@@ -31,7 +31,8 @@
             backdrop-filter: blur(16px);
             border-radius: 24px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            overflow: hidden;
+            /* This makes sure the PDF scanner doesn't cut off the bottom */
+            overflow: visible; 
             border: 1px solid rgba(255, 255, 255, 0.4);
         }
 
@@ -41,6 +42,8 @@
             text-align: center;
             color: var(--white);
             border-bottom: 5px solid var(--mcn-blue);
+            /* Keeps the top corners perfectly round on the PDF */
+            border-radius: 24px 24px 0 0; 
         }
 
         .logo-container {
@@ -196,13 +199,12 @@
             </div>
         </div>
         <button class="btn-copy" onclick="copyScores()" id="btnCopyEval">Copy Scores to Clipboard</button>
-        <button class="btn-pdf" onclick="saveAsPDF()" id="btnPdf">Save Dossier as PDF</button>
+        <button class="btn-pdf" onclick="saveAsPDF()" id="btnPdf">Save Profile as PDF</button>
     </div>
 </div>
 
 <script>
 let currentFullText = "";
-// This variable acts as the memory bank for the student's name
 let currentApplicantName = "Applicant";
 
 function loadData() {
@@ -242,11 +244,8 @@ function loadData() {
             const student = data[index];
             currentFullText = ""; 
             
-            // This safely grabs the first and last name from your specific columns
             const firstName = student["First Name"] || "Unknown";
             const lastName = student["Last Name"] || "Candidate";
-            
-            // It glues them together to create a clean file name (e.g., Akhyear_Rahman)
             currentApplicantName = (firstName + "_" + lastName).trim();
 
             let html = "<h2 style='color:var(--mcn-navy); margin-bottom: 25px; font-weight: 800; font-size: 24px;'>Applicant Dossier</h2>";
@@ -315,10 +314,12 @@ function copyScores() {
     });
 }
 
+// The fixed PDF scanner script starts here
 function saveAsPDF() {
     const btnPdf = document.getElementById('btnPdf');
-    btnPdf.innerText = "Scanning Document...";
+    btnPdf.innerText = "Scanning Document... Please Wait";
     
+    // Hide buttons to keep the PDF clean
     document.getElementById('setupGrid').style.display = 'none';
     document.getElementById('authSuite').style.display = 'none';
     document.getElementById('navButtons').style.display = 'none';
@@ -327,21 +328,35 @@ function saveAsPDF() {
 
     const element = document.getElementById('pdfContentArea');
 
+    // Remove the glass effect so the PDF does not come out blank
+    const originalBackground = element.style.background;
+    const originalBackdrop = element.style.backdropFilter;
+    const originalShadow = element.style.boxShadow;
+    
+    element.style.background = '#ffffff'; 
+    element.style.backdropFilter = 'none'; 
+    element.style.boxShadow = 'none'; 
+
     const opt = {
         margin:       0.3,
-        // The dynamic filename rule is right here
         filename:     currentApplicantName + '_MCN_Evaluation.pdf',
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true },
+        image:        { type: 'jpeg', quality: 1.0 },
+        html2canvas:  { scale: 2, useCORS: true, scrollY: 0 },
         jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
 
     html2pdf().set(opt).from(element).save().then(() => {
+        // Bring all your styles and buttons right back
+        element.style.background = originalBackground;
+        element.style.backdropFilter = originalBackdrop;
+        element.style.boxShadow = originalShadow;
+
         document.getElementById('setupGrid').style.display = 'grid';
         document.getElementById('authSuite').style.display = 'flex';
         document.getElementById('navButtons').style.display = 'flex';
         document.getElementById('btnCopyEval').style.display = 'block';
         btnPdf.style.display = 'block';
+        // Keeps your custom text here too
         btnPdf.innerText = "Save Profile as PDF";
     });
 }
