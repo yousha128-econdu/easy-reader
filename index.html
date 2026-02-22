@@ -59,8 +59,8 @@
             padding: 35px 40px;
             background: var(--white);
             display: grid;
-            grid-template-columns: 1fr 120px 150px;
-            gap: 20px;
+            grid-template-columns: 1fr 120px 100px 140px; /* Adjusted to fit the new download button */
+            gap: 15px;
             align-items: flex-end;
             border-bottom: 1px solid #e2e8f0;
         }
@@ -71,6 +71,9 @@
 
         .btn-primary { background: var(--mcn-blue); color: var(--white); border: none; padding: 16px; border-radius: 12px; font-weight: 800; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; width: 100%; }
         .btn-primary:hover { background: var(--mcn-navy); transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0, 86, 179, 0.3); }
+
+        .btn-download-draft { background: #4f46e5; color: var(--white); border: none; padding: 16px; border-radius: 12px; font-weight: 800; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; width: 100%; }
+        .btn-download-draft:hover { background: #3730a3; transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3); }
 
         #displayArea { padding: 40px; }
 
@@ -88,14 +91,13 @@
         .card-label { font-size: 12px; font-weight: 900; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; display: block; }
         .card-value { font-size: 18px; line-height: 1.7; color: var(--text-dark); white-space: pre-wrap; }
         
-        /* The New Styling for Clickable Links */
         .card-value a {
             color: var(--mcn-blue);
             text-decoration: none;
             font-weight: 700;
             border-bottom: 2px solid #cbd5e1;
             transition: 0.2s;
-            word-break: break-all; /* This stops super long links from stretching your cards! */
+            word-break: break-all;
         }
         .card-value a:hover {
             color: var(--mcn-navy);
@@ -128,6 +130,10 @@
         
         .btn-copy { background: #0f766e; color: var(--white); border: none; padding: 18px; border-radius: 12px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
         .btn-copy:hover { background: #115e59; transform: translateY(-2px); box-shadow: 0 10px 15px rgba(15, 118, 110, 0.2); }
+
+        /* The New Export to Draft Button */
+        .btn-draft { background: #f59e0b; color: var(--white); border: none; padding: 18px; border-radius: 12px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; margin-top: 15px; }
+        .btn-draft:hover { background: #d97706; transform: translateY(-2px); box-shadow: 0 10px 15px rgba(245, 158, 11, 0.2); }
         
         .btn-pdf { background: #b91c1c; color: var(--white); border: none; padding: 18px; border-radius: 12px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; margin-top: 15px; }
         .btn-pdf:hover { background: #991b1b; transform: translateY(-2px); box-shadow: 0 10px 15px rgba(185, 28, 28, 0.2); }
@@ -144,7 +150,7 @@
         <div class="logo-container">
             <img src="logo.png.jpg" alt="MCN Logo" class="logo-img">
         </div>
-        <h1 style="margin:0; font-size: 32px; letter-spacing: -0.5px;">Admission Reviewers Toolkit</h1>
+        <h1 style="margin:0; font-size: 32px; letter-spacing: -0.5px;">Admissions Reviewers Toolkit</h1>
         <p style="margin:10px 0 0; opacity: 0.9; font-weight: 600; text-transform: uppercase; letter-spacing: 3px; font-size: 13px;">Developed by Akhyear Mushfiqur Rahman, Millennium Fellow'25</p>
     </div>
 
@@ -158,6 +164,7 @@
             <input type="number" id="rowNum" value="2">
         </div>
         <button class="btn-primary" onclick="loadData()">Fetch</button>
+        <button class="btn-download-draft" onclick="downloadDraftCSV()" id="btnDownload">Get CSV</button>
     </div>
 
     <div id="displayArea">
@@ -211,6 +218,7 @@
             </div>
         </div>
         <button class="btn-copy" onclick="copyScores()" id="btnCopyEval">Copy Scores to Clipboard</button>
+        <button class="btn-draft" onclick="saveToDraft()" id="btnDraft">Export to Draft Sheet</button>
         <button class="btn-pdf" onclick="saveAsPDF()" id="btnPdf">Save Profile as PDF</button>
     </div>
 </div>
@@ -260,16 +268,13 @@ function loadData() {
             const lastName = student["Last Name"] || "Candidate";
             currentApplicantName = (firstName + "_" + lastName).trim();
 
-            let html = "<h2 style='color:var(--mcn-navy); margin-bottom: 25px; font-weight: 800; font-size: 24px;'>Applicant Profile</h2>";
+            let html = "<h2 style='color:var(--mcn-navy); margin-bottom: 25px; font-weight: 800; font-size: 24px;'>Applicant Dossier</h2>";
 
             for (const key in student) {
                 if (student[key] && student[key].trim() !== "") {
                     
-                    // The Digital Detective: Finding and converting links
                     let contentText = student[key];
-                    // This weird-looking code searches for any web link in the student's text
                     const linkFinder = /(https?:\/\/[^\s]+)/g;
-                    // Then it wraps that link in a clickable button format
                     contentText = contentText.replace(linkFinder, '<a href="$1" target="_blank" title="Click to open link">$1</a>');
 
                     html += `<div class="impact-card">
@@ -277,7 +282,6 @@ function loadData() {
                                 <div class="card-value">${contentText}</div>
                              </div>`;
                     
-                    // We still save the raw, normal text for the QuillBot checker
                     currentFullText += key + ":\n" + student[key] + "\n\n";
                 }
             }
@@ -295,10 +299,8 @@ function loadData() {
 
 function checkAuthenticity() {
     const btn = document.getElementById('btnQuillbot');
-    
     navigator.clipboard.writeText(currentFullText).then(() => {
         btn.innerText = "Text Copied! Opening QuillBot...";
-        
         setTimeout(() => {
             window.open('https://quillbot.com/ai-content-detector', '_blank');
             btn.innerText = "Check with QuillBot \u2197";
@@ -327,7 +329,6 @@ function copyScores() {
     navigator.clipboard.writeText(combinedAnswers).then(() => {
         btn.innerText = "\u2713 Saved! Paste into your Sheet";
         btn.style.background = "#065f46"; 
-        
         setTimeout(() => {
             btn.innerText = "Copy Scores to Clipboard";
             btn.style.background = "#0f766e";
@@ -335,14 +336,77 @@ function copyScores() {
     });
 }
 
+// The New Function to Save Data to Your Browser's Memory
+function saveToDraft() {
+    const row = document.getElementById('rowNum').value;
+    const prox = document.getElementById('scoreProx').value;
+    const lead = document.getElementById('scoreLead').value;
+    const decision = document.getElementById('scoreDecision').value;
+    const btn = document.getElementById('btnDraft');
+
+    // Tells the website to open the secret memory vault, or create a new one if it's empty
+    let drafts = JSON.parse(localStorage.getItem('mcn_eval_drafts')) || {};
+
+    // Saves this specific student's scores into the vault
+    drafts[row] = {
+        name: currentApplicantName,
+        proximity: prox,
+        leadership: lead,
+        decision: decision
+    };
+
+    // Locks the memory vault
+    localStorage.setItem('mcn_eval_drafts', JSON.stringify(drafts));
+
+    btn.innerText = "\u2713 Added to Draft Memory!";
+    btn.style.background = "#b45309"; 
+    
+    setTimeout(() => {
+        btn.innerText = "Export to Draft Sheet";
+        btn.style.background = "#f59e0b";
+    }, 2500);
+}
+
+// The New Function to Download Your Master Draft Sheet
+function downloadDraftCSV() {
+    let drafts = JSON.parse(localStorage.getItem('mcn_eval_drafts')) || {};
+    let rows = Object.keys(drafts).sort((a, b) => parseInt(a) - parseInt(b)); // Sorts the rows so they match your master sheet perfectly
+
+    if (rows.length === 0) {
+        alert("You have not saved any drafts yet! Evaluate a student and click 'Export to Draft Sheet' first.");
+        return;
+    }
+
+    // Creates the column titles for your new file
+    let csvContent = "Row Number,Applicant Name,Proximity to Issue,Leadership Potential,Committee Decision\n";
+
+    // Loops through everything in the memory vault and stacks it nicely
+    rows.forEach(row => {
+        let d = drafts[row];
+        csvContent += `${row},"${d.name}","${d.proximity}","${d.leadership}","${d.decision}"\n`;
+    });
+
+    // Converts the stacked text into a real downloadable file
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    link.setAttribute("href", url);
+    link.setAttribute("download", "MCN_Evaluations_Draft.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
 function saveAsPDF() {
     const btnPdf = document.getElementById('btnPdf');
+    const btnDraft = document.getElementById('btnDraft');
     btnPdf.innerText = "Scanning Document... Please Wait";
     
     document.getElementById('setupGrid').style.display = 'none';
     document.getElementById('authSuite').style.display = 'none';
     document.getElementById('navButtons').style.display = 'none';
     document.getElementById('btnCopyEval').style.display = 'none';
+    btnDraft.style.display = 'none'; // Hides the new draft button from the PDF
     btnPdf.style.display = 'none';
 
     const element = document.getElementById('pdfContentArea');
@@ -372,6 +436,7 @@ function saveAsPDF() {
         document.getElementById('authSuite').style.display = 'flex';
         document.getElementById('navButtons').style.display = 'flex';
         document.getElementById('btnCopyEval').style.display = 'block';
+        btnDraft.style.display = 'block';
         btnPdf.style.display = 'block';
         btnPdf.innerText = "Save Profile as PDF";
     });
