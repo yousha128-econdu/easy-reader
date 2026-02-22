@@ -4,118 +4,25 @@
     <title>GAC Impact Portal | Millennium Fellowship</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <style>
-        :root { 
-            --mcn-navy: #0A2342; 
-            --mcn-blue: #0056b3; 
-            --sdg-gold: #f39200;
-        }
-        body { 
-            font-family: 'Segoe UI', sans-serif; 
-            background-color: #f8fafd; 
-            margin: 0; 
-            padding: 20px; 
-            background-image: linear-gradient(135deg, #f8fafd 0%, #e0e7ff 100%);
-            min-height: 100vh;
-        }
-        .container { 
-            max-width: 950px; 
-            margin: 0 auto; 
-            background: #ffffff; 
-            border-radius: 20px; 
-            box-shadow: 0 15px 35px rgba(10, 35, 66, 0.15); 
-            overflow: hidden; 
-            border-top: 12px solid var(--mcn-blue); 
-        }
-        .header { 
-            background: var(--mcn-navy); 
-            color: white; 
-            padding: 40px; 
-            text-align: center;
-        }
-        .logo-box {
-            background: white;
-            padding: 15px;
-            display: inline-block;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-        .logo-img { 
-            max-width: 250px; 
-            height: auto;
-            display: block;
-        }
-        /* SDG Row Styling */
-        .sdg-row {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 8px;
-            padding: 20px;
-            background: #fff;
-            border-bottom: 1px solid #eee;
-        }
-        .sdg-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 4px;
-            transition: 0.3s;
-        }
-        .sdg-icon:hover { transform: scale(1.2); z-index: 10; }
+        :root { --mcn-navy: #0A2342; --mcn-blue: #0056b3; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f8fafd; margin: 0; padding: 20px; }
+        .container { max-width: 950px; margin: 0 auto; background: #ffffff; border-radius: 20px; box-shadow: 0 15px 35px rgba(10,35,66,0.15); overflow: hidden; border-top: 12px solid var(--mcn-blue); }
+        .header { background: var(--mcn-navy); color: white; padding: 40px; text-align: center; }
+        
+        /* This looks for your uploaded logo.png file */
+        .logo-box { background: white; padding: 15px; display: inline-block; border-radius: 10px; margin-bottom: 20px; }
+        .logo-img { max-width: 250px; height: auto; }
 
-        .setup-section { 
-            padding: 25px; 
-            background: #f1f5f9; 
-            border-bottom: 2px solid #e2e8f0; 
-            display: grid; 
-            grid-template-columns: 2fr 1fr auto; 
-            gap: 20px; 
-            align-items: end; 
-        }
-        .input-group label { 
-            display: block; 
-            font-weight: bold; 
-            margin-bottom: 8px; 
-            color: var(--mcn-navy); 
-            font-size: 14px; 
-        }
-        input { 
-            width: 100%; 
-            padding: 14px; 
-            border: 2px solid #cbd5e0; 
-            border-radius: 10px; 
-            font-size: 15px; 
-            box-sizing: border-box;
-        }
-        button { 
-            background-color: var(--mcn-blue); 
-            color: white; 
-            border: none; 
-            padding: 14px 30px; 
-            border-radius: 10px; 
-            font-weight: bold; 
-            cursor: pointer; 
-            transition: 0.3s;
-        }
+        .sdg-row { display: flex; justify-content: center; gap: 10px; padding: 20px; background: #fff; border-bottom: 1px solid #eee; }
+        .sdg-icon { width: 45px; height: 45px; border-radius: 4px; }
+
+        .setup-section { padding: 25px; background: #f1f5f9; display: grid; grid-template-columns: 2fr 1fr auto; gap: 20px; align-items: end; }
+        input { width: 100%; padding: 14px; border: 2px solid #cbd5e0; border-radius: 10px; box-sizing: border-box; }
+        button { background-color: var(--mcn-blue); color: white; border: none; padding: 14px 30px; border-radius: 10px; font-weight: bold; cursor: pointer; }
         button:hover { background-color: var(--mcn-navy); }
-        
         #displayArea { padding: 40px; }
-        
-        .impact-card { 
-            background: #fff; 
-            border-left: 6px solid var(--mcn-blue); 
-            margin-bottom: 25px; 
-            padding: 25px; 
-            border-radius: 0 12px 12px 0; 
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-        }
-        .label { 
-            font-size: 12px; 
-            text-transform: uppercase; 
-            color: var(--mcn-blue); 
-            font-weight: 800; 
-            display: block;
-            margin-bottom: 10px;
-        }
+        .impact-card { background: #fff; border-left: 6px solid var(--mcn-blue); margin-bottom: 25px; padding: 25px; border-radius: 0 12px 12px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+        .label { font-size: 12px; text-transform: uppercase; color: var(--mcn-blue); font-weight: 800; display: block; margin-bottom: 10px; }
         .content { font-size: 18px; line-height: 1.8; color: #1e293b; white-space: pre-wrap; }
     </style>
 </head>
@@ -124,48 +31,31 @@
 <div class="container">
     <div class="header">
         <div class="logo-box">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Millennium_Campus_Network_Logo.png/600px-Millennium_Campus_Network_Logo.png" alt="MCN Logo" class="logo-img">
+            <img src="logo.png" alt="MCN Logo" class="logo-img">
         </div>
         <h1 style="margin:0; font-size: 26px;">GAC Evaluation Portal</h1>
-        <p style="margin:10px 0 0; opacity: 0.9; font-weight: 300;">UPLIFTING SOCIAL IMPACT WORLDWIDE</p>
     </div>
 
-    <div class="sdg-row" id="sdgIcons">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Sustainable_Development_Goal_01.svg/100px-Sustainable_Development_Goal_01.svg.png" class="sdg-icon" title="No Poverty">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Sustainable_Development_Goal_02.svg/100px-Sustainable_Development_Goal_02.svg.png" class="sdg-icon" title="Zero Hunger">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Sustainable_Development_Goal_03.svg/100px-Sustainable_Development_Goal_03.svg.png" class="sdg-icon" title="Good Health">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Sustainable_Development_Goal_04.svg/100px-Sustainable_Development_Goal_04.svg.png" class="sdg-icon" title="Quality Education">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Sustainable_Development_Goal_05.svg/100px-Sustainable_Development_Goal_05.svg.png" class="sdg-icon" title="Gender Equality">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Sustainable_Development_Goal_06.svg/100px-Sustainable_Development_Goal_06.svg.png" class="sdg-icon" title="Clean Water">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Sustainable_Development_Goal_07.svg/100px-Sustainable_Development_Goal_07.svg.png" class="sdg-icon" title="Affordable Energy">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Sustainable_Development_Goal_08.svg/100px-Sustainable_Development_Goal_08.svg.png" class="sdg-icon" title="Decent Work">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Sustainable_Development_Goal_09.svg/100px-Sustainable_Development_Goal_09.svg.png" class="sdg-icon" title="Innovation">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Sustainable_Development_Goal_10.svg/100px-Sustainable_Development_Goal_10.svg.png" class="sdg-icon" title="Reduced Inequality">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Sustainable_Development_Goal_11.svg/100px-Sustainable_Development_Goal_11.svg.png" class="sdg-icon" title="Sustainable Cities">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Sustainable_Development_Goal_12.svg/100px-Sustainable_Development_Goal_12.svg.png" class="sdg-icon" title="Responsible Consumption">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Sustainable_Development_Goal_13.svg/100px-Sustainable_Development_Goal_13.svg.png" class="sdg-icon" title="Climate Action">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Sustainable_Development_Goal_14.svg/100px-Sustainable_Development_Goal_14.svg.png" class="sdg-icon" title="Life Below Water">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Sustainable_Development_Goal_15.svg/100px-Sustainable_Development_Goal_15.svg.png" class="sdg-icon" title="Life on Land">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Sustainable_Development_Goal_16.svg/100px-Sustainable_Development_Goal_16.svg.png" class="sdg-icon" title="Peace and Justice">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Sustainable_Development_Goal_17.svg/100px-Sustainable_Development_Goal_17.svg.png" class="sdg-icon" title="Partnerships">
+    <div class="sdg-row">
+        <img src="sdg1.png" class="sdg-icon" title="No Poverty">
+        <img src="sdg2.png" class="sdg-icon" title="Zero Hunger">
+        <img src="sdg3.png" class="sdg-icon" title="Good Health">
     </div>
 
     <div class="setup-section">
         <div class="input-group">
-            <label>Paste Normal Google Sheet Link</label>
+            <label style="display:block; font-weight:bold; margin-bottom:8px; color:var(--mcn-navy);">Google Sheet Link</label>
             <input type="text" id="sheetLink" placeholder="Paste your /edit link here...">
         </div>
         <div class="input-group">
-            <label>Row Number</label>
+            <label style="display:block; font-weight:bold; margin-bottom:8px; color:var(--mcn-navy);">Row Number</label>
             <input type="number" id="rowNum" value="2">
         </div>
         <button onclick="loadData()">LOAD PROFILE</button>
     </div>
 
     <div id="displayArea">
-        <div style="text-align:center; padding: 60px; color: #64748b;">
-            <p>Ready to Evaluate a Changemaker.</p>
-        </div>
+        <p style="text-align:center; padding: 60px; color: #64748b;">Ready to begin social impact evaluation.</p>
     </div>
 </div>
 
@@ -174,46 +64,29 @@ function loadData() {
     let link = document.getElementById('sheetLink').value.trim();
     const row = document.getElementById('rowNum').value;
     const output = document.getElementById('displayArea');
+    if (!link) return;
 
-    if (!link) {
-        output.innerHTML = "<p style='color:red; text-align:center;'>Please paste a link first!</p>";
-        return;
-    }
+    if (link.includes('/edit')) link = link.split('/edit')[0] + '/export?format=csv';
 
-    // Auto-Converter for normal links
-    if (link.includes('/edit')) {
-        link = link.split('/edit')[0] + '/export?format=csv';
-    }
-
-    output.innerHTML = "<p style='text-align:center; font-style:italic;'>Loading candidate data...</p>";
+    output.innerHTML = "<p style='text-align:center;'>Fetching data...</p>";
 
     Papa.parse(link, {
-        download: true,
-        header: true,
+        download: true, header: true,
         complete: function(results) {
             const data = results.data;
             const index = row - 2;
-
             if (index < 0 || index >= data.length) {
-                output.innerHTML = "<p style='color:red; text-align:center;'>Row " + row + " not found.</p>";
+                output.innerHTML = "<p style='color:red; text-align:center;'>Row not found.</p>";
                 return;
             }
-
             const student = data[index];
-            let html = "<h2 style='color:var(--mcn-navy); border-bottom: 3px solid var(--mcn-blue); padding-bottom:15px; margin-bottom: 30px;'>Impact Dossier</h2>";
-
+            let html = "<h2 style='color:var(--mcn-navy); border-bottom: 3px solid var(--mcn-blue); padding-bottom:15px; margin-bottom:30px;'>Candidate Dossier</h2>";
             for (const key in student) {
                 if (student[key] && student[key].trim() !== "") {
-                    html += `<div class="impact-card">
-                                <span class="label">${key}</span>
-                                <div class="content">${student[key]}</div>
-                             </div>`;
+                    html += `<div class="impact-card"><span class="label">${key}</span><div class="content">${student[key]}</div></div>`;
                 }
             }
             output.innerHTML = html;
-        },
-        error: function() {
-            output.innerHTML = "<p style='color:red; text-align:center;'>Error reading sheet. Check 'Share' settings.</p>";
         }
     });
 }
