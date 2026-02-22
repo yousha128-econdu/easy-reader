@@ -114,3 +114,181 @@
             background-color: var(--mcn-navy);
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(0, 86, 179, 0.2);
+        }
+
+        #displayArea {
+            padding: 40px;
+            background: #fafbfc;
+            min-height: 250px;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 40px 20px;
+            font-style: italic;
+        }
+
+        .candidate-header {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--mcn-navy);
+            font-size: 22px;
+            border-bottom: 2px solid #edf2f7;
+            padding-bottom: 15px;
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+
+        .impact-card {
+            background: #ffffff;
+            border: 1px solid #edf2f7;
+            border-left: 4px solid var(--mcn-blue);
+            margin-bottom: 20px;
+            padding: 20px 25px;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        }
+
+        .impact-card:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            border-left-color: var(--sdg-gold);
+        }
+
+        .label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--mcn-blue);
+            font-weight: 700;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .content {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text-main);
+            white-space: pre-wrap;
+        }
+
+        /* Loading Spinner */
+        .loader {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--mcn-blue);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .setup-section {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <img src="https://images.squarespace-cdn.com/content/v1/59404077d2b857790807755e/1501793755353-7O6F8STH7831KCPJ2M9H/Millennium+Fellowship+Logo+White.png" alt="Millennium Fellowship Logo" class="logo">
+        <p>Global Admissions Committee | Auto-Reader</p>
+    </div>
+
+    <div class="setup-section">
+        <div class="input-group">
+            <label for="sheetLink">Google Sheet URL</label>
+            <input type="text" id="sheetLink" placeholder="Paste your shareable /edit link here...">
+        </div>
+        <div class="input-group">
+            <label for="rowNum">Applicant Row Number</label>
+            <input type="number" id="rowNum" value="2" min="2">
+        </div>
+        <button onclick="loadData()">Load Profile</button>
+    </div>
+
+    <div id="displayArea">
+        <div class="empty-state">
+            <p>Ready for review. Paste a shareable Google Sheet link above and click Load.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+function loadData() {
+    let link = document.getElementById('sheetLink').value.trim();
+    const row = document.getElementById('rowNum').value;
+    const output = document.getElementById('displayArea');
+
+    if (!link) {
+        output.innerHTML = "<p style='color:#e53e3e; text-align:center; font-weight:600;'>Please paste a valid Google Sheet link.</p>";
+        return;
+    }
+
+    // THE MAGIC TRANSLATOR: Converts normal link to CSV link
+    if (link.includes('/edit')) {
+        link = link.split('/edit')[0] + '/export?format=csv';
+    } else if (link.includes('/pubhtml')) {
+        link = link.split('/pubhtml')[0] + '/pub?output=csv';
+    }
+
+    // Loading State
+    output.innerHTML = `
+        <div style="text-align:center; padding: 40px 0;">
+            <div class="loader"></div>
+            <p style="color: var(--text-muted); font-family: 'Montserrat', sans-serif; font-size: 14px;">Fetching application data...</p>
+        </div>
+    `;
+
+    Papa.parse(link, {
+        download: true,
+        header: true,
+        complete: function(results) {
+            const data = results.data;
+            const index = row - 2; // Adjusting for 0-index and header row
+
+            if (index < 0 || index >= data.length || !data[index]) {
+                output.innerHTML = `<p style='color:#e53e3e; text-align:center; font-weight:600;'>Applicant data at row ${row} could not be found. Please check the row number.</p>`;
+                return;
+            }
+
+            const student = data[index];
+            let html = "<h3 class='candidate-header'>Candidate Evaluation Profile</h3>";
+
+            for (const key in student) {
+                // Only render the card if there is a column header and actual content
+                if (key.trim() !== "" && student[key] && student[key].trim() !== "") {
+                    html += `<div class="impact-card">
+                                <span class="label">${key}</span>
+                                <div class="content">${student[key]}</div>
+                             </div>`;
+                }
+            }
+            output.innerHTML = html;
+        },
+        error: function(err) {
+            output.innerHTML = `
+                <div style='text-align:center; background: #fff5f5; border: 1px solid #fc8181; padding: 20px; border-radius: 6px;'>
+                    <p style='color:#c53030; font-weight:600; margin:0 0 10px 0;'>Connection Error</p>
+                    <p style='color:#e53e3e; margin:0; font-size: 14px;'>Ensure your Google Sheet is set to <strong>'Anyone with the link can view'</strong>.</p>
+                </div>`;
+            console.error("PapaParse Error:", err);
+        }
+    });
+}
+</script>
+
+</body>
+</html>
