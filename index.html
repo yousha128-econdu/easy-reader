@@ -1,196 +1,118 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>MCN | Global Admissions Portal</title>
+    <title>GAC Impact Portal | Millennium Fellowship</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <style>
-        :root {
-            --mcn-navy: #0A2342;
-            --mcn-blue: #0056b3;
-            --accent-blue: #e0e7ff;
-            --white: #ffffff;
-            --glass: rgba(255, 255, 255, 0.9);
-        }
+        :root { --mcn-navy: #0A2342; --mcn-blue: #0056b3; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f8fafd; margin: 0; padding: 20px; }
+        .container { max-width: 950px; margin: 0 auto; background: #ffffff; border-radius: 20px; box-shadow: 0 15px 35px rgba(10,35,66,0.15); overflow: hidden; border-top: 12px solid var(--mcn-blue); }
+        .header { background: var(--mcn-navy); color: white; padding: 40px; text-align: center; }
+        
+        .logo-box { background: white; padding: 15px; display: inline-block; border-radius: 10px; margin-bottom: 20px; }
+        .logo-img { max-width: 250px; height: auto; display: block; }
 
-        body {
-            font-family: 'Inter', 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
-            margin: 0;
-            padding: 40px 20px;
-            color: #102a43;
-            min-height: 100vh;
-        }
+        .sdg-row { display: flex; justify-content: center; gap: 10px; padding: 20px; background: #fff; border-bottom: 1px solid #eee; flex-wrap: wrap; }
+        .sdg-icon { width: 45px; height: 45px; border-radius: 4px; object-fit: cover; }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(10, 35, 66, 0.1);
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .header {
-            background: var(--mcn-navy);
-            padding: 50px 20px;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .logo-container {
-            background: var(--white);
-            padding: 15px 30px;
-            display: inline-block;
-            border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            margin-bottom: 25px;
-        }
-
-        .logo-img {
-            max-width: 260px;
-            height: auto;
-            display: block;
-        }
-
-        .sdg-strip {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            padding: 20px;
-            background: var(--white);
-            border-bottom: 1px solid #e1e8ed;
-        }
-
-        .sdg-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 8px;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            filter: grayscale(20%);
-        }
-
-        .sdg-icon:hover {
-            transform: scale(1.2) rotate(5deg);
-            filter: grayscale(0%);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-        }
-
-        .setup-grid {
-            padding: 40px;
-            background: #f8fafc;
-            display: grid;
-            grid-template-columns: 2fr 120px auto;
-            gap: 20px;
-            align-items: flex-end;
-            border-bottom: 1px solid #e1e8ed;
-        }
-
-        .field-group label {
-            display: block;
-            font-size: 12px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-            color: var(--mcn-navy);
-        }
-
-        input {
-            width: 100%;
-            padding: 16px;
-            border: 2px solid #cbd5e0;
-            border-radius: 12px;
-            font-size: 15px;
-            background: var(--white);
-            transition: 0.3s;
-        }
-
-        input:focus {
-            border-color: var(--mcn-blue);
-            outline: none;
-            box-shadow: 0 0 0 4px rgba(0, 86, 179, 0.1);
-        }
-
-        .btn-load {
-            background: var(--mcn-blue);
-            color: var(--white);
-            border: none;
-            padding: 16px 40px;
-            border-radius: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .btn-load:hover {
-            background: var(--mcn-navy);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 86, 179, 0.2);
-        }
-
-        #displayArea {
-            padding: 40px;
-            min-height: 200px;
-        }
-
-        .impact-card {
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 24px;
-            border: 1px solid #e1e8ed;
-            transition: 0.3s;
-        }
-
-        .impact-card:hover {
-            border-color: var(--mcn-blue);
-            box-shadow: 0 4px 12px rgba(0, 86, 179, 0.05);
-        }
-
-        .card-label {
-            font-size: 11px;
-            font-weight: 900;
-            color: var(--mcn-blue);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        .card-value {
-            font-size: 18px;
-            line-height: 1.7;
-            color: #102a43;
-            white-space: pre-wrap;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 80px 20px;
-            color: #627d98;
-        }
+        .setup-section { padding: 25px; background: #f1f5f9; display: grid; grid-template-columns: 2fr 1fr auto; gap: 20px; align-items: end; border-bottom: 2px solid #e2e8f0; }
+        .input-group label { display: block; font-weight: bold; margin-bottom: 8px; color: var(--mcn-navy); font-size: 14px; }
+        input { width: 100%; padding: 14px; border: 2px solid #cbd5e0; border-radius: 10px; font-size: 15px; box-sizing: border-box; }
+        button { background-color: var(--mcn-blue); color: white; border: none; padding: 14px 30px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        button:hover { background-color: var(--mcn-navy); }
+        
+        #displayArea { padding: 40px; }
+        .impact-card { background: #fff; border-left: 6px solid var(--mcn-blue); margin-bottom: 25px; padding: 25px; border-radius: 0 12px 12px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+        .label { font-size: 12px; text-transform: uppercase; color: var(--mcn-blue); font-weight: 800; display: block; margin-bottom: 10px; }
+        .content { font-size: 18px; line-height: 1.8; color: #1e293b; white-space: pre-wrap; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="header">
-        <div class="logo-container">
+        <div class="logo-box">
             <img src="logo.png.jpg" alt="MCN Logo" class="logo-img">
         </div>
-        <h1 style="margin:0; font-size: 28px; letter-spacing: -0.5px;">Global Admissions Committee</h1>
-        <p style="margin:10px 0 0; opacity: 0.8; font-weight: 300; text-transform: uppercase; letter-spacing: 3px; font-size: 12px;">Candidate Impact Dossier</p>
+        <h1 style="margin:0; font-size: 26px;">GAC Evaluation Portal</h1>
     </div>
 
-    <div class="sdg-strip">
-        <img src="sdg1.png" class="sdg-icon" title="No Poverty">
-        <img src="sdg2.png" class="sdg-icon" title="Zero Hunger">
-        <img src="sdg3.png" class="sdg-icon" title="Good Health">
-        <img src="sdg4.png" class="sdg-icon" title="Quality Education">
-        <img src="sdg5.png" class="sdg-icon" title="Gender Equality">
-        <img src="sdg6.png" class="sdg-icon
+    <div class="sdg-row">
+        <img src="sdg1.png" class="sdg-icon" alt="SDG 1">
+        <img src="sdg2.png" class="sdg-icon" alt="SDG 2">
+        <img src="sdg3.png" class="sdg-icon" alt="SDG 3">
+        <img src="sdg4.png" class="sdg-icon" alt="SDG 4">
+        <img src="sdg5.png" class="sdg-icon" alt="SDG 5">
+    </div>
+
+    <div class="setup-section">
+        <div class="input-group">
+            <label>Shareable Google Sheet Link</label>
+            <input type="text" id="sheetLink" placeholder="Paste your /edit link here...">
+        </div>
+        <div class="input-group">
+            <label>Row Number</label>
+            <input type="number" id="rowNum" value="2">
+        </div>
+        <button onclick="loadData()">LOAD PROFILE</button>
+    </div>
+
+    <div id="displayArea">
+        <div style="text-align:center; padding: 60px; color: #64748b;">
+            <p>Ready for evaluation. Please paste your link and select a row.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+function loadData() {
+    let link = document.getElementById('sheetLink').value.trim();
+    const row = document.getElementById('rowNum').value;
+    const output = document.getElementById('displayArea');
+
+    if (!link) {
+        output.innerHTML = "<p style='color:red; text-align:center;'>Please paste a link first!</p>";
+        return;
+    }
+
+    // Auto-Converter for normal shareable links
+    if (link.includes('/edit')) {
+        link = link.split('/edit')[0] + '/export?format=csv';
+    }
+
+    output.innerHTML = "<p style='text-align:center; font-style:italic;'>Fetching candidate data...</p>";
+
+    Papa.parse(link, {
+        download: true,
+        header: true,
+        complete: function(results) {
+            const data = results.data;
+            const index = row - 2;
+
+            if (index < 0 || index >= data.length) {
+                output.innerHTML = "<p style='color:red; text-align:center;'>Row not found.</p>";
+                return;
+            }
+
+            const student = data[index];
+            let html = "<h2 style='color:var(--mcn-navy); border-bottom: 3px solid var(--mcn-blue); padding-bottom:15px; margin-bottom: 30px;'>Impact Dossier</h2>";
+
+            for (const key in student) {
+                if (student[key] && student[key].trim() !== "") {
+                    html += `<div class="impact-card">
+                                <span class="label">${key}</span>
+                                <div class="content">${student[key]}</div>
+                             </div>`;
+                }
+            }
+            output.innerHTML = html;
+        },
+        error: function() {
+            output.innerHTML = "<p style='color:red; text-align:center;'>Error reading sheet. Check 'Anyone with link can view' settings.</p>";
+        }
+    });
+}
+</script>
+
+</body>
+</html>
