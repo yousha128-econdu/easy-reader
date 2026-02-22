@@ -1,201 +1,178 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAC Auto-Reader | Millennium Fellowship</title>
+    <title>MCN | Global Admissions Portal</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    
     <style>
         :root {
-            --mcn-navy: #002244; /* Deeper MCN Navy */
+            --mcn-navy: #0A2342;
             --mcn-blue: #0056b3;
-            --mcn-light-blue: #e6f0fa;
-            --sdg-gold: #F39200; /* Millennium Fellowship/SDG Accent */
-            --text-main: #2d3748;
-            --text-muted: #718096;
-            --bg-main: #f4f7f6;
+            --accent-blue: #e0e7ff;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.9);
         }
 
         body {
-            font-family: 'Open Sans', sans-serif;
-            background-color: var(--bg-main);
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
             margin: 0;
             padding: 40px 20px;
-            color: var(--text-main);
+            color: #102a43;
+            min-height: 100vh;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 12px 40px rgba(0, 34, 68, 0.08);
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(10, 35, 66, 0.1);
             overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .header {
-            background: linear-gradient(135deg, var(--mcn-navy) 0%, #003366 100%);
-            color: white;
-            padding: 40px 30px;
+            background: var(--mcn-navy);
+            padding: 50px 20px;
             text-align: center;
-            border-bottom: 5px solid var(--sdg-gold);
+            color: var(--white);
         }
 
-        .logo {
-            max-width: 220px;
-            margin-bottom: 15px;
+        .logo-container {
+            background: var(--white);
+            padding: 15px 30px;
+            display: inline-block;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            margin-bottom: 25px;
         }
 
-        .header p {
-            margin: 0;
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 13px;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .setup-section {
-            padding: 30px 40px;
-            background: #ffffff;
-            border-bottom: 1px solid #edf2f7;
-            display: grid;
-            grid-template-columns: 2fr 1fr auto;
-            gap: 20px;
-            align-items: end;
-        }
-
-        .input-group label {
+        .logo-img {
+            max-width: 260px;
+            height: auto;
             display: block;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            margin-bottom: 8px;
+        }
+
+        .sdg-strip {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 20px;
+            background: var(--white);
+            border-bottom: 1px solid #e1e8ed;
+        }
+
+        .sdg-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: grayscale(20%);
+        }
+
+        .sdg-icon:hover {
+            transform: scale(1.2) rotate(5deg);
+            filter: grayscale(0%);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .setup-grid {
+            padding: 40px;
+            background: #f8fafc;
+            display: grid;
+            grid-template-columns: 2fr 120px auto;
+            gap: 20px;
+            align-items: flex-end;
+            border-bottom: 1px solid #e1e8ed;
+        }
+
+        .field-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
             color: var(--mcn-navy);
-            font-size: 13px;
         }
 
         input {
             width: 100%;
-            padding: 14px;
-            border: 2px solid #e2e8f0;
-            border-radius: 6px;
-            font-size: 14px;
-            font-family: inherit;
-            box-sizing: border-box;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            padding: 16px;
+            border: 2px solid #cbd5e0;
+            border-radius: 12px;
+            font-size: 15px;
+            background: var(--white);
+            transition: 0.3s;
         }
 
         input:focus {
-            outline: none;
             border-color: var(--mcn-blue);
-            box-shadow: 0 0 0 3px var(--mcn-light-blue);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(0, 86, 179, 0.1);
         }
 
-        button {
-            background-color: var(--mcn-blue);
-            color: white;
-            font-family: 'Montserrat', sans-serif;
+        .btn-load {
+            background: var(--mcn-blue);
+            color: var(--white);
             border: none;
-            padding: 14px 28px;
-            border-radius: 6px;
-            font-size: 14px;
+            padding: 16px 40px;
+            border-radius: 12px;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: 0.3s;
             text-transform: uppercase;
             letter-spacing: 1px;
-            height: 50px; /* Matches input height */
         }
 
-        button:hover {
-            background-color: var(--mcn-navy);
-            transform: translateY(-1px);
+        .btn-load:hover {
+            background: var(--mcn-navy);
+            transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 86, 179, 0.2);
         }
 
         #displayArea {
             padding: 40px;
-            background: #fafbfc;
-            min-height: 250px;
-        }
-
-        .empty-state {
-            text-align: center;
-            color: var(--text-muted);
-            padding: 40px 20px;
-            font-style: italic;
-        }
-
-        .candidate-header {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--mcn-navy);
-            font-size: 22px;
-            border-bottom: 2px solid #edf2f7;
-            padding-bottom: 15px;
-            margin-top: 0;
-            margin-bottom: 25px;
+            min-height: 200px;
         }
 
         .impact-card {
             background: #ffffff;
-            border: 1px solid #edf2f7;
-            border-left: 4px solid var(--mcn-blue);
-            margin-bottom: 20px;
-            padding: 20px 25px;
-            border-radius: 6px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            border: 1px solid #e1e8ed;
+            transition: 0.3s;
         }
 
         .impact-card:hover {
-            transform: translateX(4px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-            border-left-color: var(--sdg-gold);
+            border-color: var(--mcn-blue);
+            box-shadow: 0 4px 12px rgba(0, 86, 179, 0.05);
         }
 
-        .label {
-            font-family: 'Montserrat', sans-serif;
+        .card-label {
             font-size: 11px;
-            text-transform: uppercase;
+            font-weight: 900;
             color: var(--mcn-blue);
-            font-weight: 700;
-            letter-spacing: 1px;
-            display: block;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             margin-bottom: 8px;
+            display: block;
         }
 
-        .content {
-            font-size: 15px;
+        .card-value {
+            font-size: 18px;
             line-height: 1.7;
-            color: var(--text-main);
+            color: #102a43;
             white-space: pre-wrap;
         }
 
-        /* Loading Spinner */
-        .loader {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid var(--mcn-blue);
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 15px auto;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @media (max-width: 768px) {
-            .setup-section {
-                grid-template-columns: 1fr;
-                gap: 15px;
-                padding: 20px;
-            }
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: #627d98;
         }
     </style>
 </head>
@@ -203,92 +180,17 @@
 
 <div class="container">
     <div class="header">
-        <img src="https://images.squarespace-cdn.com/content/v1/59404077d2b857790807755e/1501793755353-7O6F8STH7831KCPJ2M9H/Millennium+Fellowship+Logo+White.png" alt="Millennium Fellowship Logo" class="logo">
-        <p>Global Admissions Committee | Auto-Reader</p>
+        <div class="logo-container">
+            <img src="logo.png.jpg" alt="MCN Logo" class="logo-img">
+        </div>
+        <h1 style="margin:0; font-size: 28px; letter-spacing: -0.5px;">Global Admissions Committee</h1>
+        <p style="margin:10px 0 0; opacity: 0.8; font-weight: 300; text-transform: uppercase; letter-spacing: 3px; font-size: 12px;">Candidate Impact Dossier</p>
     </div>
 
-    <div class="setup-section">
-        <div class="input-group">
-            <label for="sheetLink">Google Sheet URL</label>
-            <input type="text" id="sheetLink" placeholder="Paste your shareable /edit link here...">
-        </div>
-        <div class="input-group">
-            <label for="rowNum">Applicant Row Number</label>
-            <input type="number" id="rowNum" value="2" min="2">
-        </div>
-        <button onclick="loadData()">Load Profile</button>
-    </div>
-
-    <div id="displayArea">
-        <div class="empty-state">
-            <p>Ready for review. Paste a shareable Google Sheet link above and click Load.</p>
-        </div>
-    </div>
-</div>
-
-<script>
-function loadData() {
-    let link = document.getElementById('sheetLink').value.trim();
-    const row = document.getElementById('rowNum').value;
-    const output = document.getElementById('displayArea');
-
-    if (!link) {
-        output.innerHTML = "<p style='color:#e53e3e; text-align:center; font-weight:600;'>Please paste a valid Google Sheet link.</p>";
-        return;
-    }
-
-    // THE MAGIC TRANSLATOR: Converts normal link to CSV link
-    if (link.includes('/edit')) {
-        link = link.split('/edit')[0] + '/export?format=csv';
-    } else if (link.includes('/pubhtml')) {
-        link = link.split('/pubhtml')[0] + '/pub?output=csv';
-    }
-
-    // Loading State
-    output.innerHTML = `
-        <div style="text-align:center; padding: 40px 0;">
-            <div class="loader"></div>
-            <p style="color: var(--text-muted); font-family: 'Montserrat', sans-serif; font-size: 14px;">Fetching application data...</p>
-        </div>
-    `;
-
-    Papa.parse(link, {
-        download: true,
-        header: true,
-        complete: function(results) {
-            const data = results.data;
-            const index = row - 2; // Adjusting for 0-index and header row
-
-            if (index < 0 || index >= data.length || !data[index]) {
-                output.innerHTML = `<p style='color:#e53e3e; text-align:center; font-weight:600;'>Applicant data at row ${row} could not be found. Please check the row number.</p>`;
-                return;
-            }
-
-            const student = data[index];
-            let html = "<h3 class='candidate-header'>Candidate Evaluation Profile</h3>";
-
-            for (const key in student) {
-                // Only render the card if there is a column header and actual content
-                if (key.trim() !== "" && student[key] && student[key].trim() !== "") {
-                    html += `<div class="impact-card">
-                                <span class="label">${key}</span>
-                                <div class="content">${student[key]}</div>
-                             </div>`;
-                }
-            }
-            output.innerHTML = html;
-        },
-        error: function(err) {
-            output.innerHTML = `
-                <div style='text-align:center; background: #fff5f5; border: 1px solid #fc8181; padding: 20px; border-radius: 6px;'>
-                    <p style='color:#c53030; font-weight:600; margin:0 0 10px 0;'>Connection Error</p>
-                    <p style='color:#e53e3e; margin:0; font-size: 14px;'>Ensure your Google Sheet is set to <strong>'Anyone with the link can view'</strong>.</p>
-                </div>`;
-            console.error("PapaParse Error:", err);
-        }
-    });
-}
-</script>
-
-</body>
-</html>
+    <div class="sdg-strip">
+        <img src="sdg1.png" class="sdg-icon" title="No Poverty">
+        <img src="sdg2.png" class="sdg-icon" title="Zero Hunger">
+        <img src="sdg3.png" class="sdg-icon" title="Good Health">
+        <img src="sdg4.png" class="sdg-icon" title="Quality Education">
+        <img src="sdg5.png" class="sdg-icon" title="Gender Equality">
+        <img src="sdg6.png" class="sdg-icon
