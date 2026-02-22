@@ -147,7 +147,7 @@
     
     <div class="header">
         <div class="logo-container">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Millennium_Campus_Network_Logo.png/600px-Millennium_Campus_Network_Logo.png" alt="MCN Logo" id="officialLogo" crossorigin="anonymous" style="width: 250px; max-width: 100%; display: block;">
+            <img src="logo.png.jpg" alt="MCN Logo" class="logo-img" id="officialLogo">
         </div>
         <h1 style="margin:0; font-size: 32px; letter-spacing: -0.5px;">Admissions Reviewers Toolkit</h1>
         <p style="margin:10px 0 0; opacity: 0.9; font-weight: 600; text-transform: uppercase; letter-spacing: 3px; font-size: 13px;">Developed by Akhyear Mushfiqur Rahman, Millennium Fellow'25</p>
@@ -267,7 +267,7 @@ function loadData() {
             const lastName = student["Last Name"] || "Candidate";
             currentApplicantName = (firstName + "_" + lastName).trim();
 
-            // FIXED TEXT: Now says "Applicant Profile" instead of "Applicant Dossier"
+            // FIXED TEXT: "Applicant Profile" 
             let html = "<h2 style='color:var(--mcn-navy); margin-bottom: 25px; font-weight: 800; font-size: 24px;'>Applicant Profile</h2>";
 
             for (const key in student) {
@@ -414,7 +414,8 @@ function saveAsPDF() {
         margin:       0.3,
         filename:     currentApplicantName + '_MCN_Evaluation.pdf',
         image:        { type: 'jpeg', quality: 1.0 },
-        html2canvas:  { scale: 2, useCORS: true, scrollY: 0, imageTimeout: 15000 },
+        // Since the logo is now local, we don't need useCORS to fight security blocks!
+        html2canvas:  { scale: 2, scrollY: 0, imageTimeout: 15000 },
         jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
 
