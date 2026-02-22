@@ -1,94 +1,108 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>MCN Fellowship Reader</title>
+    <title>GAC Impact Reader | Millennium Fellowship</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <style>
+        :root {
+            --mcn-navy: #0A2342;
+            --mcn-blue: #0056b3;
+            --sdg-gold: #f39200;
+        }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f2f5;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f0f4f8;
             margin: 0;
-            padding: 40px 20px;
-            color: #1c1e21;
+            padding: 20px;
         }
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             overflow: hidden;
-            border-top: 8px solid #0056b3; /* Millennium Blue */
+            border-top: 10px solid var(--mcn-blue);
         }
         .header {
-            padding: 30px;
-            background-color: #f8f9fa;
-            border-bottom: 1px solid #e9ecef;
+            background: var(--mcn-navy);
+            color: white;
+            padding: 40px;
             text-align: center;
         }
-        h2 { margin: 0; color: #002d62; font-size: 24px; }
-        .setup-area {
-            padding: 30px;
-            background-color: #ffffff;
-        }
-        .input-group {
+        /* Millennium Fellowship Logo placeholder */
+        .logo {
+            max-width: 250px;
             margin-bottom: 20px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
         }
-        label {
+        .setup-section {
+            padding: 30px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+            display: grid;
+            grid-template-columns: 2fr 1fr auto;
+            gap: 15px;
+            align-items: end;
+        }
+        .input-group label {
             display: block;
-            font-weight: 700;
+            font-weight: bold;
             margin-bottom: 8px;
-            color: #002d62;
+            color: var(--mcn-navy);
+            font-size: 14px;
         }
-        /* These are the boxes that were missing/unclear */
-        input[type="text"], input[type="number"] {
+        input {
             width: 100%;
             padding: 12px;
-            border: 2px solid #ccd0d5;
-            border-radius: 6px;
-            font-size: 16px;
-            background-color: #fff;
-            display: block; /* Ensures they appear */
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 15px;
             box-sizing: border-box;
         }
-        input[type="number"] { width: 100px; }
-        
         button {
-            width: 100%;
-            padding: 15px;
-            background-color: #0056b3;
+            background-color: var(--mcn-blue);
             color: white;
             border: none;
-            border-radius: 6px;
-            font-size: 18px;
+            padding: 12px 25px;
+            border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
-            transition: 0.2s;
+            transition: 0.3s;
         }
-        button:hover { background-color: #002d62; }
-
-        #displayArea {
-            padding: 30px;
-            background-color: #fff;
-            min-height: 100px;
-        }
-        .data-card {
+        button:hover { background-color: var(--mcn-navy); }
+        
+        #displayArea { padding: 40px; }
+        
+        .impact-card {
+            background: #fff;
+            border-left: 5px solid var(--mcn-blue);
             margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
-        .data-label {
+        .label {
             font-size: 12px;
             text-transform: uppercase;
-            color: #0056b3;
-            font-weight: bold;
-            display: block;
-            margin-bottom: 5px;
+            letter-spacing: 1px;
+            color: #718096;
+            font-weight: 800;
         }
-        .data-content {
-            font-size: 17px;
-            line-height: 1.6;
+        .content {
+            font-size: 18px;
+            margin-top: 10px;
+            line-height: 1.7;
+            color: #2d3748;
             white-space: pre-wrap;
+        }
+        .sdg-badge {
+            background: var(--sdg-gold);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -96,24 +110,27 @@
 
 <div class="container">
     <div class="header">
-        <h2>Millennium Fellowship Reader</h2>
-        <p style="color: #606770;">Global Admissions Committee Evaluation Tool</p>
+        <img src="https://images.squarespace-cdn.com/content/v1/59404077d2b857790807755e/1501793755353-7O6F8STH7831KCPJ2M9H/Millennium+Fellowship+Logo+White.png" alt="Millennium Fellowship Logo" class="logo">
+        <p style="margin:0; opacity: 0.8; letter-spacing: 1px;">GLOBAL ADMISSIONS COMMITTEE | SOCIAL IMPACT PORTAL</p>
     </div>
 
-    <div class="setup-area">
+    <div class="setup-section">
         <div class="input-group">
-            <label>1. Secure Google Sheet CSV Link</label>
-            <input type="text" id="sheetLink" placeholder="Paste link ending in &output=csv here...">
+            <label>Secure CSV Link</label>
+            <input type="text" id="sheetLink" placeholder="Paste &output=csv link...">
         </div>
         <div class="input-group">
-            <label>2. Applicant Row Number</label>
+            <label>Row Number</label>
             <input type="number" id="rowNum" value="2">
         </div>
-        <button onclick="loadData()">LOAD APPLICANT DATA</button>
+        <button onclick="loadData()">LOAD PROFILE</button>
     </div>
 
     <div id="displayArea">
-        <p style="text-align: center; color: #90949c;">Ready to review. Enter data above and click Load.</p>
+        <div style="text-align:center; padding: 50px; color: #a0aec0;">
+            <p><strong>Ready to Uplift Social Impact?</strong></p>
+            <p>Enter a candidate row to begin evaluation.</p>
+        </div>
     </div>
 </div>
 
@@ -124,11 +141,9 @@ function loadData() {
     const output = document.getElementById('displayArea');
 
     if (!link) {
-        output.innerHTML = "<p style='color:red;'><b>Error:</b> Please paste your CSV link first!</p>";
+        output.innerHTML = "<p style='color:red; text-align:center;'>Please paste your CSV link first!</p>";
         return;
     }
-
-    output.innerHTML = "<p>Loading candidate profile...</p>";
 
     Papa.parse(link, {
         download: true,
@@ -138,26 +153,24 @@ function loadData() {
             const index = row - 2;
 
             if (index < 0 || index >= data.length) {
-                output.innerHTML = "<p style='color:red;'><b>Error:</b> Row " + row + " not found in sheet.</p>";
+                output.innerHTML = "<p style='color:red; text-align:center;'>Applicant row not found.</p>";
                 return;
             }
 
             const student = data[index];
-            let html = "";
+            let html = "<h3 style='color:var(--mcn-navy); border-bottom: 2px solid #eee; padding-bottom:10px;'>Candidate Evaluation</h3>";
 
-            // Dynamic Loop: Grabs every column regardless of name
             for (const key in student) {
                 if (student[key] && student[key].trim() !== "") {
-                    html += `<div class="data-card">
-                                <span class="data-label">${key}</span>
-                                <div class="data-content">${student[key]}</div>
+                    // Special styling for SDG column
+                    const isSDG = key.toLowerCase().includes('sdg');
+                    html += `<div class="impact-card">
+                                <span class="label">${key}</span>
+                                <div class="content ${isSDG ? 'sdg-badge' : ''}">${student[key]}</div>
                              </div>`;
                 }
             }
-            output.innerHTML = html || "<p>This row is empty.</p>";
-        },
-        error: function() {
-            output.innerHTML = "<p style='color:red;'><b>Error:</b> Could not reach Google Sheet. Check your Publish settings.</p>";
+            output.innerHTML = html;
         }
     });
 }
