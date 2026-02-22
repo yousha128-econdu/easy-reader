@@ -39,4 +39,250 @@
 
         .setup-grid { padding: 30px; background: #f8fafc; display: grid; grid-template-columns: 1fr 1fr 100px auto; gap: 15px; align-items: flex-end; border-bottom: 1px solid #e1e8ed; }
         .field-group label { display: block; font-size: 13px; font-weight: bold; margin-bottom: 8px; color: var(--mcn-navy); }
-        input, select { width: 100%; padding: 14px; border: 2px solid #cbd5e0; border-radius: 10px
+        input, select { width: 100%; padding: 14px; border: 2px solid #cbd5e0; border-radius: 10px; font-size: 15px; background: var(--white); box-sizing: border-box; }
+        input[type="password"] { border-color: #f39200; } /* Gold border for the secret key */
+        
+        button { background: var(--mcn-blue); color: var(--white); border: none; padding: 14px 25px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; text-transform: uppercase; }
+        button:hover { background: var(--mcn-navy); }
+
+        #displayArea { padding: 40px; }
+        .impact-card { background: #ffffff; border-radius: 12px; padding: 20px; margin-bottom: 20px; border-left: 6px solid var(--mcn-blue); box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+        .card-label { font-size: 12px; font-weight: 900; color: var(--mcn-blue); text-transform: uppercase; margin-bottom: 8px; display: block; }
+        .card-value { font-size: 18px; line-height: 1.6; color: #102a43; white-space: pre-wrap; }
+
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 30px; padding-top: 20px; border-top: 2px dashed #cbd5e0; }
+        .nav-btn { background: #627d98; width: 48%; }
+        .nav-btn:hover { background: #102a43; }
+
+        /* The New AI Assistant Box */
+        .ai-board { background: #fff3cd; padding: 30px; border-radius: 12px; margin-top: 30px; border-left: 6px solid #f39200; display: none; }
+        .btn-ai { background: #f39200; width: 100%; margin-bottom: 15px; color: #fff; }
+        .btn-ai:hover { background: #d37c00; }
+        .ai-response { font-size: 17px; line-height: 1.6; color: #333; white-space: pre-wrap; background: #fff; padding: 20px; border-radius: 8px; border: 1px solid #ffeeba; min-height: 50px;}
+
+        .eval-board { background: #e0e7ff; padding: 30px; border-radius: 12px; margin-top: 30px; display: none; }
+        .eval-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        .btn-copy { background: #28a745; width: 100%; margin-top: 10px; }
+        .btn-copy:hover { background: #1e7e34; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <div class="logo-container">
+            <img src="logo.png.jpg" alt="MCN Logo" class="logo-img">
+        </div>
+        <h1 style="margin:0; font-size: 26px;">Global Admissions Committee</h1>
+    </div>
+
+    <div class="sdg-strip">
+        <img src="sdg1.png" class="sdg-icon" alt="SDG">
+        <img src="sdg2.png" class="sdg-icon" alt="SDG">
+        <img src="sdg3.png" class="sdg-icon" alt="SDG">
+        <img src="sdg4.png" class="sdg-icon" alt="SDG">
+        <img src="sdg5.png" class="sdg-icon" alt="SDG">
+    </div>
+
+    <div class="setup-grid">
+        <div class="field-group">
+            <label>1. Secret Gemini Password</label>
+            <input type="password" id="apiKey" placeholder="Paste API Key here (starts with AIza...)">
+        </div>
+        <div class="field-group">
+            <label>2. Google Sheet Link</label>
+            <input type="text" id="sheetLink" placeholder="Paste your /edit link...">
+        </div>
+        <div class="field-group">
+            <label>3. Row</label>
+            <input type="number" id="rowNum" value="2">
+        </div>
+        <button onclick="loadData()">Fetch</button>
+    </div>
+
+    <div id="displayArea">
+        <p style="text-align:center; padding: 40px; color: #627d98;">Enter your details above and click Fetch to begin.</p>
+    </div>
+
+    <div id="actionArea" style="padding: 0 40px 40px 40px; display: none;">
+        
+        <div class="ai-board" id="aiBoard">
+            <h3 style="margin-top:0; color:#856404;">Gemini Evaluation Assistant</h3>
+            <button class="btn-ai" onclick="askGemini()">Read Application & Generate Summary</button>
+            <div id="aiText" class="ai-response">The AI summary will appear right here...</div>
+        </div>
+
+        <div class="nav-buttons">
+            <button class="nav-btn" onclick="changeRow(-1)">&#8592; Previous Applicant</button>
+            <button class="nav-btn" onclick="changeRow(1)">Next Applicant &#8594;</button>
+        </div>
+
+        <div class="eval-board" id="evalBoard">
+            <h3 style="margin-top:0; color:var(--mcn-navy);">Your Final Evaluation</h3>
+            <div class="eval-grid">
+                <div class="field-group">
+                    <label>Proximity to Issue</label>
+                    <select id="scoreProx">
+                        <option value="1">1 - Low</option>
+                        <option value="2">2 - Fair</option>
+                        <option value="3">3 - Good</option>
+                        <option value="4">4 - Very Good</option>
+                        <option value="5">5 - Exceptional</option>
+                    </select>
+                </div>
+                <div class="field-group">
+                    <label>Leadership</label>
+                    <select id="scoreLead">
+                        <option value="Emerging">Emerging</option>
+                        <option value="Strong">Strong</option>
+                    </select>
+                </div>
+                <div class="field-group">
+                    <label>Final Decision</label>
+                    <select id="scoreDecision">
+                        <option value="Accept">Accept</option>
+                        <option value="Waitlist">Waitlist</option>
+                        <option value="Decline">Decline</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn-copy" onclick="copyScores()">Copy Scores to Paste in Sheet</button>
+            <p id="copyMessage" style="color: #28a745; font-weight: bold; font-size: 14px; text-align: center; margin-top: 10px;"></p>
+        </div>
+
+    </div>
+</div>
+
+<script>
+// This hidden variable stores the current student's data so Gemini can read it later
+let currentApplicantData = "";
+
+function loadData() {
+    let link = document.getElementById('sheetLink').value.trim();
+    const rowInput = document.getElementById('rowNum');
+    const row = parseInt(rowInput.value);
+    const output = document.getElementById('displayArea');
+    const actionArea = document.getElementById('actionArea');
+    const aiBoard = document.getElementById('aiBoard');
+    const evalBoard = document.getElementById('evalBoard');
+
+    if (!link) {
+        output.innerHTML = "<p style='color:red; text-align:center;'>Please paste a link first.</p>";
+        actionArea.style.display = "none";
+        return;
+    }
+
+    if (link.includes('/edit')) {
+        link = link.split('/edit')[0] + '/export?format=csv';
+    }
+
+    output.innerHTML = "<p style='text-align:center;'>Reading candidate file...</p>";
+
+    Papa.parse(link, {
+        download: true,
+        header: true,
+        complete: function(results) {
+            const data = results.data;
+            const index = row - 2;
+
+            if (index < 0 || index >= data.length) {
+                output.innerHTML = "<p style='color:red; text-align:center;'>Candidate row not found. You might be at the end of the list.</p>";
+                actionArea.style.display = "block";
+                aiBoard.style.display = "none";
+                evalBoard.style.display = "none";
+                return;
+            }
+
+            const student = data[index];
+            
+            // Save the data as a string so Gemini can easily read it
+            currentApplicantData = JSON.stringify(student);
+
+            let html = "<h2 style='color:var(--mcn-navy);'>Application Details</h2>";
+
+            for (const key in student) {
+                if (student[key] && student[key].trim() !== "") {
+                    html += `<div class="impact-card">
+                                <span class="card-label">${key}</span>
+                                <div class="card-value">${student[key]}</div>
+                             </div>`;
+                }
+            }
+            output.innerHTML = html;
+            
+            actionArea.style.display = "block";
+            aiBoard.style.display = "block";
+            evalBoard.style.display = "block";
+            document.getElementById('copyMessage').innerText = "";
+            document.getElementById('aiText').innerText = "The AI summary will appear right here...";
+        }
+    });
+}
+
+function changeRow(step) {
+    const rowBox = document.getElementById('rowNum');
+    let currentRow = parseInt(rowBox.value);
+    let newRow = currentRow + step;
+    if (newRow < 2) newRow = 2;
+    rowBox.value = newRow;
+    loadData();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function copyScores() {
+    const prox = document.getElementById('scoreProx').value;
+    const lead = document.getElementById('scoreLead').value;
+    const decision = document.getElementById('scoreDecision').value;
+    const combinedAnswers = prox + "    " + lead + "    " + decision;
+    
+    navigator.clipboard.writeText(combinedAnswers).then(() => {
+        document.getElementById('copyMessage').innerText = "Scores copied! Now go to your Google Sheet and press Ctrl+V to paste them.";
+    });
+}
+
+// This is the new brain function that talks to Gemini
+async function askGemini() {
+    const apiKey = document.getElementById('apiKey').value.trim();
+    const aiTextDisplay = document.getElementById('aiText');
+
+    if (!apiKey) {
+        aiTextDisplay.innerText = "Wait! Please paste your secret Gemini Password in the top box first.";
+        return;
+    }
+
+    aiTextDisplay.innerText = "Gemini is analyzing the application right now. Please wait a moment...";
+
+    // We combine our hidden instructions with the student's actual data
+    const specificInstructions = "You are an expert evaluator for a social impact fellowship. Read the following applicant data. Write exactly three short paragraphs. Paragraph 1: A simple, 3-sentence summary of their project. Paragraph 2: Your assessment of their leadership value and proximity to the issue. Paragraph 3: An authenticity check explaining if their words sound genuinely passionate or copied. Do not use complex jargons. Keep the words very easy to understand. Here is the applicant data: ";
+    
+    const finalPrompt = specificInstructions + currentApplicantData;
+
+    // We build the connection bridge to Google's servers
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+    const payload = {
+        contents: [{ parts: [{ text: finalPrompt }] }]
+    };
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        
+        const data = await response.json();
+        
+        if (data.error) {
+            aiTextDisplay.innerText = "Oops, something went wrong with the key. Make sure you copied all the letters correctly!";
+        } else {
+            // This takes the AI's final words and puts them on your screen
+            aiTextDisplay.innerText = data.candidates[0].content.parts[0].text;
+        }
+    } catch (error) {
+        aiTextDisplay.innerText = "The connection failed. Make sure your internet is working properly.";
+    }
+}
+</script>
+
+</body>
+</html>
