@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>MCN | Premium GAC Portal</title>
+    <title>MCN | Premium GAC Toolkit</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
@@ -129,17 +129,17 @@
         <div class="logo-container">
             <img src="logo.png.jpg" alt="MCN Logo" class="logo-img">
         </div>
-        <h1 style="margin:0; font-size: 32px; letter-spacing: -0.5px;">Admissions Portal</h1>
-        <p style="margin:10px 0 0; opacity: 0.9; font-weight: 600; text-transform: uppercase; letter-spacing: 3px; font-size: 13px;">Uplifting Genuine Social Impact</p>
+        <h1 style="margin:0; font-size: 32px; letter-spacing: -0.5px;">Admissions Reviewers Toolkit</h1>
+        <p style="margin:10px 0 0; opacity: 0.9; font-weight: 600; text-transform: uppercase; letter-spacing: 3px; font-size: 13px;">Developed by Akhyear Mushfiqur Rahman, MCN'25</p>
     </div>
 
     <div class="setup-grid" id="setupGrid">
         <div class="field-group">
-            <label>Master Datasheet Link</label>
+            <label>Applicant's Responses Datasheet Link</label>
             <input type="text" id="sheetLink" placeholder="Paste your Google Sheet link here...">
         </div>
         <div class="field-group">
-            <label>Candidate Row</label>
+            <label>Candidate Row No.</label>
             <input type="number" id="rowNum" value="2">
         </div>
         <button class="btn-primary" onclick="loadData()">Fetch</button>
@@ -148,7 +148,7 @@
     <div id="displayArea">
         <div class="empty-state">
             <h3>Ready to Evaluate</h3>
-            <p>Paste your link and select a row to load a changemaker's dossier.</p>
+            <p>Paste your link and select a row to load a potential changemaker's profile.</p>
         </div>
     </div>
 
@@ -342,7 +342,7 @@ function saveAsPDF() {
         document.getElementById('navButtons').style.display = 'flex';
         document.getElementById('btnCopyEval').style.display = 'block';
         btnPdf.style.display = 'block';
-        btnPdf.innerText = "Save Dossier as PDF";
+        btnPdf.innerText = "Save Profile as PDF";
     });
 }
 </script>
