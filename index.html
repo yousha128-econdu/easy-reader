@@ -1,47 +1,182 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>GAC Auto-Reader | Millennium Fellowship</title>
+    <title>GAC Impact Portal | Millennium Fellowship</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <style>
-        :root { --mcn-navy: #0A2342; --mcn-blue: #0056b3; --sdg-gold: #f39200; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f0f4f8; margin: 0; padding: 20px; }
-        .container { max-width: 900px; margin: 0 auto; background: #ffffff; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); overflow: hidden; border-top: 10px solid var(--mcn-blue); }
-        .header { background: var(--mcn-navy); color: white; padding: 30px; text-align: center; }
-        .logo { max-width: 200px; margin-bottom: 15px; }
-        .setup-section { padding: 25px; background: #f8f9fa; border-bottom: 2px solid #e9ecef; display: grid; grid-template-columns: 2fr 1fr auto; gap: 15px; align-items: end; }
-        .input-group label { display: block; font-weight: bold; margin-bottom: 8px; color: var(--mcn-navy); font-size: 13px; }
-        input { width: 100%; padding: 12px; border: 2px solid #cbd5e0; border-radius: 8px; font-size: 14px; box-sizing: border-box; }
-        button { background-color: var(--mcn-blue); color: white; border: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        button:hover { background-color: var(--mcn-navy); }
+        :root { 
+            --mcn-navy: #0A2342; 
+            --mcn-blue: #0056b3; 
+            --sdg-gold: #f39200;
+            --impact-green: #28a745;
+        }
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background-color: #f8fafd; 
+            margin: 0; 
+            padding: 20px; 
+            background-image: linear-gradient(135deg, #f8fafd 0%, #e0e7ff 100%);
+            min-height: 100vh;
+        }
+        .container { 
+            max-width: 950px; 
+            margin: 0 auto; 
+            background: #ffffff; 
+            border-radius: 20px; 
+            box-shadow: 0 15px 35px rgba(10, 35, 66, 0.15); 
+            overflow: hidden; 
+            border-top: 12px solid var(--mcn-blue); 
+        }
+        .header { 
+            background: var(--mcn-navy); 
+            color: white; 
+            padding: 40px; 
+            text-align: center;
+            position: relative;
+        }
+        /* Fixing the Logo with a more stable URL */
+        .logo-box {
+            background: white;
+            padding: 15px;
+            display: inline-block;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .logo-img { 
+            max-width: 220px; 
+            height: auto;
+            display: block;
+        }
+        .setup-section { 
+            padding: 25px; 
+            background: #f1f5f9; 
+            border-bottom: 2px solid #e2e8f0; 
+            display: grid; 
+            grid-template-columns: 2fr 1fr auto; 
+            gap: 20px; 
+            align-items: end; 
+        }
+        .input-group label { 
+            display: block; 
+            font-weight: bold; 
+            margin-bottom: 8px; 
+            color: var(--mcn-navy); 
+            font-size: 14px; 
+            text-transform: uppercase;
+        }
+        input { 
+            width: 100%; 
+            padding: 14px; 
+            border: 2px solid #cbd5e0; 
+            border-radius: 10px; 
+            font-size: 15px; 
+            box-sizing: border-box;
+            transition: 0.3s;
+        }
+        input:focus { border-color: var(--mcn-blue); outline: none; box-shadow: 0 0 8px rgba(0,86,179,0.2); }
+        button { 
+            background-color: var(--mcn-blue); 
+            color: white; 
+            border: none; 
+            padding: 14px 30px; 
+            border-radius: 10px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+        button:hover { background-color: var(--mcn-navy); transform: translateY(-2px); }
+        
         #displayArea { padding: 40px; }
-        .impact-card { background: #fff; border-left: 5px solid var(--mcn-blue); margin-bottom: 25px; padding: 20px; border-radius: 0 8px 8px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .label { font-size: 11px; text-transform: uppercase; color: #718096; font-weight: 800; letter-spacing: 1px; }
-        .content { font-size: 18px; margin-top: 8px; line-height: 1.7; color: #2d3748; white-space: pre-wrap; }
+        
+        /* SDG Illustration Styling */
+        .sdg-section {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .sdg-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 5px;
+            transition: 0.3s;
+            opacity: 0.7;
+        }
+        .sdg-icon:hover { opacity: 1; transform: scale(1.1); }
+
+        .impact-card { 
+            background: #fff; 
+            border-left: 6px solid var(--mcn-blue); 
+            margin-bottom: 25px; 
+            padding: 25px; 
+            border-radius: 0 12px 12px 0; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            transition: 0.3s;
+        }
+        .impact-card:hover { transform: translateX(5px); box-shadow: 0 6px 12px rgba(0,0,0,0.05); }
+        .label { 
+            font-size: 12px; 
+            text-transform: uppercase; 
+            color: var(--mcn-blue); 
+            font-weight: 800; 
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .content { font-size: 18px; line-height: 1.8; color: #1e293b; white-space: pre-wrap; }
+        
+        .footer-illustration {
+            text-align: center;
+            padding: 40px;
+            opacity: 0.6;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="header">
-        <img src="https://images.squarespace-cdn.com/content/v1/59404077d2b857790807755e/1501793755353-7O6F8STH7831KCPJ2M9H/Millennium+Fellowship+Logo+White.png" alt="Logo" class="logo">
-        <p style="margin:0; opacity: 0.8; letter-spacing: 1px; font-size: 12px;">GLOBAL ADMISSIONS COMMITTEE | AUTO-CONVERTER PORTAL</p>
+        <div class="logo-box">
+            <img src="https://mcnpartners.org/wp-content/uploads/2021/03/MCN-Logo-Primary-RGB-1.png" alt="MCN Logo" class="logo-img">
+        </div>
+        <h1 style="margin:0; font-size: 26px;">Millennium Fellowship Reader</h1>
+        <p style="margin:10px 0 0; opacity: 0.9; font-weight: 300; letter-spacing: 2px;">GLOBAL ADMISSIONS COMMITTEE EVALUATION</p>
+    </div>
+
+    <div class="sdg-section" id="sdgGrid">
+        <img src="https://unglobalcompact.org/system/attachments/80/original/E_SDG_PRINT-01.png" class="sdg-icon" title="No Poverty">
+        <img src="https://unglobalcompact.org/system/attachments/81/original/E_SDG_PRINT-02.png" class="sdg-icon" title="Zero Hunger">
+        <img src="https://unglobalcompact.org/system/attachments/82/original/E_SDG_PRINT-03.png" class="sdg-icon" title="Good Health">
+        <img src="https://unglobalcompact.org/system/attachments/83/original/E_SDG_PRINT-04.png" class="sdg-icon" title="Quality Education">
+        <img src="https://unglobalcompact.org/system/attachments/84/original/E_SDG_PRINT-05.png" class="sdg-icon" title="Gender Equality">
+        <img src="https://unglobalcompact.org/system/attachments/92/original/E_SDG_PRINT-13.png" class="sdg-icon" title="Climate Action">
+        <img src="https://unglobalcompact.org/system/attachments/96/original/E_SDG_PRINT-17.png" class="sdg-icon" title="Partnerships">
     </div>
 
     <div class="setup-section">
         <div class="input-group">
-            <label>Paste Normal Google Sheet Link</label>
-            <input type="text" id="sheetLink" placeholder="Paste your /edit link here...">
+            <label>Shareable Google Sheet Link</label>
+            <input type="text" id="sheetLink" placeholder="Paste /edit link here...">
         </div>
         <div class="input-group">
             <label>Row Number</label>
             <input type="number" id="rowNum" value="2">
         </div>
-        <button onclick="loadData()">LOAD PROFILE</button>
+        <button onclick="loadData()">Load Profile</button>
     </div>
 
     <div id="displayArea">
-        <p style="text-align:center; color: #a0aec0; padding: 50px;">Paste any shareable link above and click Load to begin evaluation.</p>
+        <div style="text-align:center; padding: 60px; color: #64748b;">
+            <h3 style="margin-bottom: 10px;">Ready to Advance the SDGs?</h3>
+            <p>Paste your link and choose a row to evaluate a changemaker.</p>
+        </div>
+    </div>
+
+    <div class="footer-illustration">
+        <p style="font-size: 14px;"><em>"Uplifting humanity through student-led social impact."</em></p>
+        <img src="https://static.thenounproject.com/png/3455825-200.png" style="width: 50px; filter: grayscale(1);">
     </div>
 </div>
 
@@ -52,18 +187,16 @@ function loadData() {
     const output = document.getElementById('displayArea');
 
     if (!link) {
-        output.innerHTML = "<p style='color:red; text-align:center;'>Please paste a link first!</p>";
+        output.innerHTML = "<p style='color:red; text-align:center;'><strong>Please paste your link first!</strong></p>";
         return;
     }
 
-    // THE MAGIC TRANSLATOR: This converts a normal link to a CSV link automatically
+    // MAGIC TRANSLATOR: Converts normal link to CSV automatically
     if (link.includes('/edit')) {
         link = link.split('/edit')[0] + '/export?format=csv';
-    } else if (link.includes('/pubhtml')) {
-        link = link.split('/pubhtml')[0] + '/pub?output=csv';
     }
 
-    output.innerHTML = "<p style='text-align:center;'>Translating link and loading data...</p>";
+    output.innerHTML = "<p style='text-align:center; font-style:italic;'>Fetching candidate data from MCN database...</p>";
 
     Papa.parse(link, {
         download: true,
@@ -73,12 +206,12 @@ function loadData() {
             const index = row - 2;
 
             if (index < 0 || index >= data.length) {
-                output.innerHTML = "<p style='color:red; text-align:center;'>Applicant row " + row + " not found.</p>";
+                output.innerHTML = "<p style='color:red; text-align:center;'>Candidate row not found.</p>";
                 return;
             }
 
             const student = data[index];
-            let html = "<h3 style='color:var(--mcn-navy); border-bottom: 2px solid #eee; padding-bottom:10px;'>Candidate Evaluation</h3>";
+            let html = "<h2 style='color:var(--mcn-navy); border-bottom: 3px solid var(--mcn-blue); padding-bottom:15px; margin-bottom: 30px;'>Candidate Impact Profile</h2>";
 
             for (const key in student) {
                 if (student[key] && student[key].trim() !== "") {
@@ -91,7 +224,7 @@ function loadData() {
             output.innerHTML = html;
         },
         error: function() {
-            output.innerHTML = "<p style='color:red; text-align:center;'><strong>Error:</strong> Ensure your Google Sheet is set to 'Anyone with the link can view' or is 'Published to the web'.</p>";
+            output.innerHTML = "<p style='color:red; text-align:center;'>Error reading sheet. Ensure 'General Access' is set to 'Anyone with the link can view'.</p>";
         }
     });
 }
