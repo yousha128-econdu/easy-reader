@@ -53,13 +53,11 @@
             margin-bottom: 25px;
         }
 
-        .logo-img { max-width: 260px; height: auto; display: block; }
-
         .setup-grid {
             padding: 35px 40px;
             background: var(--white);
             display: grid;
-            grid-template-columns: 1fr 120px 100px 140px; /* Adjusted to fit the new download button */
+            grid-template-columns: 1fr 120px 100px 140px; 
             gap: 15px;
             align-items: flex-end;
             border-bottom: 1px solid #e2e8f0;
@@ -131,7 +129,6 @@
         .btn-copy { background: #0f766e; color: var(--white); border: none; padding: 18px; border-radius: 12px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
         .btn-copy:hover { background: #115e59; transform: translateY(-2px); box-shadow: 0 10px 15px rgba(15, 118, 110, 0.2); }
 
-        /* The New Export to Draft Button */
         .btn-draft { background: #f59e0b; color: var(--white); border: none; padding: 18px; border-radius: 12px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; margin-top: 15px; }
         .btn-draft:hover { background: #d97706; transform: translateY(-2px); box-shadow: 0 10px 15px rgba(245, 158, 11, 0.2); }
         
@@ -148,7 +145,7 @@
     
     <div class="header">
         <div class="logo-container">
-            <img src="logo.png.jpg" alt="MCN Logo" class="logo-img">
+            <img src="logo.png.jpg" alt="MCN Logo" id="officialLogo" crossorigin="anonymous" style="width: 250px; max-width: 100%; display: block;">
         </div>
         <h1 style="margin:0; font-size: 32px; letter-spacing: -0.5px;">Admissions Reviewers Toolkit</h1>
         <p style="margin:10px 0 0; opacity: 0.9; font-weight: 600; text-transform: uppercase; letter-spacing: 3px; font-size: 13px;">Developed by Akhyear Mushfiqur Rahman, Millennium Fellow'25</p>
@@ -336,7 +333,6 @@ function copyScores() {
     });
 }
 
-// The New Function to Save Data to Your Browser's Memory
 function saveToDraft() {
     const row = document.getElementById('rowNum').value;
     const prox = document.getElementById('scoreProx').value;
@@ -344,10 +340,8 @@ function saveToDraft() {
     const decision = document.getElementById('scoreDecision').value;
     const btn = document.getElementById('btnDraft');
 
-    // Tells the website to open the secret memory vault, or create a new one if it's empty
     let drafts = JSON.parse(localStorage.getItem('mcn_eval_drafts')) || {};
 
-    // Saves this specific student's scores into the vault
     drafts[row] = {
         name: currentApplicantName,
         proximity: prox,
@@ -355,7 +349,6 @@ function saveToDraft() {
         decision: decision
     };
 
-    // Locks the memory vault
     localStorage.setItem('mcn_eval_drafts', JSON.stringify(drafts));
 
     btn.innerText = "\u2713 Added to Draft Memory!";
@@ -367,26 +360,22 @@ function saveToDraft() {
     }, 2500);
 }
 
-// The New Function to Download Your Master Draft Sheet
 function downloadDraftCSV() {
     let drafts = JSON.parse(localStorage.getItem('mcn_eval_drafts')) || {};
-    let rows = Object.keys(drafts).sort((a, b) => parseInt(a) - parseInt(b)); // Sorts the rows so they match your master sheet perfectly
+    let rows = Object.keys(drafts).sort((a, b) => parseInt(a) - parseInt(b));
 
     if (rows.length === 0) {
         alert("You have not saved any drafts yet! Evaluate a student and click 'Export to Draft Sheet' first.");
         return;
     }
 
-    // Creates the column titles for your new file
     let csvContent = "Row Number,Applicant Name,Proximity to Issue,Leadership Potential,Committee Decision\n";
 
-    // Loops through everything in the memory vault and stacks it nicely
     rows.forEach(row => {
         let d = drafts[row];
         csvContent += `${row},"${d.name}","${d.proximity}","${d.leadership}","${d.decision}"\n`;
     });
 
-    // Converts the stacked text into a real downloadable file
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement("a");
     const url = URL.createObjectURL(blob);
@@ -399,14 +388,13 @@ function downloadDraftCSV() {
 
 function saveAsPDF() {
     const btnPdf = document.getElementById('btnPdf');
-    const btnDraft = document.getElementById('btnDraft');
     btnPdf.innerText = "Scanning Document... Please Wait";
     
     document.getElementById('setupGrid').style.display = 'none';
     document.getElementById('authSuite').style.display = 'none';
     document.getElementById('navButtons').style.display = 'none';
     document.getElementById('btnCopyEval').style.display = 'none';
-    btnDraft.style.display = 'none'; // Hides the new draft button from the PDF
+    document.getElementById('btnDraft').style.display = 'none';
     btnPdf.style.display = 'none';
 
     const element = document.getElementById('pdfContentArea');
@@ -423,7 +411,8 @@ function saveAsPDF() {
         margin:       0.3,
         filename:     currentApplicantName + '_MCN_Evaluation.pdf',
         image:        { type: 'jpeg', quality: 1.0 },
-        html2canvas:  { scale: 2, useCORS: true, scrollY: 0 },
+        // Added imageTimeout to force the scanner to wait for your logo to load
+        html2canvas:  { scale: 2, useCORS: true, scrollY: 0, imageTimeout: 15000 },
         jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
 
@@ -436,7 +425,7 @@ function saveAsPDF() {
         document.getElementById('authSuite').style.display = 'flex';
         document.getElementById('navButtons').style.display = 'flex';
         document.getElementById('btnCopyEval').style.display = 'block';
-        btnDraft.style.display = 'block';
+        document.getElementById('btnDraft').style.display = 'block';
         btnPdf.style.display = 'block';
         btnPdf.innerText = "Save Profile as PDF";
     });
