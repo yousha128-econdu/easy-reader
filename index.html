@@ -265,7 +265,7 @@ function loadData() {
             const lastName = student["Last Name"] || "Candidate";
             currentApplicantName = (firstName + "_" + lastName).trim();
 
-            let html = "<h2 style='color:var(--mcn-navy); margin-bottom: 25px; font-weight: 800; font-size: 24px;'>Applicant Dossier</h2>";
+            let html = "<h2 style='color:var(--mcn-navy); margin-bottom: 25px; font-weight: 800; font-size: 24px;'>Applicant Profile</h2>";
 
             for (const key in student) {
                 if (student[key] && student[key].trim() !== "") {
