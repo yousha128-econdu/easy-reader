@@ -1,109 +1,167 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>MCN Application Reader</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
-  <style>
-    /* MCN Theme Colors: Navy Blue, Bright Blue, White */
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background-color: #f4f7f6;
-      padding: 30px;
-      color: #333;
-    }
-    .magic-box {
-      max-width: 850px;
-      margin: 0 auto;
-      background-color: white;
-      padding: 40px;
-      border-radius: 8px;
-      box-shadow: 0 8px 16px rgba(10, 35, 66, 0.1);
-      border-top: 6px solid #0056b3; /* Millennium Blue */
-    }
-    h2 {
-      color: #0A2342; /* Deep Navy */
-      margin-bottom: 5px;
-      font-size: 28px;
-      border-bottom: 2px solid #0056b3;
-      padding-bottom: 10px;
-    }
-    .instruction-text {
-      color: #555;
-      font-size: 16px;
-      margin-bottom: 25px;
-    }
-    .input-group {
-      margin-bottom: 20px;
-    }
-    .input-group label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 8px;
-      color: #0A2342;
-    }
-    input[type="text"], input[type="number"] {
-      padding: 12px;
-      font-size: 16px;
-      width: 100%;
-      box-sizing: border-box;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    input[type="number"] {
-      width: 120px;
-    }
-    button {
-      padding: 14px 28px;
-      font-size: 18px;
-      background-color: #0056b3; 
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: bold;
-      width: 100%;
-      transition: background-color 0.3s ease;
-    }
-    button:hover {
-      background-color: #0A2342; 
-    }
-    .reading-area {
-      margin-top: 30px;
-      line-height: 1.8;
-      font-size: 17px;
-      color: #222;
-      background-color: #fdfdfd;
-      padding: 25px;
-      border-radius: 8px;
-      border: 1px solid #e0e0e0;
-    }
-    /* This perfectly separates each question and answer so it is easy to read */
-    .data-row {
-      margin-bottom: 20px;
-      border-bottom: 1px dashed #ccc;
-      padding-bottom: 15px;
-    }
-    .data-title {
-      font-weight: bold;
-      color: #0056b3;
-      display: block;
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .data-value {
-      display: block;
-      margin-top: 6px;
-      white-space: pre-wrap; 
-    }
-  </style>
+    <title>MCN Fellowship Reader</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 40px 20px;
+            color: #1c1e21;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            border-top: 8px solid #0056b3; /* Millennium Blue */
+        }
+        .header {
+            padding: 30px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            text-align: center;
+        }
+        h2 { margin: 0; color: #002d62; font-size: 24px; }
+        .setup-area {
+            padding: 30px;
+            background-color: #ffffff;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #002d62;
+        }
+        /* These are the boxes that were missing/unclear */
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ccd0d5;
+            border-radius: 6px;
+            font-size: 16px;
+            background-color: #fff;
+            display: block; /* Ensures they appear */
+            box-sizing: border-box;
+        }
+        input[type="number"] { width: 100px; }
+        
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        button:hover { background-color: #002d62; }
+
+        #displayArea {
+            padding: 30px;
+            background-color: #fff;
+            min-height: 100px;
+        }
+        .data-card {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .data-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #0056b3;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .data-content {
+            font-size: 17px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+    </style>
 </head>
 <body>
 
-  <div class="magic-box">
-    <h2>Millennium Fellowship Reader</h2>
-    <p class="instruction-text">Global Admissions Committee Portal: Paste your CSV link and enter the candidate's row number.</p>
-    
-    <div class="input-group">
-      <label>1. Secure Google Sheet CSV Link:</label>
-      <input type="text" id="sheetLinkInput" placeholder="
+<div class="container">
+    <div class="header">
+        <h2>Millennium Fellowship Reader</h2>
+        <p style="color: #606770;">Global Admissions Committee Evaluation Tool</p>
+    </div>
+
+    <div class="setup-area">
+        <div class="input-group">
+            <label>1. Secure Google Sheet CSV Link</label>
+            <input type="text" id="sheetLink" placeholder="Paste link ending in &output=csv here...">
+        </div>
+        <div class="input-group">
+            <label>2. Applicant Row Number</label>
+            <input type="number" id="rowNum" value="2">
+        </div>
+        <button onclick="loadData()">LOAD APPLICANT DATA</button>
+    </div>
+
+    <div id="displayArea">
+        <p style="text-align: center; color: #90949c;">Ready to review. Enter data above and click Load.</p>
+    </div>
+</div>
+
+<script>
+function loadData() {
+    const link = document.getElementById('sheetLink').value.trim();
+    const row = document.getElementById('rowNum').value;
+    const output = document.getElementById('displayArea');
+
+    if (!link) {
+        output.innerHTML = "<p style='color:red;'><b>Error:</b> Please paste your CSV link first!</p>";
+        return;
+    }
+
+    output.innerHTML = "<p>Loading candidate profile...</p>";
+
+    Papa.parse(link, {
+        download: true,
+        header: true,
+        complete: function(results) {
+            const data = results.data;
+            const index = row - 2;
+
+            if (index < 0 || index >= data.length) {
+                output.innerHTML = "<p style='color:red;'><b>Error:</b> Row " + row + " not found in sheet.</p>";
+                return;
+            }
+
+            const student = data[index];
+            let html = "";
+
+            // Dynamic Loop: Grabs every column regardless of name
+            for (const key in student) {
+                if (student[key] && student[key].trim() !== "") {
+                    html += `<div class="data-card">
+                                <span class="data-label">${key}</span>
+                                <div class="data-content">${student[key]}</div>
+                             </div>`;
+                }
+            }
+            output.innerHTML = html || "<p>This row is empty.</p>";
+        },
+        error: function() {
+            output.innerHTML = "<p style='color:red;'><b>Error:</b> Could not reach Google Sheet. Check your Publish settings.</p>";
+        }
+    });
+}
+</script>
+
+</body>
+</html>
