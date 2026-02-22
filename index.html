@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>The Application Reader</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f4f8;
+      padding: 30px;
+    }
+    .magic-box {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 { color: #2c3e50; margin-bottom: 5px; }
+    .instruction-text { color: #555; font-size: 16px; margin-bottom: 20px; }
+    .input-group { margin-bottom: 20px; }
+    .input-group label { display: block; font-weight: bold; margin-bottom: 8px; color: #333; }
+    input[type="text"], input[type="number"] {
+      padding: 12px; font-size: 16px; width: 100%; box-sizing: border-box;
+      border: 2px solid #ccc; border-radius: 6px;
+    }
+    input[type="number"] { width: 150px; }
+    button {
+      padding: 14px 28px; font-size: 18px; background-color: #27ae60;
+      color: white; border: none; border-radius: 6px; cursor: pointer;
+      font-weight: bold; width: 100%;
+    }
+    button:hover { background-color: #219150; }
+    .reading-area {
+      margin-top: 30px; white-space: pre-wrap; line-height: 1.8;
+      font-size: 18px; color: #222; background-color: #fafafa;
+      padding: 20px; border-radius: 8px; border: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="magic-box">
+    <h2>The Application Reader</h2>
+    <p class="instruction-text">Review your candidates easily. Just paste the published link and enter the row.</p>
+    
+    <div class="input-group">
+      <label>1. Paste your Google Sheet CSV Link here:</label>
+      <input type="text" id="sheetLinkInput" placeholder="https://docs.google.com/spreadsheets/d/e/...">
+    </div>
+
+    <div class="input-group">
+      <label>2. Type the candidate's Row Number:</label>
+      <input type="number" id="rowNumberInput" value="2">
+    </div>
+    
+    <button onclick="fetchApplication()">Read Application Now</button>
+    <div id="displayArea" class="reading-area">The application story will magically appear here...</div>
+  </div>
+
+  <script>
+    function fetchApplication() {
+      const mySheetLink = document.getElementById("sheetLinkInput").value.trim();
+      const rowWanted = document.getElementById("rowNumberInput").value;
+      const display = document.getElementById("displayArea");
+
+      if (mySheetLink === "") {
+        display.innerText = "Please paste your Google Sheet link in the top box first!";
+        return;
+      }
+
+      display.innerText = "Fetching the story... please wait a second.";
+
+      Papa.parse(mySheetLink, {
+        download: true,
+        header: true,
+        complete: function(results) {
+          const allStudents = results.data;
+          const actualStudentPlace = rowWanted - 2;
+
+          if(actualStudentPlace < 0 || actualStudentPlace >= allStudents.length || !allStudents[actualStudentPlace]["First Name"]) {
+            display.innerText = "Oops! I could not find a full application on that row. Try another number.";
+            return;
+          }
+
+          const student = allStudents[actualStudentPlace];
+
+          const readableStory = 
+            "Applicant: " + student["First Name"] + " " + student["Last Name"] + "\n" +
+            "University: " + student["University"] + " | Major: " + student["Major"] + "\n" +
+            "Project Name: " + student["Project Name"] + " | Stage: " + student["Stage"] + "\n" +
+            "Target Goal: SDG " + student["SDG"] + "\n\n" +
+            "Project Description:\n" + student["Brief Description"] + "\n\n" +
+            "Impact and Measurement: The project aims to impact " + student["Lives Impacted"] + " lives.\n" +
+            "Success will be measured by: " + student["Impact Measurement"] + "\n\n" +
+            "Personal Motivation (Q1):\n" + student["Q1: Motivation"] + "\n\n" +
+            "Why the Millennium Fellowship (Q2):\n" + student["Q2: Why Fellow?"] + "\n\n" +
+            "Leadership Experience (Q3):\n" + student["Q3: Leadership Value"];
+
+          display.innerText = readableStory;
+        },
+        error: function() {
+          display.innerText = "There was an error reading your link. Make sure you published the Google Sheet as a CSV file!";
+        }
+      });
+    }
+  </script>
+</body>
+</html>
