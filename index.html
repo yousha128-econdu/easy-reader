@@ -8,7 +8,6 @@
             --mcn-navy: #0A2342; 
             --mcn-blue: #0056b3; 
             --sdg-gold: #f39200;
-            --impact-green: #28a745;
         }
         body { 
             font-family: 'Segoe UI', sans-serif; 
@@ -32,9 +31,7 @@
             color: white; 
             padding: 40px; 
             text-align: center;
-            position: relative;
         }
-        /* Fixing the Logo with a more stable URL */
         .logo-box {
             background: white;
             padding: 15px;
@@ -43,10 +40,28 @@
             margin-bottom: 20px;
         }
         .logo-img { 
-            max-width: 220px; 
+            max-width: 250px; 
             height: auto;
             display: block;
         }
+        /* SDG Row Styling */
+        .sdg-row {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 20px;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+        }
+        .sdg-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+        .sdg-icon:hover { transform: scale(1.2); z-index: 10; }
+
         .setup-section { 
             padding: 25px; 
             background: #f1f5f9; 
@@ -62,7 +77,6 @@
             margin-bottom: 8px; 
             color: var(--mcn-navy); 
             font-size: 14px; 
-            text-transform: uppercase;
         }
         input { 
             width: 100%; 
@@ -71,9 +85,7 @@
             border-radius: 10px; 
             font-size: 15px; 
             box-sizing: border-box;
-            transition: 0.3s;
         }
-        input:focus { border-color: var(--mcn-blue); outline: none; box-shadow: 0 0 8px rgba(0,86,179,0.2); }
         button { 
             background-color: var(--mcn-blue); 
             color: white; 
@@ -83,29 +95,11 @@
             font-weight: bold; 
             cursor: pointer; 
             transition: 0.3s;
-            text-transform: uppercase;
         }
-        button:hover { background-color: var(--mcn-navy); transform: translateY(-2px); }
+        button:hover { background-color: var(--mcn-navy); }
         
         #displayArea { padding: 40px; }
         
-        /* SDG Illustration Styling */
-        .sdg-section {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-        .sdg-icon {
-            width: 45px;
-            height: 45px;
-            border-radius: 5px;
-            transition: 0.3s;
-            opacity: 0.7;
-        }
-        .sdg-icon:hover { opacity: 1; transform: scale(1.1); }
-
         .impact-card { 
             background: #fff; 
             border-left: 6px solid var(--mcn-blue); 
@@ -113,25 +107,16 @@
             padding: 25px; 
             border-radius: 0 12px 12px 0; 
             box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-            transition: 0.3s;
         }
-        .impact-card:hover { transform: translateX(5px); box-shadow: 0 6px 12px rgba(0,0,0,0.05); }
         .label { 
             font-size: 12px; 
             text-transform: uppercase; 
             color: var(--mcn-blue); 
             font-weight: 800; 
-            letter-spacing: 1.5px;
-            margin-bottom: 10px;
             display: block;
+            margin-bottom: 10px;
         }
         .content { font-size: 18px; line-height: 1.8; color: #1e293b; white-space: pre-wrap; }
-        
-        .footer-illustration {
-            text-align: center;
-            padding: 40px;
-            opacity: 0.6;
-        }
     </style>
 </head>
 <body>
@@ -139,44 +124,48 @@
 <div class="container">
     <div class="header">
         <div class="logo-box">
-            <img src="https://mcnpartners.org/wp-content/uploads/2021/03/MCN-Logo-Primary-RGB-1.png" alt="MCN Logo" class="logo-img">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Millennium_Campus_Network_Logo.png/600px-Millennium_Campus_Network_Logo.png" alt="MCN Logo" class="logo-img">
         </div>
-        <h1 style="margin:0; font-size: 26px;">Millennium Fellowship Reader</h1>
-        <p style="margin:10px 0 0; opacity: 0.9; font-weight: 300; letter-spacing: 2px;">GLOBAL ADMISSIONS COMMITTEE EVALUATION</p>
+        <h1 style="margin:0; font-size: 26px;">GAC Evaluation Portal</h1>
+        <p style="margin:10px 0 0; opacity: 0.9; font-weight: 300;">UPLIFTING SOCIAL IMPACT WORLDWIDE</p>
     </div>
 
-    <div class="sdg-section" id="sdgGrid">
-        <img src="https://unglobalcompact.org/system/attachments/80/original/E_SDG_PRINT-01.png" class="sdg-icon" title="No Poverty">
-        <img src="https://unglobalcompact.org/system/attachments/81/original/E_SDG_PRINT-02.png" class="sdg-icon" title="Zero Hunger">
-        <img src="https://unglobalcompact.org/system/attachments/82/original/E_SDG_PRINT-03.png" class="sdg-icon" title="Good Health">
-        <img src="https://unglobalcompact.org/system/attachments/83/original/E_SDG_PRINT-04.png" class="sdg-icon" title="Quality Education">
-        <img src="https://unglobalcompact.org/system/attachments/84/original/E_SDG_PRINT-05.png" class="sdg-icon" title="Gender Equality">
-        <img src="https://unglobalcompact.org/system/attachments/92/original/E_SDG_PRINT-13.png" class="sdg-icon" title="Climate Action">
-        <img src="https://unglobalcompact.org/system/attachments/96/original/E_SDG_PRINT-17.png" class="sdg-icon" title="Partnerships">
+    <div class="sdg-row" id="sdgIcons">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Sustainable_Development_Goal_01.svg/100px-Sustainable_Development_Goal_01.svg.png" class="sdg-icon" title="No Poverty">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Sustainable_Development_Goal_02.svg/100px-Sustainable_Development_Goal_02.svg.png" class="sdg-icon" title="Zero Hunger">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Sustainable_Development_Goal_03.svg/100px-Sustainable_Development_Goal_03.svg.png" class="sdg-icon" title="Good Health">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Sustainable_Development_Goal_04.svg/100px-Sustainable_Development_Goal_04.svg.png" class="sdg-icon" title="Quality Education">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Sustainable_Development_Goal_05.svg/100px-Sustainable_Development_Goal_05.svg.png" class="sdg-icon" title="Gender Equality">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Sustainable_Development_Goal_06.svg/100px-Sustainable_Development_Goal_06.svg.png" class="sdg-icon" title="Clean Water">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Sustainable_Development_Goal_07.svg/100px-Sustainable_Development_Goal_07.svg.png" class="sdg-icon" title="Affordable Energy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Sustainable_Development_Goal_08.svg/100px-Sustainable_Development_Goal_08.svg.png" class="sdg-icon" title="Decent Work">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Sustainable_Development_Goal_09.svg/100px-Sustainable_Development_Goal_09.svg.png" class="sdg-icon" title="Innovation">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Sustainable_Development_Goal_10.svg/100px-Sustainable_Development_Goal_10.svg.png" class="sdg-icon" title="Reduced Inequality">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Sustainable_Development_Goal_11.svg/100px-Sustainable_Development_Goal_11.svg.png" class="sdg-icon" title="Sustainable Cities">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Sustainable_Development_Goal_12.svg/100px-Sustainable_Development_Goal_12.svg.png" class="sdg-icon" title="Responsible Consumption">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Sustainable_Development_Goal_13.svg/100px-Sustainable_Development_Goal_13.svg.png" class="sdg-icon" title="Climate Action">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Sustainable_Development_Goal_14.svg/100px-Sustainable_Development_Goal_14.svg.png" class="sdg-icon" title="Life Below Water">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Sustainable_Development_Goal_15.svg/100px-Sustainable_Development_Goal_15.svg.png" class="sdg-icon" title="Life on Land">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Sustainable_Development_Goal_16.svg/100px-Sustainable_Development_Goal_16.svg.png" class="sdg-icon" title="Peace and Justice">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Sustainable_Development_Goal_17.svg/100px-Sustainable_Development_Goal_17.svg.png" class="sdg-icon" title="Partnerships">
     </div>
 
     <div class="setup-section">
         <div class="input-group">
-            <label>Shareable Google Sheet Link</label>
-            <input type="text" id="sheetLink" placeholder="Paste /edit link here...">
+            <label>Paste Normal Google Sheet Link</label>
+            <input type="text" id="sheetLink" placeholder="Paste your /edit link here...">
         </div>
         <div class="input-group">
             <label>Row Number</label>
             <input type="number" id="rowNum" value="2">
         </div>
-        <button onclick="loadData()">Load Profile</button>
+        <button onclick="loadData()">LOAD PROFILE</button>
     </div>
 
     <div id="displayArea">
         <div style="text-align:center; padding: 60px; color: #64748b;">
-            <h3 style="margin-bottom: 10px;">Ready to Advance the SDGs?</h3>
-            <p>Paste your link and choose a row to evaluate a changemaker.</p>
+            <p>Ready to Evaluate a Changemaker.</p>
         </div>
-    </div>
-
-    <div class="footer-illustration">
-        <p style="font-size: 14px;"><em>"Uplifting humanity through student-led social impact."</em></p>
-        <img src="https://static.thenounproject.com/png/3455825-200.png" style="width: 50px; filter: grayscale(1);">
     </div>
 </div>
 
@@ -187,16 +176,16 @@ function loadData() {
     const output = document.getElementById('displayArea');
 
     if (!link) {
-        output.innerHTML = "<p style='color:red; text-align:center;'><strong>Please paste your link first!</strong></p>";
+        output.innerHTML = "<p style='color:red; text-align:center;'>Please paste a link first!</p>";
         return;
     }
 
-    // MAGIC TRANSLATOR: Converts normal link to CSV automatically
+    // Auto-Converter for normal links
     if (link.includes('/edit')) {
         link = link.split('/edit')[0] + '/export?format=csv';
     }
 
-    output.innerHTML = "<p style='text-align:center; font-style:italic;'>Fetching candidate data from MCN database...</p>";
+    output.innerHTML = "<p style='text-align:center; font-style:italic;'>Loading candidate data...</p>";
 
     Papa.parse(link, {
         download: true,
@@ -206,12 +195,12 @@ function loadData() {
             const index = row - 2;
 
             if (index < 0 || index >= data.length) {
-                output.innerHTML = "<p style='color:red; text-align:center;'>Candidate row not found.</p>";
+                output.innerHTML = "<p style='color:red; text-align:center;'>Row " + row + " not found.</p>";
                 return;
             }
 
             const student = data[index];
-            let html = "<h2 style='color:var(--mcn-navy); border-bottom: 3px solid var(--mcn-blue); padding-bottom:15px; margin-bottom: 30px;'>Candidate Impact Profile</h2>";
+            let html = "<h2 style='color:var(--mcn-navy); border-bottom: 3px solid var(--mcn-blue); padding-bottom:15px; margin-bottom: 30px;'>Impact Dossier</h2>";
 
             for (const key in student) {
                 if (student[key] && student[key].trim() !== "") {
@@ -224,7 +213,7 @@ function loadData() {
             output.innerHTML = html;
         },
         error: function() {
-            output.innerHTML = "<p style='color:red; text-align:center;'>Error reading sheet. Ensure 'General Access' is set to 'Anyone with the link can view'.</p>";
+            output.innerHTML = "<p style='color:red; text-align:center;'>Error reading sheet. Check 'Share' settings.</p>";
         }
     });
 }
