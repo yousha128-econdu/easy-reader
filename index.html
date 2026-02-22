@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>MCN | Global Admissions Portal</title>
+    <title>MCN | AI Admissions Portal</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <style>
         :root {
@@ -12,7 +12,7 @@
         }
 
         body {
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
             margin: 0;
             padding: 40px 20px;
@@ -37,194 +37,6 @@
         .sdg-strip { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; padding: 20px; background: var(--white); border-bottom: 1px solid #e1e8ed; }
         .sdg-icon { width: 45px; height: 45px; border-radius: 8px; }
 
-        .setup-grid { padding: 30px; background: #f8fafc; display: grid; grid-template-columns: 2fr 100px auto; gap: 15px; align-items: flex-end; border-bottom: 1px solid #e1e8ed; }
+        .setup-grid { padding: 30px; background: #f8fafc; display: grid; grid-template-columns: 1fr 1fr 100px auto; gap: 15px; align-items: flex-end; border-bottom: 1px solid #e1e8ed; }
         .field-group label { display: block; font-size: 13px; font-weight: bold; margin-bottom: 8px; color: var(--mcn-navy); }
-        input, select { width: 100%; padding: 14px; border: 2px solid #cbd5e0; border-radius: 10px; font-size: 15px; background: var(--white); box-sizing: border-box; }
-        button { background: var(--mcn-blue); color: var(--white); border: none; padding: 14px 25px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; text-transform: uppercase; }
-        button:hover { background: var(--mcn-navy); }
-
-        #displayArea { padding: 40px; }
-        .impact-card { background: #ffffff; border-radius: 12px; padding: 20px; margin-bottom: 20px; border-left: 6px solid var(--mcn-blue); box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
-        .card-label { font-size: 12px; font-weight: 900; color: var(--mcn-blue); text-transform: uppercase; margin-bottom: 8px; display: block; }
-        .card-value { font-size: 18px; line-height: 1.6; color: #102a43; white-space: pre-wrap; }
-
-        /* Navigation Buttons */
-        .nav-buttons { display: flex; justify-content: space-between; margin-top: 30px; padding-top: 20px; border-top: 2px dashed #cbd5e0; }
-        .nav-btn { background: #627d98; width: 48%; }
-        .nav-btn:hover { background: #102a43; }
-
-        /* Evaluation Dashboard */
-        .eval-board { background: #e0e7ff; padding: 30px; border-radius: 12px; margin-top: 30px; display: none; }
-        .eval-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 20px; }
-        .btn-copy { background: #28a745; width: 100%; margin-top: 10px; }
-        .btn-copy:hover { background: #1e7e34; }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <div class="header">
-        <div class="logo-container">
-            <img src="logo.png.jpg" alt="MCN Logo" class="logo-img">
-        </div>
-        <h1 style="margin:0; font-size: 26px;">Global Admissions Committee</h1>
-    </div>
-
-    <div class="sdg-strip">
-        <img src="sdg1.png" class="sdg-icon" alt="SDG">
-        <img src="sdg2.png" class="sdg-icon" alt="SDG">
-        <img src="sdg3.png" class="sdg-icon" alt="SDG">
-    </div>
-
-    <div class="setup-grid">
-        <div class="field-group">
-            <label>Master Datasheet Link</label>
-            <input type="text" id="sheetLink" placeholder="Paste your normal Google Sheet link here...">
-        </div>
-        <div class="field-group">
-            <label>Row</label>
-            <input type="number" id="rowNum" value="2">
-        </div>
-        <button onclick="loadData()">Fetch Profile</button>
-    </div>
-
-    <div id="displayArea">
-        <p style="text-align:center; padding: 40px; color: #627d98;">Paste your link and click Fetch Profile to begin.</p>
-    </div>
-
-    <div id="actionArea" style="padding: 0 40px 40px 40px; display: none;">
-        
-        <div class="nav-buttons">
-            <button class="nav-btn" onclick="changeRow(-1)">&#8592; Previous Applicant</button>
-            <button class="nav-btn" onclick="changeRow(1)">Next Applicant &#8594;</button>
-        </div>
-
-        <div class="eval-board" id="evalBoard">
-            <h3 style="margin-top:0; color:var(--mcn-navy);">Your Evaluation</h3>
-            <div class="eval-grid">
-                <div class="field-group">
-                    <label>Proximity to Issue</label>
-                    <select id="scoreProx">
-                        <option value="1">1 - Low</option>
-                        <option value="2">2 - Fair</option>
-                        <option value="3">3 - Good</option>
-                        <option value="4">4 - Very Good</option>
-                        <option value="5">5 - Exceptional</option>
-                    </select>
-                </div>
-                <div class="field-group">
-                    <label>Leadership</label>
-                    <select id="scoreLead">
-                        <option value="Emerging">Emerging</option>
-                        <option value="Strong">Strong</option>
-                    </select>
-                </div>
-                <div class="field-group">
-                    <label>Final Decision</label>
-                    <select id="scoreDecision">
-                        <option value="Accept">Accept</option>
-                        <option value="Waitlist">Waitlist</option>
-                        <option value="Decline">Decline</option>
-                    </select>
-                </div>
-            </div>
-            <button class="btn-copy" onclick="copyScores()">Copy Scores to Paste in Sheet</button>
-            <p id="copyMessage" style="color: #28a745; font-weight: bold; font-size: 14px; text-align: center; margin-top: 10px;"></p>
-        </div>
-
-    </div>
-</div>
-
-<script>
-function loadData() {
-    let link = document.getElementById('sheetLink').value.trim();
-    const rowInput = document.getElementById('rowNum');
-    const row = parseInt(rowInput.value);
-    const output = document.getElementById('displayArea');
-    const actionArea = document.getElementById('actionArea');
-    const evalBoard = document.getElementById('evalBoard');
-
-    if (!link) {
-        output.innerHTML = "<p style='color:red; text-align:center;'>Please paste a link first.</p>";
-        actionArea.style.display = "none";
-        return;
-    }
-
-    if (link.includes('/edit')) {
-        link = link.split('/edit')[0] + '/export?format=csv';
-    }
-
-    output.innerHTML = "<p style='text-align:center;'>Reading candidate file...</p>";
-
-    Papa.parse(link, {
-        download: true,
-        header: true,
-        complete: function(results) {
-            const data = results.data;
-            const index = row - 2;
-
-            if (index < 0 || index >= data.length) {
-                output.innerHTML = "<p style='color:red; text-align:center;'>Candidate row not found. You might be at the end of the list.</p>";
-                actionArea.style.display = "block";
-                evalBoard.style.display = "none";
-                return;
-            }
-
-            const student = data[index];
-            let html = "<h2 style='color:var(--mcn-navy);'>Application Details</h2>";
-
-            for (const key in student) {
-                if (student[key] && student[key].trim() !== "") {
-                    html += `<div class="impact-card">
-                                <span class="card-label">${key}</span>
-                                <div class="card-value">${student[key]}</div>
-                             </div>`;
-                }
-            }
-            output.innerHTML = html;
-            
-            // Show the buttons and evaluation board after successful load
-            actionArea.style.display = "block";
-            evalBoard.style.display = "block";
-            
-            // Reset the copy message
-            document.getElementById('copyMessage').innerText = "";
-        }
-    });
-}
-
-function changeRow(step) {
-    const rowBox = document.getElementById('rowNum');
-    let currentRow = parseInt(rowBox.value);
-    
-    // Make sure we do not go below row 2 (which is the first student)
-    let newRow = currentRow + step;
-    if (newRow < 2) {
-        newRow = 2;
-    }
-    
-    rowBox.value = newRow;
-    
-    // Automatically fetch the new profile
-    loadData();
-    
-    // Scroll smoothly back to the top of the application
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function copyScores() {
-    const prox = document.getElementById('scoreProx').value;
-    const lead = document.getElementById('scoreLead').value;
-    const decision = document.getElementById('scoreDecision').value;
-    
-    // This glues your answers together separated by a little space
-    const combinedAnswers = prox + "    " + lead + "    " + decision;
-    
-    navigator.clipboard.writeText(combinedAnswers).then(() => {
-        document.getElementById('copyMessage').innerText = "Scores copied! Now go to your Google Sheet and press Ctrl+V to paste them.";
-    });
-}
-</script>
-
-</body>
-</html>
+        input, select { width: 100%; padding: 14px; border: 2px solid #cbd5e0; border-radius: 10px
