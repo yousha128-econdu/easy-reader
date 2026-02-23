@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>MCN | Joyful GAC Reviewers Toolkit</title>
+    <title>MCN | Joyful GAC Toolkit</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
@@ -25,9 +25,9 @@
             color: var(--text-dark);
             min-height: 100vh;
             position: relative;
+            overflow-x: hidden;
         }
 
-        /* --- THE NEW FLOATING SDG BACKGROUND --- */
         .bg-shapes {
             position: fixed;
             top: 0;
@@ -36,17 +36,16 @@
             height: 100vh;
             z-index: -1;
             overflow: hidden;
-            pointer-events: none; /* Makes sure you can't accidentally click them */
+            pointer-events: none; 
         }
         
         .bg-shape {
             position: absolute;
-            opacity: 0.08; /* Keeps them soft and transparent so you can focus */
+            opacity: 0.08; 
             filter: grayscale(20%);
             animation: float 20s infinite ease-in-out alternate;
         }
 
-        /* Spreading the goals beautifully across the background */
         .bg-shape:nth-child(1) { top: -2%; left: 5%; width: 250px; animation-delay: 0s; }
         .bg-shape:nth-child(2) { top: 15%; right: 3%; width: 300px; animation-delay: -5s; }
         .bg-shape:nth-child(3) { bottom: 5%; left: 8%; width: 220px; animation-delay: -10s; }
@@ -58,7 +57,6 @@
             0% { transform: translateY(0) rotate(0deg); }
             100% { transform: translateY(30px) rotate(8deg); }
         }
-        /* --------------------------------------- */
 
         .container {
             max-width: 1050px;
@@ -69,6 +67,7 @@
             box-shadow: 0 20px 60px -15px rgba(0, 86, 179, 0.15);
             overflow: visible; 
             border: 1px solid rgba(255, 255, 255, 0.8);
+            transition: transform 0.4s ease;
         }
 
         .header {
@@ -191,6 +190,69 @@
         .empty-state h3 { font-size: 28px; color: var(--mcn-navy); margin-bottom: 15px; font-weight: 800; }
         .empty-state p { font-size: 18px; line-height: 1.6; }
         .joyful-emoji { font-size: 48px; margin-bottom: 20px; display: block; animation: gentleFadeIn 1s ease forwards; }
+
+        /* --- THE NEW SLIDING RUBRIC DRAWER --- */
+        .btn-toggle-rubric {
+            position: fixed;
+            right: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+            color: white;
+            padding: 15px 25px 15px 20px;
+            border-radius: 30px 0 0 30px;
+            border: none;
+            font-weight: 800;
+            font-size: 15px;
+            cursor: pointer;
+            box-shadow: -5px 5px 15px rgba(109, 40, 217, 0.3);
+            z-index: 1000;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+        .btn-toggle-rubric:hover { padding-right: 35px; background: #5b21b6; }
+
+        .rubric-panel {
+            position: fixed;
+            top: 0;
+            right: -500px;
+            width: 450px;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(25px);
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            border-left: 1px solid #e2e8f0;
+        }
+        .rubric-panel.open { right: 0; }
+
+        .rubric-header {
+            background: var(--mcn-navy);
+            color: white;
+            padding: 30px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .rubric-header h2 { margin: 0; font-size: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+        .close-rubric { background: none; border: none; color: white; font-size: 28px; cursor: pointer; transition: 0.2s; }
+        .close-rubric:hover { color: #f87171; transform: scale(1.1); }
+
+        .rubric-content { padding: 30px; }
+        .rubric-section { margin-bottom: 30px; border-bottom: 2px dashed #e2e8f0; padding-bottom: 20px; }
+        .rubric-section h4 { color: var(--mcn-blue); font-size: 18px; margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 1px; }
+        .rubric-rule { background: #f8fafc; border-left: 4px solid #38bdf8; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
+        .rubric-rule p { margin: 0 0 8px 0; font-size: 14px; line-height: 1.6; }
+        .rubric-score { display: inline-block; background: #e0e7ff; color: #4338ca; font-size: 12px; font-weight: 800; padding: 4px 10px; border-radius: 20px; margin-right: 5px; }
+        .rubric-bad { background: #fee2e2; color: #b91c1c; }
     </style>
 </head>
 <body>
@@ -202,6 +264,65 @@
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Sustainable_Development_Goal_10.svg/500px-Sustainable_Development_Goal_10.svg.png" class="bg-shape" alt="SDG 10">
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Sustainable_Development_Goal_13.svg/500px-Sustainable_Development_Goal_13.svg.png" class="bg-shape" alt="SDG 13">
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Sustainable_Development_Goal_17.svg/500px-Sustainable_Development_Goal_17.svg.png" class="bg-shape" alt="SDG 17">
+</div>
+
+<button class="btn-toggle-rubric" onclick="toggleRubric()" id="btnRubricToggle">View Official Rubric</button>
+
+<div class="rubric-panel" id="rubricPanel">
+    <div class="rubric-header">
+        <h2>GAC Scoring Guide</h2>
+        <button class="close-rubric" onclick="toggleRubric()">×</button>
+    </div>
+    <div class="rubric-content">
+        
+        <div class="rubric-section">
+            <h4>Part 1: Project & Impact</h4>
+            <div class="rubric-rule">
+                <p><strong>Description Clarity</strong></p>
+                <p><span class="rubric-score">Score 5</span> Highly clear, simple language, no buzzwords. Reads as if explaining to a friend.</p>
+                <p><span class="rubric-score rubric-bad">Score 1</span> Unclear, relies heavily on jargon and buzzwords. Inaccessible.</p>
+            </div>
+            <div class="rubric-rule">
+                <p><strong>SDG Alignment</strong></p>
+                <p><span class="rubric-score">Score 5</span> Identifies a problem related to an SDG and offers a compelling response.</p>
+                <p><span class="rubric-score rubric-bad">Score 1</span> No connection to an SDG or offers a poor response.</p>
+            </div>
+        </div>
+
+        <div class="rubric-section">
+            <h4>Part 1: Proximity to Issue</h4>
+            <div class="rubric-rule">
+                <p><strong>Community Connection</strong></p>
+                <p><span class="rubric-score">Score 5</span> Deep, authentic connection. Active member or has impactful relationships with the target group.</p>
+                <p><span class="rubric-score rubric-bad">Score 1</span> No connection, biased views, harmful stereotypes, or lacks empathy.</p>
+            </div>
+        </div>
+
+        <div class="rubric-section">
+            <h4>Part 2: Leadership Potential</h4>
+            <div class="rubric-rule">
+                <p><strong>Personal Motivation</strong></p>
+                <p><span class="rubric-score">Score 5</span> Articulates a deep, personal "why." The passion feels lived-in and completely authentic.</p>
+                <p><span class="rubric-score rubric-bad">Score 1</span> Unclear motivation. Focused on resume-building or external rewards instead of social commitment.</p>
+            </div>
+            <div class="rubric-rule">
+                <p><strong>MCN Values</strong></p>
+                <p><span class="rubric-score">Score 5</span> Provides detailed examples of empathetic, humble, and inclusive leadership.</p>
+                <p><span class="rubric-score rubric-bad">Score 1</span> Focuses on personal success and contradicts or undermines MCN values.</p>
+            </div>
+        </div>
+
+        <div class="rubric-section">
+            <h4>Part 3: Final Overview</h4>
+            <div class="rubric-rule">
+                <p><strong>Key Checks (Yes/Maybe/No)</strong></p>
+                <p>• Does the applicant show ethical integrity?</p>
+                <p>• Do the responses seem completely authentic or AI-generated?</p>
+                <p>• Is the project highly unique and outstanding?</p>
+            </div>
+        </div>
+
+    </div>
 </div>
 
 <div class="container" id="pdfContentArea">
@@ -277,119 +398,6 @@
                     <option value="Decline">Decline</option>
                 </select>
             </div>
-        <div class="field-group">
-                <label>Leadership Potential</label>
-                <select id="scoreLead">
-                    <option value="Emerging">Emerging</option>
-                    <option value="Strong">Strong</option>
-                    <option value="Exceptional">Exceptional</option>
-                </select>
-            </div><div class="field-group">
-                <label>Leadership Potential</label>
-                <select id="scoreLead">
-                    <option value="Emerging">Emerging</option>
-                    <option value="Strong">Strong</option>
-                    <option value="Exceptional">Exceptional</option>
-                </select>
-            </div><div class="field-group">
-                <label>Leadership Potential</label>
-                <select id="scoreLead">
-                    <option value="Emerging">Emerging</option>
-                    <option value="Strong">Strong</option>
-                    <option value="Exceptional">Exceptional</option>
-                </select>
-            </div><div class="field-group">
-                <label>Leadership Potential</label>
-                <select id="scoreLead">
-                    <option value="Emerging">Emerging</option>
-                    <option value="Strong">Strong</option>
-                    <option value="Exceptional">Exceptional</option>
-                </select>
-            </div><div class="field-group">
-                <label>Leadership Potential</label>
-                <select id="scoreLead">
-                    <option value="Emerging">Emerging</option>
-                    <option value="Strong">Strong</option>
-                    <option value="Exceptional">Exceptional</option>
-                </select>
-            </div><div class="field-group">
-                <label>Leadership Potential</label>
-                <select id="scoreLead">
-                    <option value="Emerging">Emerging</option>
-                    <option value="Strong">Strong</option>
-                    <option value="Exceptional">Exceptional</option>
-                </select>
-            </div><div class="field-group">
-                <label>Leadership Potential</label>
-                <select id="scoreLead">
-                    <option value="Emerging">Emerging</option>
-                    <option value="Strong">Strong</option>
-                    <option value="Exceptional">Exceptional</option>
-                </select>
-            </div><div class="field-group">
-                <label>Leadership Potential</label>
-                <select id="scoreLead">
-                    <option value="Emerging">Emerging</option>
-                    <option value="Strong">Strong</option>
-                    <option value="Exceptional">Exceptional</option>
-                </select>
-            </div><div class="field-group">
-                <label>Leadership Potential</label>
-                <select id="scoreLead">
-                    <option value="Emerging">Emerging</option>
-                    <option value="Strong">Strong</option>
-                    <option value="Exceptional">Exceptional</option>
-                </select>
-            </div><div class="field-group">
-                <label>Leadership Potential</label>
-                <select id="scoreLead">
-                    <option value="Emerging">Emerging</option>
-                    <option value="Strong">Strong</option>
-                    <option value="Exceptional">Exceptional</option>
-                </select>
-            </div><div class="field-group">
-                <label>Leadership Potential</label>
-                <select id="scoreLead">
-                    <option value="Emerging">Emerging</option>
-                    <option value="Strong">Strong</option>
-                    <option value="Exceptional">Exceptional</option>
-                </select>
-            </div><div class="field-group">
-                <label>Leadership Potential</label>
-                <select id="scoreLead">
-                    <option value="Emerging">Emerging</option>
-                    <option value="Strong">Strong</option>
-                    <option value="Exceptional">Exceptional</option>
-                </select>
-            </div><div class="field-group">
-                <label>Leadership Potential</label>
-                <select id="scoreLead">
-                    <option value="Emerging">Emerging</option>
-                    <option value="Strong">Strong</option>
-                    <option value="Exceptional">Exceptional</option>
-                </select>
-            </div><div class="field-group">
-                <label>Leadership Potential</label>
-                <select id="scoreLead">
-                    <option value="Emerging">Emerging</option>
-                    <option value="Strong">Strong</option>
-                    <option value="Exceptional">Exceptional</option>
-                </select>
-            </div><div class="field-group">
-                <label>Leadership Potential</label>
-                <select id="scoreLead">
-                    <option value="Emerging">Emerging</option>
-                    <option value="Strong">Strong</option>
-                    <option value="Exceptional">Exceptional</option>
-                </select>
-            </div><div class="field-group">
-                <label>Leadership Potential</label>
-                <select id="scoreLead">
-                    <option value="Emerging">Emerging</option>
-                    <option value="Strong">Strong</option>
-                    <option value="Exceptional">Exceptional</option>
-                </select>
-            </div>
         </div>
         <button class="btn-copy" onclick="copyScores()" id="btnCopyEval">Copy Scores to Clipboard</button>
         <button class="btn-draft" onclick="saveToDraft()" id="btnDraft">Export to Draft Sheet</button>
@@ -400,6 +408,12 @@
 <script>
 let currentFullText = "";
 let currentApplicantName = "Applicant";
+
+// The simple function to open and close the rubric drawer smoothly
+function toggleRubric() {
+    const panel = document.getElementById('rubricPanel');
+    panel.classList.toggle('open');
+}
 
 function loadData() {
     let link = document.getElementById('sheetLink').value.trim();
@@ -577,12 +591,17 @@ function saveAsPDF() {
     const btnPdf = document.getElementById('btnPdf');
     btnPdf.innerText = "Scanning Document... Please Wait";
     
+    // We make sure the scanner hides the rubric button before printing
     document.getElementById('setupGrid').style.display = 'none';
     document.getElementById('authSuite').style.display = 'none';
     document.getElementById('navButtons').style.display = 'none';
     document.getElementById('btnCopyEval').style.display = 'none';
     document.getElementById('btnDraft').style.display = 'none';
+    document.getElementById('btnRubricToggle').style.display = 'none';
     btnPdf.style.display = 'none';
+
+    // We also forcefully close the rubric drawer if it was left open so it doesn't overlap the PDF
+    document.getElementById('rubricPanel').classList.remove('open');
 
     const element = document.getElementById('pdfContentArea');
 
@@ -615,6 +634,7 @@ function saveAsPDF() {
         document.getElementById('navButtons').style.display = 'flex';
         document.getElementById('btnCopyEval').style.display = 'block';
         document.getElementById('btnDraft').style.display = 'block';
+        document.getElementById('btnRubricToggle').style.display = 'block';
         btnPdf.style.display = 'block';
         btnPdf.innerText = "Save Profile as PDF";
     });
