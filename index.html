@@ -136,8 +136,22 @@
             transition: all 0.3s ease;
         }
         .impact-card:hover { box-shadow: 0 20px 40px -10px rgba(0, 86, 179, 0.1); transform: translateX(5px); border-left-color: var(--mcn-blue); }
-        .card-label { font-size: 13px; font-weight: 900; color: #94a3b8; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
-        .card-value { font-size: 17px; line-height: 1.8; color: var(--text-dark); white-space: pre-wrap; }
+        
+        /* THE FIX: Crystal Clear Formatting for the Questions */
+        .card-label { 
+            font-size: 16px; 
+            font-weight: 700; 
+            color: var(--mcn-blue); 
+            text-transform: none; /* Removes the hard-to-read ALL CAPS */
+            letter-spacing: normal; /* Removes the stretched letters */
+            line-height: 1.6; 
+            margin-bottom: 12px; 
+            display: block; 
+            border-bottom: 2px dashed #e2e8f0; /* Adds a clean separator line */
+            padding-bottom: 10px;
+        }
+        
+        .card-value { font-size: 17px; line-height: 1.8; color: var(--text-dark); white-space: pre-wrap; padding-top: 5px; }
         
         .card-value a {
             color: #38bdf8;
@@ -191,7 +205,7 @@
         .empty-state p { font-size: 18px; line-height: 1.6; }
         .joyful-emoji { font-size: 48px; margin-bottom: 20px; display: block; animation: gentleFadeIn 1s ease forwards; }
 
-        /* --- THE EXPANDED RIGHT RUBRIC DRAWER --- */
+        /* THE RIGHT RUBRIC DRAWER */
         .btn-toggle-rubric {
             position: fixed;
             right: -5px;
@@ -231,16 +245,16 @@
         }
         .rubric-panel.open { right: 0; }
 
-        /* --- THE BRAND NEW LEFT AI POLICY DRAWER --- */
+        /* THE LEFT AI POLICY DRAWER */
         .btn-toggle-ai {
             position: fixed;
             left: -5px;
             top: 50%;
             transform: translateY(-50%);
-            background: linear-gradient(135deg, #f59e0b, #d97706); /* Bright Golden Color */
+            background: linear-gradient(135deg, #f59e0b, #d97706);
             color: white;
             padding: 15px 20px 15px 25px;
-            border-radius: 0 30px 30px 0; /* Flat on left, round on right */
+            border-radius: 0 30px 30px 0;
             border: none;
             font-weight: 800;
             font-size: 15px;
@@ -271,7 +285,6 @@
         }
         .ai-panel.open { left: 0; }
 
-        /* Shared Header Styles for Both Drawers */
         .drawer-header {
             color: white;
             padding: 30px;
@@ -508,7 +521,6 @@
 let currentFullText = "";
 let currentApplicantName = "Applicant";
 
-// Functions to smoothly open and close your two drawers
 function toggleRubric() {
     document.getElementById('rubricPanel').classList.toggle('open');
 }
@@ -692,7 +704,6 @@ function saveAsPDF() {
     const btnPdf = document.getElementById('btnPdf');
     btnPdf.innerText = "Scanning Document... Please Wait";
     
-    // We hide both drawer buttons during the PDF scan so the print is perfectly clean
     document.getElementById('setupGrid').style.display = 'none';
     document.getElementById('authSuite').style.display = 'none';
     document.getElementById('navButtons').style.display = 'none';
