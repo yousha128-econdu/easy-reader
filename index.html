@@ -173,20 +173,20 @@
         /* THE RIGHT RUBRIC DRAWER */
         .btn-toggle-rubric { position: fixed; right: -5px; top: 50%; transform: translateY(-50%); background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; padding: 15px 25px 15px 20px; border-radius: 30px 0 0 30px; border: none; font-weight: 800; font-size: 15px; cursor: pointer; box-shadow: -5px 5px 15px rgba(109, 40, 217, 0.3); z-index: 1000; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; writing-mode: vertical-rl; text-orientation: mixed; }
         .btn-toggle-rubric:hover { padding-right: 35px; background: #5b21b6; }
-        .rubric-panel { position: fixed; top: 0; right: -600px; width: 550px; height: 100vh; background: #ffffff; box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1); z-index: 1001; transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; border-left: 1px solid #e2e8f0; }
+        .rubric-panel { position: fixed; top: 0; right: -700px; width: 650px; height: 100vh; background: #ffffff; box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1); z-index: 1001; transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; border-left: 1px solid #e2e8f0; }
         .rubric-panel.open { right: 0; }
 
         /* THE LEFT AI POLICY DRAWER */
         .btn-toggle-ai { position: fixed; left: -5px; top: 50%; transform: translateY(-50%); background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 15px 20px 15px 25px; border-radius: 0 30px 30px 0; border: none; font-weight: 800; font-size: 15px; cursor: pointer; box-shadow: 5px 5px 15px rgba(217, 119, 6, 0.3); z-index: 1000; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; writing-mode: vertical-rl; text-orientation: mixed; }
         .btn-toggle-ai:hover { padding-left: 35px; background: #b45309; }
-        .ai-panel { position: fixed; top: 0; left: -600px; width: 550px; height: 100vh; background: #ffffff; box-shadow: 10px 0 30px rgba(0, 0, 0, 0.1); z-index: 1001; transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; border-right: 1px solid #e2e8f0; }
+        .ai-panel { position: fixed; top: 0; left: -700px; width: 650px; height: 100vh; background: #ffffff; box-shadow: 10px 0 30px rgba(0, 0, 0, 0.1); z-index: 1001; transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; border-right: 1px solid #e2e8f0; }
         .ai-panel.open { left: 0; }
 
         /* Shared Drawer Headers & Styles */
         .drawer-header { color: white; padding: 30px; position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; }
         .rubric-header { background: var(--mcn-navy); }
         .ai-header { background: linear-gradient(135deg, #f59e0b, #d97706); }
-        .drawer-header h2 { margin: 0; font-size: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+        .drawer-header h2 { margin: 0; font-size: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; line-height: 1.4; }
         .close-drawer { background: none; border: none; color: white; font-size: 28px; cursor: pointer; transition: 0.2s; }
         .close-drawer:hover { color: #f87171; transform: scale(1.1); }
         
@@ -208,6 +208,12 @@
         .s2 { background: #f87171; } 
         .s1 { background: #dc2626; } 
         .s-yn { background: #4f46e5; } 
+
+        /* Table styling for AI Document */
+        .ai-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 15px; background: white; }
+        .ai-table th { background: #fef3c7; color: #b45309; text-align: left; padding: 12px; border: 1px solid #fde68a; font-weight: 800; }
+        .ai-table td { padding: 12px; border: 1px solid #e2e8f0; vertical-align: top; line-height: 1.6; }
+        .ai-table-footer td { font-weight: 700; background: #fffbeb; font-style: italic; color: #92400e; }
     </style>
 </head>
 <body>
@@ -224,63 +230,170 @@
 <button class="btn-toggle-ai" onclick="toggleAiPolicy()" id="btnAiToggle">View AI Policy</button>
 <div class="ai-panel" id="aiPanel">
     <div class="drawer-header ai-header">
-        <h2>Official AI Policy Guide</h2>
+        <h2>Global Admissions Committee 2026<br>AI Use Policy Guide for Reviewers</h2>
         <button class="close-drawer" onclick="toggleAiPolicy()">×</button>
     </div>
     <div class="rubric-content">
         
-        <p style="font-size: 14px; line-height: 1.6; margin-bottom: 25px; border-left: 4px solid #f59e0b; padding-left: 15px;">
-            The MCN Admissions Team acknowledges that AI tools are widely accessible. This policy does not prohibit responsible use, but establishes boundaries to ensure applications reflect the applicant’s own thinking.
-            <br><br>
-            ✅ <strong>Acceptable:</strong> Supplementary editing (correcting grammar, clarity, sentence flow, adjusting structure).<br>
-            ❌ <strong>Prohibited:</strong> Generating substance (project ideas, constructing arguments, producing reflections).
-        </p>
-
         <div class="rubric-section ai-section">
-            <h4>Red Flags & Green Flags</h4>
-            <div class="rubric-rule ai-rule">
-                <p style="margin-bottom: 10px; font-weight: 800; color: var(--text-dark);">Substance vs. Language Refinement</p>
-                <p><span class="score-badge" style="background:#10b981;">Green</span> Clear references to personal experiences, specific concrete details, nuance/self-awareness, natural tone variation, minor stylistic imperfections.</p>
-                <p><span class="score-badge" style="background:#dc2626;">Red</span> Restatement of ideas with synonyms, overuse of broad/abstract terminology, highly polished but generic, uniform paragraph structure, lack of local context.</p>
-            </div>
-            <div class="rubric-rule ai-rule">
-                <p style="margin-bottom: 10px; font-weight: 800; color: var(--text-dark);">Assessing Extent of AI Use</p>
-                <p><span class="score-badge" style="background:#3b82f6;">Limited</span> 1-2 responses noticeably more refined, shifts in tone between sections, mostly authentic with isolated formal passages.</p>
-                <p><span class="score-badge" style="background:#f59e0b;">Extensive</span> Consistently uniform tone everywhere, similar sentence rhythm throughout, multiple abstract answers.</p>
+            <div class="rubric-rule ai-rule" style="background: white;">
+                <p>The MCN Admissions Team acknowledges that artificial intelligence tools are widely accessible and commonly used by students for writing support. This policy does not prohibit the responsible use of such tools. Instead, it establishes clear boundaries to ensure that all submitted applications reflect the applicant’s own thinking, experiences, and ideas.</p>
+                <p><strong>AI may be used as a supplementary editing tool.</strong> Acceptable uses include correcting grammar, improving clarity, refining sentence flow, or adjusting structure. These forms of assistance are comparable to using proofreading software or seeking language support.</p>
+                <p><strong>AI may not be used to generate the substance of an application.</strong> This includes developing project ideas, constructing arguments, producing reflections, or shaping the intellectual core of responses. The originality, reasoning, and insight presented in the application must belong to the student.</p>
+                <p>When evaluating applications, reviewers must assess two dimensions:</p>
+                <ol style="font-size: 13px; line-height: 1.6; margin-bottom: 10px;">
+                    <li>The nature of AI use: whether it appears limited to language refinement or extends to idea generation and substantive content.</li>
+                    <li>The extent of AI use: whether it appears in isolated sections or consistently throughout the application.</li>
+                </ol>
+                <p>The purpose of this policy is to preserve authenticity and fairness while recognizing that language support tools may be used responsibly.</p>
             </div>
         </div>
 
         <div class="rubric-section ai-section">
-            <h4>Decision Framework</h4>
-            <div class="rubric-rule ai-rule">
-                <p style="margin-bottom: 10px;">For Question 23 (<strong>"AI Generated?"</strong>), select based on the overall pattern:</p>
-                <p><strong>Option 1:</strong> Yes, completely AI-generated & ideas seem unoriginal.<br><em>(Generic, repetitive, lacking specificity)</em></p>
-                <p><strong>Option 2:</strong> Yes, majority of application used AI for language, but ideas seem original.<br><em>(Clear original ideas; language uniformly polished)</em></p>
-                <p><strong>Option 3:</strong> Yes, short portion used AI for language, ideas seem original.<br><em>(Strong authenticity overall with isolated polished sections)</em></p>
-                <p><strong>Option 4:</strong> No, completely original without apparent use of AI.<br><em>(Consistent authentic voice and specificity)</em></p>
+            <h4>Red Flags and Green Flags</h4>
+            <p style="font-size: 13px; margin-bottom: 15px; font-style: italic;">Reviewers should rely on pattern recognition across the full application rather than isolated phrases. The indicators below are intended to guide judgment, not replace it.</p>
+            
+            <h5 style="color: var(--text-dark); margin: 0 0 10px 0; font-size: 14px;">A. Assessing Whether AI Was Used for Substance or Only Language Refinement</h5>
+            <table class="ai-table">
+                <tr>
+                    <th>Green Flags — Likely Supplementary Editing Only</th>
+                    <th>Red Flags — Likely Substantive AI Reliance</th>
+                </tr>
+                <tr>
+                    <td>Clear references to personal experiences, communities, or institutions.</td>
+                    <td>Repeated restatement of the same idea using different synonyms without adding depth.</td>
+                </tr>
+                <tr>
+                    <td>Specific examples with concrete details rather than abstract descriptions.</td>
+                    <td>Overuse of broad, vague, abstract terminology without specific examples.</td>
+                </tr>
+                <tr>
+                    <td>Reflections that demonstrate nuance, self-awareness, or lessons learned.</td>
+                    <td>Highly polished but generic responses that could apply to any context.</td>
+                </tr>
+                <tr>
+                    <td>Natural variation in tone and structure across responses.</td>
+                    <td>Uniform paragraph structure across all answers.</td>
+                </tr>
+                <tr>
+                    <td>Minor imperfections or stylistic inconsistencies that reflect authentic writing.</td>
+                    <td>Lack of personal voice, local context, or concrete detail</td>
+                </tr>
+                <tr class="ai-table-footer">
+                    <td>These features suggest that the applicant’s ideas are original, even if the language appears polished.</td>
+                    <td>These patterns may indicate that AI was used to generate or heavily shape the substance of the application.</td>
+                </tr>
+            </table>
+
+            <h5 style="color: var(--text-dark); margin: 25px 0 10px 0; font-size: 14px;">B. Assessing Whether AI Was Used Throughout or in Limited Portions</h5>
+            <table class="ai-table">
+                <tr>
+                    <th>Indicators of Limited Use</th>
+                    <th>Indicators of Extensive Use</th>
+                </tr>
+                <tr>
+                    <td>One or two responses noticeably more refined than others.</td>
+                    <td>Consistently uniform tone across all responses.</td>
+                </tr>
+                <tr>
+                    <td>Shifts in tone between sections.</td>
+                    <td>Similar sentence rhythm and structure throughout the application.</td>
+                </tr>
+                <tr>
+                    <td>Mostly grounded, authentic responses with isolated formal passages.</td>
+                    <td>Multiple abstract and vague answers.</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Lack of variation in vocabulary or expression style.</td>
+                </tr>
+                <tr class="ai-table-footer">
+                    <td>This pattern suggests that AI may have been used selectively for editing purposes.</td>
+                    <td>This pattern suggests sustained reliance rather than occasional editing support.</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="rubric-section ai-section">
+            <h4>Reviewer Decision Framework</h4>
+            <div class="rubric-rule ai-rule" style="background: white;">
+                <p>For each application, reviewers must select one of the following four options in the review sheet (the drop-down menu for the question, <strong>“Overall, do the applicant’s responses seem AI-generated?”</strong>):</p>
+                <ol style="font-size: 13px; line-height: 1.6; margin-bottom: 0;">
+                    <li><strong>Option 1:</strong> Yes, the responses seem completely AI-generated and the ideas seem unoriginal.</li>
+                    <li><strong>Option 2:</strong> Yes, AI has been used for the majority of the application but only to enhance language and grammar; the ideas seem original.</li>
+                    <li><strong>Option 3:</strong> Yes, AI has been used for a short portion of the application but only to enhance language and grammar; the ideas seem original.</li>
+                    <li><strong>Option 4:</strong> No, the student’s responses seem completely original without any apparent use of AI.</li>
+                </ol>
             </div>
         </div>
 
         <div class="rubric-section ai-section">
-            <h4>Reference Examples</h4>
+            <h4>Decision Guide</h4>
+            <table class="ai-table">
+                <tr>
+                    <th>Observed Pattern</th>
+                    <th>Nature of Ideas</th>
+                    <th>Extent of AI Use</th>
+                    <th>Select</th>
+                </tr>
+                <tr>
+                    <td>Generic, repetitive, lacking specificity</td>
+                    <td>Ideas appear unoriginal</td>
+                    <td>Used throughout</td>
+                    <td>Option 1</td>
+                </tr>
+                <tr>
+                    <td>Clear original ideas; language uniformly polished</td>
+                    <td>Ideas seem original</td>
+                    <td>Majority of responses</td>
+                    <td>Option 2</td>
+                </tr>
+                <tr>
+                    <td>Strong authenticity overall with isolated polished sections</td>
+                    <td>Ideas seem original</td>
+                    <td>Limited portion</td>
+                    <td>Option 3</td>
+                </tr>
+                <tr>
+                    <td>Consistent authentic voice and specificity</td>
+                    <td>Ideas seem original</td>
+                    <td>No visible indicators</td>
+                    <td>Option 4</td>
+                </tr>
+            </table>
+            <p style="font-size:13px; margin-top:10px; font-style: italic; text-align: center; color: var(--mcn-navy); font-weight: bold;">Reviewers must base their selection on the overall pattern of the application rather than a single sentence or paragraph.</p>
+        </div>
+
+        <div class="rubric-section ai-section">
+            <h4>Examples</h4>
             <div class="rubric-rule ai-rule">
-                <p><strong>Ex 1 (Option 1):</strong> <em>"My initiative seeks to create sustainable and transformative impact by empowering marginalized communities through innovative and scalable solutions..."</em> <br><span style="color:#64748b;">(Abstract, broad, no concrete detail)</span></p>
+                <p><strong>Example 1 — Likely Fully AI-Generated (Select Option 1)</strong><br>
+                "My initiative seeks to create sustainable and transformative impact by empowering marginalized communities through innovative and scalable solutions that foster systemic change and long-term resilience."<br>
+                <span style="color:#64748b; font-style: italic;">This response relies heavily on abstract language and broad claims without concrete detail or personal grounding.</span></p>
             </div>
             <div class="rubric-rule ai-rule">
-                <p><strong>Ex 2 (Option 2):</strong> <em>"In my second year... I noticed many first-generation students struggled... I plan to create a peer mentorship network..."</em> <br><span style="color:#64748b;">(Idea is specific. If this high polish appears everywhere, it's Option 2)</span></p>
+                <p><strong>Example 2 — Majority Language Enhancement (Select Option 2)</strong><br>
+                "In my second year at university, I noticed that many first-generation students struggled to navigate academic requirements. I plan to create a peer mentorship network that offers structured workshops and simplified guides to reduce confusion and improve retention."<br>
+                <span style="color:#64748b; font-style: italic;">The idea is specific and grounded. If similar polish appears consistently across the application, Option 2 should be selected.</span></p>
             </div>
             <div class="rubric-rule ai-rule">
-                <p><strong>Ex 3 (Option 3):</strong> <em>"I started a small tutoring group... Over time it developed into a more organized peer-support network... Through this experience..."</em> <br><span style="color:#64748b;">(Rooted in personal experience, but phrasing is noticeably more polished than their typical informal tone elsewhere)</span></p>
+                <p><strong>Example 3 — Limited Editing Support (Select Option 3)</strong><br>
+                “I started a small tutoring group after realizing many of my classmates were struggling with calculus. At first, we simply met to review assignments together, but over time it developed into a more organized peer-support network that improved both confidence and performance. Through this experience, I came to better understand the importance of accessible academic support structures within university communities.”<br>
+                <span style="color:#64748b; font-style: italic;">This paragraph is clearly rooted in a specific personal experience, but the structure and phrasing are noticeably more polished than the applicant’s typical informal tone elsewhere.</span></p>
             </div>
             <div class="rubric-rule ai-rule">
-                <p><strong>Ex 4 (Option 4):</strong> <em>"When heavy rains damaged homes... We did not have a plan at first, and we made mistakes... That is why I want to create a campus response group."</em> <br><span style="color:#64748b;">(Specificity, lived experience, authentic reflection)</span></p>
+                <p><strong>Example 4 — Fully Original (Select Option 4)</strong><br>
+                "When heavy rains damaged several homes in my area, I organized classmates to collect supplies. We did not have a plan at first, and we made mistakes, but the experience showed me how unprepared we were. That is why I want to create a campus emergency response training group."<br>
+                <span style="color:#64748b; font-style: italic;">This response demonstrates specificity, lived experience, and authentic reflection.</span></p>
             </div>
         </div>
-        
+
         <div class="rubric-section ai-section" style="border-bottom: none;">
             <h4>Final Guidance</h4>
-            <div class="rubric-rule ai-rule" style="border-left-color: #dc2626 !important;">
+            <div class="rubric-rule ai-rule" style="background: white;">
                 <p>AI detection requires careful judgment. <strong>Polished writing alone should not be penalized, and such applications must not be rejected.</strong> The determining factor is originality.</p>
+                <p>If the ideas, reasoning, and insight clearly originate from the applicant, minor editing assistance is acceptable. If originality appears compromised or the application lacks authentic substance, it must be marked accordingly.</p>
+                <p>This policy is intended to ensure fairness, protect authenticity, and uphold the integrity of the Millennium Fellowship admissions process.</p>
             </div>
         </div>
 
