@@ -88,10 +88,7 @@
             margin-bottom: 25px;
             transition: transform 0.3s ease;
         }
-        .logo-container:hover {
-            transform: translateY(-5px); 
-        }
-
+        .logo-container:hover { transform: translateY(-5px); }
         .logo-img { max-width: 240px; height: auto; display: block; }
 
         .setup-grid {
@@ -120,10 +117,7 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
-        .animated-entry {
-            animation: gentleFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
+        .animated-entry { animation: gentleFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
         .impact-card {
             background: var(--white);
@@ -137,48 +131,26 @@
         }
         .impact-card:hover { box-shadow: 0 20px 40px -10px rgba(0, 86, 179, 0.1); transform: translateX(5px); border-left-color: var(--mcn-blue); }
         
-        /* THE FIX: Crystal Clear Formatting for the Questions */
+        /* THE FIX: Crystal Clear Formatting for the Applicant Questions */
         .card-label { 
             font-size: 16px; 
             font-weight: 700; 
-            color: var(--mcn-blue); 
+            color: var(--mcn-navy); 
             text-transform: none; /* Removes the hard-to-read ALL CAPS */
             letter-spacing: normal; /* Removes the stretched letters */
             line-height: 1.6; 
             margin-bottom: 12px; 
             display: block; 
-            border-bottom: 2px dashed #e2e8f0; /* Adds a clean separator line */
+            border-bottom: 2px dashed #e2e8f0; 
             padding-bottom: 10px;
         }
         
         .card-value { font-size: 17px; line-height: 1.8; color: var(--text-dark); white-space: pre-wrap; padding-top: 5px; }
         
-        .card-value a {
-            color: #38bdf8;
-            text-decoration: none;
-            font-weight: 700;
-            border-bottom: 2px solid #bae6fd;
-            transition: 0.2s;
-            word-break: break-all;
-            padding-bottom: 2px;
-        }
-        .card-value a:hover {
-            color: var(--mcn-navy);
-            border-bottom-color: var(--mcn-navy);
-        }
+        .card-value a { color: #38bdf8; text-decoration: none; font-weight: 700; border-bottom: 2px solid #bae6fd; transition: 0.2s; word-break: break-all; padding-bottom: 2px; }
+        .card-value a:hover { color: var(--mcn-navy); border-bottom-color: var(--mcn-navy); }
 
-        .auth-suite {
-            background: linear-gradient(135deg, #f5f3ff, #ffffff);
-            border-left: 8px solid var(--auth-purple);
-            padding: 35px;
-            border-radius: 24px;
-            margin: 10px 45px 35px 45px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 10px 30px -10px rgba(139, 92, 246, 0.15);
-            display: none;
-        }
+        .auth-suite { background: linear-gradient(135deg, #f5f3ff, #ffffff); border-left: 8px solid var(--auth-purple); padding: 35px; border-radius: 24px; margin: 10px 45px 35px 45px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 10px 30px -10px rgba(139, 92, 246, 0.15); display: none; }
         .auth-text h3 { margin: 0 0 10px 0; color: var(--auth-purple); font-size: 22px; font-weight: 800; }
         .auth-text p { margin: 0; color: var(--text-muted); font-size: 16px; }
         .btn-auth { background: var(--auth-purple); color: var(--white); border: none; padding: 18px 28px; border-radius: 50px; font-weight: 800; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 10px 20px -5px rgba(139, 92, 246, 0.4); }
@@ -189,9 +161,17 @@
         .nav-btn:hover { background: var(--mcn-light); border-color: #cbd5e1; transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
 
         .eval-board { background: var(--mcn-light); padding: 45px; border-radius: 32px; margin: 0 45px 45px 45px; display: none; border: 1px solid #e0e7ff; }
-        .eval-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 25px; margin-bottom: 30px; }
         
-        .btn-copy { background: linear-gradient(135deg, var(--success-green), #059669); color: var(--white); border: none; padding: 20px; border-radius: 50px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.3); }
+        /* The New Highly-Precise Evaluation Grid Styling */
+        .eval-row { background: var(--white); border: 1px solid #e2e8f0; border-radius: 16px; padding: 25px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); transition: 0.3s; }
+        .eval-row:hover { border-color: #38bdf8; box-shadow: 0 10px 20px -5px rgba(0, 86, 179, 0.1); }
+        .eval-q-text { font-size: 16px; font-weight: 700; color: var(--text-dark); line-height: 1.5; }
+        .eval-input { width: 100%; max-width: 400px; padding: 14px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 15px; font-weight: 600; color: var(--mcn-navy); background: #f8fafc; transition: 0.3s; cursor: pointer; }
+        .eval-input:focus { border-color: #38bdf8; outline: none; background: var(--white); box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.15); }
+        .eval-textarea { width: 100%; height: 100px; padding: 14px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 15px; font-family: inherit; background: #f8fafc; transition: 0.3s; resize: vertical; }
+        .eval-textarea:focus { border-color: #38bdf8; outline: none; background: var(--white); box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.15); }
+
+        .btn-copy { background: linear-gradient(135deg, var(--success-green), #059669); color: var(--white); border: none; padding: 20px; border-radius: 50px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.3); margin-top: 15px; }
         .btn-copy:hover { transform: translateY(-4px) scale(1.01); box-shadow: 0 15px 25px -5px rgba(16, 185, 129, 0.4); }
 
         .btn-draft { background: linear-gradient(135deg, var(--joyful-orange), #d97706); color: var(--white); border: none; padding: 20px; border-radius: 50px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); margin-top: 18px; box-shadow: 0 10px 20px -5px rgba(245, 158, 11, 0.3); }
@@ -206,109 +186,29 @@
         .joyful-emoji { font-size: 48px; margin-bottom: 20px; display: block; animation: gentleFadeIn 1s ease forwards; }
 
         /* THE RIGHT RUBRIC DRAWER */
-        .btn-toggle-rubric {
-            position: fixed;
-            right: -5px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
-            color: white;
-            padding: 15px 25px 15px 20px;
-            border-radius: 30px 0 0 30px;
-            border: none;
-            font-weight: 800;
-            font-size: 15px;
-            cursor: pointer;
-            box-shadow: -5px 5px 15px rgba(109, 40, 217, 0.3);
-            z-index: 1000;
-            transition: 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-        }
+        .btn-toggle-rubric { position: fixed; right: -5px; top: 50%; transform: translateY(-50%); background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; padding: 15px 25px 15px 20px; border-radius: 30px 0 0 30px; border: none; font-weight: 800; font-size: 15px; cursor: pointer; box-shadow: -5px 5px 15px rgba(109, 40, 217, 0.3); z-index: 1000; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; writing-mode: vertical-rl; text-orientation: mixed; }
         .btn-toggle-rubric:hover { padding-right: 35px; background: #5b21b6; }
-
-        .rubric-panel {
-            position: fixed;
-            top: 0;
-            right: -600px;
-            width: 550px; 
-            height: 100vh;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(25px);
-            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
-            z-index: 1001;
-            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow-y: auto;
-            border-left: 1px solid #e2e8f0;
-        }
+        .rubric-panel { position: fixed; top: 0; right: -600px; width: 550px; height: 100vh; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(25px); box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1); z-index: 1001; transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; border-left: 1px solid #e2e8f0; }
         .rubric-panel.open { right: 0; }
 
         /* THE LEFT AI POLICY DRAWER */
-        .btn-toggle-ai {
-            position: fixed;
-            left: -5px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: white;
-            padding: 15px 20px 15px 25px;
-            border-radius: 0 30px 30px 0;
-            border: none;
-            font-weight: 800;
-            font-size: 15px;
-            cursor: pointer;
-            box-shadow: 5px 5px 15px rgba(217, 119, 6, 0.3);
-            z-index: 1000;
-            transition: 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-        }
+        .btn-toggle-ai { position: fixed; left: -5px; top: 50%; transform: translateY(-50%); background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 15px 20px 15px 25px; border-radius: 0 30px 30px 0; border: none; font-weight: 800; font-size: 15px; cursor: pointer; box-shadow: 5px 5px 15px rgba(217, 119, 6, 0.3); z-index: 1000; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; writing-mode: vertical-rl; text-orientation: mixed; }
         .btn-toggle-ai:hover { padding-left: 35px; background: #b45309; }
-
-        .ai-panel {
-            position: fixed;
-            top: 0;
-            left: -600px;
-            width: 550px;
-            height: 100vh;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(25px);
-            box-shadow: 10px 0 30px rgba(0, 0, 0, 0.1);
-            z-index: 1001;
-            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow-y: auto;
-            border-right: 1px solid #e2e8f0;
-        }
+        .ai-panel { position: fixed; top: 0; left: -600px; width: 550px; height: 100vh; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(25px); box-shadow: 10px 0 30px rgba(0, 0, 0, 0.1); z-index: 1001; transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; border-right: 1px solid #e2e8f0; }
         .ai-panel.open { left: 0; }
 
-        .drawer-header {
-            color: white;
-            padding: 30px;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        /* Shared Drawer Headers */
+        .drawer-header { color: white; padding: 30px; position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; }
         .rubric-header { background: var(--mcn-navy); }
         .ai-header { background: linear-gradient(135deg, #f59e0b, #d97706); }
-        
         .drawer-header h2 { margin: 0; font-size: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
         .close-drawer { background: none; border: none; color: white; font-size: 28px; cursor: pointer; transition: 0.2s; }
         .close-drawer:hover { color: #f87171; transform: scale(1.1); }
-
         .rubric-content { padding: 30px; color: var(--text-dark); }
         .rubric-section { margin-bottom: 30px; border-bottom: 2px dashed #e2e8f0; padding-bottom: 20px; }
         .rubric-section h4 { color: var(--mcn-blue); font-size: 18px; margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 1px; border-left: 5px solid var(--mcn-blue); padding-left: 10px; }
-        
         .rubric-rule { background: #f8fafc; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #e2e8f0; }
         .rubric-rule p { margin: 0 0 8px 0; font-size: 13px; line-height: 1.5; }
-        
         .score-badge { font-weight: 800; padding: 3px 8px; border-radius: 4px; display: inline-block; margin-right: 8px; color: white; min-width: 65px; text-align: center; }
         .s5 { background: #10b981; } 
         .s4 { background: #34d399; } 
@@ -330,7 +230,6 @@
 </div>
 
 <button class="btn-toggle-ai" onclick="toggleAiPolicy()" id="btnAiToggle">View AI Policy</button>
-
 <div class="ai-panel" id="aiPanel">
     <div class="drawer-header ai-header">
         <h2>Official AI Policy</h2>
@@ -346,14 +245,12 @@
 </div>
 
 <button class="btn-toggle-rubric" onclick="toggleRubric()" id="btnRubricToggle">View Official Rubric</button>
-
 <div class="rubric-panel" id="rubricPanel">
     <div class="drawer-header rubric-header">
         <h2>Official Evaluation Rubric</h2>
         <button class="close-drawer" onclick="toggleRubric()">×</button>
     </div>
     <div class="rubric-content">
-        
         <div class="rubric-section">
             <h4>Part 1: Project Description & SDG</h4>
             <div class="rubric-rule">
@@ -433,7 +330,6 @@
                 <p><span class="score-badge s-yn">AI Gen</span> Do the responses seem AI-generated?</p>
             </div>
         </div>
-
     </div>
 </div>
 
@@ -483,34 +379,120 @@
 
     <div class="eval-board" id="evalBoard">
         <h3 style="margin-top:0; color:var(--mcn-navy); font-size: 26px; font-weight: 800; margin-bottom: 25px;">Final Assessment</h3>
-        <div class="eval-grid">
-            <div class="field-group">
-                <label>Proximity to Issue</label>
-                <select id="scoreProx">
-                    <option value="1">1 - Distant</option>
-                    <option value="2">2 - Aware</option>
-                    <option value="3">3 - Connected</option>
-                    <option value="4">4 - Involved</option>
-                    <option value="5">5 - Lived Experience</option>
-                </select>
-            </div>
-            <div class="field-group">
-                <label>Leadership Potential</label>
-                <select id="scoreLead">
-                    <option value="Emerging">Emerging</option>
-                    <option value="Strong">Strong</option>
-                    <option value="Exceptional">Exceptional</option>
-                </select>
-            </div>
-            <div class="field-group">
-                <label>Committee Decision</label>
-                <select id="scoreDecision">
-                    <option value="Accept">Accept</option>
-                    <option value="Waitlist">Waitlist</option>
-                    <option value="Decline">Decline</option>
-                </select>
-            </div>
+        
+        <div class="eval-row">
+            <div class="eval-q-text">1. Student is leading or involved in a social impact organization, project, creative initiative, social enterprise, etc.</div>
+            <select id="eval_1" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
         </div>
+        <div class="eval-row">
+            <div class="eval-q-text">2. Student's description of the project is clear, accessible and easy to understand</div>
+            <select id="eval_2" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">3. Student presents clear and specific measurable goals and activities for their project during the fellowship period</div>
+            <select id="eval_3" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">4. Project demonstrates potential for sustainability and/or scalability beyond the fellowship period. This is to consider the long-term viability of the project.</div>
+            <select id="eval_4" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">5. Student’s work is genuinely connected to one or more SDGs or UN Academic Impact Principles.</div>
+            <select id="eval_5" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">6. Student’s work will offer a contribution to the Fellowship cohort on their campus and globally.</div>
+            <select id="eval_6" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">7. Student is close to the people they are trying to help. They are part of the community they are trying to help, or have built meaningful relationships with community members, or have done through research and preparatory work to feel confident that they understand the complexities of the issues they are addressing.</div>
+            <select id="eval_7" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">8. Political nature of project: Is the work this student is doing politically sensitive?</div>
+            <select id="eval_8" class="eval-input"><option value="">Select Option...</option><option value="Yes">Yes</option><option value="Maybe">Maybe</option><option value="No">No</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">9. Ethics of project: Does something about the project this student is working on seem unethical? Does it work with communities in a paternalistic way? If you have any question about this please first ask your fellow team members for insight, and if it still seems unclear ask team MCN or mark it as a maybe.</div>
+            <select id="eval_9" class="eval-input"><option value="">Select Option...</option><option value="Yes">Yes</option><option value="Maybe">Maybe</option><option value="No">No</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">10. Q1: What personal experiences have shaped your interest in creating social impact? In other words, why do you personally care about the issues you are working on or planning to work on? Tell us what drives you in your work. We want to hear your story</div>
+            <select id="eval_10" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">11. Q2: Why do you want to be a Millennium Fellow? How will you use this distinction towards your future social impact work?</div>
+            <select id="eval_11" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">12. Q3: MCN values that our community prioritizes empathetic, humble, inclusive leadership. Reflect upon your personal experience of acting as a leader, and share how you demonstrated one of these core values.</div>
+            <select id="eval_12" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">13. Student’s essay/video responses are thoughtful and demonstrate emotional investment, a genuine passion for social change work.</div>
+            <select id="eval_13" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">14. Student has a genuine passion for the work they are doing and are personally connected to it.</div>
+            <select id="eval_14" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">15. Student articulates a clear vision for how they will integrate social impact work into their future life and/or career.</div>
+            <select id="eval_15" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">16. Student’s motivation for social impact and joining the fellowship is related to their proposed project</div>
+            <select id="eval_16" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">17. Student demonstrates real commitment to the Fellowship program and a desire to invest in all it will involve.</div>
+            <select id="eval_17" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">18. Student demonstrates a clear understanding of the fellowship's requirements and expresses a willingness to actively participate in all aspects of the program.</div>
+            <select id="eval_18" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">19. Does the applicant demonstrate a community mindset?</div>
+            <select id="eval_19" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">20. Student is driven by a sense of values such as empathy and humility. (Watch out for applications that demonstrate that the student is actually driven by a desire for personal success and importance over social change)</div>
+            <select id="eval_20" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">21. Student provides specific examples of how they have demonstrated empathy and humility in their past experiences.</div>
+            <select id="eval_21" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">22. Ethics of person: Does something in this student’s personal statements lead you to question their ethics? Do you feel you can’t quite trust their instincts? If you have any question about this please first ask your fellow team members for insight, and if it still seems unclear ask team MCN.</div>
+            <select id="eval_22" class="eval-input"><option value="">Select Option...</option><option value="Yes">Yes</option><option value="Maybe">Maybe</option><option value="No">No</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">23. Overall, do the applicant's responses seem AI-generated?</div>
+            <select id="eval_23" class="eval-input"><option value="">Select Option...</option><option value="Yes">Yes</option><option value="Maybe">Maybe</option><option value="No">No</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">24. Overall, does the applicant show ethical integrity through their responses?</div>
+            <select id="eval_24" class="eval-input"><option value="">Select Option...</option><option value="Yes">Yes</option><option value="Maybe">Maybe</option><option value="No">No</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">25. Your Overall Rating of the Applicant's Application</div>
+            <select id="eval_25" class="eval-input"><option value="">Select Rating...</option><option value="10">10 - Exceptional</option><option value="9">9 - Outstanding</option><option value="8">8 - Excellent</option><option value="7">7 - Very Good</option><option value="6">6 - Good</option><option value="5">5 - Average</option><option value="4">4 - Below Average</option><option value="3">3 - Poor</option><option value="2">2 - Very Poor</option><option value="1">1 - Unacceptable</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">26. Overall, what do you think about this applicant?</div>
+            <select id="eval_26" class="eval-input"><option value="">Select Final Decision...</option><option value="Accept this Applicant">Accept this Applicant</option><option value="Waitlist this Applicant">Waitlist this Applicant</option><option value="Reject this Applicant">Reject this Applicant</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">27. If you selected 'Reject this Applicant', please share below why.</div>
+            <textarea id="eval_27" class="eval-textarea" placeholder="Type your reasons here..."></textarea>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">28. [Optional] Do you have any comments about this application/applicant that we should keep in mind?</div>
+            <textarea id="eval_28" class="eval-textarea" placeholder="Type your comments here..."></textarea>
+        </div>
+
         <button class="btn-copy" onclick="copyScores()" id="btnCopyEval">Copy Scores to Clipboard</button>
         <button class="btn-draft" onclick="saveToDraft()" id="btnDraft">Export to Draft Sheet</button>
         <button class="btn-pdf" onclick="saveAsPDF()" id="btnPdf">Save Profile as PDF</button>
@@ -521,12 +503,14 @@
 let currentFullText = "";
 let currentApplicantName = "Applicant";
 
-function toggleRubric() {
-    document.getElementById('rubricPanel').classList.toggle('open');
+// The master array matching your exact 28 columns
+const evalIds = [];
+for(let i=1; i<=28; i++) {
+    evalIds.push('eval_' + i);
 }
-function toggleAiPolicy() {
-    document.getElementById('aiPanel').classList.toggle('open');
-}
+
+function toggleRubric() { document.getElementById('rubricPanel').classList.toggle('open'); }
+function toggleAiPolicy() { document.getElementById('aiPanel').classList.toggle('open'); }
 
 function loadData() {
     let link = document.getElementById('sheetLink').value.trim();
@@ -543,9 +527,7 @@ function loadData() {
         return;
     }
 
-    if (link.includes('/edit')) {
-        link = link.split('/edit')[0] + '/export?format=csv';
-    }
+    if (link.includes('/edit')) { link = link.split('/edit')[0] + '/export?format=csv'; }
 
     output.innerHTML = "<div class='empty-state animated-entry'><span class='joyful-emoji'>🚀</span><h3>Fetching Records...</h3><p>Gathering the candidate's amazing journey right now.</p></div>";
 
@@ -573,7 +555,6 @@ function loadData() {
 
             for (const key in student) {
                 if (student[key] && student[key].trim() !== "") {
-                    
                     let contentText = student[key];
                     const linkFinder = /(https?:\/\/[^\s]+)/g;
                     contentText = contentText.replace(linkFinder, '<a href="$1" target="_blank" title="Click to open link">$1</a>');
@@ -589,18 +570,12 @@ function loadData() {
             html += "</div>";
             output.innerHTML = html;
             
-            const authSuite = document.getElementById('authSuite');
-            const navButtons = document.getElementById('navButtons');
-            const evalBoard = document.getElementById('evalBoard');
-            
-            authSuite.style.display = "flex";
-            authSuite.classList.add('animated-entry');
-            
-            navButtons.style.display = "flex";
-            navButtons.classList.add('animated-entry');
-            
-            evalBoard.style.display = "block";
-            evalBoard.classList.add('animated-entry');
+            document.getElementById('authSuite').style.display = "flex";
+            document.getElementById('authSuite').classList.add('animated-entry');
+            document.getElementById('navButtons').style.display = "flex";
+            document.getElementById('navButtons').classList.add('animated-entry');
+            document.getElementById('evalBoard').style.display = "block";
+            document.getElementById('evalBoard').classList.add('animated-entry');
             
             document.getElementById('btnQuillbot').innerText = "Check with QuillBot \u2197";
             document.getElementById('btnCopyEval').innerText = "Copy Scores to Clipboard";
@@ -629,16 +604,21 @@ function changeRow(step) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+// THE NERD-LEVEL HORIZONTAL COPY UPGRADE
 function copyScores() {
-    const prox = document.getElementById('scoreProx').value;
-    const lead = document.getElementById('scoreLead').value;
-    const decision = document.getElementById('scoreDecision').value;
     const btn = document.getElementById('btnCopyEval');
     
-    const combinedAnswers = prox + "    " + lead + "    " + decision;
+    // This grabs all 28 inputs automatically and cleans up line-breaks from text areas
+    let values = evalIds.map(id => {
+        let val = document.getElementById(id).value;
+        return val.replace(/\n/g, " "); // Replaces "Enter" presses with spaces so Google Sheets doesn't break
+    });
+    
+    // The "\t" adds a hidden horizontal tab between every answer.
+    const combinedAnswers = values.join("\t");
     
     navigator.clipboard.writeText(combinedAnswers).then(() => {
-        btn.innerText = "\u2713 Saved! Paste into your Sheet";
+        btn.innerText = "\u2713 Saved! Paste directly into your Sheet row";
         btn.style.background = "linear-gradient(135deg, #059669, #047857)"; 
         setTimeout(() => {
             btn.innerText = "Copy Scores to Clipboard";
@@ -649,20 +629,12 @@ function copyScores() {
 
 function saveToDraft() {
     const row = document.getElementById('rowNum').value;
-    const prox = document.getElementById('scoreProx').value;
-    const lead = document.getElementById('scoreLead').value;
-    const decision = document.getElementById('scoreDecision').value;
     const btn = document.getElementById('btnDraft');
 
+    let values = evalIds.map(id => document.getElementById(id).value.replace(/\n/g, " "));
     let drafts = JSON.parse(localStorage.getItem('mcn_eval_drafts')) || {};
 
-    drafts[row] = {
-        name: currentApplicantName,
-        proximity: prox,
-        leadership: lead,
-        decision: decision
-    };
-
+    drafts[row] = { name: currentApplicantName, scores: values };
     localStorage.setItem('mcn_eval_drafts', JSON.stringify(drafts));
 
     btn.innerText = "\u2713 Added to Draft Memory!";
@@ -683,11 +655,14 @@ function downloadDraftCSV() {
         return;
     }
 
-    let csvContent = "Row Number,Applicant Name,Proximity to Issue,Leadership Potential,Committee Decision\n";
+    // Creating the headers (Q1 through Q28) to keep the CSV file clean
+    let headers = "Row Number,Applicant Name," + Array.from({length: 28}, (_, i) => `Q${i+1}`).join(",") + "\n";
+    let csvContent = headers;
 
     rows.forEach(row => {
         let d = drafts[row];
-        csvContent += `${row},"${d.name}","${d.proximity}","${d.leadership}","${d.decision}"\n`;
+        let rowData = d.scores.map(v => `"${v}"`).join(",");
+        csvContent += `${row},"${d.name}",${rowData}\n`;
     });
 
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
@@ -717,7 +692,6 @@ function saveAsPDF() {
     document.getElementById('aiPanel').classList.remove('open');
 
     const element = document.getElementById('pdfContentArea');
-
     const originalBackground = element.style.background;
     const originalBackdrop = element.style.backdropFilter;
     const originalShadow = element.style.boxShadow;
