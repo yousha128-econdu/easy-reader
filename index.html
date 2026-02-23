@@ -42,7 +42,6 @@
         .bg-shape {
             position: absolute;
             opacity: 0.05; 
-            /* THE SPEED FIX: Pushes the animation to the graphics card to prevent lag */
             will-change: transform; 
             animation: float 20s infinite ease-in-out alternate;
         }
@@ -62,7 +61,6 @@
         .container {
             max-width: 1050px;
             margin: 0 auto;
-            /* THE SPEED FIX: Changed to a solid color to remove heavy math calculations */
             background: #ffffff; 
             border-radius: 32px; 
             box-shadow: 0 20px 60px -15px rgba(0, 86, 179, 0.15);
@@ -132,19 +130,7 @@
         }
         .impact-card:hover { box-shadow: 0 20px 40px -10px rgba(0, 86, 179, 0.1); transform: translateX(5px); border-left-color: var(--mcn-blue); }
         
-        .card-label { 
-            font-size: 16px; 
-            font-weight: 700; 
-            color: var(--mcn-navy); 
-            text-transform: none; 
-            letter-spacing: normal; 
-            line-height: 1.6; 
-            margin-bottom: 12px; 
-            display: block; 
-            border-bottom: 2px dashed #e2e8f0; 
-            padding-bottom: 10px;
-        }
-        
+        .card-label { font-size: 16px; font-weight: 700; color: var(--mcn-navy); text-transform: none; letter-spacing: normal; line-height: 1.6; margin-bottom: 12px; display: block; border-bottom: 2px dashed #e2e8f0; padding-bottom: 10px; }
         .card-value { font-size: 17px; line-height: 1.8; color: var(--text-dark); white-space: pre-wrap; padding-top: 5px; }
         
         .card-value a { color: #38bdf8; text-decoration: none; font-weight: 700; border-bottom: 2px solid #bae6fd; transition: 0.2s; word-break: break-all; padding-bottom: 2px; }
@@ -165,7 +151,7 @@
         .eval-row { background: var(--white); border: 1px solid #e2e8f0; border-radius: 16px; padding: 25px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); transition: 0.3s; }
         .eval-row:hover { border-color: #38bdf8; box-shadow: 0 10px 20px -5px rgba(0, 86, 179, 0.1); }
         .eval-q-text { font-size: 16px; font-weight: 700; color: var(--text-dark); line-height: 1.5; }
-        .eval-input { width: 100%; max-width: 400px; padding: 14px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 15px; font-weight: 600; color: var(--mcn-navy); background: #f8fafc; transition: 0.3s; cursor: pointer; }
+        .eval-input { width: 100%; max-width: 500px; padding: 14px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 15px; font-weight: 600; color: var(--mcn-navy); background: #f8fafc; transition: 0.3s; cursor: pointer; }
         .eval-input:focus { border-color: #38bdf8; outline: none; background: var(--white); box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.15); }
         .eval-textarea { width: 100%; height: 100px; padding: 14px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 15px; font-family: inherit; background: #f8fafc; transition: 0.3s; resize: vertical; }
         .eval-textarea:focus { border-color: #38bdf8; outline: none; background: var(--white); box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.15); }
@@ -196,18 +182,25 @@
         .ai-panel { position: fixed; top: 0; left: -600px; width: 550px; height: 100vh; background: #ffffff; box-shadow: 10px 0 30px rgba(0, 0, 0, 0.1); z-index: 1001; transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; border-right: 1px solid #e2e8f0; }
         .ai-panel.open { left: 0; }
 
-        /* Shared Drawer Headers */
+        /* Shared Drawer Headers & Styles */
         .drawer-header { color: white; padding: 30px; position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; }
         .rubric-header { background: var(--mcn-navy); }
         .ai-header { background: linear-gradient(135deg, #f59e0b, #d97706); }
         .drawer-header h2 { margin: 0; font-size: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
         .close-drawer { background: none; border: none; color: white; font-size: 28px; cursor: pointer; transition: 0.2s; }
         .close-drawer:hover { color: #f87171; transform: scale(1.1); }
+        
         .rubric-content { padding: 30px; color: var(--text-dark); }
         .rubric-section { margin-bottom: 30px; border-bottom: 2px dashed #e2e8f0; padding-bottom: 20px; }
         .rubric-section h4 { color: var(--mcn-blue); font-size: 18px; margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 1px; border-left: 5px solid var(--mcn-blue); padding-left: 10px; }
-        .rubric-rule { background: #f8fafc; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #e2e8f0; }
+        
+        /* Golden Highlights specifically for AI section */
+        .ai-section h4 { color: #d97706; border-left-color: #f59e0b; }
+        .ai-rule { border-left-color: #fde68a !important; }
+
+        .rubric-rule { background: #f8fafc; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #e2e8f0; border-left: 4px solid #38bdf8; }
         .rubric-rule p { margin: 0 0 8px 0; font-size: 13px; line-height: 1.5; }
+        
         .score-badge { font-weight: 800; padding: 3px 8px; border-radius: 4px; display: inline-block; margin-right: 8px; color: white; min-width: 65px; text-align: center; }
         .s5 { background: #10b981; } 
         .s4 { background: #34d399; } 
@@ -231,15 +224,66 @@
 <button class="btn-toggle-ai" onclick="toggleAiPolicy()" id="btnAiToggle">View AI Policy</button>
 <div class="ai-panel" id="aiPanel">
     <div class="drawer-header ai-header">
-        <h2>Official AI Policy</h2>
+        <h2>Official AI Policy Guide</h2>
         <button class="close-drawer" onclick="toggleAiPolicy()">×</button>
     </div>
     <div class="rubric-content">
-        <div style="text-align: center; padding: 40px 20px;">
-            <span style="font-size: 48px; display: block; margin-bottom: 20px;">🤖</span>
-            <h3 style="font-size: 22px; color: #d97706; margin-bottom: 10px;">Awaiting Canva Text</h3>
-            <p style="font-size: 16px; color: #64748b; line-height: 1.6;">Please copy the exact rules from your Canva presentation and paste them into our chat. I will instantly build them into this space so you never have to leave the website during an evaluation.</p>
+        
+        <p style="font-size: 14px; line-height: 1.6; margin-bottom: 25px; border-left: 4px solid #f59e0b; padding-left: 15px;">
+            The MCN Admissions Team acknowledges that AI tools are widely accessible. This policy does not prohibit responsible use, but establishes boundaries to ensure applications reflect the applicant’s own thinking.
+            <br><br>
+            ✅ <strong>Acceptable:</strong> Supplementary editing (correcting grammar, clarity, sentence flow, adjusting structure).<br>
+            ❌ <strong>Prohibited:</strong> Generating substance (project ideas, constructing arguments, producing reflections).
+        </p>
+
+        <div class="rubric-section ai-section">
+            <h4>Red Flags & Green Flags</h4>
+            <div class="rubric-rule ai-rule">
+                <p style="margin-bottom: 10px; font-weight: 800; color: var(--text-dark);">Substance vs. Language Refinement</p>
+                <p><span class="score-badge" style="background:#10b981;">Green</span> Clear references to personal experiences, specific concrete details, nuance/self-awareness, natural tone variation, minor stylistic imperfections.</p>
+                <p><span class="score-badge" style="background:#dc2626;">Red</span> Restatement of ideas with synonyms, overuse of broad/abstract terminology, highly polished but generic, uniform paragraph structure, lack of local context.</p>
+            </div>
+            <div class="rubric-rule ai-rule">
+                <p style="margin-bottom: 10px; font-weight: 800; color: var(--text-dark);">Assessing Extent of AI Use</p>
+                <p><span class="score-badge" style="background:#3b82f6;">Limited</span> 1-2 responses noticeably more refined, shifts in tone between sections, mostly authentic with isolated formal passages.</p>
+                <p><span class="score-badge" style="background:#f59e0b;">Extensive</span> Consistently uniform tone everywhere, similar sentence rhythm throughout, multiple abstract answers.</p>
+            </div>
         </div>
+
+        <div class="rubric-section ai-section">
+            <h4>Decision Framework</h4>
+            <div class="rubric-rule ai-rule">
+                <p style="margin-bottom: 10px;">For Question 23 (<strong>"AI Generated?"</strong>), select based on the overall pattern:</p>
+                <p><strong>Option 1:</strong> Yes, completely AI-generated & ideas seem unoriginal.<br><em>(Generic, repetitive, lacking specificity)</em></p>
+                <p><strong>Option 2:</strong> Yes, majority of application used AI for language, but ideas seem original.<br><em>(Clear original ideas; language uniformly polished)</em></p>
+                <p><strong>Option 3:</strong> Yes, short portion used AI for language, ideas seem original.<br><em>(Strong authenticity overall with isolated polished sections)</em></p>
+                <p><strong>Option 4:</strong> No, completely original without apparent use of AI.<br><em>(Consistent authentic voice and specificity)</em></p>
+            </div>
+        </div>
+
+        <div class="rubric-section ai-section">
+            <h4>Reference Examples</h4>
+            <div class="rubric-rule ai-rule">
+                <p><strong>Ex 1 (Option 1):</strong> <em>"My initiative seeks to create sustainable and transformative impact by empowering marginalized communities through innovative and scalable solutions..."</em> <br><span style="color:#64748b;">(Abstract, broad, no concrete detail)</span></p>
+            </div>
+            <div class="rubric-rule ai-rule">
+                <p><strong>Ex 2 (Option 2):</strong> <em>"In my second year... I noticed many first-generation students struggled... I plan to create a peer mentorship network..."</em> <br><span style="color:#64748b;">(Idea is specific. If this high polish appears everywhere, it's Option 2)</span></p>
+            </div>
+            <div class="rubric-rule ai-rule">
+                <p><strong>Ex 3 (Option 3):</strong> <em>"I started a small tutoring group... Over time it developed into a more organized peer-support network... Through this experience..."</em> <br><span style="color:#64748b;">(Rooted in personal experience, but phrasing is noticeably more polished than their typical informal tone elsewhere)</span></p>
+            </div>
+            <div class="rubric-rule ai-rule">
+                <p><strong>Ex 4 (Option 4):</strong> <em>"When heavy rains damaged homes... We did not have a plan at first, and we made mistakes... That is why I want to create a campus response group."</em> <br><span style="color:#64748b;">(Specificity, lived experience, authentic reflection)</span></p>
+            </div>
+        </div>
+        
+        <div class="rubric-section ai-section" style="border-bottom: none;">
+            <h4>Final Guidance</h4>
+            <div class="rubric-rule ai-rule" style="border-left-color: #dc2626 !important;">
+                <p>AI detection requires careful judgment. <strong>Polished writing alone should not be penalized, and such applications must not be rejected.</strong> The determining factor is originality.</p>
+            </div>
+        </div>
+
     </div>
 </div>
 
@@ -469,7 +513,13 @@
         </div>
         <div class="eval-row">
             <div class="eval-q-text">23. Overall, do the applicant's responses seem AI-generated?</div>
-            <select id="eval_23" class="eval-input"><option value="">Select Option...</option><option value="Yes">Yes</option><option value="Maybe">Maybe</option><option value="No">No</option></select>
+            <select id="eval_23" class="eval-input">
+                <option value="">Select Option...</option>
+                <option value="1. Yes, completely AI-generated / unoriginal ideas">1. Yes, completely AI-generated / unoriginal ideas</option>
+                <option value="2. Yes, majority AI for language / original ideas">2. Yes, majority AI for language / original ideas</option>
+                <option value="3. Yes, short portion AI for language / original ideas">3. Yes, short portion AI for language / original ideas</option>
+                <option value="4. No, completely original no AI">4. No, completely original no AI</option>
+            </select>
         </div>
         <div class="eval-row">
             <div class="eval-q-text">24. Overall, does the applicant show ethical integrity through their responses?</div>
