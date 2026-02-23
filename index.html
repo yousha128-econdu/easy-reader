@@ -41,8 +41,9 @@
         
         .bg-shape {
             position: absolute;
-            opacity: 0.08; 
-            filter: grayscale(20%);
+            opacity: 0.05; 
+            /* THE SPEED FIX: Pushes the animation to the graphics card to prevent lag */
+            will-change: transform; 
             animation: float 20s infinite ease-in-out alternate;
         }
 
@@ -61,8 +62,8 @@
         .container {
             max-width: 1050px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.96);
-            backdrop-filter: blur(25px);
+            /* THE SPEED FIX: Changed to a solid color to remove heavy math calculations */
+            background: #ffffff; 
             border-radius: 32px; 
             box-shadow: 0 20px 60px -15px rgba(0, 86, 179, 0.15);
             overflow: visible; 
@@ -131,13 +132,12 @@
         }
         .impact-card:hover { box-shadow: 0 20px 40px -10px rgba(0, 86, 179, 0.1); transform: translateX(5px); border-left-color: var(--mcn-blue); }
         
-        /* THE FIX: Crystal Clear Formatting for the Applicant Questions */
         .card-label { 
             font-size: 16px; 
             font-weight: 700; 
             color: var(--mcn-navy); 
-            text-transform: none; /* Removes the hard-to-read ALL CAPS */
-            letter-spacing: normal; /* Removes the stretched letters */
+            text-transform: none; 
+            letter-spacing: normal; 
             line-height: 1.6; 
             margin-bottom: 12px; 
             display: block; 
@@ -162,7 +162,6 @@
 
         .eval-board { background: var(--mcn-light); padding: 45px; border-radius: 32px; margin: 0 45px 45px 45px; display: none; border: 1px solid #e0e7ff; }
         
-        /* The New Highly-Precise Evaluation Grid Styling */
         .eval-row { background: var(--white); border: 1px solid #e2e8f0; border-radius: 16px; padding: 25px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); transition: 0.3s; }
         .eval-row:hover { border-color: #38bdf8; box-shadow: 0 10px 20px -5px rgba(0, 86, 179, 0.1); }
         .eval-q-text { font-size: 16px; font-weight: 700; color: var(--text-dark); line-height: 1.5; }
@@ -188,13 +187,13 @@
         /* THE RIGHT RUBRIC DRAWER */
         .btn-toggle-rubric { position: fixed; right: -5px; top: 50%; transform: translateY(-50%); background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; padding: 15px 25px 15px 20px; border-radius: 30px 0 0 30px; border: none; font-weight: 800; font-size: 15px; cursor: pointer; box-shadow: -5px 5px 15px rgba(109, 40, 217, 0.3); z-index: 1000; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; writing-mode: vertical-rl; text-orientation: mixed; }
         .btn-toggle-rubric:hover { padding-right: 35px; background: #5b21b6; }
-        .rubric-panel { position: fixed; top: 0; right: -600px; width: 550px; height: 100vh; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(25px); box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1); z-index: 1001; transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; border-left: 1px solid #e2e8f0; }
+        .rubric-panel { position: fixed; top: 0; right: -600px; width: 550px; height: 100vh; background: #ffffff; box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1); z-index: 1001; transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; border-left: 1px solid #e2e8f0; }
         .rubric-panel.open { right: 0; }
 
         /* THE LEFT AI POLICY DRAWER */
         .btn-toggle-ai { position: fixed; left: -5px; top: 50%; transform: translateY(-50%); background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 15px 20px 15px 25px; border-radius: 0 30px 30px 0; border: none; font-weight: 800; font-size: 15px; cursor: pointer; box-shadow: 5px 5px 15px rgba(217, 119, 6, 0.3); z-index: 1000; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; writing-mode: vertical-rl; text-orientation: mixed; }
         .btn-toggle-ai:hover { padding-left: 35px; background: #b45309; }
-        .ai-panel { position: fixed; top: 0; left: -600px; width: 550px; height: 100vh; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(25px); box-shadow: 10px 0 30px rgba(0, 0, 0, 0.1); z-index: 1001; transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; border-right: 1px solid #e2e8f0; }
+        .ai-panel { position: fixed; top: 0; left: -600px; width: 550px; height: 100vh; background: #ffffff; box-shadow: 10px 0 30px rgba(0, 0, 0, 0.1); z-index: 1001; transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; border-right: 1px solid #e2e8f0; }
         .ai-panel.open { left: 0; }
 
         /* Shared Drawer Headers */
@@ -441,7 +440,7 @@
             <select id="eval_15" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
         </div>
         <div class="eval-row">
-            <div class="eval-q-text">16. Student’s motivation for social impact and joining the fellowship is related to their proposed project</div>
+            <div class="eval-q-text">16. Student’s motivation for social impact and joining the fellowship is related to their propsed project</div>
             <select id="eval_16" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
         </div>
         <div class="eval-row">
@@ -604,17 +603,14 @@ function changeRow(step) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// THE NERD-LEVEL HORIZONTAL COPY UPGRADE
 function copyScores() {
     const btn = document.getElementById('btnCopyEval');
     
-    // This grabs all 28 inputs automatically and cleans up line-breaks from text areas
     let values = evalIds.map(id => {
         let val = document.getElementById(id).value;
-        return val.replace(/\n/g, " "); // Replaces "Enter" presses with spaces so Google Sheets doesn't break
+        return val.replace(/\n/g, " "); 
     });
     
-    // The "\t" adds a hidden horizontal tab between every answer.
     const combinedAnswers = values.join("\t");
     
     navigator.clipboard.writeText(combinedAnswers).then(() => {
@@ -655,7 +651,6 @@ function downloadDraftCSV() {
         return;
     }
 
-    // Creating the headers (Q1 through Q28) to keep the CSV file clean
     let headers = "Row Number,Applicant Name," + Array.from({length: 28}, (_, i) => `Q${i+1}`).join(",") + "\n";
     let csvContent = headers;
 
