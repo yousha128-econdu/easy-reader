@@ -4,34 +4,38 @@
     <title>MCN | Premium GAC Toolkit</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --mcn-navy: #0f172a;
-            --mcn-blue: #1e3a8a;
-            --mcn-light: #f8fafc;
-            --accent-blue: #3b82f6;
+            --mcn-navy: #0A2342;
+            --mcn-blue: #0056b3;
+            --mcn-light: #f0f4f8; /* Softer, richer light blue */
             --auth-purple: #7c3aed;
             --success-green: #059669;
-            --joyful-orange: #d97706;
+            --joyful-orange: #f59e0b;
             --white: #ffffff;
-            --text-dark: #1e293b;
-            --text-muted: #64748b;
+            --text-dark: #0f172a;
+            --text-muted: #475569;
+            --border-light: #e2e8f0;
+            --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --shadow-float: 0 20px 40px -10px rgba(0, 86, 179, 0.1), 0 10px 20px -5px rgba(0, 0, 0, 0.04);
         }
 
         body {
-            /* Upgraded to a highly sophisticated, soft ambient gradient */
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e0eafc 100%);
             margin: 0;
-            padding: 40px 20px;
+            padding: 50px 20px;
             color: var(--text-dark);
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
+            -webkit-font-smoothing: antialiased; /* Makes the font render perfectly crisp */
         }
 
-        /* HARDWARE ACCELERATED BACKGROUND SHAPES */
+        /* --- HARDWARE-ACCELERATED BACKGROUND --- */
         .bg-shapes {
             position: fixed;
             top: 0;
@@ -44,9 +48,8 @@
         }
         .bg-shape {
             position: absolute;
-            opacity: 0.04; 
-            filter: grayscale(10%);
-            will-change: transform; /* Bypasses CPU for zero-lag floating */
+            opacity: 0.04; /* Very subtle so it's gorgeous but not distracting */
+            will-change: transform; 
             animation: float 20s infinite ease-in-out alternate;
         }
         .bg-shape:nth-child(1) { top: -2%; left: 5%; width: 250px; animation-delay: 0s; }
@@ -61,186 +64,198 @@
             100% { transform: translateY(30px) rotate(8deg); }
         }
 
-        /* MAIN CONTAINER - Solid white for scrolling performance, elegant shadows for aesthetics */
+        /* --- MAIN CONTAINER --- */
         .container {
             max-width: 1050px;
             margin: 0 auto;
-            background: #ffffff; 
-            border-radius: 24px; 
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 25px 50px -12px rgba(15, 23, 42, 0.1);
+            background: var(--white); 
+            border-radius: 32px; 
+            box-shadow: var(--shadow-float); /* Premium layered shadow */
             overflow: visible; 
-            border: 1px solid rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.9);
             transition: transform 0.4s ease;
         }
 
+        /* --- HEADER --- */
         .header {
-            background: linear-gradient(135deg, var(--mcn-navy) 0%, var(--mcn-blue) 100%);
+            background: linear-gradient(135deg, var(--mcn-navy) 0%, #003b82 100%);
             padding: 55px 20px;
             text-align: center;
             color: var(--white);
-            border-bottom: 5px solid var(--accent-blue);
-            border-radius: 24px 24px 0 0; 
+            border-bottom: 6px solid #38bdf8;
+            border-radius: 32px 32px 0 0; 
             position: relative;
             overflow: hidden;
+        }
+        /* A gorgeous subtle glow inside the header */
+        .header::after {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(56,189,248,0.15) 0%, transparent 60%);
+            pointer-events: none;
         }
 
         .logo-container {
             background: var(--white);
             padding: 22px 45px;
             display: inline-block;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+            border-radius: 24px;
+            box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.2);
             margin-bottom: 25px;
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            z-index: 2;
         }
         .logo-container:hover { transform: translateY(-5px) scale(1.02); }
-        .logo-img { max-width: 230px; height: auto; display: block; }
+        .logo-img { max-width: 250px; height: auto; display: block; }
 
+        .header h1 { margin: 0; font-size: 38px; font-weight: 800; letter-spacing: -1px; position: relative; z-index: 2; }
+        .header p { margin: 12px 0 0; opacity: 0.9; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; font-size: 14px; color: #bae6fd; position: relative; z-index: 2; }
+
+        /* --- CONTROL GRID --- */
         .setup-grid {
-            padding: 40px 45px;
+            padding: 45px 50px;
             background: var(--white);
             display: grid;
-            grid-template-columns: 1fr 120px 120px 170px; 
+            grid-template-columns: 1fr 130px 110px 160px; 
             gap: 20px;
             align-items: flex-end;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid var(--border-light);
         }
 
-        .field-group label { display: block; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 10px; color: var(--text-muted); }
-        input, select { width: 100%; padding: 16px 20px; border: 1.5px solid #e2e8f0; border-radius: 14px; font-size: 15px; background: #f8fafc; transition: all 0.3s ease; box-sizing: border-box; color: var(--mcn-navy); font-weight: 500;}
-        input:focus, select:focus { border-color: var(--accent-blue); outline: none; background: var(--white); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); transform: translateY(-1px); }
+        .field-group label { display: block; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; color: var(--mcn-blue); }
+        input, select { 
+            width: 100%; padding: 18px 20px; border: 2px solid var(--border-light); border-radius: 16px; 
+            font-size: 16px; background: #f8fafc; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            box-sizing: border-box; color: var(--text-dark); font-weight: 500; font-family: inherit;
+        }
+        input:focus, select:focus { border-color: #38bdf8; outline: none; background: var(--white); box-shadow: 0 0 0 5px rgba(56, 189, 248, 0.15); transform: translateY(-2px); }
 
-        /* REFINED PREMIUM BUTTONS */
-        .btn-primary { background: linear-gradient(135deg, #2563eb, #3b82f6); color: var(--white); border: none; padding: 16px; border-radius: 50px; font-weight: 700; font-size: 14px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; width: 100%; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25); }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35); }
+        .btn-primary { background: linear-gradient(135deg, var(--mcn-blue), #2563eb); color: var(--white); border: none; padding: 18px; border-radius: 16px; font-weight: 800; font-size: 15px; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); text-transform: uppercase; letter-spacing: 1px; width: 100%; box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.3); font-family: inherit; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 25px -5px rgba(37, 99, 235, 0.4); }
 
-        .btn-download-draft { background: linear-gradient(135deg, #7c3aed, #8b5cf6); color: var(--white); border: none; padding: 16px; border-radius: 50px; font-weight: 700; font-size: 14px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; width: 100%; box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25); }
-        .btn-download-draft:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(124, 58, 237, 0.35); }
+        .btn-download-draft { background: linear-gradient(135deg, #6366f1, var(--auth-purple)); color: var(--white); border: none; padding: 18px; border-radius: 16px; font-weight: 800; font-size: 15px; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); text-transform: uppercase; letter-spacing: 1px; width: 100%; box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.3); font-family: inherit; }
+        .btn-download-draft:hover { transform: translateY(-3px); box-shadow: 0 15px 25px -5px rgba(99, 102, 241, 0.4); }
 
-        #displayArea { padding: 45px; }
+        #displayArea { padding: 50px; }
 
         @keyframes gentleFadeIn {
             from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .animated-entry { animation: gentleFadeIn 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+        .animated-entry { animation: gentleFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
-        /* SLEEK ONBOARDING CARDS */
-        .onboarding-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin-top: 40px; text-align: left; }
-        .onboard-card { background: linear-gradient(145deg, #ffffff, #f8fafc); padding: 35px; border-radius: 20px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 10px 25px -5px rgba(0, 0, 0, 0.05); transition: all 0.3s ease; }
-        .onboard-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 20px 35px -10px rgba(59, 130, 246, 0.1); border-color: #bae6fd; }
-        .onboard-card h4 { margin: 0 0 20px 0; color: var(--mcn-navy); font-size: 20px; font-weight: 800; display: flex; align-items: center; gap: 10px; }
-        .onboard-card ul, .onboard-card ol { margin: 0; padding-left: 22px; color: var(--text-dark); font-size: 15px; line-height: 1.7; }
-        .onboard-card li { margin-bottom: 12px; }
-        .onboard-card li strong { color: var(--mcn-blue); font-weight: 700; }
+        /* --- ONBOARDING / EMPTY STATE --- */
+        .onboarding-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 45px; text-align: left; }
+        .onboard-card { background: var(--white); padding: 40px; border-radius: 24px; border: 1px solid var(--border-light); box-shadow: var(--shadow-soft); transition: all 0.3s ease; position: relative; overflow: hidden; }
+        .onboard-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--mcn-blue), #38bdf8); opacity: 0; transition: 0.3s; }
+        .onboard-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-float); }
+        .onboard-card:hover::before { opacity: 1; }
+        .onboard-card h4 { margin: 0 0 20px 0; color: var(--mcn-navy); font-size: 22px; font-weight: 800; display: flex; align-items: center; gap: 12px; }
+        .onboard-card ul, .onboard-card ol { margin: 0; padding-left: 22px; color: var(--text-muted); font-size: 15px; line-height: 1.8; }
+        .onboard-card li { margin-bottom: 15px; }
+        .onboard-card li strong { color: var(--text-dark); font-weight: 700; }
 
-        /* ELEGANT IMPACT CARDS */
-        .impact-card { background: var(--white); border-radius: 16px; padding: 35px; margin-bottom: 25px; border: 1px solid #e2e8f0; border-left: 6px solid var(--accent-blue); box-shadow: 0 2px 4px rgba(0,0,0,0.02), 0 10px 20px rgba(0,0,0,0.04); transition: all 0.3s ease; }
-        .impact-card:hover { box-shadow: 0 4px 6px rgba(0,0,0,0.03), 0 15px 30px rgba(30, 58, 138, 0.08); transform: translateY(-2px); border-left-color: var(--mcn-blue); }
+        /* --- IMPACT CARDS (Applicant Answers) --- */
+        .impact-card { 
+            background: var(--white); border-radius: 20px; padding: 35px; margin-bottom: 25px; 
+            border: 1px solid var(--border-light); border-left: 6px solid #38bdf8; 
+            box-shadow: var(--shadow-soft); transition: all 0.3s ease; 
+        }
+        .impact-card:hover { box-shadow: var(--shadow-float); transform: translateX(4px); border-left-color: var(--mcn-blue); }
         
-        .card-label { font-size: 15px; font-weight: 700; color: var(--mcn-blue); text-transform: none; letter-spacing: -0.01em; line-height: 1.5; margin-bottom: 15px; display: block; border-bottom: 1px solid #e2e8f0; padding-bottom: 12px; }
-        .card-value { font-size: 16px; line-height: 1.8; color: var(--text-dark); white-space: pre-wrap; font-weight: 400; }
-        
-        .card-value a { color: var(--accent-blue); text-decoration: none; font-weight: 600; border-bottom: 2px solid #bae6fd; transition: 0.2s; word-break: break-all; padding-bottom: 1px; }
-        .card-value a:hover { color: var(--mcn-navy); border-bottom-color: var(--mcn-navy); }
+        .card-label { 
+            font-size: 16px; font-weight: 700; color: var(--mcn-navy); 
+            line-height: 1.6; margin-bottom: 15px; display: block; 
+            border-bottom: 1px solid var(--border-light); padding-bottom: 12px;
+        }
+        .card-value { font-size: 17px; line-height: 1.8; color: var(--text-dark); white-space: pre-wrap; font-weight: 400; }
+        .card-value a { color: var(--mcn-blue); text-decoration: none; font-weight: 600; border-bottom: 2px solid #bae6fd; transition: 0.2s; word-break: break-all; padding-bottom: 2px; }
+        .card-value a:hover { color: var(--mcn-navy); border-bottom-color: var(--mcn-navy); background: #f0f9ff; }
 
-        .auth-suite { background: linear-gradient(135deg, #faf5ff, #ffffff); border-left: 6px solid var(--auth-purple); padding: 35px 45px; border-radius: 20px; margin: 10px 45px 35px 45px; display: flex; align-items: center; justify-content: space-between; border: 1px solid #f3e8ff; box-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.1); display: none; }
-        .auth-text h3 { margin: 0 0 8px 0; color: var(--auth-purple); font-size: 20px; font-weight: 800; }
+        /* --- AUTHENTICITY SUITE --- */
+        .auth-suite { background: linear-gradient(135deg, #f8fafc, #ffffff); border: 1px solid var(--border-light); border-left: 6px solid var(--auth-purple); padding: 35px 40px; border-radius: 24px; margin: 10px 50px 40px 50px; display: flex; align-items: center; justify-content: space-between; box-shadow: var(--shadow-soft); display: none; }
+        .auth-text h3 { margin: 0 0 8px 0; color: var(--auth-purple); font-size: 22px; font-weight: 800; letter-spacing: -0.5px;}
         .auth-text p { margin: 0; color: var(--text-muted); font-size: 15px; }
-        .btn-auth { background: var(--auth-purple); color: var(--white); border: none; padding: 16px 30px; border-radius: 50px; font-weight: 700; font-size: 14px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25); }
-        .btn-auth:hover { background: #6d28d9; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(124, 58, 237, 0.35); }
+        .btn-auth { background: var(--auth-purple); color: var(--white); border: none; padding: 16px 28px; border-radius: 16px; font-weight: 700; font-size: 14px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 8px 15px -5px rgba(139, 92, 246, 0.3); font-family: inherit; }
+        .btn-auth:hover { background: #6d28d9; transform: translateY(-3px); box-shadow: 0 12px 20px -5px rgba(139, 92, 246, 0.4); }
 
-        .nav-buttons { display: flex; justify-content: space-between; margin: 0 45px 35px 45px; padding-top: 35px; border-top: 1px solid #e2e8f0; display: none; }
-        .nav-btn { background: var(--white); color: var(--text-dark); border: 1.5px solid #cbd5e1; padding: 16px 35px; border-radius: 50px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; width: 48%; text-transform: uppercase; letter-spacing: 1px; font-size: 13px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-        .nav-btn:hover { background: #f8fafc; border-color: var(--text-muted); transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .nav-buttons { display: flex; justify-content: space-between; margin: 0 50px 40px 50px; padding-top: 35px; border-top: 1px solid var(--border-light); display: none; }
+        .nav-btn { background: var(--white); color: var(--text-dark); border: 2px solid var(--border-light); padding: 16px 35px; border-radius: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; width: 48%; text-transform: uppercase; letter-spacing: 1px; box-shadow: var(--shadow-soft); font-family: inherit; }
+        .nav-btn:hover { border-color: var(--text-muted); transform: translateY(-2px); box-shadow: var(--shadow-float); }
 
-        .eval-board { background: #f8fafc; padding: 45px; border-radius: 24px; margin: 0 45px 45px 45px; display: none; border: 1px solid #e2e8f0; }
+        /* --- THE EVALUATION BOARD --- */
+        .eval-board { background: var(--white); padding: 50px; border-radius: 32px; margin: 0 50px 50px 50px; display: none; border: 1px solid var(--border-light); box-shadow: var(--shadow-soft); position: relative; overflow: hidden; }
+        /* Beautiful blue accent bar at the top of the evaluation board */
+        .eval-board::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 6px; background: linear-gradient(90deg, var(--mcn-navy), #38bdf8); }
         
-        .eval-row { background: var(--white); border: 1px solid #e2e8f0; border-radius: 16px; padding: 25px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); transition: all 0.3s ease; }
-        .eval-row:hover { border-color: #bae6fd; box-shadow: 0 8px 20px -5px rgba(59, 130, 246, 0.1); transform: translateY(-1px); }
-        .eval-q-text { font-size: 15px; font-weight: 600; color: var(--mcn-navy); line-height: 1.5; }
-        .eval-input { width: 100%; max-width: 500px; padding: 14px 18px; border: 1.5px solid #e2e8f0; border-radius: 12px; font-size: 14px; font-weight: 600; color: var(--mcn-navy); background: #f8fafc; transition: all 0.3s ease; cursor: pointer; }
-        .eval-input:focus { border-color: var(--accent-blue); outline: none; background: var(--white); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); }
-        .eval-textarea { width: 100%; height: 100px; padding: 16px; border: 1.5px solid #e2e8f0; border-radius: 12px; font-size: 14px; font-family: inherit; background: #f8fafc; transition: all 0.3s ease; resize: vertical; line-height: 1.6; }
-        .eval-textarea:focus { border-color: var(--accent-blue); outline: none; background: var(--white); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); }
+        .eval-row { background: #f8fafc; border: 1px solid var(--border-light); border-radius: 20px; padding: 25px 30px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 15px; transition: 0.3s ease; }
+        .eval-row:hover { border-color: #bae6fd; background: var(--white); box-shadow: var(--shadow-soft); transform: translateY(-2px); }
+        .eval-q-text { font-size: 16px; font-weight: 700; color: var(--text-dark); line-height: 1.6; }
+        .eval-input { width: 100%; max-width: 500px; padding: 15px 20px; border: 2px solid var(--border-light); border-radius: 12px; font-size: 15px; font-weight: 600; color: var(--mcn-navy); background: var(--white); transition: 0.3s; cursor: pointer; }
+        .eval-input:focus { border-color: #38bdf8; outline: none; box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.15); }
+        .eval-textarea { width: 100%; height: 110px; padding: 15px 20px; border: 2px solid var(--border-light); border-radius: 12px; font-size: 15px; font-family: inherit; background: var(--white); transition: 0.3s; resize: vertical; line-height: 1.6; }
+        .eval-textarea:focus { border-color: #38bdf8; outline: none; box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.15); }
 
-        .btn-copy { background: linear-gradient(135deg, #10b981, #059669); color: var(--white); border: none; padding: 20px; border-radius: 50px; font-weight: 700; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25); margin-top: 20px; }
-        .btn-copy:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35); }
+        .btn-copy { background: linear-gradient(135deg, var(--success-green), #047857); color: var(--white); border: none; padding: 22px; border-radius: 16px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1.5px; transition: all 0.3s ease; box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.3); margin-top: 25px; font-size: 16px; font-family: inherit; }
+        .btn-copy:hover { transform: translateY(-3px); box-shadow: 0 15px 25px -5px rgba(16, 185, 129, 0.4); }
 
-        .btn-draft { background: linear-gradient(135deg, #f59e0b, #d97706); color: var(--white); border: none; padding: 20px; border-radius: 50px; font-weight: 700; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; margin-top: 15px; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25); }
-        .btn-draft:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(245, 158, 11, 0.35); }
+        .btn-draft { background: linear-gradient(135deg, var(--joyful-orange), #d97706); color: var(--white); border: none; padding: 22px; border-radius: 16px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1.5px; transition: all 0.3s ease; margin-top: 15px; box-shadow: 0 10px 20px -5px rgba(245, 158, 11, 0.3); font-size: 16px; font-family: inherit; }
+        .btn-draft:hover { transform: translateY(-3px); box-shadow: 0 15px 25px -5px rgba(245, 158, 11, 0.4); }
         
-        .btn-pdf { background: linear-gradient(135deg, #ef4444, #dc2626); color: var(--white); border: none; padding: 20px; border-radius: 50px; font-weight: 700; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; margin-top: 15px; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25); }
-        .btn-pdf:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(239, 68, 68, 0.35); }
+        .btn-pdf { background: linear-gradient(135deg, #ef4444, #b91c1c); color: var(--white); border: none; padding: 22px; border-radius: 16px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1.5px; transition: all 0.3s ease; margin-top: 15px; box-shadow: 0 10px 20px -5px rgba(239, 68, 68, 0.3); font-size: 16px; font-family: inherit; }
+        .btn-pdf:hover { transform: translateY(-3px); box-shadow: 0 15px 25px -5px rgba(239, 68, 68, 0.4); }
 
         .empty-state { text-align: center; padding: 60px 20px 80px 20px; color: var(--text-muted); }
-        .empty-state h3 { font-size: 28px; color: var(--mcn-navy); margin-bottom: 10px; font-weight: 800; letter-spacing: -0.5px; }
-        .empty-state p { font-size: 16px; line-height: 1.6; max-width: 600px; margin: 0 auto; }
-        .joyful-emoji { font-size: 48px; margin-bottom: 15px; display: block; animation: gentleFadeIn 1s ease forwards; }
+        .empty-state h3 { font-size: 34px; color: var(--mcn-navy); margin-bottom: 15px; font-weight: 800; letter-spacing: -1px; }
+        .empty-state p { font-size: 18px; line-height: 1.6; max-width: 650px; margin: 0 auto; color: var(--text-muted); }
+        .joyful-emoji { font-size: 54px; margin-bottom: 20px; display: block; animation: gentleFadeIn 1s ease forwards; }
 
-        /* -----------------------------------------------------------
-           THE HARDWARE-ACCELERATED, SUPER SMOOTH SLIDING DRAWERS 
-           (Replaced laggy left/right positioning with transform: translateX)
-           ----------------------------------------------------------- */
-        
-        /* RIGHT RUBRIC DRAWER */
-        .btn-toggle-rubric { position: fixed; right: 0; top: 50%; transform: translateY(-50%); background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; padding: 18px 18px 18px 22px; border-radius: 20px 0 0 20px; border: none; font-weight: 700; font-size: 14px; cursor: pointer; box-shadow: -4px 0 15px rgba(109, 40, 217, 0.2); z-index: 1000; transition: padding 0.3s ease, background 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px; writing-mode: vertical-rl; text-orientation: mixed; }
-        .btn-toggle-rubric:hover { padding-right: 28px; background: #5b21b6; }
-        
-        .rubric-panel { position: fixed; top: 0; right: 0; width: 600px; max-width: 90vw; height: 100vh; background: #ffffff; box-shadow: -10px 0 40px rgba(0, 0, 0, 0.15); z-index: 1001; overflow-y: auto; border-left: 1px solid #e2e8f0; 
-            /* The Speed Fix */
-            transform: translateX(100%); 
-            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); 
-            will-change: transform;
-        }
-        .rubric-panel.open { transform: translateX(0); }
+        /* THE RIGHT RUBRIC DRAWER */
+        .btn-toggle-rubric { position: fixed; right: -5px; top: 50%; transform: translateY(-50%); background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; padding: 18px 25px 18px 20px; border-radius: 20px 0 0 20px; border: none; font-weight: 800; font-size: 14px; cursor: pointer; box-shadow: -5px 5px 20px rgba(109, 40, 217, 0.25); z-index: 1000; transition: 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px; writing-mode: vertical-rl; text-orientation: mixed; font-family: inherit; }
+        .btn-toggle-rubric:hover { padding-right: 35px; background: #5b21b6; }
+        .rubric-panel { position: fixed; top: 0; right: -700px; width: 650px; height: 100vh; background: #ffffff; box-shadow: -15px 0 40px rgba(0, 0, 0, 0.08); z-index: 1001; transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1); overflow-y: auto; border-left: 1px solid var(--border-light); }
+        .rubric-panel.open { right: 0; }
 
-        /* LEFT AI POLICY DRAWER */
-        .btn-toggle-ai { position: fixed; left: 0; top: 50%; transform: translateY(-50%); background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 18px 22px 18px 18px; border-radius: 0 20px 20px 0; border: none; font-weight: 700; font-size: 14px; cursor: pointer; box-shadow: 4px 0 15px rgba(217, 119, 6, 0.2); z-index: 1000; transition: padding 0.3s ease, background 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px; writing-mode: vertical-rl; text-orientation: mixed; }
-        .btn-toggle-ai:hover { padding-left: 28px; background: #b45309; }
-        
-        .ai-panel { position: fixed; top: 0; left: 0; width: 600px; max-width: 90vw; height: 100vh; background: #ffffff; box-shadow: 10px 0 40px rgba(0, 0, 0, 0.15); z-index: 1001; overflow-y: auto; border-right: 1px solid #e2e8f0; 
-            /* The Speed Fix */
-            transform: translateX(-100%); 
-            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); 
-            will-change: transform;
-        }
-        .ai-panel.open { transform: translateX(0); }
+        /* THE LEFT AI POLICY DRAWER */
+        .btn-toggle-ai { position: fixed; left: -5px; top: 50%; transform: translateY(-50%); background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 18px 20px 18px 25px; border-radius: 0 20px 20px 0; border: none; font-weight: 800; font-size: 14px; cursor: pointer; box-shadow: 5px 5px 20px rgba(217, 119, 6, 0.25); z-index: 1000; transition: 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px; writing-mode: vertical-rl; text-orientation: mixed; font-family: inherit; }
+        .btn-toggle-ai:hover { padding-left: 35px; background: #b45309; }
+        .ai-panel { position: fixed; top: 0; left: -700px; width: 650px; height: 100vh; background: #ffffff; box-shadow: 15px 0 40px rgba(0, 0, 0, 0.08); z-index: 1001; transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1); overflow-y: auto; border-right: 1px solid var(--border-light); }
+        .ai-panel.open { left: 0; }
 
-        /* Shared Drawer Headers & Content */
-        .drawer-header { color: white; padding: 35px 30px; position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
-        .rubric-header { background: linear-gradient(135deg, var(--mcn-navy) 0%, #1e3a8a 100%); }
+        /* Shared Drawer Headers & Styles */
+        .drawer-header { color: white; padding: 35px; position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; }
+        .rubric-header { background: linear-gradient(135deg, var(--mcn-navy), var(--mcn-blue)); }
         .ai-header { background: linear-gradient(135deg, #d97706, #b45309); }
-        .drawer-header h2 { margin: 0; font-size: 18px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; line-height: 1.4; }
-        .close-drawer { background: rgba(255,255,255,0.2); border: none; color: white; width: 36px; height: 36px; border-radius: 50%; font-size: 24px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease; }
-        .close-drawer:hover { background: rgba(255,255,255,0.3); transform: scale(1.05); }
+        .drawer-header h2 { margin: 0; font-size: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; line-height: 1.4; }
+        .close-drawer { background: none; border: none; color: white; font-size: 32px; cursor: pointer; transition: 0.2s; padding: 0; line-height: 1; }
+        .close-drawer:hover { color: #cbd5e1; transform: scale(1.1); }
         
-        .rubric-content { padding: 35px; color: var(--text-dark); }
-        .rubric-section { margin-bottom: 35px; border-bottom: 1px solid #e2e8f0; padding-bottom: 25px; }
-        .rubric-section:last-child { border-bottom: none; }
-        .rubric-section h4 { color: var(--mcn-blue); font-size: 16px; font-weight: 800; margin: 0 0 20px 0; text-transform: uppercase; letter-spacing: 1px; border-left: 4px solid var(--mcn-blue); padding-left: 12px; }
+        .rubric-content { padding: 40px 35px; color: var(--text-dark); }
+        .rubric-section { margin-bottom: 40px; border-bottom: 1px solid var(--border-light); padding-bottom: 25px; }
+        .rubric-section h4 { color: var(--mcn-navy); font-size: 19px; margin: 0 0 20px 0; text-transform: uppercase; letter-spacing: 1px; border-left: 5px solid var(--mcn-blue); padding-left: 12px; font-weight: 800; }
         
-        .ai-section h4 { color: #b45309; border-left-color: #f59e0b; }
+        /* Golden Highlights specifically for AI section */
+        .ai-section h4 { color: #92400e; border-left-color: #f59e0b; }
         .ai-rule { border-left-color: #fde68a !important; }
 
-        .rubric-rule { background: #f8fafc; padding: 20px; border-radius: 12px; margin-bottom: 15px; border: 1px solid #e2e8f0; border-left: 4px solid #93c5fd; }
-        .rubric-rule p { margin: 0 0 10px 0; font-size: 14px; line-height: 1.6; color: #334155; }
+        .rubric-rule { background: #f8fafc; padding: 20px; border-radius: 12px; margin-bottom: 15px; border: 1px solid var(--border-light); border-left: 4px solid #38bdf8; }
+        .rubric-rule p { margin: 0 0 10px 0; font-size: 14px; line-height: 1.6; }
         .rubric-rule p:last-child { margin-bottom: 0; }
         
-        .score-badge { font-weight: 700; font-size: 12px; padding: 4px 10px; border-radius: 6px; display: inline-block; margin-right: 8px; color: white; min-width: 70px; text-align: center; }
+        .score-badge { font-weight: 800; padding: 4px 10px; border-radius: 6px; display: inline-block; margin-right: 10px; color: white; min-width: 65px; text-align: center; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
         .s5 { background: #10b981; } 
-        .s4 { background: #34d399; } 
+        .s4 { background: #34d399; color: #064e3b; } 
         .s3 { background: #fbbf24; color: #78350f; } 
-        .s2 { background: #f87171; } 
+        .s2 { background: #f87171; color: #7f1d1d; } 
         .s1 { background: #dc2626; } 
-        .s-yn { background: #6366f1; } 
+        .s-yn { background: var(--auth-purple); } 
 
-        .ai-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 13px; margin-bottom: 20px; background: white; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; }
-        .ai-table th { background: #fffbeb; color: #92400e; text-align: left; padding: 14px; border-bottom: 1px solid #fde68a; font-weight: 700; }
-        .ai-table td { padding: 14px; border-bottom: 1px solid #f1f5f9; border-right: 1px solid #f1f5f9; vertical-align: top; line-height: 1.6; color: #475569; }
+        .ai-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 14px; margin-bottom: 20px; background: white; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-light); }
+        .ai-table th { background: #fef3c7; color: #92400e; text-align: left; padding: 15px; border-bottom: 1px solid var(--border-light); font-weight: 800; }
+        .ai-table td { padding: 15px; border-bottom: 1px solid var(--border-light); vertical-align: top; line-height: 1.6; border-right: 1px solid var(--border-light); }
         .ai-table td:last-child { border-right: none; }
         .ai-table tr:last-child td { border-bottom: none; }
-        .ai-table-footer td { font-weight: 600; background: #f8fafc; font-style: italic; color: #64748b; }
+        .ai-table-footer td { font-weight: 600; background: #fffbeb; font-style: italic; color: #b45309; }
     </style>
 </head>
 <body>
@@ -265,10 +280,10 @@
         <div class="rubric-section ai-section">
             <div class="rubric-rule ai-rule" style="background: white;">
                 <p>The MCN Admissions Team acknowledges that artificial intelligence tools are widely accessible and commonly used by students for writing support. This policy does not prohibit the responsible use of such tools. Instead, it establishes clear boundaries to ensure that all submitted applications reflect the applicant’s own thinking, experiences, and ideas.</p>
-                <p><strong>AI may be used as a supplementary editing tool.</strong> Acceptable uses include correcting grammar, improving clarity, refining sentence flow, or adjusting structure. These forms of assistance are comparable to using proofreading software or seeking language support.</p>
-                <p><strong>AI may not be used to generate the substance of an application.</strong> This includes developing project ideas, constructing arguments, producing reflections, or shaping the intellectual core of responses. The originality, reasoning, and insight presented in the application must belong to the student.</p>
+                <p><strong>✅ AI may be used as a supplementary editing tool.</strong> Acceptable uses include correcting grammar, improving clarity, refining sentence flow, or adjusting structure. These forms of assistance are comparable to using proofreading software or seeking language support.</p>
+                <p><strong>❌ AI may not be used to generate the substance of an application.</strong> This includes developing project ideas, constructing arguments, producing reflections, or shaping the intellectual core of responses. The originality, reasoning, and insight presented in the application must belong to the student.</p>
                 <p>When evaluating applications, reviewers must assess two dimensions:</p>
-                <ol style="font-size: 14px; line-height: 1.6; margin-bottom: 10px; color: #334155;">
+                <ol style="font-size: 14px; line-height: 1.6; margin-bottom: 10px; color: var(--text-dark); font-weight: 500;">
                     <li>The nature of AI use: whether it appears limited to language refinement or extends to idea generation and substantive content.</li>
                     <li>The extent of AI use: whether it appears in isolated sections or consistently throughout the application.</li>
                 </ol>
@@ -278,13 +293,13 @@
 
         <div class="rubric-section ai-section">
             <h4>Red Flags and Green Flags</h4>
-            <p style="font-size: 14px; margin-bottom: 20px; font-style: italic; color: #64748b;">Reviewers should rely on pattern recognition across the full application rather than isolated phrases. The indicators below are intended to guide judgment, not replace it.</p>
+            <p style="font-size: 14px; margin-bottom: 20px; font-style: italic; color: var(--text-muted);">Reviewers should rely on pattern recognition across the full application rather than isolated phrases. The indicators below are intended to guide judgment, not replace it.</p>
             
             <h5 style="color: var(--text-dark); margin: 0 0 12px 0; font-size: 15px;">A. Assessing Whether AI Was Used for Substance or Only Language Refinement</h5>
             <table class="ai-table">
                 <tr>
-                    <th>Green Flags — Likely Supplementary Editing Only</th>
-                    <th>Red Flags — Likely Substantive AI Reliance</th>
+                    <th>Green Flags — Likely Editing Only</th>
+                    <th>Red Flags — Likely Substantive Reliance</th>
                 </tr>
                 <tr>
                     <td>Clear references to personal experiences, communities, or institutions.</td>
@@ -304,11 +319,11 @@
                 </tr>
                 <tr>
                     <td>Minor imperfections or stylistic inconsistencies that reflect authentic writing.</td>
-                    <td>Lack of personal voice, local context, or concrete detail.</td>
+                    <td>Lack of personal voice, local context, or concrete detail</td>
                 </tr>
                 <tr class="ai-table-footer">
-                    <td>These features suggest that the applicant’s ideas are original, even if the language appears polished.</td>
-                    <td>These patterns may indicate that AI was used to generate or heavily shape the substance of the application.</td>
+                    <td>These features suggest that the applicant’s ideas are original, even if language is polished.</td>
+                    <td>These patterns may indicate that AI was used to heavily shape the substance of the application.</td>
                 </tr>
             </table>
 
@@ -345,7 +360,7 @@
             <h4>Reviewer Decision Framework</h4>
             <div class="rubric-rule ai-rule" style="background: white;">
                 <p>For each application, reviewers must select one of the following four options in the review sheet (the drop-down menu for the question, <strong>“Overall, do the applicant’s responses seem AI-generated?”</strong>):</p>
-                <ol style="font-size: 14px; line-height: 1.7; margin-bottom: 0; color: #334155;">
+                <ol style="font-size: 14px; line-height: 1.8; margin-bottom: 0; color: var(--text-dark);">
                     <li><strong>Option 1:</strong> Yes, the responses seem completely AI-generated and the ideas seem unoriginal.</li>
                     <li><strong>Option 2:</strong> Yes, AI has been used for the majority of the application but only to enhance language and grammar; the ideas seem original.</li>
                     <li><strong>Option 3:</strong> Yes, AI has been used for a short portion of the application but only to enhance language and grammar; the ideas seem original.</li>
@@ -367,28 +382,28 @@
                     <td>Generic, repetitive, lacking specificity</td>
                     <td>Ideas appear unoriginal</td>
                     <td>Used throughout</td>
-                    <td><span style="font-weight: 700; color: #dc2626;">Option 1</span></td>
+                    <td>Option 1</td>
                 </tr>
                 <tr>
                     <td>Clear original ideas; language uniformly polished</td>
                     <td>Ideas seem original</td>
                     <td>Majority of responses</td>
-                    <td><span style="font-weight: 700; color: #f59e0b;">Option 2</span></td>
+                    <td>Option 2</td>
                 </tr>
                 <tr>
                     <td>Strong authenticity overall with isolated polished sections</td>
                     <td>Ideas seem original</td>
                     <td>Limited portion</td>
-                    <td><span style="font-weight: 700; color: #3b82f6;">Option 3</span></td>
+                    <td>Option 3</td>
                 </tr>
                 <tr>
                     <td>Consistent authentic voice and specificity</td>
                     <td>Ideas seem original</td>
                     <td>No visible indicators</td>
-                    <td><span style="font-weight: 700; color: #10b981;">Option 4</span></td>
+                    <td>Option 4</td>
                 </tr>
             </table>
-            <p style="font-size:14px; margin-top:15px; font-style: italic; text-align: center; color: var(--mcn-navy); font-weight: 600;">Reviewers must base their selection on the overall pattern of the application rather than a single sentence or paragraph.</p>
+            <p style="font-size:14px; margin-top:15px; font-weight: 700; text-align: center; color: var(--mcn-navy);">Reviewers must base their selection on the overall pattern of the application rather than a single sentence or paragraph.</p>
         </div>
 
         <div class="rubric-section ai-section">
@@ -396,29 +411,29 @@
             <div class="rubric-rule ai-rule">
                 <p><strong>Example 1 — Likely Fully AI-Generated (Select Option 1)</strong><br>
                 "My initiative seeks to create sustainable and transformative impact by empowering marginalized communities through innovative and scalable solutions that foster systemic change and long-term resilience."<br>
-                <span style="color:#64748b; font-style: italic; font-size: 13px;">This response relies heavily on abstract language and broad claims without concrete detail or personal grounding.</span></p>
+                <span style="color:var(--text-muted); font-style: italic;">This response relies heavily on abstract language and broad claims without concrete detail or personal grounding.</span></p>
             </div>
             <div class="rubric-rule ai-rule">
                 <p><strong>Example 2 — Majority Language Enhancement (Select Option 2)</strong><br>
                 "In my second year at university, I noticed that many first-generation students struggled to navigate academic requirements. I plan to create a peer mentorship network that offers structured workshops and simplified guides to reduce confusion and improve retention."<br>
-                <span style="color:#64748b; font-style: italic; font-size: 13px;">The idea is specific and grounded. If similar polish appears consistently across the application, Option 2 should be selected.</span></p>
+                <span style="color:var(--text-muted); font-style: italic;">The idea is specific and grounded. If similar polish appears consistently across the application, Option 2 should be selected.</span></p>
             </div>
             <div class="rubric-rule ai-rule">
                 <p><strong>Example 3 — Limited Editing Support (Select Option 3)</strong><br>
                 “I started a small tutoring group after realizing many of my classmates were struggling with calculus. At first, we simply met to review assignments together, but over time it developed into a more organized peer-support network that improved both confidence and performance. Through this experience, I came to better understand the importance of accessible academic support structures within university communities.”<br>
-                <span style="color:#64748b; font-style: italic; font-size: 13px;">This paragraph is clearly rooted in a specific personal experience, but the structure and phrasing are noticeably more polished than the applicant’s typical informal tone elsewhere.</span></p>
+                <span style="color:var(--text-muted); font-style: italic;">This paragraph is clearly rooted in a specific personal experience, but the structure and phrasing are noticeably more polished than the applicant’s typical informal tone elsewhere.</span></p>
             </div>
             <div class="rubric-rule ai-rule">
                 <p><strong>Example 4 — Fully Original (Select Option 4)</strong><br>
                 "When heavy rains damaged several homes in my area, I organized classmates to collect supplies. We did not have a plan at first, and we made mistakes, but the experience showed me how unprepared we were. That is why I want to create a campus emergency response training group."<br>
-                <span style="color:#64748b; font-style: italic; font-size: 13px;">This response demonstrates specificity, lived experience, and authentic reflection.</span></p>
+                <span style="color:var(--text-muted); font-style: italic;">This response demonstrates specificity, lived experience, and authentic reflection.</span></p>
             </div>
         </div>
 
         <div class="rubric-section ai-section" style="border-bottom: none;">
             <h4>Final Guidance</h4>
-            <div class="rubric-rule ai-rule" style="background: #fef2f2; border-left-color: #ef4444 !important;">
-                <p>AI detection requires careful judgment. <strong style="color: #b91c1c;">Polished writing alone should not be penalized, and such applications must not be rejected.</strong> The determining factor is originality.</p>
+            <div class="rubric-rule ai-rule" style="background: #fff1f2; border-left-color: #ef4444 !important; color: #7f1d1d;">
+                <p>AI detection requires careful judgment. <strong>Polished writing alone should not be penalized, and such applications must not be rejected.</strong> The determining factor is originality.</p>
                 <p>If the ideas, reasoning, and insight clearly originate from the applicant, minor editing assistance is acceptable. If originality appears compromised or the application lacks authentic substance, it must be marked accordingly.</p>
                 <p>This policy is intended to ensure fairness, protect authenticity, and uphold the integrity of the Millennium Fellowship admissions process.</p>
             </div>
@@ -548,8 +563,8 @@
         <div class="logo-container">
             <img src="logo.png.jpg" alt="MCN Logo" class="logo-img" id="officialLogo">
         </div>
-        <h1 style="margin:0; font-size: 34px; font-weight: 800; letter-spacing: -0.5px;">Admissions Reviewers Toolkit</h1>
-        <p style="margin:12px 0 0; opacity: 0.95; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; font-size: 13px; color: #bae6fd;">Developed by Akhyear Mushfiqur Rahman, Millennium Fellow'25</p>
+        <h1 style="margin:0; font-size: 38px; font-weight: 800; letter-spacing: -1px;">Admissions Reviewers Toolkit</h1>
+        <p>Developed by Akhyear Mushfiqur Rahman, Millennium Fellow'25</p>
     </div>
 
     <div class="setup-grid" id="setupGrid">
@@ -569,7 +584,7 @@
         <div class="empty-state">
             <span class="joyful-emoji">✨</span>
             <h3>Ready to Discover a Changemaker!</h3>
-            <p style="margin-bottom: 25px;">Start your evaluation session by following the guide below.</p>
+            <p style="margin-bottom: 35px;">Start your evaluation session by following the guide below.</p>
             
             <div class="onboarding-grid">
                 <div class="onboard-card">
@@ -591,10 +606,10 @@
                 </div>
             </div>
 
-            <div style="margin-top: 35px; background: rgba(248, 250, 252, 0.8); border: 1px solid #e2e8f0; border-left: 5px solid #3b82f6; padding: 25px; border-radius: 16px; text-align: left; font-size: 14px; color: #475569; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); line-height: 1.7;">
-                <strong style="color: #1e3a8a; font-size: 15px; display: block; margin-bottom: 8px;">📌 Disclaimer & Important Notice</strong>
-                This toolkit is an independent, personal project developed by <strong>Akhyear Mushfiqur Rahman</strong> (Millennium Fellow '25, GAC '26 Member, and Economics major at the University of Dhaka). It is not an officially mandated platform by the Millennium Campus Network.<br><br>
-                Please note that this tool <strong>cannot and will not</strong> change your initial evaluation sheet. It is designed solely to help you generate draft assessments more efficiently in a distraction-free environment. You will still need to manually transfer or paste your final evaluations into your actual assigned assessment sheet following the draft you create here.
+            <div style="margin-top: 40px; background: rgba(254, 243, 199, 0.4); border: 1px solid #fde68a; border-left: 5px solid var(--joyful-orange); padding: 25px 30px; border-radius: 20px; text-align: left; font-size: 15px; color: #92400e; box-shadow: var(--shadow-soft); line-height: 1.7;">
+                <strong style="font-size: 16px; display: block; margin-bottom: 8px;">⚠️ Disclaimer & Important Notice:</strong> 
+                This toolkit is an independent, personal project developed by <strong>Akhyear Mushfiqur Rahman</strong> (Millennium Fellow '25, GAC '26 Member, and Economics major at the University of Dhaka) and is not an officially mandated platform by the Millennium Campus Network. <br><br>
+                Please note that this tool cannot directly modify your official evaluation spreadsheet. It is designed solely to help you generate draft assessments efficiently in a distraction-free environment. You will still need to manually transfer or paste your final evaluations into your actual assigned assessment sheet.
             </div>
 
         </div>
@@ -614,7 +629,7 @@
     </div>
 
     <div class="eval-board" id="evalBoard">
-        <h3 style="margin-top:0; color:var(--mcn-navy); font-size: 24px; font-weight: 800; margin-bottom: 25px;">Final Assessment</h3>
+        <h3 style="margin-top:0; color:var(--mcn-navy); font-size: 26px; font-weight: 800; margin-bottom: 25px; letter-spacing: -0.5px;">Final Assessment</h3>
         
         <div class="eval-row">
             <div class="eval-q-text">1. Student is leading or involved in a social impact organization, project, creative initiative, social enterprise, etc.</div>
@@ -793,7 +808,7 @@ function loadData() {
             const lastName = student["Last Name"] || "Candidate";
             currentApplicantName = (firstName + "_" + lastName).trim();
 
-            let html = "<div class='animated-entry'><h2 style='color:var(--mcn-navy); margin-bottom: 30px; font-weight: 800; font-size: 28px;'>Applicant Profile</h2>";
+            let html = "<div class='animated-entry'><h2 style='color:var(--mcn-navy); margin-bottom: 30px; font-weight: 800; font-size: 28px; letter-spacing: -0.5px;'>Applicant Profile</h2>";
 
             for (const key in student) {
                 if (student[key] && student[key].trim() !== "") {
@@ -861,7 +876,7 @@ function copyScores() {
         btn.style.background = "linear-gradient(135deg, #059669, #047857)"; 
         setTimeout(() => {
             btn.innerText = "Copy Scores to Clipboard";
-            btn.style.background = "linear-gradient(135deg, var(--success-green), #059669)";
+            btn.style.background = "linear-gradient(135deg, var(--success-green), #047857)";
         }, 3000);
     });
 }
