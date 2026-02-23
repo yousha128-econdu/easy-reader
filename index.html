@@ -137,7 +137,7 @@
         }
         .impact-card:hover { box-shadow: 0 20px 40px -10px rgba(0, 86, 179, 0.1); transform: translateX(5px); border-left-color: var(--mcn-blue); }
         .card-label { font-size: 13px; font-weight: 900; color: #94a3b8; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
-        .card-value { font-size: 18px; line-height: 1.8; color: var(--text-dark); white-space: pre-wrap; }
+        .card-value { font-size: 17px; line-height: 1.8; color: var(--text-dark); white-space: pre-wrap; }
         
         .card-value a {
             color: #38bdf8;
@@ -191,7 +191,7 @@
         .empty-state p { font-size: 18px; line-height: 1.6; }
         .joyful-emoji { font-size: 48px; margin-bottom: 20px; display: block; animation: gentleFadeIn 1s ease forwards; }
 
-        /* --- THE NEW SLIDING RUBRIC DRAWER --- */
+        /* --- THE EXPANDED SLIDING RUBRIC DRAWER --- */
         .btn-toggle-rubric {
             position: fixed;
             right: -5px;
@@ -218,8 +218,8 @@
         .rubric-panel {
             position: fixed;
             top: 0;
-            right: -500px;
-            width: 450px;
+            right: -600px;
+            width: 550px; /* Widened for better reading of detailed text */
             height: 100vh;
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(25px);
@@ -246,13 +246,21 @@
         .close-rubric { background: none; border: none; color: white; font-size: 28px; cursor: pointer; transition: 0.2s; }
         .close-rubric:hover { color: #f87171; transform: scale(1.1); }
 
-        .rubric-content { padding: 30px; }
+        .rubric-content { padding: 30px; color: var(--text-dark); }
         .rubric-section { margin-bottom: 30px; border-bottom: 2px dashed #e2e8f0; padding-bottom: 20px; }
-        .rubric-section h4 { color: var(--mcn-blue); font-size: 18px; margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 1px; }
-        .rubric-rule { background: #f8fafc; border-left: 4px solid #38bdf8; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
-        .rubric-rule p { margin: 0 0 8px 0; font-size: 14px; line-height: 1.6; }
-        .rubric-score { display: inline-block; background: #e0e7ff; color: #4338ca; font-size: 12px; font-weight: 800; padding: 4px 10px; border-radius: 20px; margin-right: 5px; }
-        .rubric-bad { background: #fee2e2; color: #b91c1c; }
+        .rubric-section h4 { color: var(--mcn-blue); font-size: 18px; margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 1px; border-left: 5px solid var(--mcn-blue); padding-left: 10px; }
+        
+        .rubric-rule { background: #f8fafc; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #e2e8f0; }
+        .rubric-rule p { margin: 0 0 8px 0; font-size: 13px; line-height: 1.5; }
+        
+        /* Specific Score Styling for the Rubric Scale */
+        .score-badge { font-weight: 800; padding: 3px 8px; border-radius: 4px; display: inline-block; margin-right: 8px; color: white; min-width: 65px; text-align: center; }
+        .s5 { background: #10b981; } /* Highly Agree */
+        .s4 { background: #34d399; } /* Agree */
+        .s3 { background: #fbbf24; color: #78350f; } /* Unsure/Neutral */
+        .s2 { background: #f87171; } /* Disagree */
+        .s1 { background: #dc2626; } /* Highly Disagree */
+        .s-yn { background: #4f46e5; } /* Yes/Maybe/No */
     </style>
 </head>
 <body>
@@ -270,55 +278,88 @@
 
 <div class="rubric-panel" id="rubricPanel">
     <div class="rubric-header">
-        <h2>GAC Scoring Guide</h2>
+        <h2>Official Evaluation Rubric</h2>
         <button class="close-rubric" onclick="toggleRubric()">×</button>
     </div>
     <div class="rubric-content">
         
         <div class="rubric-section">
-            <h4>Part 1: Project & Impact</h4>
+            <h4>Part 1: Project Description & SDG</h4>
             <div class="rubric-rule">
-                <p><strong>Description Clarity</strong></p>
-                <p><span class="rubric-score">Score 5</span> Highly clear, simple language, no buzzwords. Reads as if explaining to a friend.</p>
-                <p><span class="rubric-score rubric-bad">Score 1</span> Unclear, relies heavily on jargon and buzzwords. Inaccessible.</p>
+                <p><strong>Clarity & Problem Identification (1.1 - 1.3)</strong></p>
+                <p><span class="score-badge s5">5 - Highly</span> Candidate effectively identifies a problem related to at least one SDG and offers a compelling response. Description is highly clear and uses simple language as if explaining to a friend. Avoids all buzzwords. </p>
+                <p><span class="score-badge s4">4 - Agree</span> Identifies a problem related to an SDG, but with some lack of clarity. Reasonably compelling response. Mostly uses simple language; 1-2 minor technical terms allowed. </p>
+                <p><span class="score-badge s3">3 - Unsure</span> Description generally understandable but lacks consistency in clarity. Uses buzzwords or technical terms that confuse a non-expert. </p>
+                <p><span class="score-badge s2">2 - Disagree</span> Problem statement lacks clarity or fails to address a significant issue. Not a compelling response. Overuses jargon. </p>
+                <p><span class="score-badge s1">1 - Highly</span> Fails to relate to an SDG or offers a poor response. Phrases answers in future uncertainty ("can do", "will try"). Heavily relies on jargon. </p>
             </div>
             <div class="rubric-rule">
-                <p><strong>SDG Alignment</strong></p>
-                <p><span class="rubric-score">Score 5</span> Identifies a problem related to an SDG and offers a compelling response.</p>
-                <p><span class="rubric-score rubric-bad">Score 1</span> No connection to an SDG or offers a poor response.</p>
+                <p><strong>Number of Lives Impacted (1.9 & 2)</strong></p>
+                <p><span class="score-badge s5">5 - Highly</span> Specific, well-reasoned number based on concrete plans and target groups. Demonstrates understanding of potential impact limitations. </p>
+                <p><span class="score-badge s4">4 - Agree</span> Reasonable number with some explanation. May lack details about target groups or project reach. </p>
+                <p><span class="score-badge s3">3 - Unsure</span> Expresses uncertainty or avoids giving a specific estimate. Needs guidance on quantifying impact. </p>
+                <p><span class="score-badge s2">2 - Disagree</span> Unrealistic number without justification or contradicts other info in application. </p>
+                <p><span class="score-badge s1">1 - Highly</span> Claims no positive impact or suggests negative consequences. Raises concerns about feasibility. </p>
+            </div>
+            <div class="rubric-rule">
+                <p><strong>SDG & UNAI Principles (2.1 & 2.2)</strong></p>
+                <p><span class="score-badge s5">5 - Highly</span> Clearly identifies specific SDG/UNAI and provides a convincing explanation directly addressing core objectives. Deep understanding. </p>
+                <p><span class="score-badge s4">4 - Agree</span> Identifies relevant SDG/UNAI and makes reasonable connection, but lacks depth or specificity. </p>
+                <p><span class="score-badge s3">3 - Unsure</span> Identifies connection but unsure which best aligns, or connection is vague. </p>
+                <p><span class="score-badge s2">2 - Disagree</span> Identifies irrelevant SDG/UNAI or fails to explain connection. Limited understanding. </p>
+                <p><span class="score-badge s1">1 - Highly</span> No connection to any SDG/UNAI. Actively rejects relevance or shows clear misunderstanding. </p>
             </div>
         </div>
 
         <div class="rubric-section">
             <h4>Part 1: Proximity to Issue</h4>
             <div class="rubric-rule">
-                <p><strong>Community Connection</strong></p>
-                <p><span class="rubric-score">Score 5</span> Deep, authentic connection. Active member or has impactful relationships with the target group.</p>
-                <p><span class="rubric-score rubric-bad">Score 1</span> No connection, biased views, harmful stereotypes, or lacks empathy.</p>
+                <p><strong>Community Connection (2.2)</strong></p>
+                <p><span class="score-badge s5">5 - Highly</span> Strong personal connection. Actively involved as a member or through deep, impactful relationships (extensive personal stories, concrete examples). </p>
+                <p><span class="score-badge s4">4 - Agree</span> Shows some connection or ongoing interactions (examples of involvement, but lacks depth or current engagement). </p>
+                <p><span class="score-badge s3">3 - Unsure</span> Unclear level of connection. Vague statements, conflicting information, or no clear evidence of engagement. </p>
+                <p><span class="score-badge s2">2 - Disagree</span> No clear connection. Suggests involvement was superficial or not impactful. Dismissive language. </p>
+                <p><span class="score-badge s1">1 - Highly</span> No connection. Expresses biased views, lacks empathy, uses harmful stereotypes. </p>
             </div>
         </div>
 
         <div class="rubric-section">
-            <h4>Part 2: Leadership Potential</h4>
+            <h4>Part 2: You as a Leader</h4>
             <div class="rubric-rule">
-                <p><strong>Personal Motivation</strong></p>
-                <p><span class="rubric-score">Score 5</span> Articulates a deep, personal "why." The passion feels lived-in and completely authentic.</p>
-                <p><span class="rubric-score rubric-bad">Score 1</span> Unclear motivation. Focused on resume-building or external rewards instead of social commitment.</p>
+                <p><strong>Personal Motivation (Q1)</strong></p>
+                <p><span class="score-badge s5">5 - Highly</span> Clear/compelling personal story deeply connected to social issue. Articulates deep personal "why." Passion feels lived-in and authentic. </p>
+                <p><span class="score-badge s4">4 - Agree</span> Explains interest sincerely. Mentions personal experiences, but link to social impact is not fully developed. </p>
+                <p><span class="score-badge s3">3 - Unsure</span> States reasons showing some alignment, but personal "why" remains surface-level. Mentions irrelevant personal experiences. </p>
+                <p><span class="score-badge s2">2 - Disagree</span> Reasons feel generic or vague. Motivation appears weak or unclear. </p>
+                <p><span class="score-badge s1">1 - Highly</span> Motivation unclear or primarily focused on resume-building/credentials with no personal or social commitment. </p>
             </div>
             <div class="rubric-rule">
-                <p><strong>MCN Values</strong></p>
-                <p><span class="rubric-score">Score 5</span> Provides detailed examples of empathetic, humble, and inclusive leadership.</p>
-                <p><span class="rubric-score rubric-bad">Score 1</span> Focuses on personal success and contradicts or undermines MCN values.</p>
+                <p><strong>MCN Values & Fellowship (Q2)</strong></p>
+                <p><span class="score-badge s5">5 - Highly</span> Clear understanding of MCN mission/values. Genuine desire to contribute. Demonstrates real commitment and aligns own values. </p>
+                <p><span class="score-badge s4">4 - Agree</span> Mentions values and outlines specific ways to engage. Focuses on contributing, but connection to own motivation is unclear. </p>
+                <p><span class="score-badge s3">3 - Unsure</span> Mentions program, but focus is primarily on personal benefits/receiving benefits. </p>
+                <p><span class="score-badge s2">2 - Disagree</span> Mentions values but plans are vague or unspecific. </p>
+                <p><span class="score-badge s1">1 - Highly</span> Little to no knowledge of program values. No connection between fellowship and social impact goals. </p>
+            </div>
+            <div class="rubric-rule">
+                <p><strong>Leadership & Teamwork (Q3)</strong></p>
+                <p><span class="score-badge s5">5 - Highly</span> Detailed example of empathetic/humble/inclusive leadership. Shows genuine consideration for others. Values the "we" over the "I". </p>
+                <p><span class="score-badge s4">4 - Agree</span> Mentions leadership and MCN value, but details are vague. Recognizes importance of fellowship community. </p>
+                <p><span class="score-badge s3">3 - Unsure</span> Unclear if true leadership position. Actions primarily focused on achieving results or gaining recognition. </p>
+                <p><span class="score-badge s2">2 - Disagree</span> Response does not reflect teamwork or collaboration. Focuses on personal gain or individual success. </p>
+                <p><span class="score-badge s1">1 - Highly</span> No examples of leadership. Actions contradict MCN values. Does not lean toward teamwork. </p>
             </div>
         </div>
 
         <div class="rubric-section">
-            <h4>Part 3: Final Overview</h4>
+            <h4>Part 3: Overview Checks</h4>
             <div class="rubric-rule">
-                <p><strong>Key Checks (Yes/Maybe/No)</strong></p>
-                <p>• Does the applicant show ethical integrity?</p>
-                <p>• Do the responses seem completely authentic or AI-generated?</p>
-                <p>• Is the project highly unique and outstanding?</p>
+                <p><strong>Final Red Flags (Yes/Maybe/No)</strong></p>
+                <p><span class="score-badge s-yn">Ethics</span> Does something lead you to question their ethics or seem paternalistic? Can you trust their instincts? </p>
+                <p><span class="score-badge s-yn">Political</span> Is the work politically sensitive? </p>
+                <p><span class="score-badge s-yn">Unique</span> Is this project/emotional investment very unique and extraordinary for MCN to take note of? [cite: 5]</p>
+                <p><span class="score-badge s-yn">Tech/Health</span> Using Tech for Impact (AI, robotics, apps) or Public Health project? [cite: 5]</p>
+                <p><span class="score-badge s-yn">AI Gen</span> Do the responses seem AI-generated? [cite: 5]</p>
             </div>
         </div>
 
@@ -409,7 +450,6 @@
 let currentFullText = "";
 let currentApplicantName = "Applicant";
 
-// The simple function to open and close the rubric drawer smoothly
 function toggleRubric() {
     const panel = document.getElementById('rubricPanel');
     panel.classList.toggle('open');
@@ -591,7 +631,6 @@ function saveAsPDF() {
     const btnPdf = document.getElementById('btnPdf');
     btnPdf.innerText = "Scanning Document... Please Wait";
     
-    // We make sure the scanner hides the rubric button before printing
     document.getElementById('setupGrid').style.display = 'none';
     document.getElementById('authSuite').style.display = 'none';
     document.getElementById('navButtons').style.display = 'none';
@@ -600,7 +639,6 @@ function saveAsPDF() {
     document.getElementById('btnRubricToggle').style.display = 'none';
     btnPdf.style.display = 'none';
 
-    // We also forcefully close the rubric drawer if it was left open so it doesn't overlap the PDF
     document.getElementById('rubricPanel').classList.remove('open');
 
     const element = document.getElementById('pdfContentArea');
