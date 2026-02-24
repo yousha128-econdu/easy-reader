@@ -27,6 +27,7 @@
             --auth-purple-brand: #7c3aed;
             --success-green-brand: #059669;
             --joyful-orange-brand: #f59e0b;
+            --quillbot-green: #41C300; /* New QuillBot Green Variable */
 
             /* LIGHT THEME (Default) */
             --bg-gradient-start: #f1f5f9;
@@ -191,11 +192,11 @@
         .card-value a { color: var(--accent-blue); text-decoration: none; font-weight: 600; border-bottom: 2px solid #bae6fd; padding-bottom: 2px; letter-spacing: 0.5px; word-spacing: normal; }
         .card-value a:hover { color: var(--heading-color); border-bottom-color: var(--heading-color); background: var(--link-hover-bg); }
 
-        .auth-suite { background: linear-gradient(135deg, var(--input-bg), var(--white)); border: 1px solid var(--border-light); border-left: 6px solid var(--auth-purple-brand); padding: 35px 40px; border-radius: 24px; margin: 10px 50px 40px 50px; display: flex; align-items: center; justify-content: space-between; box-shadow: var(--shadow-soft); display: none; }
-        .auth-text h3 { margin: 0 0 8px 0; color: var(--auth-purple-brand); font-size: 22px; font-weight: 800; letter-spacing: -0.2px; word-spacing: 1.5px; }
+        .auth-suite { background: linear-gradient(135deg, var(--input-bg), var(--white)); border: 1px solid var(--border-light); border-left: 6px solid var(--quillbot-green); padding: 35px 40px; border-radius: 24px; margin: 10px 50px 40px 50px; display: flex; align-items: center; justify-content: space-between; box-shadow: var(--shadow-soft); display: none; }
+        .auth-text h3 { margin: 0 0 8px 0; color: var(--quillbot-green); font-size: 22px; font-weight: 800; letter-spacing: -0.2px; word-spacing: 1.5px; }
         .auth-text p { margin: 0; color: var(--text-muted); font-size: 15px; letter-spacing: 0.3px; word-spacing: 1.5px; }
-        .btn-auth { background: var(--auth-purple-brand); color: #ffffff; border: none; padding: 16px 28px; border-radius: 16px; font-weight: 700; font-size: 14px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 3px; box-shadow: 0 8px 15px -5px rgba(139, 92, 246, 0.3); font-family: inherit; }
-        .btn-auth:hover { transform: translateY(-3px); box-shadow: 0 12px 20px -5px rgba(139, 92, 246, 0.4); }
+        .btn-auth { background: var(--quillbot-green); color: #ffffff; border: none; padding: 16px 28px; border-radius: 16px; font-weight: 700; font-size: 14px; cursor: pointer; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 3px; box-shadow: 0 8px 15px -5px rgba(65, 195, 0, 0.3); font-family: inherit; }
+        .btn-auth:hover { transform: translateY(-3px); box-shadow: 0 12px 20px -5px rgba(65, 195, 0, 0.4); }
 
         .nav-buttons { display: flex; justify-content: space-between; margin: 0 50px 40px 50px; padding-top: 35px; border-top: 1px solid var(--border-light); display: none; }
         .nav-btn { background: var(--white); color: var(--text-dark); border: 2px solid var(--border-light); padding: 16px 35px; border-radius: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; width: 48%; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 3px; box-shadow: var(--shadow-soft); font-family: inherit; }
@@ -558,7 +559,7 @@
                 <p><span class="score-badge s5">5 - Highly Agree</span> The candidate articulates how their own values align with the program's values and aslo outlines specific ways they will engage with the program's resources and opportunities.</p>
                 <p><span class="score-badge s4">4 - Agree</span> The candidate mentions the program's values and also contributing to the program, but the connection to their own motivation is unclear and their plans are vague or unspecific.</p>
                 <p><span class="score-badge s3">3 - Unsure</span> The candidate mentions the program, but their focus is primarily on personal benefits or outcomes and focuses primarily on receiving benefits from the program with little mention of contribution.</p>
-                <p><span class="score-badge s1">1/2 - Disagree</span> The candidate demonstrates little to no knowledge of the program's values or mission AND does not demonstrate a connection between the fellowship and their social impact goals.</p>
+                <p><span class="score-badge s1/2 - Disagree</span> The candidate demonstrates little to no knowledge of the program's values or mission AND does not demonstrate a connection between the fellowship and their social impact goals.</p>
             </div>
             
             <div class="rubric-rule">
@@ -566,7 +567,7 @@
                 <p><span class="score-badge s5">5 - Highly Agree</span> The candidate clearly describes their role and responsibilities as a leader and their actions show genuine consideration for others' feelings and perspectives.</p>
                 <p><span class="score-badge s4">4 - Agree</span> The candidate mentions a leadership experience and mentions relevant MCN value, but the details are vague or incomplete and their demonstration is unclear or underdeveloped.</p>
                 <p><span class="score-badge s3">3 - Unsure</span> The candidate mentions leadership, but it's unclear if they were in a true leadership position and the actions are primarily focused on achieving results or gaining recognition.</p>
-                <p><span class="score-badge s1">1/2 - Disagree</span> The candidate does not provide any examples of leadership experience and their actions contradict or undermine MCN Values.</p>
+                <p><span class="score-badge s1/2 - Disagree</span> The candidate does not provide any examples of leadership experience and their actions contradict or undermine MCN Values.</p>
             </div>
             
             <div class="rubric-rule">
@@ -575,7 +576,7 @@
                 <p><span class="score-badge s4">4 - Agree</span> Recognizes the importance of the fellowship community and mentions specific ways they hope to engage.</p>
                 <p><span class="score-badge s3">3 - Unsure</span> The candidate's response does not reflect their ideas on teamwork and collaboration.</p>
                 <p><span class="score-badge s2">2 - Disagree</span> Focuses almost entirely on personal gain or individual project success.</p>
-                <p><span class="score-badge s1">1 - Highly Disagree</span> Candidate does not lean toward teamwork or community values.</p>
+                <p><span class="score-badge s1 - Highly Disagree</span> Candidate does not lean toward teamwork or community values.</p>
             </div>
             
         </div>
