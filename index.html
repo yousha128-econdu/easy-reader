@@ -54,7 +54,7 @@
         }
 
         .container {
-            max-width: 1050px; margin: 0 auto; background: var(--white); border-radius: 32px; box-shadow: var(--shadow-float); border: 1px solid rgba(255, 255, 255, 0.9); transition: transform 0.4s ease;
+            max-width: 1050px; margin: 0 auto; background: var(--white); border-radius: 32px; box-shadow: var(--shadow-float); overflow: visible; border: 1px solid rgba(255, 255, 255, 0.9); transition: transform 0.4s ease;
         }
 
         .header {
@@ -74,7 +74,6 @@
         .logo-img { max-width: 250px; height: auto; display: block; }
 
         .header h1 { margin: 0; font-size: 38px; font-weight: 800; letter-spacing: -1px; position: relative; z-index: 2; }
-        .header p { margin: 12px 0 0; opacity: 0.9; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 13px; color: #bae6fd; position: relative; z-index: 2; }
 
         .setup-grid {
             padding: 45px 50px; background: var(--white); display: grid; grid-template-columns: 1fr 130px 110px 160px; gap: 20px; align-items: flex-end; border-bottom: 1px solid var(--border-light);
@@ -93,6 +92,12 @@
         .btn-download-draft:hover { transform: translateY(-3px); box-shadow: 0 15px 25px -5px rgba(99, 102, 241, 0.4); }
 
         #displayArea { padding: 50px; }
+
+        @keyframes gentleFadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animated-entry { animation: gentleFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
         .onboarding-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 45px; text-align: left; }
         .onboard-card { background: var(--white); padding: 40px; border-radius: 24px; border: 1px solid var(--border-light); box-shadow: var(--shadow-soft); transition: all 0.3s ease; position: relative; overflow: hidden; }
@@ -144,25 +149,19 @@
         .btn-pdf { background: linear-gradient(135deg, #ef4444, #b91c1c); color: var(--white); border: none; padding: 22px; border-radius: 16px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1.5px; transition: all 0.3s ease; margin-top: 15px; box-shadow: 0 10px 20px -5px rgba(239, 68, 68, 0.3); font-size: 16px; font-family: inherit; }
         .btn-pdf:hover { transform: translateY(-3px); box-shadow: 0 15px 25px -5px rgba(239, 68, 68, 0.4); }
 
-        /* --- THE PROFESSIONAL FOOTER --- */
-        .footer {
-            margin: 50px auto 0 auto; max-width: 1050px; padding: 40px 50px; background: rgba(255, 255, 255, 0.8); border-radius: 32px; border: 1px solid var(--border-light); box-shadow: var(--shadow-soft); text-align: center; line-height: 1.8;
-        }
-        .footer-credit { font-size: 16px; font-weight: 800; color: var(--mcn-navy); margin-bottom: 5px; }
-        .footer-sub { font-size: 14px; color: var(--text-muted); font-weight: 500; margin-bottom: 20px; }
-        .footer-links { margin-bottom: 25px; }
-        .footer-links a { color: var(--mcn-blue); text-decoration: none; font-weight: 700; font-size: 14px; margin: 0 15px; text-transform: uppercase; letter-spacing: 1px; transition: 0.2s; padding-bottom: 4px; border-bottom: 2px solid transparent; }
-        .footer-links a:hover { border-bottom-color: var(--mcn-blue); color: var(--mcn-navy); }
-        .footer-disclaimer { font-size: 13px; color: #92400e; background: #fffbeb; padding: 20px 30px; border-radius: 16px; border: 1px solid #fde68a; max-width: 800px; margin: 0 auto; text-align: left; }
+        .empty-state { text-align: center; padding: 60px 20px 80px 20px; color: var(--text-muted); }
+        .empty-state h3 { font-size: 34px; color: var(--mcn-navy); margin-bottom: 15px; font-weight: 800; letter-spacing: -1px; }
+        .empty-state p { font-size: 18px; line-height: 1.6; max-width: 650px; margin: 0 auto; color: var(--text-muted); }
+        .joyful-emoji { font-size: 54px; margin-bottom: 20px; display: block; animation: gentleFadeIn 1s ease forwards; }
 
         .btn-toggle-rubric { position: fixed; right: -5px; top: 50%; transform: translateY(-50%); background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; padding: 18px 25px 18px 20px; border-radius: 20px 0 0 20px; border: none; font-weight: 800; font-size: 14px; cursor: pointer; box-shadow: -5px 5px 20px rgba(109, 40, 217, 0.25); z-index: 1000; transition: 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px; writing-mode: vertical-rl; text-orientation: mixed; font-family: inherit; }
         .btn-toggle-rubric:hover { padding-right: 35px; background: #5b21b6; }
-        .rubric-panel { position: fixed; top: 0; right: -700px; width: 650px; height: 100vh; background: #ffffff; box-shadow: -15px 0 40px rgba(0, 0, 0, 0.08); z-index: 1001; transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1); overflow-y: auto; border-left: 1px solid var(--border-light); }
+        .rubric-panel { position: fixed; top: 0; right: -750px; width: 700px; height: 100vh; background: #ffffff; box-shadow: -15px 0 40px rgba(0, 0, 0, 0.08); z-index: 1001; transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1); overflow-y: auto; border-left: 1px solid var(--border-light); }
         .rubric-panel.open { right: 0; }
 
         .btn-toggle-ai { position: fixed; left: -5px; top: 50%; transform: translateY(-50%); background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 18px 20px 18px 25px; border-radius: 0 20px 20px 0; border: none; font-weight: 800; font-size: 14px; cursor: pointer; box-shadow: 5px 5px 20px rgba(217, 119, 6, 0.25); z-index: 1000; transition: 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px; writing-mode: vertical-rl; text-orientation: mixed; font-family: inherit; }
         .btn-toggle-ai:hover { padding-left: 35px; background: #b45309; }
-        .ai-panel { position: fixed; top: 0; left: -700px; width: 650px; height: 100vh; background: #ffffff; box-shadow: 15px 0 40px rgba(0, 0, 0, 0.08); z-index: 1001; transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1); overflow-y: auto; border-right: 1px solid var(--border-light); }
+        .ai-panel { position: fixed; top: 0; left: -750px; width: 700px; height: 100vh; background: #ffffff; box-shadow: 15px 0 40px rgba(0, 0, 0, 0.08); z-index: 1001; transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1); overflow-y: auto; border-right: 1px solid var(--border-light); }
         .ai-panel.open { left: 0; }
 
         .drawer-header { color: white; padding: 35px; position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; }
@@ -171,11 +170,18 @@
         .drawer-header h2 { margin: 0; font-size: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; line-height: 1.4; }
         .close-drawer { background: none; border: none; color: white; font-size: 32px; cursor: pointer; transition: 0.2s; padding: 0; line-height: 1; }
         .close-drawer:hover { color: #cbd5e1; transform: scale(1.1); }
+        
         .rubric-content { padding: 40px 35px; color: var(--text-dark); }
         .rubric-section { margin-bottom: 40px; border-bottom: 1px solid var(--border-light); padding-bottom: 25px; }
         .rubric-section h4 { color: var(--mcn-navy); font-size: 19px; margin: 0 0 20px 0; text-transform: uppercase; letter-spacing: 1px; border-left: 5px solid var(--mcn-blue); padding-left: 12px; font-weight: 800; }
+        
         .ai-section h4 { color: #92400e; border-left-color: #f59e0b; }
+        .ai-rule { border-left-color: #fde68a !important; }
+
         .rubric-rule { background: #f8fafc; padding: 20px; border-radius: 12px; margin-bottom: 15px; border: 1px solid var(--border-light); border-left: 4px solid #38bdf8; }
+        .rubric-rule p { margin: 0 0 10px 0; font-size: 14px; line-height: 1.6; }
+        .rubric-rule p:last-child { margin-bottom: 0; }
+        
         .score-badge { font-weight: 800; padding: 4px 10px; border-radius: 6px; display: inline-block; margin-right: 10px; color: white; min-width: 65px; text-align: center; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
         .s5 { background: #10b981; } 
         .s4 { background: #34d399; color: #064e3b; } 
@@ -183,12 +189,23 @@
         .s2 { background: #f87171; color: #7f1d1d; } 
         .s1 { background: #dc2626; } 
         .s-yn { background: var(--auth-purple); } 
+
         .ai-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 14px; margin-bottom: 20px; background: white; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-light); }
         .ai-table th { background: #fef3c7; color: #92400e; text-align: left; padding: 15px; border-bottom: 1px solid var(--border-light); font-weight: 800; }
         .ai-table td { padding: 15px; border-bottom: 1px solid var(--border-light); vertical-align: top; line-height: 1.6; border-right: 1px solid var(--border-light); }
         .ai-table td:last-child { border-right: none; }
         .ai-table tr:last-child td { border-bottom: none; }
         .ai-table-footer td { font-weight: 600; background: #fffbeb; font-style: italic; color: #b45309; }
+
+        /* THE ELEGANT MINIMALIST FOOTER */
+        .elegant-footer { max-width: 1050px; margin: 40px auto 20px auto; padding: 0 20px; text-align: center; color: var(--text-muted); font-size: 14px; line-height: 1.6; }
+        .elegant-footer p { margin: 5px 0; }
+        .elegant-footer strong { color: var(--mcn-navy); font-weight: 800; }
+        .elegant-footer-links { margin: 15px 0; display: flex; justify-content: center; gap: 20px; font-weight: 700; text-transform: uppercase; font-size: 13px; letter-spacing: 1px; }
+        .elegant-footer-links a { color: var(--mcn-blue); text-decoration: none; border-bottom: 2px solid transparent; padding-bottom: 2px; transition: 0.2s; }
+        .elegant-footer-links a:hover { color: var(--mcn-navy); border-bottom-color: var(--mcn-navy); }
+        .elegant-footer-disclaimer { margin-top: 20px; font-size: 12px; padding: 15px 25px; background: rgba(0,0,0,0.03); border-radius: 12px; color: var(--text-muted); display: inline-block; max-width: 800px; text-align: left; border: 1px solid rgba(0,0,0,0.05); }
+
     </style>
 </head>
 <body>
@@ -209,33 +226,30 @@
         <button class="close-drawer" onclick="toggleAiPolicy()">×</button>
     </div>
     <div class="rubric-content">
+        
         <div class="rubric-section ai-section">
             <div class="rubric-rule ai-rule" style="background: white;">
                 <p>The MCN Admissions Team acknowledges that artificial intelligence tools are widely accessible and commonly used by students for writing support. This policy does not prohibit the responsible use of such tools. Instead, it establishes clear boundaries to ensure that all submitted applications reflect the applicant’s own thinking, experiences, and ideas.</p>
-                <p><strong>✅ AI may be used as a supplementary editing tool.</strong> Acceptable uses include correcting grammar, improving clarity, refining sentence flow, or adjusting structure.</p>
-                <p><strong>❌ AI may not be used to generate the substance of an application.</strong> This includes developing project ideas, constructing arguments, producing reflections, or shaping the intellectual core of responses.</p>
-            </div>
-        </div>
-
-        <div class="rubric-section ai-section">
-            <h4>Decision Framework</h4>
-            <div class="rubric-rule ai-rule" style="background: white;">
-                <p>For each application, reviewers must select one of the following four options in the review sheet:</p>
-                <ol style="font-size: 14px; line-height: 1.8; color: var(--text-dark);">
-                    <li><strong>Option 1:</strong> Yes, the responses seem completely AI-generated and the ideas seem unoriginal.</li>
-                    <li><strong>Option 2:</strong> Yes, AI has been used for the majority of the application but only to enhance language and grammar; the ideas seem original.</li>
-                    <li><strong>Option 3:</strong> Yes, AI has been used for a short portion of the application but only to enhance language and grammar; the ideas seem original.</li>
-                    <li><strong>Option 4:</strong> No, the student’s responses seem completely original without any apparent use of AI.</li>
+                <p><strong>AI may be used as a supplementary editing tool.</strong> Acceptable uses include correcting grammar, improving clarity, refining sentence flow, or adjusting structure. These forms of assistance are comparable to using proofreading software or seeking language support.</p>
+                <p><strong>AI may not be used to generate the substance of an application.</strong> This includes developing project ideas, constructing arguments, producing reflections, or shaping the intellectual core of responses. The originality, reasoning, and insight presented in the application must belong to the student.</p>
+                <p>When evaluating applications, reviewers must assess two dimensions:</p>
+                <ol style="font-size: 14px; line-height: 1.6; margin-bottom: 10px; color: var(--text-dark); font-weight: 500;">
+                    <li>The nature of AI use: whether it appears limited to language refinement or extends to idea generation and substantive content.</li>
+                    <li>The extent of AI use: whether it appears in isolated sections or consistently throughout the application.</li>
                 </ol>
+                <p>The purpose of this policy is to preserve authenticity and fairness while recognizing that language support tools may be used responsibly.</p>
             </div>
         </div>
 
         <div class="rubric-section ai-section">
             <h4>Red Flags and Green Flags</h4>
+            <p style="font-size: 14px; margin-bottom: 20px; font-style: italic; color: var(--text-muted);">Reviewers should rely on pattern recognition across the full application rather than isolated phrases. The indicators below are intended to guide judgment, not replace it.</p>
+            
+            <h5 style="color: var(--text-dark); margin: 0 0 12px 0; font-size: 15px;">A. Assessing Whether AI Was Used for Substance or Only Language Refinement</h5>
             <table class="ai-table">
                 <tr>
-                    <th>Green Flags — Likely Editing Only</th>
-                    <th>Red Flags — Likely Substantive Reliance</th>
+                    <th>Green Flags — Likely Supplementary Editing Only</th>
+                    <th>Red Flags — Likely Substantive AI Reliance</th>
                 </tr>
                 <tr>
                     <td>Clear references to personal experiences, communities, or institutions.</td>
@@ -246,11 +260,135 @@
                     <td>Overuse of broad, vague, abstract terminology without specific examples.</td>
                 </tr>
                 <tr>
+                    <td>Reflections that demonstrate nuance, self-awareness, or lessons learned.</td>
+                    <td>Highly polished but generic responses that could apply to any context.</td>
+                </tr>
+                <tr>
                     <td>Natural variation in tone and structure across responses.</td>
-                    <td>Lack of personal voice, local context, or concrete detail</td>
+                    <td>Uniform paragraph structure across all answers.</td>
+                </tr>
+                <tr>
+                    <td>Minor imperfections or stylistic inconsistencies that reflect authentic writing.</td>
+                    <td>Lack of personal voice, local context, or concrete detail.</td>
+                </tr>
+                <tr class="ai-table-footer">
+                    <td>These features suggest that the applicant’s ideas are original, even if the language appears polished.</td>
+                    <td>These patterns may indicate that AI was used to generate or heavily shape the substance of the application.</td>
+                </tr>
+            </table>
+
+            <h5 style="color: var(--text-dark); margin: 30px 0 12px 0; font-size: 15px;">B. Assessing Whether AI Was Used Throughout or in Limited Portions</h5>
+            <table class="ai-table">
+                <tr>
+                    <th>Indicators of Limited Use</th>
+                    <th>Indicators of Extensive Use</th>
+                </tr>
+                <tr>
+                    <td>One or two responses noticeably more refined than others.</td>
+                    <td>Consistently uniform tone across all responses.</td>
+                </tr>
+                <tr>
+                    <td>Shifts in tone between sections.</td>
+                    <td>Similar sentence rhythm and structure throughout the application.</td>
+                </tr>
+                <tr>
+                    <td>Mostly grounded, authentic responses with isolated formal passages.</td>
+                    <td>Multiple abstract and vague answers.</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Lack of variation in vocabulary or expression style.</td>
+                </tr>
+                <tr class="ai-table-footer">
+                    <td>This pattern suggests that AI may have been used selectively for editing purposes.</td>
+                    <td>This pattern suggests sustained reliance rather than occasional editing support.</td>
                 </tr>
             </table>
         </div>
+
+        <div class="rubric-section ai-section">
+            <h4>Reviewer Decision Framework</h4>
+            <div class="rubric-rule ai-rule" style="background: white;">
+                <p>For each application, reviewers must select one of the following four options in the review sheet (the drop-down menu for the question, <strong>“Overall, do the applicant’s responses seem AI-generated?”</strong>):</p>
+                <ol style="font-size: 14px; line-height: 1.8; margin-bottom: 0; color: var(--text-dark);">
+                    <li><strong>Option 1:</strong> Yes, the responses seem completely AI-generated and the ideas seem unoriginal.</li>
+                    <li><strong>Option 2:</strong> Yes, AI has been used for the majority of the application but only to enhance language and grammar; the ideas seem original.</li>
+                    <li><strong>Option 3:</strong> Yes, AI has been used for a short portion of the application but only to enhance language and grammar; the ideas seem original.</li>
+                    <li><strong>Option 4:</strong> No, the student’s responses seem completely original without any apparent use of AI.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="rubric-section ai-section">
+            <h4>Decision Guide</h4>
+            <table class="ai-table">
+                <tr>
+                    <th>Observed Pattern</th>
+                    <th>Nature of Ideas</th>
+                    <th>Extent of AI Use</th>
+                    <th>Select</th>
+                </tr>
+                <tr>
+                    <td>Generic, repetitive, lacking specificity</td>
+                    <td>Ideas appear unoriginal</td>
+                    <td>Used throughout</td>
+                    <td>Option 1</td>
+                </tr>
+                <tr>
+                    <td>Clear original ideas; language uniformly polished</td>
+                    <td>Ideas seem original</td>
+                    <td>Majority of responses</td>
+                    <td>Option 2</td>
+                </tr>
+                <tr>
+                    <td>Strong authenticity overall with isolated polished sections</td>
+                    <td>Ideas seem original</td>
+                    <td>Limited portion</td>
+                    <td>Option 3</td>
+                </tr>
+                <tr>
+                    <td>Consistent authentic voice and specificity</td>
+                    <td>Ideas seem original</td>
+                    <td>No visible indicators</td>
+                    <td>Option 4</td>
+                </tr>
+            </table>
+            <p style="font-size:14px; margin-top:15px; font-weight: 700; text-align: center; color: var(--mcn-navy);">Reviewers must base their selection on the overall pattern of the application rather than a single sentence or paragraph.</p>
+        </div>
+
+        <div class="rubric-section ai-section">
+            <h4>Examples</h4>
+            <div class="rubric-rule ai-rule">
+                <p><strong>Example 1 — Likely Fully AI-Generated (Select Option 1)</strong><br>
+                "My initiative seeks to create sustainable and transformative impact by empowering marginalized communities through innovative and scalable solutions that foster systemic change and long-term resilience."<br>
+                <span style="color:var(--text-muted); font-style: italic;">This response relies heavily on abstract language and broad claims without concrete detail or personal grounding.</span></p>
+            </div>
+            <div class="rubric-rule ai-rule">
+                <p><strong>Example 2 — Majority Language Enhancement (Select Option 2)</strong><br>
+                "In my second year at university, I noticed that many first-generation students struggled to navigate academic requirements. I plan to create a peer mentorship network that offers structured workshops and simplified guides to reduce confusion and improve retention."<br>
+                <span style="color:var(--text-muted); font-style: italic;">The idea is specific and grounded. If similar polish appears consistently across the application, Option 2 should be selected.</span></p>
+            </div>
+            <div class="rubric-rule ai-rule">
+                <p><strong>Example 3 — Limited Editing Support (Select Option 3)</strong><br>
+                “I started a small tutoring group after realizing many of my classmates were struggling with calculus. At first, we simply met to review assignments together, but over time it developed into a more organized peer-support network that improved both confidence and performance. Through this experience, I came to better understand the importance of accessible academic support structures within university communities.”<br>
+                <span style="color:var(--text-muted); font-style: italic;">This paragraph is clearly rooted in a specific personal experience, but the structure and phrasing are noticeably more polished than the applicant’s typical informal tone elsewhere.</span></p>
+            </div>
+            <div class="rubric-rule ai-rule">
+                <p><strong>Example 4 — Fully Original (Select Option 4)</strong><br>
+                "When heavy rains damaged several homes in my area, I organized classmates to collect supplies. We did not have a plan at first, and we made mistakes, but the experience showed me how unprepared we were. That is why I want to create a campus emergency response training group."<br>
+                <span style="color:var(--text-muted); font-style: italic;">This response demonstrates specificity, lived experience, and authentic reflection.</span></p>
+            </div>
+        </div>
+
+        <div class="rubric-section ai-section" style="border-bottom: none;">
+            <h4>Final Guidance</h4>
+            <div class="rubric-rule ai-rule" style="background: white; border-left-color: #f59e0b !important; color: var(--text-dark);">
+                <p>AI detection requires careful judgment. <strong>Polished writing alone should not be penalized, and such applications must not be rejected.</strong> The determining factor is originality.</p>
+                <p>If the ideas, reasoning, and insight clearly originate from the applicant, minor editing assistance is acceptable. If originality appears compromised or the application lacks authentic substance, it must be marked accordingly.</p>
+                <p>This policy is intended to ensure fairness, protect authenticity, and uphold the integrity of the Millennium Fellowship admissions process.</p>
+            </div>
+        </div>
+
     </div>
 </div>
 
@@ -265,39 +403,117 @@
             <h4>Part 1: Project Description & SDG</h4>
             <div class="rubric-rule">
                 <p><strong>Clarity & Problem Identification (1.1 - 1.3)</strong></p>
-                <p><span class="score-badge s5">5 - Highly Agree</span> Candidate effectively identifies a problem that relates to at least one SDG and offers a compelling response. Description is highly clear and uses simple language. Avoids all buzzwords.</p>
-                <p><span class="score-badge s4">4 - Agree</span> Candidate identifies a problem related to at least one SDG, but with some lack of clarity. Description is clear and easy to understand.</p>
-                <p><span class="score-badge s3">3 - Unsure</span> Description is generally understandable but lacks consistency in clarity. Uses some buzzwords that may confuse a non-expert.</p>
-                <p><span class="score-badge s2">2 - Disagree</span> Problem statement lacks clarity or fails to address a significant issue. Description is vague or poorly structured.</p>
-                <p><span class="score-badge s1">1 - Highly Disagree</span> Candidate does not clearly identify a problem. Phrases answers in future uncertainty. Heavily relies on jargon.</p>
+                <p><span class="score-badge s5">5 - Highly Agree</span> Candidate effectively identifies a problem that relates to at least one SDG and offers a compelling response through their project. Description is highly clear and uses simple language as if explaining to a friend. Avoids all buzzwords.</p>
+                <p><span class="score-badge s4">4 - Agree</span> Candidate identifies a problem related to at least one SDG, but with some lack of clarity or specificity. They offer a reasonably compelling response to that problem. Description is clear and easy to understand. Mostly uses simple language, though it may include 1-2 minor technical terms that do not hinder comprehension.</p>
+                <p><span class="score-badge s3">3 - Unsure</span> Description is generally understandable but lacks consistency in clarity. Uses some buzzwords or technical terms that may confuse a non-expert reader.</p>
+                <p><span class="score-badge s2">2 - Disagree</span> Candidate's problem statement lacks clarity or fails to address a significant issue related at least one SDG or their project is not a compelling response to the problem identified. Description is vague or poorly structured. Overuses buzzwords or unexplained technical language, making it difficult for a non-expert to follow.</p>
+                <p><span class="score-badge s1">1 - Highly Disagree</span> Candidate does not clearly identify a problem or fails to relate it to at least one SDG or offers a poor response to the problem identified. Phrases answers in future uncertainity like "can do", "we can try", "will try to". Description is unclear, confusing, or inaccessible. Heavily relies on jargon and buzzwords, with little to no effort to simplify or explain ideas.</p>
             </div>
             
             <div class="rubric-rule">
                 <p><strong>Number of Lives Impacted (1.9 & 2)</strong></p>
-                <p><span class="score-badge s5">5 - Highly Agree</span> Candidate provides a specific, well-reasoned number based on concrete project plans. Demonstrates understanding of limitations.</p>
-                <p><span class="score-badge s4">4 - Agree</span> Candidate provides a reasonable number with some explanation of how they arrived at it.</p>
+                <p><span class="score-badge s5">5 - Highly Agree</span> Candidate provides a specific, well-reasoned number based on concrete project plans and target groups. They demonstrate understanding of potential impact limitations and provide justification for their estimate.</p>
+                <p><span class="score-badge s4">4 - Agree</span> Candidate provides a reasonable number with some explanation of how they arrived at it. However, they may lack details about target groups or project reach.</p>
+                <p><span class="score-badge s3">3 - Unsure</span> Candidate expresses uncertainity about number of lives impacted or avoids giving speific estimate. They may need furhter guidance or clarification on how to quantify impact.</p>
+                <p><span class="score-badge s2">2 - Disagree</span> Candidate provides an unrealistic number without justification or contradicts other information in their application. They may need to refine their project goals or impact measurement strategy.</p>
+                <p><span class="score-badge s1">1 - Highly Disagree</span> Candidate claims their project will have no positive impact or even suggests potential negative consequences. This raises concerns about project feasibility and alignment with program goals.</p>
+            </div>
+            
+            <div class="rubric-rule">
+                <p><strong>SDG & UNAI Principles (2.1 & 2.2)</strong></p>
+                <p><span class="score-badge s5">5 - Highly Agree</span> Candidate clearly identifies a specific SDG and provides a convincing explanation of how their work directly addresses its core objectives and targets. They demonstrate a deep understandng of the selected SDG and its relevance to their work. Candidate clearly and explicitly demonstrates a strong connection between their work and a specific UN Academic Impact Principle, citing relevant details and objectives. They show a deep understanding of the principle and how their work contributes to its goals.</p>
+                <p><span class="score-badge s4">4 - Agree</span> Candidate identifies a relevant SDG and makes a reasonable connection to their work, but the explanation lacks depth or specificity. They demonstrate some understanding of the chosen SDG but could elaborate on the specific targets their work addresses. Candidate acknowledges the UN Academic Impact Principles or is unable to clearly articulate a connection between their work and a UN Academic Impact Principle, but the explanation lacks specifics or depth. They could benefit from providing more concrete examples or elaborating on their understanding.</p>
+                <p><span class="score-badge s3">3 - Unsure</span> Candidate identifies a connection to the SDGs but is unsure which one best aligns with their work or provides a vague connection. They may need further guidance or information to identify the most relevant SDG. Candidate is unsure of the specific UN Academic Impact connection between their work and any principle. They may need further resources or guidance.</p>
+                <p><span class="score-badge s2">2 - Disagree</span> Candidate identifies an SDG that is not directly relevant to their work or fails to explain the connection convincingly. They demonstrate limited understanding of the SDGs or their relationship to their work. Candidate does not see a connection between their work and any UN Academic Impact Principles, potentially due to a misunderstanding of the principles or their own work's focus. Clarification and additional information may be needed.</p>
+                <p><span class="score-badge s1">1 - Highly Disagree</span> Candidate's work has no connection to any SDG or actively rejects the relelance of SDGs despite potential connections. They demonstrate a clear misunderstanding or disinterest in the SDGs. Candidate's work explicitly refutes any connection between their work and the UN Academic Impact Principles, potentially demonstrating a lack of awareness or alignment with the goals. Further exploration of their motivations and understanding is required.</p>
+            </div>
+        </div>
+
+        <div class="rubric-section">
+            <h4>Part 1: Proximity to Issue</h4>
+            <div class="rubric-rule">
+                <p><strong>Community Connection (2.2)</strong></p>
+                <p><span class="score-badge s5">5 - Highly Agree</span> Candidate Clearly demonstrates strong personal connection to the community, actively involved as a member or through deep, impactful relationships. (To note: Extensive personal stories, concrete examples of involvement, clear understanding of community dynamics).</p>
+                <p><span class="score-badge s4">4 - Agree</span> Candidate Shows some connection to the community, either through past experiences or ongoing interactions (Examples of involvement, understanding of community needs, but lacks depth or current engagement).</p>
+                <p><span class="score-badge s3">3 - Unsure</span> Unclear level of connection to the community, lacks specific details or offers conflicting information (Vague statements, limited understanding of community dynamics, no clear evidence of engagement).</p>
+                <p><span class="score-badge s2">2 - Disagree</span> Candidate does not demonstrate any clear connection to the community, suggests involvement was superficial or not impactful. (No examples, dismissive language about the community, prioritizes external perspectives).</p>
+                <p><span class="score-badge s1">1 - Highly Disagree</span> Candidate has no connection to the community, expresses biased vies and demonstrates lack of understanding and empathy. (Harmful stereotypes, insensitive language, clear disregard for community perspectives).</p>
             </div>
         </div>
 
         <div class="rubric-section">
             <h4>Part 2: You as a Leader</h4>
+            
             <div class="rubric-rule">
-                <p><strong>Personal Motivation (Q1)</strong></p>
-                <p><span class="score-badge s5">5 - Highly Agree</span> Demonstrates a clear and compelling personal story. Clearly articulates a deep, personal "why" behind their work.</p>
-                <p><span class="score-badge s3">3 - Unsure</span> Mentions personal experiences, but the link to social impact motivation is surface-level or underdeveloped.</p>
-                <p><span class="score-badge s1">1 - Highly Disagree</span> Motivation is unclear or primarily focused on résumé-building or external rewards.</p>
+                <p><strong>Personal Motivation - Thoughtful/Emotional Investment (Q1)</strong></p>
+                <p><span class="score-badge s5">5 - Highly Agree</span> The candidate demonstrates a clear and compelling personal story that explains their interest in social impact.</p>
+                <p><span class="score-badge s4">4 - Agree</span> The candidate shares a personal experience that deeply connects to their chosen social issue.</p>
+                <p><span class="score-badge s3">3 - Unsure</span> The candidate mentions personal experiences, but the link to social impact motivation is not fully developed.</p>
+                <p><span class="score-badge s2">2 - Disagree</span> The candidate mentions personal experiences, but they are not relevant to their chosen social issue.</p>
+                <p><span class="score-badge s1">1 - Highly Disagree</span> The candidate does not mention any personal experiences or motivations for their interest in social impact.</p>
+            </div>
+            
+            <div class="rubric-rule">
+                <p><strong>Personal Motivation - Genuine Passion (Q1)</strong></p>
+                <p><span class="score-badge s5">5 - Highly Agree</span> Clearly articulates a deep, personal "why" behind their work. The passion feels lived-in and authentic.</p>
+                <p><span class="score-badge s4">4 - Agree</span> Explains interest in the fellowship and its social impact clearly and sincerely. Shows strong, genuine motivation, though the personal connection may not be deeply explored.</p>
+                <p><span class="score-badge s3">3 - Unsure</span> States reasons for applying that show some interest and alignment with the fellowship, but the personal "why" remains surface-level or underdeveloped.</p>
+                <p><span class="score-badge s2">2 - Disagree</span> Reasons for applying feel generic or vague. Motivation appears weak or unclear, with limited connection to social impact or personal values.</p>
+                <p><span class="score-badge s1">1 - Highly Disagree</span> Motivation is unclear or primarily focused on résumé-building, credentials, or external rewards, with little to no indication of personal or social commitment.</p>
+            </div>
+            
+            <div class="rubric-rule">
+                <p><strong>MCN Values & Fellowship (Q2)</strong></p>
+                <p><span class="score-badge s5">5 - Highly Agree</span> The candidate articulates how their own values align with the program's values and aslo outlines specific ways they will engage with the program's resources and opportunities.</p>
+                <p><span class="score-badge s4">4 - Agree</span> The candidate mentions the program's values and also contributing to the program, but the connection to their own motivation is unclear and their plans are vague or unspecific.</p>
+                <p><span class="score-badge s3">3 - Unsure</span> The candidate mentions the program, but their focus is primarily on personal benefits or outcomes and focuses primarily on receiving benefits from the program with little mention of contribution.</p>
+                <p><span class="score-badge s1">1/2 - Disagree</span> The candidate demonstrates little to no knowledge of the program's values or mission AND does not demonstrate a connection between the fellowship and their social impact goals.</p>
+            </div>
+            
+            <div class="rubric-rule">
+                <p><strong>Leadership & Teamwork - Empathy & Humility (Q3)</strong></p>
+                <p><span class="score-badge s5">5 - Highly Agree</span> The candidate clearly describes their role and responsibilities as a leader and their actions show genuine consideration for others' feelings and perspectives.</p>
+                <p><span class="score-badge s4">4 - Agree</span> The candidate mentions a leadership experience and mentions relevant MCN value, but the details are vague or incomplete and their demonstration is unclear or underdeveloped.</p>
+                <p><span class="score-badge s3">3 - Unsure</span> The candidate mentions leadership, but it's unclear if they were in a true leadership position and the actions are primarily focused on achieving results or gaining recognition.</p>
+                <p><span class="score-badge s1">1/2 - Disagree</span> The candidate does not provide any examples of leadership experience and their actions contradict or undermine MCN Values.</p>
+            </div>
+            
+            <div class="rubric-rule">
+                <p><strong>Community Mindset (Q3)</strong></p>
+                <p><span class="score-badge s5">5 - Highly Agree</span> Expresses a strong desire to collaborate with and learn from other Fellows. Values the "we" over the "I".</p>
+                <p><span class="score-badge s4">4 - Agree</span> Recognizes the importance of the fellowship community and mentions specific ways they hope to engage.</p>
+                <p><span class="score-badge s3">3 - Unsure</span> The candidate's response does not reflect their ideas on teamwork and collaboration.</p>
+                <p><span class="score-badge s2">2 - Disagree</span> Focuses almost entirely on personal gain or individual project success.</p>
+                <p><span class="score-badge s1">1 - Highly Disagree</span> Candidate does not lean toward teamwork or community values.</p>
+            </div>
+            
+        </div>
+
+        <div class="rubric-section" style="border-bottom: none;">
+            <h4>Part 3: Overview Checks</h4>
+            <div class="rubric-rule">
+                <p><strong>Final Red Flags (Yes/Maybe/No)</strong></p>
+                <p><span class="score-badge s-yn">Ethics (Person)</span> Does something in this student's personal statements lead you to question their ethics? Do you feel you can't quite trust their instincts? If you have any question about this please first ask your fellow team members for insight, and if it still seems unclear ask team MCN.</p>
+                <p><span class="score-badge s-yn">Ethics (Project)</span> Does something about the project this student is working on seem unethical? Does it work with communities in a paternalistic way? If you have any question about this please first ask your fellow team members for insight, and if it still seems unclear ask team MCN or mark it as a maybe.</p>
+                <p><span class="score-badge s-yn">Political</span> Is the work this student is doing politically sensitive?</p>
+                <p><span class="score-badge s-yn">Unique Project</span> Is this applicant's project a very unique, extraordinary. and outstanding for MCN to take note of?</p>
+                <p><span class="score-badge s-yn">Unique Emotion</span> Is this applicant's emotional investment responses a very unique, extraordinary, and outstanding for MCN to take note of?</p>
+                <p><span class="score-badge s-yn">Tech for Impact</span> Is this candidate Using Tech for Impact? (e.g the use of Al, robotics, other emerging technologies, digital products like mobile apps, websites, software, hardware, devices, etc in advancing the SDGs or UNAI Principles)</p>
+                <p><span class="score-badge s-yn">Public Health</span> Is the candidate working on a public health project?</p>
+                <p><span class="score-badge s-yn">AI Gen</span> Overall, do the applicant's responses seem AI-generated?</p>
+                <p><span class="score-badge s-yn">Ethical Integrity</span> Overall, does the applicant show ethical integrity through their responses?</p>
             </div>
         </div>
     </div>
 </div>
 
 <div class="container" id="pdfContentArea">
+    
     <div class="header">
         <div class="logo-container">
             <img src="logo.png.jpg" alt="MCN Logo" class="logo-img" id="officialLogo">
         </div>
-        <h1>Admissions Reviewers Toolkit</h1>
-        <p>Developed By Akhyear Mushfiqur Rahman, Millennium Fellow'25 & GAC'26</p>
+        <h1 style="margin:0; font-size: 38px; font-weight: 800; letter-spacing: -1px;">Admissions Reviewers Toolkit</h1>
     </div>
 
     <div class="setup-grid" id="setupGrid">
@@ -317,7 +533,7 @@
         <div class="empty-state">
             <span class="joyful-emoji">✨</span>
             <h3>Ready to Discover a Changemaker!</h3>
-            <p style="margin-bottom: 25px;">Start your evaluation session by following the guide below.</p>
+            <p style="margin-bottom: 35px;">Start your evaluation session by following the guide below.</p>
             
             <div class="onboarding-grid">
                 <div class="onboard-card">
@@ -334,10 +550,11 @@
                         <li><strong>Paste & Fetch:</strong> Put your Master Sheet link in the top bar and select the row number you want to evaluate.</li>
                         <li><strong>Check the Rules:</strong> Use the side buttons to slide out the AI Policy and Official Rubric whenever you need them.</li>
                         <li><strong>Score the Applicant:</strong> Read the profile and fill out the 28-point assessment board at the bottom.</li>
-                        <li><strong>Save your Draft:</strong> Click <em>Copy Scores to Clipboard</em> or use <em>Draft CSV Sheet</em> before you manually select the options in the official form.</li>
+                        <li><strong>Save your Draft:</strong> Click <em>Copy Scores to Clipboard</em> to paste into a personal draft sheet, or use <em>Draft CSV Sheet</em> to download a backup before you manually select the options in the official form.</li>
                     </ol>
                 </div>
             </div>
+
         </div>
     </div>
 
@@ -355,165 +572,366 @@
     </div>
 
     <div class="eval-board" id="evalBoard">
-        <h3 style="margin-top:0; color:var(--mcn-navy); font-size: 26px; font-weight: 800; margin-bottom: 25px;">Final Assessment</h3>
-        <div id="evalContainer"></div>
+        <h3 style="margin-top:0; color:var(--mcn-navy); font-size: 26px; font-weight: 800; margin-bottom: 25px; letter-spacing: -0.5px;">Final Assessment</h3>
+        
+        <div class="eval-row">
+            <div class="eval-q-text">1. Student is leading or involved in a social impact organization, project, creative initiative, social enterprise, etc.</div>
+            <select id="eval_1" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">2. Student's description of the project is clear, accessible and easy to understand</div>
+            <select id="eval_2" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">3. Student presents clear and specific measurable goals and activities for their project during the fellowship period</div>
+            <select id="eval_3" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">4. Project demonstrates potential for sustainability and/or scalability beyond the fellowship period. This is to consider the long-term viability of the project.</div>
+            <select id="eval_4" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">5. Student’s work is genuinely connected to one or more SDGs or UN Academic Impact Principles.</div>
+            <select id="eval_5" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">6. Student’s work will offer a contribution to the Fellowship cohort on their campus and globally.</div>
+            <select id="eval_6" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">7. Student is close to the people they are trying to help. They are part of the community they are trying to help, or have built meaningful relationships with community members, or have done through research and preparatory work to feel confident that they understand the complexities of the issues they are addressing.</div>
+            <select id="eval_7" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">8. Political nature of project: Is the work this student is doing politically sensitive?</div>
+            <select id="eval_8" class="eval-input"><option value="">Select Option...</option><option value="Yes">Yes</option><option value="Maybe">Maybe</option><option value="No">No</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">9. Ethics of project: Does something about the project this student is working on seem unethical? Does it work with communities in a paternalistic way? If you have any question about this please first ask your fellow team members for insight, and if it still seems unclear ask team MCN or mark it as a maybe.</div>
+            <select id="eval_9" class="eval-input"><option value="">Select Option...</option><option value="Yes">Yes</option><option value="Maybe">Maybe</option><option value="No">No</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">10. Q1: What personal experiences have shaped your interest in creating social impact? In other words, why do you personally care about the issues you are working on or planning to work on? Tell us what drives you in your work. We want to hear your story</div>
+            <select id="eval_10" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">11. Q2: Why do you want to be a Millennium Fellow? How will you use this distinction towards your future social impact work?</div>
+            <select id="eval_11" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">12. Q3: MCN values that our community prioritizes empathetic, humble, inclusive leadership. Reflect upon your personal experience of acting as a leader, and share how you demonstrated one of these core values.</div>
+            <select id="eval_12" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">13. Student’s essay/video responses are thoughtful and demonstrate emotional investment, a genuine passion for social change work.</div>
+            <select id="eval_13" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">14. Student has a genuine passion for the work they are doing and are personally connected to it.</div>
+            <select id="eval_14" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">15. Student articulates a clear vision for how they will integrate social impact work into their future life and/or career.</div>
+            <select id="eval_15" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">16. Student’s motivation for social impact and joining the fellowship is related to their propsed project</div>
+            <select id="eval_16" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">17. Student demonstrates real commitment to the Fellowship program and a desire to invest in all it will involve.</div>
+            <select id="eval_17" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">18. Student demonstrates a clear understanding of the fellowship's requirements and expresses a willingness to actively participate in all aspects of the program.</div>
+            <select id="eval_18" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">19. Does the applicant demonstrate a community mindset?</div>
+            <select id="eval_19" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">20. Student is driven by a sense of values such as empathy and humility. (Watch out for applications that demonstrate that the student is actually driven by a desire for personal success and importance over social change)</div>
+            <select id="eval_20" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">21. Student provides specific examples of how they have demonstrated empathy and humility in their past experiences.</div>
+            <select id="eval_21" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">22. Ethics of person: Does something in this student’s personal statements lead you to question their ethics? Do you feel you can’t quite trust their instincts? If you have any question about this please first ask your fellow team members for insight, and if it still seems unclear ask team MCN.</div>
+            <select id="eval_22" class="eval-input"><option value="">Select Option...</option><option value="Yes">Yes</option><option value="Maybe">Maybe</option><option value="No">No</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">23. Overall, do the applicant's responses seem AI-generated?</div>
+            <select id="eval_23" class="eval-input">
+                <option value="">Select Option...</option>
+                <option value="1. Yes, completely AI-generated / unoriginal ideas">1. Yes, completely AI-generated / unoriginal ideas</option>
+                <option value="2. Yes, majority AI for language / original ideas">2. Yes, majority AI for language / original ideas</option>
+                <option value="3. Yes, short portion AI for language / original ideas">3. Yes, short portion AI for language / original ideas</option>
+                <option value="4. No, completely original no AI">4. No, completely original no AI</option>
+            </select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">24. Overall, does the applicant show ethical integrity through their responses?</div>
+            <select id="eval_24" class="eval-input"><option value="">Select Option...</option><option value="Yes">Yes</option><option value="Maybe">Maybe</option><option value="No">No</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">25. Your Overall Rating of the Applicant's Application</div>
+            <select id="eval_25" class="eval-input"><option value="">Select Rating...</option><option value="10">10 - Exceptional</option><option value="9">9 - Outstanding</option><option value="8">8 - Excellent</option><option value="7">7 - Very Good</option><option value="6">6 - Good</option><option value="5">5 - Average</option><option value="4">4 - Below Average</option><option value="3">3 - Poor</option><option value="2">2 - Very Poor</option><option value="1">1 - Unacceptable</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">26. Overall, what do you think about this applicant?</div>
+            <select id="eval_26" class="eval-input"><option value="">Select Final Decision...</option><option value="Accept this Applicant">Accept this Applicant</option><option value="Waitlist this Applicant">Waitlist this Applicant</option><option value="Reject this Applicant">Reject this Applicant</option></select>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">27. If you selected 'Reject this Applicant', please share below why.</div>
+            <textarea id="eval_27" class="eval-textarea" placeholder="Type your reasons here..."></textarea>
+        </div>
+        <div class="eval-row">
+            <div class="eval-q-text">28. [Optional] Do you have any comments about this application/applicant that we should keep in mind?</div>
+            <textarea id="eval_28" class="eval-textarea" placeholder="Type your comments here..."></textarea>
+        </div>
+
         <button class="btn-copy" onclick="copyScores()" id="btnCopyEval">Copy Scores to Clipboard</button>
         <button class="btn-draft" onclick="saveToDraft()" id="btnDraft">Export to Draft Sheet</button>
         <button class="btn-pdf" onclick="saveAsPDF()" id="btnPdf">Save Profile as PDF</button>
     </div>
 </div>
 
-<div class="footer">
-    <div class="footer-credit">Developed by Akhyear Mushfiqur Rahman</div>
-    <div class="footer-sub">
-        Millennium Fellow '25 | GAC '26 Member | Economics major at the University of Dhaka
+<div class="elegant-footer">
+    <p>Designed & Developed by <strong>Akhyear Mushfiqur Rahman</strong> <br> (Millennium Fellow '25 & GAC '26 Member)</p>
+    <div class="elegant-footer-links">
+        <a href="https://bd.linkedin.com/in/akhyear-mushfiqur-rahman" target="_blank">LinkedIn</a> • 
+        <a href="https://www.millenniumfellows.org/fellow/2025/ud/akhyear-mushfiqur-rahman" target="_blank">Millennium Fellow Profile</a>
     </div>
-    <div class="footer-links">
-        <a href="https://bd.linkedin.com/in/akhyear-mushfiqur-rahman" target="_blank">🔗 LinkedIn</a>
-        <a href="https://www.millenniumfellows.org/fellow/2025/ud/akhyear-mushfiqur-rahman" target="_blank">🌍 Millennium Fellow Profile</a>
-    </div>
-    <div class="footer-disclaimer">
-        <strong>⚠️ Important Notice:</strong> This toolkit is an independent personal project and is not an officially mandated platform by the Millennium Campus Network. This tool cannot directly modify your official evaluation spreadsheet. It is designed solely to help you generate draft assessments efficiently. You will still need to manually select your final evaluations from the dropdown menus in your actual assigned assessment sheet.
+    <div class="elegant-footer-disclaimer">
+        <strong>Disclaimer:</strong> This toolkit is an independent personal project developed by an Economics major at the University of Dhaka and is not an officially mandated platform by the Millennium Campus Network. It is designed solely to help generate draft assessments efficiently. You will still need to manually select your final evaluations in your actual assigned assessment sheet.
     </div>
 </div>
 
 <script>
 let currentFullText = "";
 let currentApplicantName = "Applicant";
-const evalIds = []; for(let i=1; i<=28; i++) { evalIds.push('eval_' + i); }
 
-// Assessment Questions Array
-const questions = [
-    "Student is leading or involved in a social impact organization, project, creative initiative, etc.",
-    "Student's description of the project is clear, accessible and easy to understand",
-    "Student presents clear and specific measurable goals and activities",
-    "Project demonstrates potential for sustainability and/or scalability",
-    "Student’s work is genuinely connected to one or more SDGs or UNAI Principles",
-    "Student’s work will offer a contribution to the Fellowship cohort",
-    "Student is close to the people they are trying to help (Proximity)",
-    "Political nature of project: Is the work politically sensitive?",
-    "Ethics of project: Does it seem unethical or paternalistic?",
-    "Q1: Personal experiences shaping interest in social impact (Story)",
-    "Q2: Why become a Millennium Fellow? Future use of distinction",
-    "Q3: Reflection on acting as an empathetic, humble, inclusive leader",
-    "Essay/video responses demonstrate emotional investment and passion",
-    "Student has a genuine passion and personal connection to the work",
-    "Articulates a clear vision for future social impact career/life",
-    "Motivation for joining is related to their proposed project",
-    "Demonstrates real commitment to the program requirements",
-    "Clear understanding and willingness to participate in all aspects",
-    "Does the applicant demonstrate a community mindset?",
-    "Student is driven by values (empathy/humility) over personal importance",
-    "Provides specific examples of demonstrating empathy and humility",
-    "Ethics of person: Do responses lead you to question their ethics?",
-    "Overall, do the responses seem AI-generated? (Option 1-4)",
-    "Overall, does the applicant show ethical integrity?",
-    "Your Overall Rating of the Applicant (1-10)",
-    "Overall, what do you think about this applicant? (Final Decision)",
-    "If you selected 'Reject this Applicant', please share why",
-    "[Optional] Additional comments about this application"
-];
-
-// Generate Evaluation UI
-const evalCont = document.getElementById('evalContainer');
-questions.forEach((q, i) => {
-    const num = i + 1;
-    let inputHtml = "";
-    
-    if (num === 23) { // AI Question
-        inputHtml = `<select id="eval_${num}" class="eval-input"><option value="">Select Option...</option><option value="Option 1">Option 1: Completely AI / Unoriginal</option><option value="Option 2">Option 2: Majority AI / Original Ideas</option><option value="Option 3">Option 3: Limited AI / Original Ideas</option><option value="Option 4">Option 4: Original No AI</option></select>`;
-    } else if (num === 25) { // Rating
-        inputHtml = `<select id="eval_${num}" class="eval-input"><option value="">Select Rating...</option>${[10,9,8,7,6,5,4,3,2,1].map(n => `<option value="${n}">${n}</option>`).join('')}</select>`;
-    } else if (num === 26) { // Decision
-        inputHtml = `<select id="eval_${num}" class="eval-input"><option value="">Select Decision...</option><option value="Accept">Accept</option><option value="Waitlist">Waitlist</option><option value="Reject">Reject</option></select>`;
-    } else if (num === 8 || num === 9 || num === 22 || num === 24) { // Yes/No
-        inputHtml = `<select id="eval_${num}" class="eval-input"><option value="">Select...</option><option value="Yes">Yes</option><option value="Maybe">Maybe</option><option value="No">No</option></select>`;
-    } else if (num >= 27) { // Text Areas
-        inputHtml = `<textarea id="eval_${num}" class="eval-textarea" placeholder="Enter details..."></textarea>`;
-    } else { // Standard 1-5 Score
-        inputHtml = `<select id="eval_${num}" class="eval-input"><option value="">Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>`;
-    }
-
-    evalCont.innerHTML += `<div class="eval-row"><div class="eval-q-text">${num}. ${q}</div>${inputHtml}</div>`;
-});
+const evalIds = [];
+for(let i=1; i<=28; i++) {
+    evalIds.push('eval_' + i);
+}
 
 function toggleRubric() { document.getElementById('rubricPanel').classList.toggle('open'); }
 function toggleAiPolicy() { document.getElementById('aiPanel').classList.toggle('open'); }
 
 function loadData() {
     let link = document.getElementById('sheetLink').value.trim();
-    const row = parseInt(document.getElementById('rowNum').value);
+    const rowInput = document.getElementById('rowNum');
+    const row = parseInt(rowInput.value);
     const output = document.getElementById('displayArea');
-    if (!link) return;
-    if (link.includes('/edit')) link = link.split('/edit')[0] + '/export?format=csv';
+    
+    document.getElementById('authSuite').style.display = "none";
+    document.getElementById('navButtons').style.display = "none";
+    document.getElementById('evalBoard').style.display = "none";
+
+    if (!link) {
+        output.innerHTML = "<div class='empty-state animated-entry' style='color:#ef4444;'><span class='joyful-emoji'>🔍</span><h3>Oops! Missing Link</h3><p>Please paste your master datasheet link first.</p></div>";
+        return;
+    }
+
+    if (link.includes('/edit')) { link = link.split('/edit')[0] + '/export?format=csv'; }
+
+    output.innerHTML = "<div class='empty-state animated-entry'><span class='joyful-emoji'>🚀</span><h3>Fetching Records...</h3><p>Gathering the candidate's amazing journey right now.</p></div>";
 
     Papa.parse(link, {
-        download: true, header: true,
+        download: true,
+        header: true,
         complete: function(results) {
             const data = results.data;
-            const student = data[row - 2];
-            if (!student) return;
-            currentFullText = "";
-            currentApplicantName = (student["First Name"] + "_" + student["Last Name"]).trim() || "Applicant";
-            let html = "<div class='animated-entry'><h2 style='color:var(--mcn-navy); margin-bottom: 30px; font-weight: 800;'>Applicant Profile</h2>";
+            const index = row - 2;
+
+            if (index < 0 || index >= data.length) {
+                output.innerHTML = "<div class='empty-state animated-entry' style='color:#ef4444;'><span class='joyful-emoji'>🏁</span><h3>End of the Line!</h3><p>Candidate row does not exist. You might have finished the list!</p></div>";
+                document.getElementById('navButtons').style.display = "flex";
+                return;
+            }
+
+            const student = data[index];
+            currentFullText = ""; 
+            
+            const firstName = student["First Name"] || "Unknown";
+            const lastName = student["Last Name"] || "Candidate";
+            currentApplicantName = (firstName + "_" + lastName).trim();
+
+            let html = "<div class='animated-entry'><h2 style='color:var(--mcn-navy); margin-bottom: 30px; font-weight: 800; font-size: 28px;'>Applicant Profile</h2>";
+
             for (const key in student) {
-                if (student[key]) {
-                    html += `<div class="impact-card"><span class="card-label">${key}</span><div class="card-value">${student[key]}</div></div>`;
-                    currentFullText += key + ": " + student[key] + "\n\n";
+                if (student[key] && student[key].trim() !== "") {
+                    let contentText = student[key];
+                    const linkFinder = /(https?:\/\/[^\s]+)/g;
+                    contentText = contentText.replace(linkFinder, '<a href="$1" target="_blank" title="Click to open link">$1</a>');
+
+                    html += `<div class="impact-card">
+                                <span class="card-label">${key}</span>
+                                <div class="card-value">${contentText}</div>
+                             </div>`;
+                    
+                    currentFullText += key + ":\n" + student[key] + "\n\n";
                 }
             }
-            output.innerHTML = html + "</div>";
+            html += "</div>";
+            output.innerHTML = html;
+            
             document.getElementById('authSuite').style.display = "flex";
+            document.getElementById('authSuite').classList.add('animated-entry');
             document.getElementById('navButtons').style.display = "flex";
+            document.getElementById('navButtons').classList.add('animated-entry');
             document.getElementById('evalBoard').style.display = "block";
+            document.getElementById('evalBoard').classList.add('animated-entry');
+            
+            document.getElementById('btnQuillbot').innerText = "Check with QuillBot \u2197";
+            document.getElementById('btnCopyEval').innerText = "Copy Scores to Clipboard";
         }
     });
 }
 
 function checkAuthenticity() {
-    navigator.clipboard.writeText(currentFullText);
-    window.open('https://quillbot.com/ai-content-detector', '_blank');
+    const btn = document.getElementById('btnQuillbot');
+    navigator.clipboard.writeText(currentFullText).then(() => {
+        btn.innerText = "Text Copied! Opening QuillBot...";
+        setTimeout(() => {
+            window.open('https://quillbot.com/ai-content-detector', '_blank');
+            btn.innerText = "Check with QuillBot \u2197";
+        }, 1000);
+    });
 }
 
 function changeRow(step) {
     const rowBox = document.getElementById('rowNum');
-    rowBox.value = Math.max(2, parseInt(rowBox.value) + step);
+    let currentRow = parseInt(rowBox.value);
+    let newRow = currentRow + step;
+    if (newRow < 2) newRow = 2;
+    rowBox.value = newRow;
     loadData();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function copyScores() {
-    const vals = evalIds.map(id => document.getElementById(id).value.replace(/\n/g, " "));
-    navigator.clipboard.writeText(vals.join("\t"));
-    document.getElementById('btnCopyEval').innerText = "✓ Copied as Tab-Separated Data";
-    setTimeout(() => { document.getElementById('btnCopyEval').innerText = "Copy Scores to Clipboard"; }, 2000);
+    const btn = document.getElementById('btnCopyEval');
+    
+    let values = evalIds.map(id => {
+        let val = document.getElementById(id).value;
+        return val.replace(/\n/g, " "); 
+    });
+    
+    const combinedAnswers = values.join("\t");
+    
+    navigator.clipboard.writeText(combinedAnswers).then(() => {
+        btn.innerText = "\u2713 Saved! Paste directly into your Sheet row";
+        btn.style.background = "linear-gradient(135deg, #059669, #047857)"; 
+        setTimeout(() => {
+            btn.innerText = "Copy Scores to Clipboard";
+            btn.style.background = "linear-gradient(135deg, var(--success-green), #059669)";
+        }, 3000);
+    });
 }
 
 function saveToDraft() {
     const row = document.getElementById('rowNum').value;
-    const vals = evalIds.map(id => document.getElementById(id).value.replace(/\n/g, " "));
+    const btn = document.getElementById('btnDraft');
+
+    let values = evalIds.map(id => document.getElementById(id).value.replace(/\n/g, " "));
     let drafts = JSON.parse(localStorage.getItem('mcn_eval_drafts')) || {};
-    drafts[row] = { name: currentApplicantName, scores: vals };
+
+    drafts[row] = { name: currentApplicantName, scores: values };
     localStorage.setItem('mcn_eval_drafts', JSON.stringify(drafts));
-    document.getElementById('btnDraft').innerText = "✓ Saved to Draft Memory";
-    setTimeout(() => { document.getElementById('btnDraft').innerText = "Export to Draft Sheet"; }, 2000);
+
+    btn.innerText = "\u2713 Added to Draft Memory!";
+    btn.style.background = "linear-gradient(135deg, #d97706, #b45309)"; 
+    
+    setTimeout(() => {
+        btn.innerText = "Export to Draft Sheet";
+        btn.style.background = "linear-gradient(135deg, var(--joyful-orange), #d97706)";
+    }, 2500);
 }
 
 function downloadDraftCSV() {
     let drafts = JSON.parse(localStorage.getItem('mcn_eval_drafts')) || {};
-    let csv = "Row,Name," + questions.map((_,i) => "Q"+(i+1)).join(",") + "\n";
-    Object.keys(drafts).sort((a,b)=>a-b).forEach(r => {
-        csv += `${r},"${drafts[r].name}",` + drafts[r].scores.map(v => `"${v}"`).join(",") + "\n";
+    let rows = Object.keys(drafts).sort((a, b) => parseInt(a) - parseInt(b));
+
+    if (rows.length === 0) {
+        alert("You have not saved any drafts yet! Evaluate a student and click 'Export to Draft Sheet' first.");
+        return;
+    }
+
+    let headers = "Row Number,Applicant Name," + Array.from({length: 28}, (_, i) => `Q${i+1}`).join(",") + "\n";
+    let csvContent = headers;
+
+    rows.forEach(row => {
+        let d = drafts[row];
+        let rowData = d.scores.map(v => `"${v}"`).join(",");
+        csvContent += `${row},"${d.name}",${rowData}\n`;
     });
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url; a.download = "MCN_Draft_Assessments.csv"; a.click();
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    link.setAttribute("href", url);
+    link.setAttribute("download", "MCN_Evaluations_Draft.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
 
 function saveAsPDF() {
+    const btnPdf = document.getElementById('btnPdf');
+    btnPdf.innerText = "Scanning Document... Please Wait";
+    
+    document.getElementById('setupGrid').style.display = 'none';
+    document.getElementById('authSuite').style.display = 'none';
+    document.getElementById('navButtons').style.display = 'none';
+    document.getElementById('btnCopyEval').style.display = 'none';
+    document.getElementById('btnDraft').style.display = 'none';
+    document.getElementById('btnRubricToggle').style.display = 'none';
+    document.getElementById('btnAiToggle').style.display = 'none';
+    btnPdf.style.display = 'none';
+
+    document.getElementById('rubricPanel').classList.remove('open');
+    document.getElementById('aiPanel').classList.remove('open');
+
     const element = document.getElementById('pdfContentArea');
-    html2pdf().from(element).save(currentApplicantName + "_MCN_Profile.pdf");
+    const originalBackground = element.style.background;
+    const originalBackdrop = element.style.backdropFilter;
+    const originalShadow = element.style.boxShadow;
+    const originalBorder = element.style.border;
+    
+    element.style.background = '#ffffff'; 
+    element.style.backdropFilter = 'none'; 
+    element.style.boxShadow = 'none'; 
+    element.style.border = 'none';
+
+    const opt = {
+        margin:       0.3,
+        filename:     currentApplicantName + '_MCN_Evaluation.pdf',
+        image:        { type: 'jpeg', quality: 1.0 },
+        html2canvas:  { scale: 2, scrollY: 0, imageTimeout: 15000 },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+
+    html2pdf().set(opt).from(element).save().then(() => {
+        element.style.background = originalBackground;
+        element.style.backdropFilter = originalBackdrop;
+        element.style.boxShadow = originalShadow;
+        element.style.border = originalBorder;
+
+        document.getElementById('setupGrid').style.display = 'grid';
+        document.getElementById('authSuite').style.display = 'flex';
+        document.getElementById('navButtons').style.display = 'flex';
+        document.getElementById('btnCopyEval').style.display = 'block';
+        document.getElementById('btnDraft').style.display = 'block';
+        document.getElementById('btnRubricToggle').style.display = 'block';
+        document.getElementById('btnAiToggle').style.display = 'block';
+        btnPdf.style.display = 'block';
+        btnPdf.innerText = "Save Profile as PDF";
+    });
 }
 </script>
 
