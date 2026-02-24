@@ -24,6 +24,8 @@
             --auth-purple: #7c3aed;
             --success-green: #059669;
             --joyful-orange: #f59e0b;
+            --danger-red: #ef4444;
+            --warning-yellow: #f59e0b;
             --white: #ffffff;
             --text-dark: #0f172a;
             --text-muted: #475569;
@@ -43,19 +45,13 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased; 
             -moz-osx-font-smoothing: grayscale;
-            
-            /* DRAMATICALLY INCREASED GLOBAL TYPOGRAPHY SPACING */
             letter-spacing: 0.5px; 
             word-spacing: 2.5px; 
             line-height: 1.8;
         }
 
-        .bg-shapes {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; overflow: hidden; pointer-events: none; 
-        }
-        .bg-shape {
-            position: absolute; opacity: 0.05; will-change: transform; animation: float 20s infinite ease-in-out alternate; filter: grayscale(50%);
-        }
+        .bg-shapes { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; overflow: hidden; pointer-events: none; }
+        .bg-shape { position: absolute; opacity: 0.05; will-change: transform; animation: float 20s infinite ease-in-out alternate; filter: grayscale(50%); }
         .bg-shape:nth-child(1) { top: -2%; left: 5%; width: 250px; animation-delay: 0s; }
         .bg-shape:nth-child(2) { top: 15%; right: 3%; width: 300px; animation-delay: -5s; }
         .bg-shape:nth-child(3) { bottom: 5%; left: 8%; width: 220px; animation-delay: -10s; }
@@ -65,37 +61,21 @@
 
         @keyframes float { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(30px) rotate(8deg); } }
 
-        .container {
-            max-width: 1050px; margin: 0 auto; background: var(--white); border-radius: 32px; box-shadow: var(--shadow-float); overflow: visible; border: 1px solid rgba(255, 255, 255, 0.9); transition: transform 0.4s ease;
-        }
+        .container { max-width: 1050px; margin: 0 auto; background: var(--white); border-radius: 32px; box-shadow: var(--shadow-float); overflow: visible; border: 1px solid rgba(255, 255, 255, 0.9); transition: transform 0.4s ease; }
 
-        .header {
-            background: linear-gradient(135deg, var(--mcn-navy) 0%, #003b82 100%);
-            padding: 55px 20px; text-align: center; color: var(--white); border-bottom: 6px solid #38bdf8; border-radius: 32px 32px 0 0; position: relative; overflow: hidden;
-        }
-        .header::after {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(56,189,248,0.15) 0%, transparent 60%);
-            pointer-events: none;
-        }
+        .header { background: linear-gradient(135deg, var(--mcn-navy) 0%, #003b82 100%); padding: 55px 20px; text-align: center; color: var(--white); border-bottom: 6px solid #38bdf8; border-radius: 32px 32px 0 0; position: relative; overflow: hidden; }
+        .header::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(56,189,248,0.15) 0%, transparent 60%); pointer-events: none; }
 
-        .logo-container {
-            background: var(--white); padding: 22px 45px; display: inline-block; border-radius: 24px; box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.2); margin-bottom: 25px; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; z-index: 2;
-        }
+        .logo-container { background: var(--white); padding: 22px 45px; display: inline-block; border-radius: 24px; box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.2); margin-bottom: 25px; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; z-index: 2; }
         .logo-container:hover { transform: translateY(-5px) scale(1.02); }
         .logo-img { max-width: 250px; height: auto; display: block; }
 
         .header h1 { margin: 0; font-size: 38px; font-weight: 800; letter-spacing: -0.5px; position: relative; z-index: 2; word-spacing: 3px; }
-        .header p { margin: 12px 0 0; opacity: 0.9; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 13px; color: #bae6fd; position: relative; z-index: 2; word-spacing: 3px; }
 
-        .setup-grid {
-            padding: 45px 50px; background: var(--white); display: grid; grid-template-columns: 1fr 130px 110px 160px; gap: 20px; align-items: flex-end; border-bottom: 1px solid var(--border-light);
-        }
+        .setup-grid { padding: 45px 50px; background: var(--white); display: grid; grid-template-columns: 1fr 130px 110px 160px; gap: 20px; align-items: flex-end; border-bottom: 1px solid var(--border-light); }
 
         .field-group label { display: block; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 3px; margin-bottom: 12px; color: var(--mcn-blue); }
-        input, select { 
-            width: 100%; padding: 18px 20px; border: 2px solid var(--border-light); border-radius: 16px; font-size: 16px; background: #f8fafc; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-sizing: border-box; color: var(--text-dark); font-weight: 600; font-family: inherit; letter-spacing: 0.5px; word-spacing: 2px;
-        }
+        input, select { width: 100%; padding: 18px 20px; border: 2px solid var(--border-light); border-radius: 16px; font-size: 16px; background: #f8fafc; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-sizing: border-box; color: var(--text-dark); font-weight: 600; font-family: inherit; letter-spacing: 0.5px; word-spacing: 2px; }
         input:focus, select:focus { border-color: #38bdf8; outline: none; background: var(--white); box-shadow: 0 0 0 5px rgba(56, 189, 248, 0.15); transform: translateY(-2px); }
 
         .btn-primary { background: linear-gradient(135deg, var(--mcn-blue), #2563eb); color: var(--white); border: none; padding: 18px; border-radius: 16px; font-weight: 800; font-size: 15px; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 3px; width: 100%; box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.3); font-family: inherit; }
@@ -106,10 +86,7 @@
 
         #displayArea { padding: 50px; }
 
-        @keyframes gentleFadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes gentleFadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         .animated-entry { animation: gentleFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
         .onboarding-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 45px; text-align: left; }
@@ -117,56 +94,30 @@
         .onboard-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--mcn-blue), #38bdf8); opacity: 0; transition: 0.3s; }
         .onboard-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-float); }
         .onboard-card:hover::before { opacity: 1; }
-        .onboard-card h4 { margin: 0 0 20px 0; color: var(--mcn-navy); font-size: 22px; font-weight: 800; display: flex; align-items: center; gap: 12px; letter-spacing: 0.5px; word-spacing: 2px; }
-        .onboard-card ul, .onboard-card ol { margin: 0; padding-left: 22px; color: var(--text-muted); font-size: 15px; line-height: 1.9; letter-spacing: 0.5px; word-spacing: 2px; }
+        .onboard-card h4 { margin: 0 0 20px 0; color: var(--mcn-navy); font-size: 22px; font-weight: 800; display: flex; align-items: center; gap: 12px; letter-spacing: 0.2px; word-spacing: 1.5px; }
+        .onboard-card ul, .onboard-card ol { margin: 0; padding-left: 22px; color: var(--text-muted); font-size: 15px; line-height: 1.85; letter-spacing: 0.4px; word-spacing: 1.5px; }
         .onboard-card li { margin-bottom: 15px; }
         .onboard-card li strong { color: var(--text-dark); font-weight: 700; word-spacing: 3px; }
 
-        /* THE NEW PREMIUM SAAS-STYLE IMPACT CARDS */
-        .impact-card { 
-            background: var(--white); border-radius: 24px; margin-bottom: 35px; border: 1px solid var(--border-light); 
-            border-top: 6px solid var(--mcn-blue); 
-            box-shadow: var(--shadow-soft); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); overflow: hidden;
-        }
+        .impact-card { background: var(--white); border-radius: 24px; margin-bottom: 35px; border: 1px solid var(--border-light); border-top: 6px solid var(--mcn-blue); box-shadow: var(--shadow-soft); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); overflow: hidden; }
         .impact-card:hover { box-shadow: var(--shadow-float); transform: translateY(-4px); border-color: #bae6fd; }
         
         .card-header { background: #f8fafc; padding: 25px 35px; border-bottom: 1px solid var(--border-light); border-left: 5px solid var(--mcn-blue); }
         .card-body { padding: 30px 35px; background: var(--white); border-left: 5px solid transparent; transition: 0.3s; }
         .impact-card:hover .card-body { border-left-color: var(--success-green); }
 
-        .card-label { 
-            font-size: 17.5px; font-weight: 700; color: var(--mcn-navy); line-height: 1.7; margin: 0; 
-            letter-spacing: 0.5px; word-spacing: 3px; /* Added breathing room for questions */
-        }
-        .card-label::before {
-            content: '📌 APPLICATION QUESTION'; display: block; font-size: 11px; font-weight: 800; color: var(--mcn-blue); 
-            text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 12px; opacity: 0.9; word-spacing: 3px;
-        }
+        .card-label { font-size: 17.5px; font-weight: 700; color: var(--mcn-navy); line-height: 1.7; margin: 0; letter-spacing: 0.5px; word-spacing: 3px; }
+        .card-label::before { content: '📌 APPLICATION QUESTION'; display: block; font-size: 11px; font-weight: 800; color: var(--mcn-blue); text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 12px; opacity: 0.9; word-spacing: 3px; }
         
-        /* THE CRITICAL FIX FOR ESSAY READING - MAXIMUM AIR AND BREATHING ROOM */
-        .card-value { 
-            font-size: 17px; 
-            line-height: 2.1; /* High line height so lines don't stack */
-            color: var(--text-dark); 
-            white-space: pre-wrap; 
-            font-weight: 400; 
-            letter-spacing: 0.6px; /* Space between letters */
-            word-spacing: 4px; /* MASSIVE space between words to destroy congestion */
-            padding: 0 10px; 
-            position: relative;
-        }
-
-        .card-value::before {
-            content: '📝 APPLICANT RESPONSE'; display: block; font-size: 11px; font-weight: 800; color: var(--success-green); 
-            text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 15px; opacity: 0.9; word-spacing: 3px;
-        }
+        .card-value { font-size: 17px; line-height: 2.1; color: var(--text-dark); white-space: pre-wrap; font-weight: 400; letter-spacing: 0.6px; word-spacing: 4px; padding: 0 10px; position: relative; }
+        .card-value::before { content: '📝 APPLICANT RESPONSE'; display: block; font-size: 11px; font-weight: 800; color: var(--success-green); text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 15px; opacity: 0.9; word-spacing: 3px; }
 
         .card-value a { color: var(--mcn-blue); text-decoration: none; font-weight: 600; border-bottom: 2px solid #bae6fd; transition: 0.2s; word-break: break-all; padding-bottom: 2px; letter-spacing: 0.5px; word-spacing: normal; }
         .card-value a:hover { color: var(--mcn-navy); border-bottom-color: var(--mcn-navy); background: #f0f9ff; }
 
         .auth-suite { background: linear-gradient(135deg, #f8fafc, #ffffff); border: 1px solid var(--border-light); border-left: 6px solid var(--auth-purple); padding: 35px 40px; border-radius: 24px; margin: 10px 50px 40px 50px; display: flex; align-items: center; justify-content: space-between; box-shadow: var(--shadow-soft); display: none; }
-        .auth-text h3 { margin: 0 0 8px 0; color: var(--auth-purple); font-size: 22px; font-weight: 800; letter-spacing: 0.2px; word-spacing: 2px; }
-        .auth-text p { margin: 0; color: var(--text-muted); font-size: 15px; letter-spacing: 0.5px; word-spacing: 2px; }
+        .auth-text h3 { margin: 0 0 8px 0; color: var(--auth-purple); font-size: 22px; font-weight: 800; letter-spacing: -0.2px; word-spacing: 1.5px; }
+        .auth-text p { margin: 0; color: var(--text-muted); font-size: 15px; letter-spacing: 0.3px; word-spacing: 1.5px; }
         .btn-auth { background: var(--auth-purple); color: var(--white); border: none; padding: 16px 28px; border-radius: 16px; font-weight: 700; font-size: 14px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 3px; box-shadow: 0 8px 15px -5px rgba(139, 92, 246, 0.3); font-family: inherit; }
         .btn-auth:hover { background: #6d28d9; transform: translateY(-3px); box-shadow: 0 12px 20px -5px rgba(139, 92, 246, 0.4); }
 
@@ -174,29 +125,54 @@
         .nav-btn { background: var(--white); color: var(--text-dark); border: 2px solid var(--border-light); padding: 16px 35px; border-radius: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; width: 48%; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 3px; box-shadow: var(--shadow-soft); font-family: inherit; }
         .nav-btn:hover { border-color: var(--text-muted); transform: translateY(-2px); box-shadow: var(--shadow-float); }
 
-        .eval-board { background: var(--white); padding: 50px; border-radius: 32px; margin: 0 50px 50px 50px; display: none; border: 1px solid var(--border-light); box-shadow: var(--shadow-soft); position: relative; overflow: hidden; }
-        .eval-board::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 6px; background: linear-gradient(90deg, var(--mcn-navy), #38bdf8); }
+        /* PSYCHOLOGY UPGRADE: THE EVALUATION BOARD */
+        .eval-board { background: var(--white); padding: 0 50px 50px 50px; border-radius: 32px; margin: 0 50px 50px 50px; display: none; border: 1px solid var(--border-light); box-shadow: var(--shadow-soft); position: relative; overflow: hidden; }
         
-        .eval-row { background: #f8fafc; border: 1px solid var(--border-light); border-radius: 20px; padding: 25px 30px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 15px; transition: 0.3s ease; }
+        /* PSYCHOLOGY UPGRADE: PROGRESS BAR (ZEIGARNIK EFFECT) */
+        .progress-sticky { position: sticky; top: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); padding: 25px 0; z-index: 5; border-bottom: 1px solid var(--border-light); margin-bottom: 30px; }
+        .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .progress-title { margin: 0; color: var(--mcn-navy); font-size: 24px; font-weight: 800; letter-spacing: -0.5px; }
+        .progress-count { font-size: 14px; font-weight: 800; color: var(--mcn-blue); background: #f0f9ff; padding: 6px 12px; border-radius: 10px; letter-spacing: 1px; }
+        .progress-track { width: 100%; height: 10px; background: var(--border-light); border-radius: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--mcn-blue), var(--success-green)); width: 0%; transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+
+        /* PSYCHOLOGY UPGRADE: COGNITIVE CHUNKING (SECTION HEADERS) */
+        .eval-category-title { color: var(--mcn-navy); font-size: 18px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; word-spacing: 3px; margin: 45px 0 20px 0; padding-bottom: 10px; border-bottom: 2px dashed var(--border-light); display: flex; align-items: center; gap: 10px; }
+        .eval-category-title::before { content: ''; display: inline-block; width: 12px; height: 12px; background: #38bdf8; border-radius: 50%; }
+
+        .eval-row { background: #f8fafc; border: 1px solid var(--border-light); border-radius: 20px; padding: 25px 30px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 15px; transition: all 0.3s ease; position: relative; }
         .eval-row:hover { border-color: #bae6fd; background: var(--white); box-shadow: var(--shadow-soft); transform: translateY(-2px); }
         .eval-q-text { font-size: 16px; font-weight: 700; color: var(--text-dark); line-height: 1.8; letter-spacing: 0.5px; word-spacing: 2px; }
-        .eval-input { width: 100%; max-width: 500px; padding: 15px 20px; border: 2px solid var(--border-light); border-radius: 12px; font-size: 15px; font-weight: 600; color: var(--mcn-navy); background: var(--white); transition: 0.3s; cursor: pointer; letter-spacing: 0.5px; word-spacing: 2px; }
+        
+        .eval-input { width: 100%; max-width: 500px; padding: 15px 20px; border: 2px solid var(--border-light); border-radius: 12px; font-size: 15px; font-weight: 600; color: var(--mcn-navy); background: var(--white); transition: all 0.3s ease; cursor: pointer; letter-spacing: 0.5px; word-spacing: 2px; appearance: none; }
         .eval-input:focus { border-color: #38bdf8; outline: none; box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.15); }
+        
+        /* PSYCHOLOGY UPGRADE: COLOR CODED FEEDBACK (HICK'S LAW) */
+        .eval-input.val-high { border-color: var(--success-green); background: #f0fdf4; color: #064e3b; }
+        .eval-input.val-mid { border-color: var(--warning-yellow); background: #fffbeb; color: #78350f; }
+        .eval-input.val-low { border-color: var(--danger-red); background: #fef2f2; color: #7f1d1d; }
+        .eval-input.val-done { border-color: var(--mcn-blue); background: #f0f9ff; }
+
         .eval-textarea { width: 100%; height: 110px; padding: 15px 20px; border: 2px solid var(--border-light); border-radius: 12px; font-size: 15px; font-family: inherit; background: var(--white); transition: 0.3s; resize: vertical; line-height: 1.8; letter-spacing: 0.5px; word-spacing: 2.5px; }
         .eval-textarea:focus { border-color: #38bdf8; outline: none; box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.15); }
+        .eval-textarea.val-done { border-color: var(--mcn-blue); background: #f0f9ff; }
 
-        .btn-copy { background: linear-gradient(135deg, var(--success-green), #047857); color: var(--white); border: none; padding: 22px; border-radius: 16px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 3px; transition: all 0.3s ease; box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.3); margin-top: 25px; font-size: 16px; font-family: inherit; }
+        .btn-copy { background: linear-gradient(135deg, var(--success-green), #047857); color: var(--white); border: none; padding: 22px; border-radius: 16px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 3px; transition: all 0.3s ease; box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.3); margin-top: 35px; font-size: 16px; font-family: inherit; }
         .btn-copy:hover { transform: translateY(-3px); box-shadow: 0 15px 25px -5px rgba(16, 185, 129, 0.4); }
 
-        .btn-draft { background: linear-gradient(135deg, var(--joyful-orange), #d97706); color: var(--white); border: none; padding: 22px; border-radius: 16px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 3px; transition: all 0.3s ease; margin-top: 15px; box-shadow: 0 10px 20px -5px rgba(245, 158, 11, 0.3); font-size: 16px; font-family: inherit; }
+        .btn-draft { background: linear-gradient(135deg, var(--joyful-orange), #d97706); color: var(--white); border: none; padding: 22px; border-radius: 16px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 3px; transition: all 0.3s ease; margin-top: 15px; box-shadow: 0 10px 20px -5px rgba(245, 158, 11, 0.3); font-size: 16px; font-family: inherit; position: relative; overflow: hidden; }
         .btn-draft:hover { transform: translateY(-3px); box-shadow: 0 15px 25px -5px rgba(245, 158, 11, 0.4); }
         
+        /* PSYCHOLOGY UPGRADE: SUCCESS ANIMATION (DOPAMINE REWARD) */
+        @keyframes successPulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); background: var(--success-green); } 100% { transform: scale(1); } }
+        .btn-reward-anim { animation: successPulse 0.5s ease; background: linear-gradient(135deg, var(--success-green), #047857) !important; color: white !important; }
+
         .btn-pdf { background: linear-gradient(135deg, #ef4444, #b91c1c); color: var(--white); border: none; padding: 22px; border-radius: 16px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 3px; transition: all 0.3s ease; margin-top: 15px; box-shadow: 0 10px 20px -5px rgba(239, 68, 68, 0.3); font-size: 16px; font-family: inherit; }
         .btn-pdf:hover { transform: translateY(-3px); box-shadow: 0 15px 25px -5px rgba(239, 68, 68, 0.4); }
 
         .empty-state { text-align: center; padding: 60px 20px 60px 20px; color: var(--text-muted); }
         .empty-state h3 { font-size: 34px; color: var(--mcn-navy); margin-bottom: 15px; font-weight: 800; letter-spacing: -0.5px; word-spacing: 3px; }
-        .empty-state p { font-size: 18px; line-height: 1.8; max-width: 650px; margin: 0 auto; color: var(--text-muted); letter-spacing: 0.5px; word-spacing: 2px; }
+        .empty-state p { font-size: 18px; line-height: 1.8; max-width: 650px; margin: 0 auto; color: var(--text-muted); letter-spacing: 0.5px; word-spacing: 2.5px; }
         .joyful-emoji { font-size: 54px; margin-bottom: 20px; display: block; animation: gentleFadeIn 1s ease forwards; }
 
         .btn-toggle-rubric { position: fixed; right: -5px; top: 50%; transform: translateY(-50%); background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; padding: 18px 25px 18px 20px; border-radius: 20px 0 0 20px; border: none; font-weight: 800; font-size: 14px; cursor: pointer; box-shadow: -5px 5px 20px rgba(109, 40, 217, 0.25); z-index: 1000; transition: 0.3s ease; text-transform: uppercase; letter-spacing: 2px; word-spacing: 3px; writing-mode: vertical-rl; text-orientation: mixed; font-family: inherit; }
@@ -242,7 +218,6 @@
         .ai-table tr:last-child td { border-bottom: none; }
         .ai-table-footer td { font-weight: 600; background: #fffbeb; font-style: italic; color: #b45309; }
 
-        /* THE ELEGANT MINIMALIST FOOTER */
         .elegant-footer { max-width: 1050px; margin: 40px auto 40px auto; text-align: center; }
         .elegant-footer-disclaimer { background: rgba(254, 243, 199, 0.6); border: 1px solid #fde68a; border-left: 5px solid var(--joyful-orange); padding: 25px 30px; border-radius: 20px; text-align: left; font-size: 14.5px; color: #92400e; box-shadow: var(--shadow-soft); line-height: 1.8; margin-bottom: 25px; letter-spacing: 0.5px; word-spacing: 2.5px; }
         .about-developer { background: var(--white); border: 1px solid var(--border-light); border-radius: 20px; padding: 25px; box-shadow: var(--shadow-soft); }
@@ -271,7 +246,6 @@
         <button class="close-drawer" onclick="toggleAiPolicy()">×</button>
     </div>
     <div class="rubric-content">
-        
         <div class="rubric-section ai-section">
             <div class="rubric-rule ai-rule" style="background: white;">
                 <p>The MCN Admissions Team acknowledges that artificial intelligence tools are widely accessible and commonly used by students for writing support. This policy does not prohibit the responsible use of such tools. Instead, it establishes clear boundaries to ensure that all submitted applications reflect the applicant’s own thinking, experiences, and ideas.</p>
@@ -558,7 +532,7 @@
         <div class="logo-container">
             <img src="logo.png.jpg" alt="MCN Logo" class="logo-img" id="officialLogo">
         </div>
-        <h1 style="margin:0; font-size: 38px; font-weight: 800; letter-spacing: -0.5px;">Admissions Reviewers Toolkit</h1>
+        <h1 style="margin:0; font-size: 38px; font-weight: 800; letter-spacing: -0.5px; word-spacing: 3px;">Admissions Reviewers Toolkit</h1>
         <p style="margin:12px 0 0; opacity: 0.95; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; word-spacing: 2px; font-size: 14px; color: #bae6fd;">Developed By Akhyear Mushfiqur Rahman, Millennium Fellow'25 & GAC'26</p>
     </div>
 
@@ -617,127 +591,18 @@
     </div>
 
     <div class="eval-board" id="evalBoard">
-        <h3 style="margin-top:0; color:var(--mcn-navy); font-size: 26px; font-weight: 800; margin-bottom: 25px; letter-spacing: -0.5px;">Final Assessment</h3>
-        
-        <div class="eval-row">
-            <div class="eval-q-text">1. Student is leading or involved in a social impact organization, project, creative initiative, social enterprise, etc.</div>
-            <select id="eval_1" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
-        </div>
-        <div class="eval-row">
-            <div class="eval-q-text">2. Student's description of the project is clear, accessible and easy to understand</div>
-            <select id="eval_2" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
-        </div>
-        <div class="eval-row">
-            <div class="eval-q-text">3. Student presents clear and specific measurable goals and activities for their project during the fellowship period</div>
-            <select id="eval_3" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
-        </div>
-        <div class="eval-row">
-            <div class="eval-q-text">4. Project demonstrates potential for sustainability and/or scalability beyond the fellowship period. This is to consider the long-term viability of the project.</div>
-            <select id="eval_4" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
-        </div>
-        <div class="eval-row">
-            <div class="eval-q-text">5. Student’s work is genuinely connected to one or more SDGs or UN Academic Impact Principles.</div>
-            <select id="eval_5" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
-        </div>
-        <div class="eval-row">
-            <div class="eval-q-text">6. Student’s work will offer a contribution to the Fellowship cohort on their campus and globally.</div>
-            <select id="eval_6" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
-        </div>
-        <div class="eval-row">
-            <div class="eval-q-text">7. Student is close to the people they are trying to help. They are part of the community they are trying to help, or have built meaningful relationships with community members, or have done through research and preparatory work to feel confident that they understand the complexities of the issues they are addressing.</div>
-            <select id="eval_7" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
-        </div>
-        <div class="eval-row">
-            <div class="eval-q-text">8. Political nature of project: Is the work this student is doing politically sensitive?</div>
-            <select id="eval_8" class="eval-input"><option value="">Select Option...</option><option value="Yes">Yes</option><option value="Maybe">Maybe</option><option value="No">No</option></select>
-        </div>
-        <div class="eval-row">
-            <div class="eval-q-text">9. Ethics of project: Does something about the project this student is working on seem unethical? Does it work with communities in a paternalistic way? If you have any question about this please first ask your fellow team members for insight, and if it still seems unclear ask team MCN or mark it as a maybe.</div>
-            <select id="eval_9" class="eval-input"><option value="">Select Option...</option><option value="Yes">Yes</option><option value="Maybe">Maybe</option><option value="No">No</option></select>
-        </div>
-        <div class="eval-row">
-            <div class="eval-q-text">10. Q1: What personal experiences have shaped your interest in creating social impact? In other words, why do you personally care about the issues you are working on or planning to work on? Tell us what drives you in your work. We want to hear your story</div>
-            <select id="eval_10" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
-        </div>
-        <div class="eval-row">
-            <div class="eval-q-text">11. Q2: Why do you want to be a Millennium Fellow? How will you use this distinction towards your future social impact work?</div>
-            <select id="eval_11" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
-        </div>
-        <div class="eval-row">
-            <div class="eval-q-text">12. Q3: MCN values that our community prioritizes empathetic, humble, inclusive leadership. Reflect upon your personal experience of acting as a leader, and share how you demonstrated one of these core values.</div>
-            <select id="eval_12" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
-        </div>
-        <div class="eval-row">
-            <div class="eval-q-text">13. Student’s essay/video responses are thoughtful and demonstrate emotional investment, a genuine passion for social change work.</div>
-            <select id="eval_13" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
-        </div>
-        <div class="eval-row">
-            <div class="eval-q-text">14. Student has a genuine passion for the work they are doing and are personally connected to it.</div>
-            <select id="eval_14" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
-        </div>
-        <div class="eval-row">
-            <div class="eval-q-text">15. Student articulates a clear vision for how they will integrate social impact work into their future life and/or career.</div>
-            <select id="eval_15" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
-        </div>
-        <div class="eval-row">
-            <div class="eval-q-text">16. Student’s motivation for social impact and joining the fellowship is related to their propsed project</div>
-            <select id="eval_16" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
-        </div>
-        <div class="eval-row">
-            <div class="eval-q-text">17. Student demonstrates real commitment to the Fellowship program and a desire to invest in all it will involve.</div>
-            <select id="eval_17" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
-        </div>
-        <div class="eval-row">
-            <div class="eval-q-text">18. Student demonstrates a clear understanding of the fellowship's requirements and expresses a willingness to actively participate in all aspects of the program.</div>
-            <select id="eval_18" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
-        </div>
-        <div class="eval-row">
-            <div class="eval-q-text">19. Does the applicant demonstrate a community mindset?</div>
-            <select id="eval_19" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
-        </div>
-        <div class="eval-row">
-            <div class="eval-q-text">20. Student is driven by a sense of values such as empathy and humility. (Watch out for applications that demonstrate that the student is actually driven by a desire for personal success and importance over social change)</div>
-            <select id="eval_20" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
-        </div>
-        <div class="eval-row">
-            <div class="eval-q-text">21. Student provides specific examples of how they have demonstrated empathy and humility in their past experiences.</div>
-            <select id="eval_21" class="eval-input"><option value="">Select Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>
-        </div>
-        <div class="eval-row">
-            <div class="eval-q-text">22. Ethics of person: Does something in this student’s personal statements lead you to question their ethics? Do you feel you can’t quite trust their instincts? If you have any question about this please first ask your fellow team members for insight, and if it still seems unclear ask team MCN.</div>
-            <select id="eval_22" class="eval-input"><option value="">Select Option...</option><option value="Yes">Yes</option><option value="Maybe">Maybe</option><option value="No">No</option></select>
-        </div>
-        <div class="eval-row">
-            <div class="eval-q-text">23. Overall, do the applicant's responses seem AI-generated?</div>
-            <select id="eval_23" class="eval-input">
-                <option value="">Select Option...</option>
-                <option value="1. Yes, completely AI-generated / unoriginal ideas">1. Yes, completely AI-generated / unoriginal ideas</option>
-                <option value="2. Yes, majority AI for language / original ideas">2. Yes, majority AI for language / original ideas</option>
-                <option value="3. Yes, short portion AI for language / original ideas">3. Yes, short portion AI for language / original ideas</option>
-                <option value="4. No, completely original no AI">4. No, completely original no AI</option>
-            </select>
-        </div>
-        <div class="eval-row">
-            <div class="eval-q-text">24. Overall, does the applicant show ethical integrity through their responses?</div>
-            <select id="eval_24" class="eval-input"><option value="">Select Option...</option><option value="Yes">Yes</option><option value="Maybe">Maybe</option><option value="No">No</option></select>
-        </div>
-        <div class="eval-row">
-            <div class="eval-q-text">25. Your Overall Rating of the Applicant's Application</div>
-            <select id="eval_25" class="eval-input"><option value="">Select Rating...</option><option value="10">10 - Exceptional</option><option value="9">9 - Outstanding</option><option value="8">8 - Excellent</option><option value="7">7 - Very Good</option><option value="6">6 - Good</option><option value="5">5 - Average</option><option value="4">4 - Below Average</option><option value="3">3 - Poor</option><option value="2">2 - Very Poor</option><option value="1">1 - Unacceptable</option></select>
-        </div>
-        <div class="eval-row">
-            <div class="eval-q-text">26. Overall, what do you think about this applicant?</div>
-            <select id="eval_26" class="eval-input"><option value="">Select Final Decision...</option><option value="Accept this Applicant">Accept this Applicant</option><option value="Waitlist this Applicant">Waitlist this Applicant</option><option value="Reject this Applicant">Reject this Applicant</option></select>
-        </div>
-        <div class="eval-row">
-            <div class="eval-q-text">27. If you selected 'Reject this Applicant', please share below why.</div>
-            <textarea id="eval_27" class="eval-textarea" placeholder="Type your reasons here..."></textarea>
-        </div>
-        <div class="eval-row">
-            <div class="eval-q-text">28. [Optional] Do you have any comments about this application/applicant that we should keep in mind?</div>
-            <textarea id="eval_28" class="eval-textarea" placeholder="Type your comments here..."></textarea>
+        <div class="progress-sticky" id="progressSticky">
+            <div class="progress-header">
+                <h3 class="progress-title">Draft Assessment Board</h3>
+                <div class="progress-count"><span id="completedCount">0</span> / 28 Completed</div>
+            </div>
+            <div class="progress-track">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
         </div>
 
+        <div id="evalContainer"></div>
+        
         <button class="btn-copy" onclick="copyScores()" id="btnCopyEval">Copy Scores to Clipboard</button>
         <button class="btn-draft" onclick="saveToDraft()" id="btnDraft">Export to Draft Sheet</button>
         <button class="btn-pdf" onclick="saveAsPDF()" id="btnPdf">Save Profile as PDF</button>
@@ -764,10 +629,96 @@
 let currentFullText = "";
 let currentApplicantName = "Applicant";
 
-const evalIds = [];
-for(let i=1; i<=28; i++) {
-    evalIds.push('eval_' + i);
-}
+const questions = [
+    "Student is leading or involved in a social impact organization, project, creative initiative, etc.",
+    "Student's description of the project is clear, accessible and easy to understand",
+    "Student presents clear and specific measurable goals and activities",
+    "Project demonstrates potential for sustainability and/or scalability",
+    "Student’s work is genuinely connected to one or more SDGs or UNAI Principles",
+    "Student’s work will offer a contribution to the Fellowship cohort",
+    "Student is close to the people they are trying to help (Proximity)",
+    "Political nature of project: Is the work politically sensitive?",
+    "Ethics of project: Does it seem unethical or paternalistic?",
+    "Q1: Personal experiences shaping interest in social impact (Story)",
+    "Q2: Why become a Millennium Fellow? Future use of distinction",
+    "Q3: Reflection on acting as an empathetic, humble, inclusive leader",
+    "Essay/video responses demonstrate emotional investment and passion",
+    "Student has a genuine passion and personal connection to the work",
+    "Articulates a clear vision for future social impact career/life",
+    "Motivation for joining is related to their proposed project",
+    "Demonstrates real commitment to the program requirements",
+    "Clear understanding and willingness to participate in all aspects",
+    "Does the applicant demonstrate a community mindset?",
+    "Student is driven by values (empathy/humility) over personal importance",
+    "Provides specific examples of demonstrating empathy and humility",
+    "Ethics of person: Do responses lead you to question their ethics?",
+    "Overall, do the responses seem AI-generated? (Option 1-4)",
+    "Overall, does the applicant show ethical integrity?",
+    "Your Overall Rating of the Applicant (1-10)",
+    "Overall, what do you think about this applicant? (Final Decision)",
+    "If you selected 'Reject this Applicant', please share why",
+    "[Optional] Additional comments about this application"
+];
+
+const evalIds = []; 
+for(let i=1; i<=28; i++) { evalIds.push('eval_' + i); }
+
+// RENDER QUESTIONS WITH PSYCHOLOGICAL CHUNKING
+const evalCont = document.getElementById('evalContainer');
+questions.forEach((q, i) => {
+    const num = i + 1;
+    let inputHtml = "";
+    
+    // Cognitive Load Theory: Chunking into 5 clear sections
+    if(num === 1) evalCont.innerHTML += `<div class="eval-category-title">Part 1: The Project & Impact</div>`;
+    if(num === 8) evalCont.innerHTML += `<div class="eval-category-title">Part 2: Project Ethics</div>`;
+    if(num === 10) evalCont.innerHTML += `<div class="eval-category-title">Part 3: The Leader & MCN Values</div>`;
+    if(num === 22) evalCont.innerHTML += `<div class="eval-category-title">Part 4: Authenticity & Integrity</div>`;
+    if(num === 25) evalCont.innerHTML += `<div class="eval-category-title">Part 5: Final Verdict</div>`;
+
+    if (num === 23) { 
+        inputHtml = `<select id="eval_${num}" class="eval-input eval-tracker"><option value="">Select Option...</option><option value="Option 1">1. Yes, completely AI / unoriginal</option><option value="Option 2">2. Yes, majority AI / original ideas</option><option value="Option 3">3. Yes, short portion AI / original ideas</option><option value="Option 4">4. No, completely original no AI</option></select>`;
+    } else if (num === 25) { 
+        inputHtml = `<select id="eval_${num}" class="eval-input eval-tracker"><option value="">Select Rating...</option>${[10,9,8,7,6,5,4,3,2,1].map(n => `<option value="${n}">${n}</option>`).join('')}</select>`;
+    } else if (num === 26) { 
+        inputHtml = `<select id="eval_${num}" class="eval-input eval-tracker"><option value="">Select Decision...</option><option value="Accept">Accept</option><option value="Waitlist">Waitlist</option><option value="Reject">Reject</option></select>`;
+    } else if (num === 8 || num === 9 || num === 22 || num === 24) { 
+        inputHtml = `<select id="eval_${num}" class="eval-input eval-tracker"><option value="">Select...</option><option value="Yes">Yes</option><option value="Maybe">Maybe</option><option value="No">No</option></select>`;
+    } else if (num >= 27) { 
+        inputHtml = `<textarea id="eval_${num}" class="eval-textarea eval-tracker" placeholder="Enter details..."></textarea>`;
+    } else { 
+        inputHtml = `<select id="eval_${num}" class="eval-input eval-tracker"><option value="">Score...</option><option value="5">5 - Highly Agree</option><option value="4">4 - Agree</option><option value="3">3 - Neutral</option><option value="2">2 - Disagree</option><option value="1">1 - Highly Disagree</option></select>`;
+    }
+
+    evalCont.innerHTML += `<div class="eval-row"><div class="eval-q-text">${num}. ${q}</div>${inputHtml}</div>`;
+});
+
+// PSYCHOLOGY UPGRADE: Hick's Law Color Coding & Zeigarnik Effect Progress Bar
+document.querySelectorAll('.eval-tracker').forEach(item => {
+    item.addEventListener('change', function() {
+        // Color coding
+        this.classList.remove('val-high', 'val-mid', 'val-low', 'val-done');
+        if (this.tagName === 'SELECT') {
+            if (this.value.startsWith('5') || this.value.startsWith('4') || this.value === '10' || this.value === '9' || this.value === '8' || this.value === 'Accept' || this.value === 'Option 4' || this.value === 'No') {
+                this.classList.add('val-high');
+            } else if (this.value.startsWith('3') || this.value === '7' || this.value === '6' || this.value === '5' || this.value === 'Waitlist' || this.value === 'Option 3' || this.value === 'Option 2' || this.value === 'Maybe') {
+                this.classList.add('val-mid');
+            } else if (this.value.startsWith('2') || this.value.startsWith('1') || this.value === '4' || this.value === '3' || this.value === '2' || this.value === '1' || this.value === 'Reject' || this.value === 'Option 1' || this.value === 'Yes') {
+                this.classList.add('val-low');
+            }
+        } else {
+            if(this.value.trim() !== "") this.classList.add('val-done');
+        }
+
+        // Progress Bar
+        let filled = 0;
+        document.querySelectorAll('.eval-tracker').forEach(el => {
+            if (el.value.trim() !== "") filled++;
+        });
+        document.getElementById('completedCount').innerText = filled;
+        document.getElementById('progressFill').style.width = (filled / 28 * 100) + '%';
+    });
+});
 
 function toggleRubric() { document.getElementById('rubricPanel').classList.toggle('open'); }
 function toggleAiPolicy() { document.getElementById('aiPanel').classList.toggle('open'); }
@@ -794,6 +745,11 @@ function loadData() {
     document.getElementById('authSuite').style.display = "none";
     document.getElementById('navButtons').style.display = "none";
     document.getElementById('evalBoard').style.display = "none";
+
+    // Reset Progress
+    document.getElementById('completedCount').innerText = 0;
+    document.getElementById('progressFill').style.width = '0%';
+    document.querySelectorAll('.eval-tracker').forEach(el => { el.value = ""; el.classList.remove('val-high', 'val-mid', 'val-low', 'val-done'); });
 
     if (!link) {
         output.innerHTML = "<div class='empty-state animated-entry' style='color:#ef4444;'><span class='joyful-emoji'>🔍</span><h3>Oops! Missing Link</h3><p>Please paste your master datasheet link first.</p></div>";
@@ -824,7 +780,7 @@ function loadData() {
             const lastName = student["Last Name"] || "Candidate";
             currentApplicantName = (firstName + "_" + lastName).trim();
 
-            let html = "<div class='animated-entry'><h2 style='color:var(--mcn-navy); margin-bottom: 35px; font-weight: 800; font-size: 32px; letter-spacing: -0.5px; word-spacing: 2px;'>Applicant Profile</h2>";
+            let html = "<div class='animated-entry'><h2 style='color:var(--mcn-navy); margin-bottom: 35px; font-weight: 800; font-size: 32px; letter-spacing: -0.5px; word-spacing: 3px;'>Applicant Profile</h2>";
 
             for (const key in student) {
                 if (student[key] && student[key].trim() !== "") {
@@ -894,11 +850,11 @@ function copyScores() {
     const combinedAnswers = values.join("\t");
     
     navigator.clipboard.writeText(combinedAnswers).then(() => {
-        btn.innerText = "\u2713 Saved! Paste directly into your Sheet row";
-        btn.style.background = "linear-gradient(135deg, #059669, #047857)"; 
+        btn.innerText = "✓ Saved! Paste directly into your Sheet row";
+        btn.classList.add('btn-reward-anim');
         setTimeout(() => {
             btn.innerText = "Copy Scores to Clipboard";
-            btn.style.background = "linear-gradient(135deg, var(--success-green), #059669)";
+            btn.classList.remove('btn-reward-anim');
         }, 3000);
     });
 }
@@ -913,12 +869,12 @@ function saveToDraft() {
     drafts[row] = { name: currentApplicantName, scores: values };
     localStorage.setItem('mcn_eval_drafts', JSON.stringify(drafts));
 
-    btn.innerText = "\u2713 Added to Draft Memory!";
-    btn.style.background = "linear-gradient(135deg, #d97706, #b45309)"; 
+    btn.innerText = "✓ Added to Draft Memory!";
+    btn.classList.add('btn-reward-anim');
     
     setTimeout(() => {
         btn.innerText = "Export to Draft Sheet";
-        btn.style.background = "linear-gradient(135deg, var(--joyful-orange), #d97706)";
+        btn.classList.remove('btn-reward-anim');
     }, 2500);
 }
 
@@ -961,6 +917,7 @@ function saveAsPDF() {
     document.getElementById('btnDraft').style.display = 'none';
     document.getElementById('btnRubricToggle').style.display = 'none';
     document.getElementById('btnAiToggle').style.display = 'none';
+    document.getElementById('progressSticky').style.display = 'none';
     btnPdf.style.display = 'none';
 
     document.getElementById('rubricPanel').classList.remove('open');
@@ -998,6 +955,7 @@ function saveAsPDF() {
         document.getElementById('btnDraft').style.display = 'block';
         document.getElementById('btnRubricToggle').style.display = 'block';
         document.getElementById('btnAiToggle').style.display = 'block';
+        document.getElementById('progressSticky').style.display = 'block';
         btnPdf.style.display = 'block';
         btnPdf.innerText = "Save Profile as PDF";
     });
