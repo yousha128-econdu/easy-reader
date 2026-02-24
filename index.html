@@ -121,17 +121,6 @@
             transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
         }
 
-        /* BACKGROUND SHAPES */
-        .bg-shapes { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; overflow: hidden; pointer-events: none; }
-        .bg-shape { position: absolute; opacity: 0.05; will-change: transform; animation: float 20s infinite ease-in-out alternate; filter: grayscale(50%); }
-        .bg-shape:nth-child(1) { top: -2%; left: 5%; width: 250px; animation-delay: 0s; }
-        .bg-shape:nth-child(2) { top: 15%; right: 3%; width: 300px; animation-delay: -5s; }
-        .bg-shape:nth-child(3) { bottom: 5%; left: 8%; width: 220px; animation-delay: -10s; }
-        .bg-shape:nth-child(4) { bottom: -5%; right: 10%; width: 280px; animation-delay: -15s; }
-        .bg-shape:nth-child(5) { top: 45%; left: 25%; width: 180px; animation-delay: -7s; }
-        .bg-shape:nth-child(6) { top: 55%; right: 25%; width: 160px; animation-delay: -12s; }
-        @keyframes float { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(30px) rotate(8deg); } }
-
         /* THE THEME TOGGLE BUTTON */
         .theme-toggle {
             position: fixed; top: 25px; right: 25px;
@@ -173,7 +162,7 @@
         .animated-entry { animation: gentleFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
         .onboarding-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 45px; text-align: left; }
-        .onboard-card { background: var(--white); padding: 40px; border-radius: 24px; border: 1px solid var(--border-light); box-shadow: var(--shadow-soft); position: relative; overflow: hidden; }
+        .onboard-card { background: var(--white); padding: 40px; border-radius: 24px; border: 1px solid var(--border-light); box-shadow: var(--shadow-soft); transition: all 0.3s ease; position: relative; overflow: hidden; }
         .onboard-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, #38bdf8, var(--auth-purple-brand)); opacity: 0; transition: 0.3s; }
         .onboard-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-float); }
         .onboard-card:hover::before { opacity: 1; }
@@ -206,7 +195,7 @@
         .btn-auth:hover { transform: translateY(-3px); box-shadow: 0 12px 20px -5px rgba(139, 92, 246, 0.4); }
 
         .nav-buttons { display: flex; justify-content: space-between; margin: 0 50px 40px 50px; padding-top: 35px; border-top: 1px solid var(--border-light); display: none; }
-        .nav-btn { background: var(--white); color: var(--text-dark); border: 2px solid var(--border-light); padding: 16px 35px; border-radius: 16px; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 3px; box-shadow: var(--shadow-soft); font-family: inherit; }
+        .nav-btn { background: var(--white); color: var(--text-dark); border: 2px solid var(--border-light); padding: 16px 35px; border-radius: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; width: 48%; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 3px; box-shadow: var(--shadow-soft); font-family: inherit; }
         .nav-btn:hover { border-color: var(--text-muted); transform: translateY(-2px); box-shadow: var(--shadow-float); }
 
         /* THE EVALUATION BOARD */
@@ -318,15 +307,6 @@
     <span id="themeIcon">🌙</span> <span id="themeText">Dark Mode</span>
 </button>
 
-<div class="bg-shapes">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Sustainable_Development_Goal_01.svg/500px-Sustainable_Development_Goal_01.svg.png" class="bg-shape" alt="SDG 1">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Sustainable_Development_Goal_04.svg/500px-Sustainable_Development_Goal_04.svg.png" class="bg-shape" alt="SDG 4">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Sustainable_Development_Goal_05.svg/500px-Sustainable_Development_Goal_05.svg.png" class="bg-shape" alt="SDG 5">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Sustainable_Development_Goal_10.svg/500px-Sustainable_Development_Goal_10.svg.png" class="bg-shape" alt="SDG 10">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Sustainable_Development_Goal_13.svg/500px-Sustainable_Development_Goal_13.svg.png" class="bg-shape" alt="SDG 13">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Sustainable_Development_Goal_17.svg/500px-Sustainable_Development_Goal_17.svg.png" class="bg-shape" alt="SDG 17">
-</div>
-
 <button class="btn-toggle-ai" onclick="toggleAiPolicy()" id="btnAiToggle">View AI Policy</button>
 <div class="ai-panel" id="aiPanel">
     <div class="drawer-header ai-header">
@@ -336,7 +316,7 @@
     <div class="rubric-content">
         
         <div class="rubric-section ai-section">
-            <div class="rubric-rule ai-rule">
+            <div class="rubric-rule ai-rule" style="background: var(--white);">
                 <p>The MCN Admissions Team acknowledges that artificial intelligence tools are widely accessible and commonly used by students for writing support. This policy does not prohibit the responsible use of such tools. Instead, it establishes clear boundaries to ensure that all submitted applications reflect the applicant’s own thinking, experiences, and ideas.</p>
                 <p><strong>✅ AI may be used as a supplementary editing tool.</strong> Acceptable uses include correcting grammar, improving clarity, refining sentence flow, or adjusting structure. These forms of assistance are comparable to using proofreading software or seeking language support.</p>
                 <p><strong>❌ AI may not be used to generate the substance of an application.</strong> This includes developing project ideas, constructing arguments, producing reflections, or shaping the intellectual core of responses. The originality, reasoning, and insight presented in the application must belong to the student.</p>
@@ -416,7 +396,7 @@
 
         <div class="rubric-section ai-section">
             <h4>Reviewer Decision Framework</h4>
-            <div class="rubric-rule ai-rule">
+            <div class="rubric-rule ai-rule" style="background: var(--white);">
                 <p>For each application, reviewers must select one of the following four options in the review sheet (the drop-down menu for the question, <strong>“Overall, do the applicant’s responses seem AI-generated?”</strong>):</p>
                 <ol style="font-size: 14px; line-height: 1.8; margin-bottom: 0; color: var(--text-dark); letter-spacing: 0.5px; word-spacing: 2.5px;">
                     <li><strong>Option 1:</strong> Yes, the responses seem completely AI-generated and the ideas seem unoriginal.</li>
@@ -490,7 +470,7 @@
 
         <div class="rubric-section ai-section" style="border-bottom: none;">
             <h4>Final Guidance</h4>
-            <div class="rubric-rule ai-rule" style="border-left-color: #f59e0b !important;">
+            <div class="rubric-rule ai-rule" style="background: var(--white); border-left-color: #f59e0b !important;">
                 <p>AI detection requires careful judgment. <strong>Polished writing alone should not be penalized, and such applications must not be rejected.</strong> The determining factor is originality.</p>
                 <p>If the ideas, reasoning, and insight clearly originate from the applicant, minor editing assistance is acceptable. If originality appears compromised or the application lacks authentic substance, it must be marked accordingly.</p>
                 <p>This policy is intended to ensure fairness, protect authenticity, and uphold the integrity of the Millennium Fellowship admissions process.</p>
@@ -1040,10 +1020,6 @@ function saveAsPDF() {
     document.getElementById('rubricPanel').classList.remove('open');
     document.getElementById('aiPanel').classList.remove('open');
 
-    // Force Light Mode for PDF generation
-    const wasDark = document.body.getAttribute('data-theme') === 'dark';
-    if (wasDark) document.body.removeAttribute('data-theme');
-
     const element = document.getElementById('pdfContentArea');
     const originalBackground = element.style.background;
     const originalBackdrop = element.style.backdropFilter;
@@ -1070,7 +1046,9 @@ function saveAsPDF() {
         element.style.boxShadow = originalShadow;
         element.style.border = originalBorder;
 
-        if (wasDark) document.body.setAttribute('data-theme', 'dark');
+        if (document.body.getAttribute('data-theme') === 'dark') {
+            document.body.setAttribute('data-theme', 'dark');
+        }
 
         document.getElementById('setupGrid').style.display = 'grid';
         document.getElementById('authSuite').style.display = 'flex';
