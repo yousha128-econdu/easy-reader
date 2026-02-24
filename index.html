@@ -7,8 +7,8 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
 
-    <link rel="icon" type="image/png" href="favicon.png?v=4.0">
-    <link rel="shortcut icon" type="image/png" href="favicon.png?v=4.0">
+    <link rel="icon" type="image/png" href="favicon.png?v=5.0">
+    <link rel="shortcut icon" type="image/png" href="favicon.png?v=5.0">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -24,10 +24,10 @@
             /* BRAND COLORS (Never Change) */
             --mcn-navy-brand: #0A2342;
             --mcn-blue-brand: #0056b3;
-            --auth-purple-brand: #7c3aed;
+            --quillbot-green: #49c35a;      /* QUILLBOT GREEN */
+            --quillbot-green-hover: #3da34a; /* QUILLBOT HOVER */
             --success-green-brand: #059669;
             --joyful-orange-brand: #f59e0b;
-            --quillbot-green: #41C300; /* New QuillBot Green Variable */
 
             /* LIGHT THEME (Default) */
             --bg-gradient-start: #f1f5f9;
@@ -115,7 +115,7 @@
             transition: background 0.4s ease, color 0.4s ease;
         }
 
-        /* Force smooth transitions on all containers */
+        /* Force smooth transitions on containers */
         .container, .header, .setup-grid, .impact-card, .card-header, .card-body, .eval-board, .eval-row, 
         input, select, textarea, .rubric-panel, .ai-panel, .auth-suite, .about-developer, .rubric-rule, 
         .ai-table th, .ai-table td, .progress-sticky {
@@ -157,8 +157,8 @@
         .btn-primary { background: linear-gradient(135deg, var(--mcn-blue-brand), #2563eb); color: #ffffff; border: none; padding: 18px; border-radius: 16px; font-weight: 800; font-size: 15px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 3px; width: 100%; box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.3); font-family: inherit; }
         .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 25px -5px rgba(37, 99, 235, 0.4); }
 
-        .btn-download-draft { background: linear-gradient(135deg, #6366f1, var(--auth-purple-brand)); color: #ffffff; border: none; padding: 18px; border-radius: 16px; font-weight: 800; font-size: 15px; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 3px; width: 100%; box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.3); font-family: inherit; }
-        .btn-download-draft:hover { transform: translateY(-3px); box-shadow: 0 15px 25px -5px rgba(99, 102, 241, 0.4); }
+        .btn-download-draft { background: linear-gradient(135deg, var(--quillbot-green), var(--quillbot-green-hover)); color: #ffffff; border: none; padding: 18px; border-radius: 16px; font-weight: 800; font-size: 15px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 3px; width: 100%; box-shadow: 0 10px 20px -5px rgba(73, 195, 90, 0.3); font-family: inherit; }
+        .btn-download-draft:hover { transform: translateY(-3px); box-shadow: 0 15px 25px -5px rgba(73, 195, 90, 0.4); }
 
         #displayArea { padding: 50px; }
 
@@ -192,11 +192,12 @@
         .card-value a { color: var(--accent-blue); text-decoration: none; font-weight: 600; border-bottom: 2px solid #bae6fd; padding-bottom: 2px; letter-spacing: 0.5px; word-spacing: normal; }
         .card-value a:hover { color: var(--heading-color); border-bottom-color: var(--heading-color); background: var(--link-hover-bg); }
 
+        /* OFFICIAL QUILLBOT GREEN UI COMPONENT */
         .auth-suite { background: linear-gradient(135deg, var(--input-bg), var(--white)); border: 1px solid var(--border-light); border-left: 6px solid var(--quillbot-green); padding: 35px 40px; border-radius: 24px; margin: 10px 50px 40px 50px; display: flex; align-items: center; justify-content: space-between; box-shadow: var(--shadow-soft); display: none; }
         .auth-text h3 { margin: 0 0 8px 0; color: var(--quillbot-green); font-size: 22px; font-weight: 800; letter-spacing: -0.2px; word-spacing: 1.5px; }
         .auth-text p { margin: 0; color: var(--text-muted); font-size: 15px; letter-spacing: 0.3px; word-spacing: 1.5px; }
-        .btn-auth { background: var(--quillbot-green); color: #ffffff; border: none; padding: 16px 28px; border-radius: 16px; font-weight: 700; font-size: 14px; cursor: pointer; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 3px; box-shadow: 0 8px 15px -5px rgba(65, 195, 0, 0.3); font-family: inherit; }
-        .btn-auth:hover { transform: translateY(-3px); box-shadow: 0 12px 20px -5px rgba(65, 195, 0, 0.4); }
+        .btn-auth { background: var(--quillbot-green); color: #ffffff; border: none; padding: 16px 28px; border-radius: 16px; font-weight: 700; font-size: 14px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 3px; box-shadow: 0 8px 15px -5px rgba(73, 195, 90, 0.3); font-family: inherit; }
+        .btn-auth:hover { background: var(--quillbot-green-hover); transform: translateY(-3px); box-shadow: 0 12px 20px -5px rgba(73, 195, 90, 0.4); }
 
         .nav-buttons { display: flex; justify-content: space-between; margin: 0 50px 40px 50px; padding-top: 35px; border-top: 1px solid var(--border-light); display: none; }
         .nav-btn { background: var(--white); color: var(--text-dark); border: 2px solid var(--border-light); padding: 16px 35px; border-radius: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; width: 48%; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 3px; box-shadow: var(--shadow-soft); font-family: inherit; }
@@ -231,21 +232,21 @@
         .eval-textarea:focus { border-color: #38bdf8; outline: none; box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.15); }
         .eval-textarea.val-done { border-color: var(--accent-blue); background: var(--val-done-bg); }
 
-        .btn-copy { background: linear-gradient(135deg, var(--success-green-brand), #047857); color: #ffffff; border: none; padding: 22px; border-radius: 16px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 3px; transition: all 0.3s ease; box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.3); margin-top: 35px; font-size: 16px; font-family: inherit; }
+        .btn-copy { background: linear-gradient(135deg, var(--success-green-brand), #047857); color: #ffffff; border: none; padding: 22px; border-radius: 16px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 3px; box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.3); margin-top: 35px; font-size: 16px; font-family: inherit; }
         .btn-copy:hover { transform: translateY(-3px); box-shadow: 0 15px 25px -5px rgba(16, 185, 129, 0.4); }
 
-        .btn-draft { background: linear-gradient(135deg, var(--joyful-orange-brand), #d97706); color: #ffffff; border: none; padding: 22px; border-radius: 16px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 3px; transition: all 0.3s ease; margin-top: 15px; box-shadow: 0 10px 20px -5px rgba(245, 158, 11, 0.3); font-size: 16px; font-family: inherit; position: relative; overflow: hidden; }
+        .btn-draft { background: linear-gradient(135deg, var(--joyful-orange-brand), #d97706); color: #ffffff; border: none; padding: 22px; border-radius: 16px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 3px; margin-top: 15px; box-shadow: 0 10px 20px -5px rgba(245, 158, 11, 0.3); font-size: 16px; font-family: inherit; position: relative; overflow: hidden; }
         .btn-draft:hover { transform: translateY(-3px); box-shadow: 0 15px 25px -5px rgba(245, 158, 11, 0.4); }
         
         @keyframes successPulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); background: var(--success-green-brand); } 100% { transform: scale(1); } }
         .btn-reward-anim { animation: successPulse 0.5s ease; background: linear-gradient(135deg, var(--success-green-brand), #047857) !important; color: white !important; }
 
-        .btn-pdf { background: linear-gradient(135deg, var(--danger-red), #b91c1c); color: #ffffff; border: none; padding: 22px; border-radius: 16px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 3px; transition: all 0.3s ease; margin-top: 15px; box-shadow: 0 10px 20px -5px rgba(239, 68, 68, 0.3); font-size: 16px; font-family: inherit; }
+        .btn-pdf { background: linear-gradient(135deg, var(--danger-red), #b91c1c); color: #ffffff; border: none; padding: 22px; border-radius: 16px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 3px; margin-top: 15px; box-shadow: 0 10px 20px -5px rgba(239, 68, 68, 0.3); font-size: 16px; font-family: inherit; }
         .btn-pdf:hover { transform: translateY(-3px); box-shadow: 0 15px 25px -5px rgba(239, 68, 68, 0.4); }
 
         .empty-state { text-align: center; padding: 60px 20px 60px 20px; color: var(--text-muted); }
         .empty-state h3 { font-size: 34px; color: var(--heading-color); margin-bottom: 15px; font-weight: 800; letter-spacing: -0.5px; word-spacing: 3px; }
-        .empty-state p { font-size: 18px; line-height: 1.8; max-width: 650px; margin: 0 auto; letter-spacing: 0.5px; word-spacing: 2.5px; }
+        .empty-state p { font-size: 18px; line-height: 1.8; max-width: 650px; margin: 0 auto; color: var(--text-muted); letter-spacing: 0.5px; word-spacing: 2.5px; }
         .joyful-emoji { font-size: 54px; margin-bottom: 20px; display: block; animation: gentleFadeIn 1s ease forwards; }
 
         /* DRAWERS */
@@ -559,7 +560,7 @@
                 <p><span class="score-badge s5">5 - Highly Agree</span> The candidate articulates how their own values align with the program's values and aslo outlines specific ways they will engage with the program's resources and opportunities.</p>
                 <p><span class="score-badge s4">4 - Agree</span> The candidate mentions the program's values and also contributing to the program, but the connection to their own motivation is unclear and their plans are vague or unspecific.</p>
                 <p><span class="score-badge s3">3 - Unsure</span> The candidate mentions the program, but their focus is primarily on personal benefits or outcomes and focuses primarily on receiving benefits from the program with little mention of contribution.</p>
-                <p><span class="score-badge s1/2 - Disagree</span> The candidate demonstrates little to no knowledge of the program's values or mission AND does not demonstrate a connection between the fellowship and their social impact goals.</p>
+                <p><span class="score-badge s1">1/2 - Disagree</span> The candidate demonstrates little to no knowledge of the program's values or mission AND does not demonstrate a connection between the fellowship and their social impact goals.</p>
             </div>
             
             <div class="rubric-rule">
@@ -567,7 +568,7 @@
                 <p><span class="score-badge s5">5 - Highly Agree</span> The candidate clearly describes their role and responsibilities as a leader and their actions show genuine consideration for others' feelings and perspectives.</p>
                 <p><span class="score-badge s4">4 - Agree</span> The candidate mentions a leadership experience and mentions relevant MCN value, but the details are vague or incomplete and their demonstration is unclear or underdeveloped.</p>
                 <p><span class="score-badge s3">3 - Unsure</span> The candidate mentions leadership, but it's unclear if they were in a true leadership position and the actions are primarily focused on achieving results or gaining recognition.</p>
-                <p><span class="score-badge s1/2 - Disagree</span> The candidate does not provide any examples of leadership experience and their actions contradict or undermine MCN Values.</p>
+                <p><span class="score-badge s1">1/2 - Disagree</span> The candidate does not provide any examples of leadership experience and their actions contradict or undermine MCN Values.</p>
             </div>
             
             <div class="rubric-rule">
@@ -576,7 +577,7 @@
                 <p><span class="score-badge s4">4 - Agree</span> Recognizes the importance of the fellowship community and mentions specific ways they hope to engage.</p>
                 <p><span class="score-badge s3">3 - Unsure</span> The candidate's response does not reflect their ideas on teamwork and collaboration.</p>
                 <p><span class="score-badge s2">2 - Disagree</span> Focuses almost entirely on personal gain or individual project success.</p>
-                <p><span class="score-badge s1 - Highly Disagree</span> Candidate does not lean toward teamwork or community values.</p>
+                <p><span class="score-badge s1">1 - Highly Disagree</span> Candidate does not lean toward teamwork or community values.</p>
             </div>
             
         </div>
