@@ -33,6 +33,7 @@
             position: relative;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased; 
+            letter-spacing: 0.3px; /* ADDS GLOBAL BREATHING ROOM TO ALL ALPHABETS */
         }
 
         .bg-shapes {
@@ -73,8 +74,7 @@
         .logo-container:hover { transform: translateY(-5px) scale(1.02); }
         .logo-img { max-width: 250px; height: auto; display: block; }
 
-        .header h1 { margin: 0; font-size: 38px; font-weight: 800; letter-spacing: -1px; position: relative; z-index: 2; }
-        .header p { margin: 12px 0 0; opacity: 0.9; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 13px; color: #bae6fd; position: relative; z-index: 2; }
+        .header h1 { margin: 0; font-size: 38px; font-weight: 800; letter-spacing: -0.5px; position: relative; z-index: 2; }
 
         .setup-grid {
             padding: 45px 50px; background: var(--white); display: grid; grid-template-columns: 1fr 130px 110px 160px; gap: 20px; align-items: flex-end; border-bottom: 1px solid var(--border-light);
@@ -82,14 +82,14 @@
 
         .field-group label { display: block; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; color: var(--mcn-blue); }
         input, select { 
-            width: 100%; padding: 18px 20px; border: 2px solid var(--border-light); border-radius: 16px; font-size: 16px; background: #f8fafc; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-sizing: border-box; color: var(--text-dark); font-weight: 500; font-family: inherit;
+            width: 100%; padding: 18px 20px; border: 2px solid var(--border-light); border-radius: 16px; font-size: 16px; background: #f8fafc; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-sizing: border-box; color: var(--text-dark); font-weight: 500; font-family: inherit; letter-spacing: 0.3px;
         }
         input:focus, select:focus { border-color: #38bdf8; outline: none; background: var(--white); box-shadow: 0 0 0 5px rgba(56, 189, 248, 0.15); transform: translateY(-2px); }
 
-        .btn-primary { background: linear-gradient(135deg, var(--mcn-blue), #2563eb); color: var(--white); border: none; padding: 18px; border-radius: 16px; font-weight: 800; font-size: 15px; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); text-transform: uppercase; letter-spacing: 1px; width: 100%; box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.3); font-family: inherit; }
+        .btn-primary { background: linear-gradient(135deg, var(--mcn-blue), #2563eb); color: var(--white); border: none; padding: 18px; border-radius: 16px; font-weight: 800; font-size: 15px; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); text-transform: uppercase; letter-spacing: 1.5px; width: 100%; box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.3); font-family: inherit; }
         .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 25px -5px rgba(37, 99, 235, 0.4); }
 
-        .btn-download-draft { background: linear-gradient(135deg, #6366f1, var(--auth-purple)); color: var(--white); border: none; padding: 18px; border-radius: 16px; font-weight: 800; font-size: 15px; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); text-transform: uppercase; letter-spacing: 1px; width: 100%; box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.3); font-family: inherit; }
+        .btn-download-draft { background: linear-gradient(135deg, #6366f1, var(--auth-purple)); color: var(--white); border: none; padding: 18px; border-radius: 16px; font-weight: 800; font-size: 15px; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); text-transform: uppercase; letter-spacing: 1.5px; width: 100%; box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.3); font-family: inherit; }
         .btn-download-draft:hover { transform: translateY(-3px); box-shadow: 0 15px 25px -5px rgba(99, 102, 241, 0.4); }
 
         #displayArea { padding: 50px; }
@@ -105,8 +105,8 @@
         .onboard-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--mcn-blue), #38bdf8); opacity: 0; transition: 0.3s; }
         .onboard-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-float); }
         .onboard-card:hover::before { opacity: 1; }
-        .onboard-card h4 { margin: 0 0 20px 0; color: var(--mcn-navy); font-size: 22px; font-weight: 800; display: flex; align-items: center; gap: 12px; }
-        .onboard-card ul, .onboard-card ol { margin: 0; padding-left: 22px; color: var(--text-muted); font-size: 15px; line-height: 1.8; }
+        .onboard-card h4 { margin: 0 0 20px 0; color: var(--mcn-navy); font-size: 22px; font-weight: 800; display: flex; align-items: center; gap: 12px; letter-spacing: 0.2px; }
+        .onboard-card ul, .onboard-card ol { margin: 0; padding-left: 22px; color: var(--text-muted); font-size: 15px; line-height: 1.85; letter-spacing: 0.4px; }
         .onboard-card li { margin-bottom: 15px; }
         .onboard-card li strong { color: var(--text-dark); font-weight: 700; }
 
@@ -115,19 +115,19 @@
         }
         .impact-card:hover { box-shadow: var(--shadow-float); transform: translateX(4px); border-left-color: var(--mcn-blue); }
         
-        .card-label { font-size: 16px; font-weight: 700; color: var(--mcn-navy); line-height: 1.6; margin-bottom: 15px; display: block; border-bottom: 1px solid var(--border-light); padding-bottom: 12px; }
-        .card-value { font-size: 17px; line-height: 1.8; color: var(--text-dark); white-space: pre-wrap; font-weight: 400; }
-        .card-value a { color: var(--mcn-blue); text-decoration: none; font-weight: 600; border-bottom: 2px solid #bae6fd; transition: 0.2s; word-break: break-all; padding-bottom: 2px; }
+        .card-label { font-size: 16px; font-weight: 700; color: var(--mcn-navy); line-height: 1.6; margin-bottom: 15px; display: block; border-bottom: 1px solid var(--border-light); padding-bottom: 12px; letter-spacing: 0.4px; }
+        .card-value { font-size: 17px; line-height: 1.9; color: var(--text-dark); white-space: pre-wrap; font-weight: 400; letter-spacing: 0.5px; }
+        .card-value a { color: var(--mcn-blue); text-decoration: none; font-weight: 600; border-bottom: 2px solid #bae6fd; transition: 0.2s; word-break: break-all; padding-bottom: 2px; letter-spacing: 0.3px; }
         .card-value a:hover { color: var(--mcn-navy); border-bottom-color: var(--mcn-navy); background: #f0f9ff; }
 
         .auth-suite { background: linear-gradient(135deg, #f8fafc, #ffffff); border: 1px solid var(--border-light); border-left: 6px solid var(--auth-purple); padding: 35px 40px; border-radius: 24px; margin: 10px 50px 40px 50px; display: flex; align-items: center; justify-content: space-between; box-shadow: var(--shadow-soft); display: none; }
-        .auth-text h3 { margin: 0 0 8px 0; color: var(--auth-purple); font-size: 22px; font-weight: 800; letter-spacing: -0.5px;}
-        .auth-text p { margin: 0; color: var(--text-muted); font-size: 15px; }
-        .btn-auth { background: var(--auth-purple); color: var(--white); border: none; padding: 16px 28px; border-radius: 16px; font-weight: 700; font-size: 14px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 8px 15px -5px rgba(139, 92, 246, 0.3); font-family: inherit; }
+        .auth-text h3 { margin: 0 0 8px 0; color: var(--auth-purple); font-size: 22px; font-weight: 800; letter-spacing: -0.2px;}
+        .auth-text p { margin: 0; color: var(--text-muted); font-size: 15px; letter-spacing: 0.3px; }
+        .btn-auth { background: var(--auth-purple); color: var(--white); border: none; padding: 16px 28px; border-radius: 16px; font-weight: 700; font-size: 14px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px; box-shadow: 0 8px 15px -5px rgba(139, 92, 246, 0.3); font-family: inherit; }
         .btn-auth:hover { background: #6d28d9; transform: translateY(-3px); box-shadow: 0 12px 20px -5px rgba(139, 92, 246, 0.4); }
 
         .nav-buttons { display: flex; justify-content: space-between; margin: 0 50px 40px 50px; padding-top: 35px; border-top: 1px solid var(--border-light); display: none; }
-        .nav-btn { background: var(--white); color: var(--text-dark); border: 2px solid var(--border-light); padding: 16px 35px; border-radius: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; width: 48%; text-transform: uppercase; letter-spacing: 1px; box-shadow: var(--shadow-soft); font-family: inherit; }
+        .nav-btn { background: var(--white); color: var(--text-dark); border: 2px solid var(--border-light); padding: 16px 35px; border-radius: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; width: 48%; text-transform: uppercase; letter-spacing: 1.5px; box-shadow: var(--shadow-soft); font-family: inherit; }
         .nav-btn:hover { border-color: var(--text-muted); transform: translateY(-2px); box-shadow: var(--shadow-float); }
 
         .eval-board { background: var(--white); padding: 50px; border-radius: 32px; margin: 0 50px 50px 50px; display: none; border: 1px solid var(--border-light); box-shadow: var(--shadow-soft); position: relative; overflow: hidden; }
@@ -135,10 +135,10 @@
         
         .eval-row { background: #f8fafc; border: 1px solid var(--border-light); border-radius: 20px; padding: 25px 30px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 15px; transition: 0.3s ease; }
         .eval-row:hover { border-color: #bae6fd; background: var(--white); box-shadow: var(--shadow-soft); transform: translateY(-2px); }
-        .eval-q-text { font-size: 16px; font-weight: 700; color: var(--text-dark); line-height: 1.6; }
-        .eval-input { width: 100%; max-width: 500px; padding: 15px 20px; border: 2px solid var(--border-light); border-radius: 12px; font-size: 15px; font-weight: 600; color: var(--mcn-navy); background: var(--white); transition: 0.3s; cursor: pointer; }
+        .eval-q-text { font-size: 16px; font-weight: 700; color: var(--text-dark); line-height: 1.7; letter-spacing: 0.4px; }
+        .eval-input { width: 100%; max-width: 500px; padding: 15px 20px; border: 2px solid var(--border-light); border-radius: 12px; font-size: 15px; font-weight: 600; color: var(--mcn-navy); background: var(--white); transition: 0.3s; cursor: pointer; letter-spacing: 0.3px; }
         .eval-input:focus { border-color: #38bdf8; outline: none; box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.15); }
-        .eval-textarea { width: 100%; height: 110px; padding: 15px 20px; border: 2px solid var(--border-light); border-radius: 12px; font-size: 15px; font-family: inherit; background: var(--white); transition: 0.3s; resize: vertical; line-height: 1.6; }
+        .eval-textarea { width: 100%; height: 110px; padding: 15px 20px; border: 2px solid var(--border-light); border-radius: 12px; font-size: 15px; font-family: inherit; background: var(--white); transition: 0.3s; resize: vertical; line-height: 1.7; letter-spacing: 0.4px; }
         .eval-textarea:focus { border-color: #38bdf8; outline: none; box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.15); }
 
         .btn-copy { background: linear-gradient(135deg, var(--success-green), #047857); color: var(--white); border: none; padding: 22px; border-radius: 16px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1.5px; transition: all 0.3s ease; box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.3); margin-top: 25px; font-size: 16px; font-family: inherit; }
@@ -151,8 +151,8 @@
         .btn-pdf:hover { transform: translateY(-3px); box-shadow: 0 15px 25px -5px rgba(239, 68, 68, 0.4); }
 
         .empty-state { text-align: center; padding: 60px 20px 60px 20px; color: var(--text-muted); }
-        .empty-state h3 { font-size: 34px; color: var(--mcn-navy); margin-bottom: 15px; font-weight: 800; letter-spacing: -1px; }
-        .empty-state p { font-size: 18px; line-height: 1.6; max-width: 650px; margin: 0 auto; color: var(--text-muted); }
+        .empty-state h3 { font-size: 34px; color: var(--mcn-navy); margin-bottom: 15px; font-weight: 800; letter-spacing: -0.5px; }
+        .empty-state p { font-size: 18px; line-height: 1.7; max-width: 650px; margin: 0 auto; color: var(--text-muted); letter-spacing: 0.3px; }
         .joyful-emoji { font-size: 54px; margin-bottom: 20px; display: block; animation: gentleFadeIn 1s ease forwards; }
 
         .btn-toggle-rubric { position: fixed; right: -5px; top: 50%; transform: translateY(-50%); background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; padding: 18px 25px 18px 20px; border-radius: 20px 0 0 20px; border: none; font-weight: 800; font-size: 14px; cursor: pointer; box-shadow: -5px 5px 20px rgba(109, 40, 217, 0.25); z-index: 1000; transition: 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px; writing-mode: vertical-rl; text-orientation: mixed; font-family: inherit; }
@@ -168,22 +168,22 @@
         .drawer-header { color: white; padding: 35px; position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; }
         .rubric-header { background: linear-gradient(135deg, var(--mcn-navy), var(--mcn-blue)); }
         .ai-header { background: linear-gradient(135deg, #d97706, #b45309); }
-        .drawer-header h2 { margin: 0; font-size: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; line-height: 1.4; }
+        .drawer-header h2 { margin: 0; font-size: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; line-height: 1.5; }
         .close-drawer { background: none; border: none; color: white; font-size: 32px; cursor: pointer; transition: 0.2s; padding: 0; line-height: 1; }
         .close-drawer:hover { color: #cbd5e1; transform: scale(1.1); }
         
         .rubric-content { padding: 40px 35px; color: var(--text-dark); }
         .rubric-section { margin-bottom: 40px; border-bottom: 1px solid var(--border-light); padding-bottom: 25px; }
-        .rubric-section h4 { color: var(--mcn-navy); font-size: 19px; margin: 0 0 20px 0; text-transform: uppercase; letter-spacing: 1px; border-left: 5px solid var(--mcn-blue); padding-left: 12px; font-weight: 800; }
+        .rubric-section h4 { color: var(--mcn-navy); font-size: 19px; margin: 0 0 20px 0; text-transform: uppercase; letter-spacing: 1.5px; border-left: 5px solid var(--mcn-blue); padding-left: 12px; font-weight: 800; }
         
         .ai-section h4 { color: #92400e; border-left-color: #f59e0b; }
         .ai-rule { border-left-color: #fde68a !important; }
 
         .rubric-rule { background: #f8fafc; padding: 20px; border-radius: 12px; margin-bottom: 15px; border: 1px solid var(--border-light); border-left: 4px solid #38bdf8; }
-        .rubric-rule p { margin: 0 0 10px 0; font-size: 14px; line-height: 1.6; }
+        .rubric-rule p { margin: 0 0 10px 0; font-size: 14px; line-height: 1.7; letter-spacing: 0.3px; }
         .rubric-rule p:last-child { margin-bottom: 0; }
         
-        .score-badge { font-weight: 800; padding: 4px 10px; border-radius: 6px; display: inline-block; margin-right: 10px; color: white; min-width: 65px; text-align: center; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .score-badge { font-weight: 800; padding: 4px 10px; border-radius: 6px; display: inline-block; margin-right: 10px; color: white; min-width: 65px; text-align: center; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
         .s5 { background: #10b981; } 
         .s4 { background: #34d399; color: #064e3b; } 
         .s3 { background: #fbbf24; color: #78350f; } 
@@ -192,18 +192,18 @@
         .s-yn { background: var(--auth-purple); } 
 
         .ai-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 14px; margin-bottom: 20px; background: white; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-light); }
-        .ai-table th { background: #fef3c7; color: #92400e; text-align: left; padding: 15px; border-bottom: 1px solid var(--border-light); font-weight: 800; }
-        .ai-table td { padding: 15px; border-bottom: 1px solid var(--border-light); vertical-align: top; line-height: 1.6; border-right: 1px solid var(--border-light); }
+        .ai-table th { background: #fef3c7; color: #92400e; text-align: left; padding: 15px; border-bottom: 1px solid var(--border-light); font-weight: 800; letter-spacing: 0.5px; }
+        .ai-table td { padding: 15px; border-bottom: 1px solid var(--border-light); vertical-align: top; line-height: 1.7; border-right: 1px solid var(--border-light); letter-spacing: 0.3px; }
         .ai-table td:last-child { border-right: none; }
         .ai-table tr:last-child td { border-bottom: none; }
         .ai-table-footer td { font-weight: 600; background: #fffbeb; font-style: italic; color: #b45309; }
 
         /* THE ELEGANT MINIMALIST FOOTER */
         .elegant-footer { max-width: 1050px; margin: 40px auto 40px auto; text-align: center; }
-        .elegant-footer-disclaimer { background: rgba(254, 243, 199, 0.6); border: 1px solid #fde68a; border-left: 5px solid var(--joyful-orange); padding: 25px 30px; border-radius: 20px; text-align: left; font-size: 14.5px; color: #92400e; box-shadow: var(--shadow-soft); line-height: 1.7; margin-bottom: 25px; }
+        .elegant-footer-disclaimer { background: rgba(254, 243, 199, 0.6); border: 1px solid #fde68a; border-left: 5px solid var(--joyful-orange); padding: 25px 30px; border-radius: 20px; text-align: left; font-size: 14.5px; color: #92400e; box-shadow: var(--shadow-soft); line-height: 1.75; margin-bottom: 25px; letter-spacing: 0.3px; }
         .about-developer { background: var(--white); border: 1px solid var(--border-light); border-radius: 20px; padding: 25px; box-shadow: var(--shadow-soft); }
-        .about-developer h4 { color: var(--mcn-navy); font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; font-size: 14px; margin: 0 0 15px 0; }
-        .elegant-footer-links { display: flex; justify-content: center; gap: 20px; font-weight: 700; text-transform: uppercase; font-size: 13px; letter-spacing: 1px; }
+        .about-developer h4 { color: var(--mcn-navy); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; font-size: 14px; margin: 0 0 15px 0; }
+        .elegant-footer-links { display: flex; justify-content: center; gap: 20px; font-weight: 700; text-transform: uppercase; font-size: 13px; letter-spacing: 1.5px; }
         .elegant-footer-links a { color: var(--mcn-blue); text-decoration: none; border-bottom: 2px solid transparent; padding-bottom: 2px; transition: 0.2s; }
         .elegant-footer-links a:hover { color: var(--mcn-navy); border-bottom-color: var(--mcn-navy); }
 
@@ -234,7 +234,7 @@
                 <p><strong>✅ AI may be used as a supplementary editing tool.</strong> Acceptable uses include correcting grammar, improving clarity, refining sentence flow, or adjusting structure. These forms of assistance are comparable to using proofreading software or seeking language support.</p>
                 <p><strong>❌ AI may not be used to generate the substance of an application.</strong> This includes developing project ideas, constructing arguments, producing reflections, or shaping the intellectual core of responses. The originality, reasoning, and insight presented in the application must belong to the student.</p>
                 <p>When evaluating applications, reviewers must assess two dimensions:</p>
-                <ol style="font-size: 14px; line-height: 1.6; margin-bottom: 10px; color: var(--text-dark); font-weight: 500;">
+                <ol style="font-size: 14px; line-height: 1.7; margin-bottom: 10px; color: var(--text-dark); font-weight: 500; letter-spacing: 0.3px;">
                     <li>The nature of AI use: whether it appears limited to language refinement or extends to idea generation and substantive content.</li>
                     <li>The extent of AI use: whether it appears in isolated sections or consistently throughout the application.</li>
                 </ol>
@@ -244,9 +244,9 @@
 
         <div class="rubric-section ai-section">
             <h4>Red Flags and Green Flags</h4>
-            <p style="font-size: 14px; margin-bottom: 20px; font-style: italic; color: var(--text-muted);">Reviewers should rely on pattern recognition across the full application rather than isolated phrases. The indicators below are intended to guide judgment, not replace it.</p>
+            <p style="font-size: 14px; margin-bottom: 20px; font-style: italic; color: var(--text-muted); letter-spacing: 0.3px;">Reviewers should rely on pattern recognition across the full application rather than isolated phrases. The indicators below are intended to guide judgment, not replace it.</p>
             
-            <h5 style="color: var(--text-dark); margin: 0 0 12px 0; font-size: 15px;">A. Assessing Whether AI Was Used for Substance or Only Language Refinement</h5>
+            <h5 style="color: var(--text-dark); margin: 0 0 12px 0; font-size: 15px; letter-spacing: 0.5px;">A. Assessing Whether AI Was Used for Substance or Only Language Refinement</h5>
             <table class="ai-table">
                 <tr>
                     <th>Green Flags — Likely Supplementary Editing Only</th>
@@ -278,7 +278,7 @@
                 </tr>
             </table>
 
-            <h5 style="color: var(--text-dark); margin: 30px 0 12px 0; font-size: 15px;">B. Assessing Whether AI Was Used Throughout or in Limited Portions</h5>
+            <h5 style="color: var(--text-dark); margin: 30px 0 12px 0; font-size: 15px; letter-spacing: 0.5px;">B. Assessing Whether AI Was Used Throughout or in Limited Portions</h5>
             <table class="ai-table">
                 <tr>
                     <th>Indicators of Limited Use</th>
@@ -311,7 +311,7 @@
             <h4>Reviewer Decision Framework</h4>
             <div class="rubric-rule ai-rule" style="background: white;">
                 <p>For each application, reviewers must select one of the following four options in the review sheet (the drop-down menu for the question, <strong>“Overall, do the applicant’s responses seem AI-generated?”</strong>):</p>
-                <ol style="font-size: 14px; line-height: 1.8; margin-bottom: 0; color: var(--text-dark);">
+                <ol style="font-size: 14px; line-height: 1.8; margin-bottom: 0; color: var(--text-dark); letter-spacing: 0.3px;">
                     <li><strong>Option 1:</strong> Yes, the responses seem completely AI-generated and the ideas seem unoriginal.</li>
                     <li><strong>Option 2:</strong> Yes, AI has been used for the majority of the application but only to enhance language and grammar; the ideas seem original.</li>
                     <li><strong>Option 3:</strong> Yes, AI has been used for a short portion of the application but only to enhance language and grammar; the ideas seem original.</li>
@@ -354,7 +354,7 @@
                     <td>Option 4</td>
                 </tr>
             </table>
-            <p style="font-size:14px; margin-top:15px; font-weight: 700; text-align: center; color: var(--mcn-navy);">Reviewers must base their selection on the overall pattern of the application rather than a single sentence or paragraph.</p>
+            <p style="font-size:14px; margin-top:15px; font-weight: 700; text-align: center; color: var(--mcn-navy); letter-spacing: 0.3px;">Reviewers must base their selection on the overall pattern of the application rather than a single sentence or paragraph.</p>
         </div>
 
         <div class="rubric-section ai-section">
@@ -514,8 +514,8 @@
         <div class="logo-container">
             <img src="logo.png.jpg" alt="MCN Logo" class="logo-img" id="officialLogo">
         </div>
-        <h1 style="margin:0; font-size: 38px; font-weight: 800; letter-spacing: -1px;">Admissions Reviewers Toolkit</h1>
-        <p style="margin:12px 0 0; opacity: 0.95; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; font-size: 14px; color: #bae6fd;">Developed By Akhyear Mushfiqur Rahman, Millennium Fellow'25 & GAC'26</p>
+        <h1 style="margin:0; font-size: 38px; font-weight: 800; letter-spacing: -0.5px;">Admissions Reviewers Toolkit</h1>
+        <p style="margin:12px 0 0; opacity: 0.95; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 13px; color: #bae6fd;">Developed By Akhyear Mushfiqur Rahman, Millennium Fellow'25 & GAC'26</p>
     </div>
 
     <div class="setup-grid" id="setupGrid">
@@ -703,8 +703,7 @@
 <div class="elegant-footer">
     <div class="elegant-footer-disclaimer">
         <strong style="font-size: 16px; display: block; margin-bottom: 8px;">⚠️ Disclaimer & Important Notice:</strong> 
-        This toolkit is an independent, personal project developed by <strong>Akhyear Mushfiqur Rahman</strong> 
-        (Millennium Fellow '25, GAC '26 Member, and Economics major at the University of Dhaka) and is not an officially mandated platform by the Millennium Campus Network. <br><br>
+        This toolkit is an independent, personal project developed by an Economics major at the University of Dhaka and is not an officially mandated platform by the Millennium Campus Network. <br><br>
         Please note that this tool cannot directly modify your official evaluation spreadsheet. It is designed solely to help you generate draft assessments efficiently in a distraction-free environment. You will still need to manually select your final evaluations from the dropdown menus in your actual assigned assessment sheet, using the draft you made here as a guide.
     </div>
     
