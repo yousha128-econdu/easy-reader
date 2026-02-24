@@ -2,19 +2,25 @@
 <html>
 <head>
     <title>MCN | Premium GAC Toolkit</title>
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <link rel="icon" type="image/png" href="favicon.png?v=2.0">
+    <link rel="shortcut icon" type="image/png" href="favicon.png?v=2.0">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --mcn-navy: #0A2342;
             --mcn-blue: #0056b3;
-            --mcn-light: #f0f4f8; 
+            --mcn-light: #f8fafc; 
             --auth-purple: #7c3aed;
             --success-green: #059669;
             --joyful-orange: #f59e0b;
@@ -28,7 +34,7 @@
 
         body {
             font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-            background: linear-gradient(135deg, #f8fafc 0%, #e0eafc 100%);
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
             margin: 0;
             padding: 50px 20px;
             color: var(--text-dark);
@@ -36,16 +42,14 @@
             position: relative;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased; 
-            letter-spacing: 0.4px; 
-            word-spacing: 1.5px; 
-            line-height: 1.7;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .bg-shapes {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; overflow: hidden; pointer-events: none; 
         }
         .bg-shape {
-            position: absolute; opacity: 0.04; will-change: transform; animation: float 20s infinite ease-in-out alternate;
+            position: absolute; opacity: 0.05; will-change: transform; animation: float 20s infinite ease-in-out alternate; filter: grayscale(50%);
         }
         .bg-shape:nth-child(1) { top: -2%; left: 5%; width: 250px; animation-delay: 0s; }
         .bg-shape:nth-child(2) { top: 15%; right: 3%; width: 300px; animation-delay: -5s; }
@@ -54,10 +58,7 @@
         .bg-shape:nth-child(5) { top: 45%; left: 25%; width: 180px; animation-delay: -7s; }
         .bg-shape:nth-child(6) { top: 55%; right: 25%; width: 160px; animation-delay: -12s; }
 
-        @keyframes float {
-            0% { transform: translateY(0) rotate(0deg); }
-            100% { transform: translateY(30px) rotate(8deg); }
-        }
+        @keyframes float { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(30px) rotate(8deg); } }
 
         .container {
             max-width: 1050px; margin: 0 auto; background: var(--white); border-radius: 32px; box-shadow: var(--shadow-float); overflow: visible; border: 1px solid rgba(255, 255, 255, 0.9); transition: transform 0.4s ease;
@@ -79,22 +80,23 @@
         .logo-container:hover { transform: translateY(-5px) scale(1.02); }
         .logo-img { max-width: 250px; height: auto; display: block; }
 
-        .header h1 { margin: 0; font-size: 38px; font-weight: 800; letter-spacing: -0.5px; position: relative; z-index: 2; word-spacing: 2px; }
+        .header h1 { margin: 0; font-size: 38px; font-weight: 800; letter-spacing: -1px; position: relative; z-index: 2; }
+        .header p { margin: 12px 0 0; opacity: 0.9; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 13px; color: #bae6fd; position: relative; z-index: 2; }
 
         .setup-grid {
             padding: 45px 50px; background: var(--white); display: grid; grid-template-columns: 1fr 130px 110px 160px; gap: 20px; align-items: flex-end; border-bottom: 1px solid var(--border-light);
         }
 
-        .field-group label { display: block; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 2px; margin-bottom: 12px; color: var(--mcn-blue); }
+        .field-group label { display: block; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; color: var(--mcn-blue); }
         input, select { 
-            width: 100%; padding: 18px 20px; border: 2px solid var(--border-light); border-radius: 16px; font-size: 16px; background: #f8fafc; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-sizing: border-box; color: var(--text-dark); font-weight: 500; font-family: inherit; letter-spacing: 0.4px; word-spacing: 1px;
+            width: 100%; padding: 18px 20px; border: 2px solid var(--border-light); border-radius: 16px; font-size: 16px; background: #f8fafc; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-sizing: border-box; color: var(--text-dark); font-weight: 600; font-family: inherit;
         }
         input:focus, select:focus { border-color: #38bdf8; outline: none; background: var(--white); box-shadow: 0 0 0 5px rgba(56, 189, 248, 0.15); transform: translateY(-2px); }
 
-        .btn-primary { background: linear-gradient(135deg, var(--mcn-blue), #2563eb); color: var(--white); border: none; padding: 18px; border-radius: 16px; font-weight: 800; font-size: 15px; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 2px; width: 100%; box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.3); font-family: inherit; }
+        .btn-primary { background: linear-gradient(135deg, var(--mcn-blue), #2563eb); color: var(--white); border: none; padding: 18px; border-radius: 16px; font-weight: 800; font-size: 15px; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); text-transform: uppercase; letter-spacing: 1px; width: 100%; box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.3); font-family: inherit; }
         .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 25px -5px rgba(37, 99, 235, 0.4); }
 
-        .btn-download-draft { background: linear-gradient(135deg, #6366f1, var(--auth-purple)); color: var(--white); border: none; padding: 18px; border-radius: 16px; font-weight: 800; font-size: 15px; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 2px; width: 100%; box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.3); font-family: inherit; }
+        .btn-download-draft { background: linear-gradient(135deg, #6366f1, var(--auth-purple)); color: var(--white); border: none; padding: 18px; border-radius: 16px; font-weight: 800; font-size: 15px; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); text-transform: uppercase; letter-spacing: 1px; width: 100%; box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.3); font-family: inherit; }
         .btn-download-draft:hover { transform: translateY(-3px); box-shadow: 0 15px 25px -5px rgba(99, 102, 241, 0.4); }
 
         #displayArea { padding: 50px; }
@@ -110,53 +112,40 @@
         .onboard-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--mcn-blue), #38bdf8); opacity: 0; transition: 0.3s; }
         .onboard-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-float); }
         .onboard-card:hover::before { opacity: 1; }
-        .onboard-card h4 { margin: 0 0 20px 0; color: var(--mcn-navy); font-size: 22px; font-weight: 800; display: flex; align-items: center; gap: 12px; letter-spacing: 0.2px; word-spacing: 1.5px; }
-        .onboard-card ul, .onboard-card ol { margin: 0; padding-left: 22px; color: var(--text-muted); font-size: 15px; line-height: 1.85; letter-spacing: 0.4px; word-spacing: 1.5px; }
+        .onboard-card h4 { margin: 0 0 20px 0; color: var(--mcn-navy); font-size: 22px; font-weight: 800; display: flex; align-items: center; gap: 12px; }
+        .onboard-card ul, .onboard-card ol { margin: 0; padding-left: 22px; color: var(--text-muted); font-size: 15px; line-height: 1.85; }
         .onboard-card li { margin-bottom: 15px; }
-        .onboard-card li strong { color: var(--text-dark); font-weight: 700; word-spacing: 2px; }
+        .onboard-card li strong { color: var(--text-dark); font-weight: 700; }
 
-        /* THE NEW FANCY IMPACT CARDS */
+        /* THE NEW PREMIUM SAAS-STYLE IMPACT CARDS */
         .impact-card { 
-            background: var(--white); border-radius: 24px; padding: 40px; margin-bottom: 35px; border: 1px solid var(--border-light); 
-            border-top: 6px solid var(--mcn-blue); /* Moved accent to top for premium feel */
-            box-shadow: var(--shadow-soft); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); position: relative;
+            background: var(--white); border-radius: 24px; margin-bottom: 35px; border: 1px solid var(--border-light); 
+            box-shadow: var(--shadow-soft); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); overflow: hidden;
         }
-        .impact-card:hover { box-shadow: var(--shadow-float); transform: translateY(-4px); border-top-color: #38bdf8; }
+        .impact-card:hover { box-shadow: var(--shadow-float); transform: translateY(-4px); border-color: #bae6fd; }
         
-        .card-label { 
-            background: #f8fafc; border: 1px solid var(--border-light); padding: 25px 30px; border-radius: 16px; 
-            font-size: 15px; font-weight: 700; color: var(--mcn-navy); line-height: 1.7; margin-bottom: 25px; 
-            display: block; letter-spacing: 0.4px; word-spacing: 2px; position: relative;
-        }
-        
-        /* Adds a beautiful 'Application Question' Badge inside the text box */
-        .card-label::before {
-            content: '📌 APPLICATION QUESTION'; display: block; font-size: 11px; font-weight: 800; color: var(--mcn-blue); 
-            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; opacity: 0.9;
-        }
-        
-        .card-value { 
-            font-size: 17px; line-height: 2; color: var(--text-dark); white-space: pre-wrap; 
-            font-weight: 400; letter-spacing: 0.4px; word-spacing: 2px; padding: 0 10px; position: relative;
-        }
+        .card-header { background: #f8fafc; padding: 25px 35px; border-bottom: 1px solid var(--border-light); border-left: 5px solid var(--mcn-blue); }
+        .card-body { padding: 30px 35px; background: var(--white); border-left: 5px solid transparent; transition: 0.3s; }
+        .impact-card:hover .card-body { border-left-color: var(--success-green); }
 
-        /* Adds a beautiful 'Applicant Response' Badge above the answer */
-        .card-value::before {
-            content: '📝 APPLICANT RESPONSE'; display: block; font-size: 11px; font-weight: 800; color: var(--success-green); 
-            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; opacity: 0.9;
-        }
+        .badge-q, .badge-a { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; display: inline-block; padding: 4px 10px; border-radius: 6px; }
+        .badge-q { background: rgba(0, 86, 179, 0.1); color: var(--mcn-blue); }
+        .badge-a { background: rgba(5, 150, 105, 0.1); color: var(--success-green); }
 
-        .card-value a { color: var(--mcn-blue); text-decoration: none; font-weight: 600; border-bottom: 2px solid #bae6fd; transition: 0.2s; word-break: break-all; padding-bottom: 2px; letter-spacing: 0.3px; word-spacing: normal; }
+        .card-label { font-size: 17px; font-weight: 700; color: var(--mcn-navy); line-height: 1.6; margin: 0; letter-spacing: 0.2px; }
+        .card-value { font-size: 16.5px; line-height: 1.9; color: var(--text-dark); white-space: pre-wrap; font-weight: 400; margin: 0; }
+        
+        .card-value a { color: var(--mcn-blue); text-decoration: none; font-weight: 600; border-bottom: 2px solid #bae6fd; transition: 0.2s; word-break: break-all; padding-bottom: 2px; }
         .card-value a:hover { color: var(--mcn-navy); border-bottom-color: var(--mcn-navy); background: #f0f9ff; }
 
         .auth-suite { background: linear-gradient(135deg, #f8fafc, #ffffff); border: 1px solid var(--border-light); border-left: 6px solid var(--auth-purple); padding: 35px 40px; border-radius: 24px; margin: 10px 50px 40px 50px; display: flex; align-items: center; justify-content: space-between; box-shadow: var(--shadow-soft); display: none; }
-        .auth-text h3 { margin: 0 0 8px 0; color: var(--auth-purple); font-size: 22px; font-weight: 800; letter-spacing: -0.2px; word-spacing: 1.5px; }
-        .auth-text p { margin: 0; color: var(--text-muted); font-size: 15px; letter-spacing: 0.3px; word-spacing: 1.5px; }
-        .btn-auth { background: var(--auth-purple); color: var(--white); border: none; padding: 16px 28px; border-radius: 16px; font-weight: 700; font-size: 14px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 2px; box-shadow: 0 8px 15px -5px rgba(139, 92, 246, 0.3); font-family: inherit; }
+        .auth-text h3 { margin: 0 0 8px 0; color: var(--auth-purple); font-size: 22px; font-weight: 800; letter-spacing: -0.5px;}
+        .auth-text p { margin: 0; color: var(--text-muted); font-size: 15px; }
+        .btn-auth { background: var(--auth-purple); color: var(--white); border: none; padding: 16px 28px; border-radius: 16px; font-weight: 700; font-size: 14px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 8px 15px -5px rgba(139, 92, 246, 0.3); font-family: inherit; }
         .btn-auth:hover { background: #6d28d9; transform: translateY(-3px); box-shadow: 0 12px 20px -5px rgba(139, 92, 246, 0.4); }
 
         .nav-buttons { display: flex; justify-content: space-between; margin: 0 50px 40px 50px; padding-top: 35px; border-top: 1px solid var(--border-light); display: none; }
-        .nav-btn { background: var(--white); color: var(--text-dark); border: 2px solid var(--border-light); padding: 16px 35px; border-radius: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; width: 48%; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 2px; box-shadow: var(--shadow-soft); font-family: inherit; }
+        .nav-btn { background: var(--white); color: var(--text-dark); border: 2px solid var(--border-light); padding: 16px 35px; border-radius: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; width: 48%; text-transform: uppercase; letter-spacing: 1px; box-shadow: var(--shadow-soft); font-family: inherit; }
         .nav-btn:hover { border-color: var(--text-muted); transform: translateY(-2px); box-shadow: var(--shadow-float); }
 
         .eval-board { background: var(--white); padding: 50px; border-radius: 32px; margin: 0 50px 50px 50px; display: none; border: 1px solid var(--border-light); box-shadow: var(--shadow-soft); position: relative; overflow: hidden; }
@@ -164,55 +153,58 @@
         
         .eval-row { background: #f8fafc; border: 1px solid var(--border-light); border-radius: 20px; padding: 25px 30px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 15px; transition: 0.3s ease; }
         .eval-row:hover { border-color: #bae6fd; background: var(--white); box-shadow: var(--shadow-soft); transform: translateY(-2px); }
-        .eval-q-text { font-size: 16px; font-weight: 700; color: var(--text-dark); line-height: 1.7; letter-spacing: 0.4px; word-spacing: 1.5px; }
-        .eval-input { width: 100%; max-width: 500px; padding: 15px 20px; border: 2px solid var(--border-light); border-radius: 12px; font-size: 15px; font-weight: 600; color: var(--mcn-navy); background: var(--white); transition: 0.3s; cursor: pointer; letter-spacing: 0.3px; word-spacing: 1px; }
+        .eval-q-text { font-size: 16px; font-weight: 700; color: var(--text-dark); line-height: 1.6; }
+        .eval-input { width: 100%; max-width: 500px; padding: 15px 20px; border: 2px solid var(--border-light); border-radius: 12px; font-size: 15px; font-weight: 600; color: var(--mcn-navy); background: var(--white); transition: 0.3s; cursor: pointer; }
         .eval-input:focus { border-color: #38bdf8; outline: none; box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.15); }
-        .eval-textarea { width: 100%; height: 110px; padding: 15px 20px; border: 2px solid var(--border-light); border-radius: 12px; font-size: 15px; font-family: inherit; background: var(--white); transition: 0.3s; resize: vertical; line-height: 1.7; letter-spacing: 0.4px; word-spacing: 1.5px; }
+        .eval-textarea { width: 100%; height: 110px; padding: 15px 20px; border: 2px solid var(--border-light); border-radius: 12px; font-size: 15px; font-family: inherit; background: var(--white); transition: 0.3s; resize: vertical; line-height: 1.6; }
         .eval-textarea:focus { border-color: #38bdf8; outline: none; box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.15); }
 
-        .btn-copy { background: linear-gradient(135deg, var(--success-green), #047857); color: var(--white); border: none; padding: 22px; border-radius: 16px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 2px; transition: all 0.3s ease; box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.3); margin-top: 25px; font-size: 16px; font-family: inherit; }
+        .btn-copy { background: linear-gradient(135deg, var(--success-green), #047857); color: var(--white); border: none; padding: 22px; border-radius: 16px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1.5px; transition: all 0.3s ease; box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.3); margin-top: 25px; font-size: 16px; font-family: inherit; }
         .btn-copy:hover { transform: translateY(-3px); box-shadow: 0 15px 25px -5px rgba(16, 185, 129, 0.4); }
 
-        .btn-draft { background: linear-gradient(135deg, var(--joyful-orange), #d97706); color: var(--white); border: none; padding: 22px; border-radius: 16px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 2px; transition: all 0.3s ease; margin-top: 15px; box-shadow: 0 10px 20px -5px rgba(245, 158, 11, 0.3); font-size: 16px; font-family: inherit; }
+        .btn-draft { background: linear-gradient(135deg, var(--joyful-orange), #d97706); color: var(--white); border: none; padding: 22px; border-radius: 16px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1.5px; transition: all 0.3s ease; margin-top: 15px; box-shadow: 0 10px 20px -5px rgba(245, 158, 11, 0.3); font-size: 16px; font-family: inherit; }
         .btn-draft:hover { transform: translateY(-3px); box-shadow: 0 15px 25px -5px rgba(245, 158, 11, 0.4); }
         
-        .btn-pdf { background: linear-gradient(135deg, #ef4444, #b91c1c); color: var(--white); border: none; padding: 22px; border-radius: 16px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 2px; transition: all 0.3s ease; margin-top: 15px; box-shadow: 0 10px 20px -5px rgba(239, 68, 68, 0.3); font-size: 16px; font-family: inherit; }
+        .btn-pdf { background: linear-gradient(135deg, #ef4444, #b91c1c); color: var(--white); border: none; padding: 22px; border-radius: 16px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1.5px; transition: all 0.3s ease; margin-top: 15px; box-shadow: 0 10px 20px -5px rgba(239, 68, 68, 0.3); font-size: 16px; font-family: inherit; }
         .btn-pdf:hover { transform: translateY(-3px); box-shadow: 0 15px 25px -5px rgba(239, 68, 68, 0.4); }
 
         .empty-state { text-align: center; padding: 60px 20px 60px 20px; color: var(--text-muted); }
-        .empty-state h3 { font-size: 34px; color: var(--mcn-navy); margin-bottom: 15px; font-weight: 800; letter-spacing: -0.5px; word-spacing: 2px; }
-        .empty-state p { font-size: 18px; line-height: 1.7; max-width: 650px; margin: 0 auto; color: var(--text-muted); letter-spacing: 0.3px; word-spacing: 1.5px; }
+        .empty-state h3 { font-size: 34px; color: var(--mcn-navy); margin-bottom: 15px; font-weight: 800; letter-spacing: -1px; }
+        .empty-state p { font-size: 18px; line-height: 1.6; max-width: 650px; margin: 0 auto; color: var(--text-muted); }
         .joyful-emoji { font-size: 54px; margin-bottom: 20px; display: block; animation: gentleFadeIn 1s ease forwards; }
 
-        .btn-toggle-rubric { position: fixed; right: -5px; top: 50%; transform: translateY(-50%); background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; padding: 18px 25px 18px 20px; border-radius: 20px 0 0 20px; border: none; font-weight: 800; font-size: 14px; cursor: pointer; box-shadow: -5px 5px 20px rgba(109, 40, 217, 0.25); z-index: 1000; transition: 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 2px; writing-mode: vertical-rl; text-orientation: mixed; font-family: inherit; }
+        /* THE RIGHT RUBRIC DRAWER */
+        .btn-toggle-rubric { position: fixed; right: -5px; top: 50%; transform: translateY(-50%); background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; padding: 18px 25px 18px 20px; border-radius: 20px 0 0 20px; border: none; font-weight: 800; font-size: 14px; cursor: pointer; box-shadow: -5px 5px 20px rgba(109, 40, 217, 0.25); z-index: 1000; transition: 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px; writing-mode: vertical-rl; text-orientation: mixed; font-family: inherit; }
         .btn-toggle-rubric:hover { padding-right: 35px; background: #5b21b6; }
         .rubric-panel { position: fixed; top: 0; right: -750px; width: 700px; height: 100vh; background: #ffffff; box-shadow: -15px 0 40px rgba(0, 0, 0, 0.08); z-index: 1001; transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1); overflow-y: auto; border-left: 1px solid var(--border-light); }
         .rubric-panel.open { right: 0; }
 
-        .btn-toggle-ai { position: fixed; left: -5px; top: 50%; transform: translateY(-50%); background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 18px 20px 18px 25px; border-radius: 0 20px 20px 0; border: none; font-weight: 800; font-size: 14px; cursor: pointer; box-shadow: 5px 5px 20px rgba(217, 119, 6, 0.25); z-index: 1000; transition: 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 2px; writing-mode: vertical-rl; text-orientation: mixed; font-family: inherit; }
+        /* THE LEFT AI POLICY DRAWER */
+        .btn-toggle-ai { position: fixed; left: -5px; top: 50%; transform: translateY(-50%); background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 18px 20px 18px 25px; border-radius: 0 20px 20px 0; border: none; font-weight: 800; font-size: 14px; cursor: pointer; box-shadow: 5px 5px 20px rgba(217, 119, 6, 0.25); z-index: 1000; transition: 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px; writing-mode: vertical-rl; text-orientation: mixed; font-family: inherit; }
         .btn-toggle-ai:hover { padding-left: 35px; background: #b45309; }
         .ai-panel { position: fixed; top: 0; left: -750px; width: 700px; height: 100vh; background: #ffffff; box-shadow: 15px 0 40px rgba(0, 0, 0, 0.08); z-index: 1001; transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1); overflow-y: auto; border-right: 1px solid var(--border-light); }
         .ai-panel.open { left: 0; }
 
+        /* Shared Drawer Headers & Styles */
         .drawer-header { color: white; padding: 35px; position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; }
         .rubric-header { background: linear-gradient(135deg, var(--mcn-navy), var(--mcn-blue)); }
         .ai-header { background: linear-gradient(135deg, #d97706, #b45309); }
-        .drawer-header h2 { margin: 0; font-size: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 2px; line-height: 1.5; }
+        .drawer-header h2 { margin: 0; font-size: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; line-height: 1.4; }
         .close-drawer { background: none; border: none; color: white; font-size: 32px; cursor: pointer; transition: 0.2s; padding: 0; line-height: 1; }
         .close-drawer:hover { color: #cbd5e1; transform: scale(1.1); }
         
         .rubric-content { padding: 40px 35px; color: var(--text-dark); }
         .rubric-section { margin-bottom: 40px; border-bottom: 1px solid var(--border-light); padding-bottom: 25px; }
-        .rubric-section h4 { color: var(--mcn-navy); font-size: 19px; margin: 0 0 20px 0; text-transform: uppercase; letter-spacing: 1.5px; word-spacing: 2px; border-left: 5px solid var(--mcn-blue); padding-left: 12px; font-weight: 800; }
+        .rubric-section h4 { color: var(--mcn-navy); font-size: 19px; margin: 0 0 20px 0; text-transform: uppercase; letter-spacing: 1px; border-left: 5px solid var(--mcn-blue); padding-left: 12px; font-weight: 800; }
         
         .ai-section h4 { color: #92400e; border-left-color: #f59e0b; }
         .ai-rule { border-left-color: #fde68a !important; }
 
         .rubric-rule { background: #f8fafc; padding: 20px; border-radius: 12px; margin-bottom: 15px; border: 1px solid var(--border-light); border-left: 4px solid #38bdf8; }
-        .rubric-rule p { margin: 0 0 10px 0; font-size: 14px; line-height: 1.7; letter-spacing: 0.3px; word-spacing: 1.5px; }
+        .rubric-rule p { margin: 0 0 10px 0; font-size: 14px; line-height: 1.6; }
         .rubric-rule p:last-child { margin-bottom: 0; }
         
-        .score-badge { font-weight: 800; padding: 4px 10px; border-radius: 6px; display: inline-block; margin-right: 10px; color: white; min-width: 65px; text-align: center; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; word-spacing: 1.5px; }
+        .score-badge { font-weight: 800; padding: 4px 10px; border-radius: 6px; display: inline-block; margin-right: 10px; color: white; min-width: 65px; text-align: center; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
         .s5 { background: #10b981; } 
         .s4 { background: #34d399; color: #064e3b; } 
         .s3 { background: #fbbf24; color: #78350f; } 
@@ -221,18 +213,18 @@
         .s-yn { background: var(--auth-purple); } 
 
         .ai-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 14px; margin-bottom: 20px; background: white; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-light); }
-        .ai-table th { background: #fef3c7; color: #92400e; text-align: left; padding: 15px; border-bottom: 1px solid var(--border-light); font-weight: 800; letter-spacing: 0.5px; word-spacing: 1.5px; }
-        .ai-table td { padding: 15px; border-bottom: 1px solid var(--border-light); vertical-align: top; line-height: 1.7; border-right: 1px solid var(--border-light); letter-spacing: 0.3px; word-spacing: 1.5px; }
+        .ai-table th { background: #fef3c7; color: #92400e; text-align: left; padding: 15px; border-bottom: 1px solid var(--border-light); font-weight: 800; }
+        .ai-table td { padding: 15px; border-bottom: 1px solid var(--border-light); vertical-align: top; line-height: 1.6; border-right: 1px solid var(--border-light); }
         .ai-table td:last-child { border-right: none; }
         .ai-table tr:last-child td { border-bottom: none; }
         .ai-table-footer td { font-weight: 600; background: #fffbeb; font-style: italic; color: #b45309; }
 
         /* THE ELEGANT MINIMALIST FOOTER */
         .elegant-footer { max-width: 1050px; margin: 40px auto 40px auto; text-align: center; }
-        .elegant-footer-disclaimer { background: rgba(254, 243, 199, 0.6); border: 1px solid #fde68a; border-left: 5px solid var(--joyful-orange); padding: 25px 30px; border-radius: 20px; text-align: left; font-size: 14.5px; color: #92400e; box-shadow: var(--shadow-soft); line-height: 1.75; margin-bottom: 25px; letter-spacing: 0.3px; word-spacing: 1.5px; }
+        .elegant-footer-disclaimer { background: rgba(254, 243, 199, 0.6); border: 1px solid #fde68a; border-left: 5px solid var(--joyful-orange); padding: 25px 30px; border-radius: 20px; text-align: left; font-size: 14.5px; color: #92400e; box-shadow: var(--shadow-soft); line-height: 1.7; margin-bottom: 25px; }
         .about-developer { background: var(--white); border: 1px solid var(--border-light); border-radius: 20px; padding: 25px; box-shadow: var(--shadow-soft); }
-        .about-developer h4 { color: var(--mcn-navy); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; word-spacing: 2px; font-size: 14px; margin: 0 0 15px 0; }
-        .elegant-footer-links { display: flex; justify-content: center; gap: 20px; font-weight: 700; text-transform: uppercase; font-size: 13px; letter-spacing: 1.5px; word-spacing: 2px; }
+        .about-developer h4 { color: var(--mcn-navy); font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; font-size: 14px; margin: 0 0 15px 0; }
+        .elegant-footer-links { display: flex; justify-content: center; gap: 20px; font-weight: 700; text-transform: uppercase; font-size: 13px; letter-spacing: 1px; }
         .elegant-footer-links a { color: var(--mcn-blue); text-decoration: none; border-bottom: 2px solid transparent; padding-bottom: 2px; transition: 0.2s; }
         .elegant-footer-links a:hover { color: var(--mcn-navy); border-bottom-color: var(--mcn-navy); }
 
@@ -263,7 +255,7 @@
                 <p><strong>✅ AI may be used as a supplementary editing tool.</strong> Acceptable uses include correcting grammar, improving clarity, refining sentence flow, or adjusting structure. These forms of assistance are comparable to using proofreading software or seeking language support.</p>
                 <p><strong>❌ AI may not be used to generate the substance of an application.</strong> This includes developing project ideas, constructing arguments, producing reflections, or shaping the intellectual core of responses. The originality, reasoning, and insight presented in the application must belong to the student.</p>
                 <p>When evaluating applications, reviewers must assess two dimensions:</p>
-                <ol style="font-size: 14px; line-height: 1.7; margin-bottom: 10px; color: var(--text-dark); font-weight: 500; letter-spacing: 0.3px; word-spacing: 1.5px;">
+                <ol style="font-size: 14px; line-height: 1.6; margin-bottom: 10px; color: var(--text-dark); font-weight: 500;">
                     <li>The nature of AI use: whether it appears limited to language refinement or extends to idea generation and substantive content.</li>
                     <li>The extent of AI use: whether it appears in isolated sections or consistently throughout the application.</li>
                 </ol>
@@ -273,9 +265,9 @@
 
         <div class="rubric-section ai-section">
             <h4>Red Flags and Green Flags</h4>
-            <p style="font-size: 14px; margin-bottom: 20px; font-style: italic; color: var(--text-muted); letter-spacing: 0.3px; word-spacing: 1.5px;">Reviewers should rely on pattern recognition across the full application rather than isolated phrases. The indicators below are intended to guide judgment, not replace it.</p>
+            <p style="font-size: 14px; margin-bottom: 20px; font-style: italic; color: var(--text-muted);">Reviewers should rely on pattern recognition across the full application rather than isolated phrases. The indicators below are intended to guide judgment, not replace it.</p>
             
-            <h5 style="color: var(--text-dark); margin: 0 0 12px 0; font-size: 15px; letter-spacing: 0.5px; word-spacing: 1.5px;">A. Assessing Whether AI Was Used for Substance or Only Language Refinement</h5>
+            <h5 style="color: var(--text-dark); margin: 0 0 12px 0; font-size: 15px;">A. Assessing Whether AI Was Used for Substance or Only Language Refinement</h5>
             <table class="ai-table">
                 <tr>
                     <th>Green Flags — Likely Supplementary Editing Only</th>
@@ -307,7 +299,7 @@
                 </tr>
             </table>
 
-            <h5 style="color: var(--text-dark); margin: 30px 0 12px 0; font-size: 15px; letter-spacing: 0.5px; word-spacing: 1.5px;">B. Assessing Whether AI Was Used Throughout or in Limited Portions</h5>
+            <h5 style="color: var(--text-dark); margin: 30px 0 12px 0; font-size: 15px;">B. Assessing Whether AI Was Used Throughout or in Limited Portions</h5>
             <table class="ai-table">
                 <tr>
                     <th>Indicators of Limited Use</th>
@@ -340,7 +332,7 @@
             <h4>Reviewer Decision Framework</h4>
             <div class="rubric-rule ai-rule" style="background: white;">
                 <p>For each application, reviewers must select one of the following four options in the review sheet (the drop-down menu for the question, <strong>“Overall, do the applicant’s responses seem AI-generated?”</strong>):</p>
-                <ol style="font-size: 14px; line-height: 1.8; margin-bottom: 0; color: var(--text-dark); letter-spacing: 0.3px; word-spacing: 1.5px;">
+                <ol style="font-size: 14px; line-height: 1.8; margin-bottom: 0; color: var(--text-dark);">
                     <li><strong>Option 1:</strong> Yes, the responses seem completely AI-generated and the ideas seem unoriginal.</li>
                     <li><strong>Option 2:</strong> Yes, AI has been used for the majority of the application but only to enhance language and grammar; the ideas seem original.</li>
                     <li><strong>Option 3:</strong> Yes, AI has been used for a short portion of the application but only to enhance language and grammar; the ideas seem original.</li>
@@ -383,7 +375,7 @@
                     <td>Option 4</td>
                 </tr>
             </table>
-            <p style="font-size:14px; margin-top:15px; font-weight: 700; text-align: center; color: var(--mcn-navy); letter-spacing: 0.3px; word-spacing: 1.5px;">Reviewers must base their selection on the overall pattern of the application rather than a single sentence or paragraph.</p>
+            <p style="font-size:14px; margin-top:15px; font-weight: 700; text-align: center; color: var(--mcn-navy);">Reviewers must base their selection on the overall pattern of the application rather than a single sentence or paragraph.</p>
         </div>
 
         <div class="rubric-section ai-section">
@@ -433,29 +425,29 @@
             <h4>Part 1: Project Description & SDG</h4>
             <div class="rubric-rule">
                 <p><strong>Clarity & Problem Identification (1.1 - 1.3)</strong></p>
-                <p><span class="score-badge s5">5 - Highly Agree</span> Candidate effectively identifies a problem that relates to at least one SDG and offers a compelling response through their project. Description is highly clear and uses simple language as if explaining to a friend. Avoids all buzzwords.</p>
-                <p><span class="score-badge s4">4 - Agree</span> Candidate identifies a problem related to at least one SDG, but with some lack of clarity or specificity. They offer a reasonably compelling response to that problem. Description is clear and easy to understand. Mostly uses simple language, though it may include 1-2 minor technical terms that do not hinder comprehension.</p>
-                <p><span class="score-badge s3">3 - Unsure</span> Description is generally understandable but lacks consistency in clarity. Uses some buzzwords or technical terms that may confuse a non-expert reader.</p>
-                <p><span class="score-badge s2">2 - Disagree</span> Candidate's problem statement lacks clarity or fails to address a significant issue related at least one SDG or their project is not a compelling response to the problem identified. Description is vague or poorly structured. Overuses buzzwords or unexplained technical language, making it difficult for a non-expert to follow.</p>
-                <p><span class="score-badge s1">1 - Highly Disagree</span> Candidate does not clearly identify a problem or fails to relate it to at least one SDG or offers a poor response to the problem identified. Phrases answers in future uncertainity like "can do", "we can try", "will try to". Description is unclear, confusing, or inaccessible. Heavily relies on jargon and buzzwords, with little to no effort to simplify or explain ideas.</p>
+                [cite_start]<p><span class="score-badge s5">5 - Highly Agree</span> Candidate effectively identifies a problem that relates to at least one SDG and offers a compelling response through their project[cite: 1]. [cite_start]Description is highly clear and uses simple language as if explaining to a friend[cite: 1]. [cite_start]Avoids all buzzwords[cite: 1].</p>
+                [cite_start]<p><span class="score-badge s4">4 - Agree</span> Candidate identifies a problem related to at least one SDG, but with some lack of clarity or specificity[cite: 1]. [cite_start]They offer a reasonably compelling response to that problem[cite: 1]. [cite_start]Description is clear and easy to understand[cite: 1]. [cite_start]Mostly uses simple language, though it may include 1-2 minor technical terms that do not hinder comprehension[cite: 1].</p>
+                [cite_start]<p><span class="score-badge s3">3 - Unsure</span> Description is generally understandable but lacks consistency in clarity[cite: 1]. [cite_start]Uses some buzzwords or technical terms that may confuse a non-expert reader[cite: 1].</p>
+                [cite_start]<p><span class="score-badge s2">2 - Disagree</span> Candidate's problem statement lacks clarity or fails to address a significant issue related at least one SDG or their project is not a compelling response to the problem identified[cite: 1]. [cite_start]Description is vague or poorly structured[cite: 1]. [cite_start]Overuses buzzwords or unexplained technical language, making it difficult for a non-expert to follow[cite: 1].</p>
+                [cite_start]<p><span class="score-badge s1">1 - Highly Disagree</span> Candidate does not clearly identify a problem or fails to relate it to at least one SDG or offers a poor response to the problem identified[cite: 1]. [cite_start]Phrases answers in future uncertainity like "can do", "we can try", "will try to"[cite: 1]. [cite_start]Description is unclear, confusing, or inaccessible[cite: 1]. [cite_start]Heavily relies on jargon and buzzwords, with little to no effort to simplify or explain ideas[cite: 1].</p>
             </div>
             
             <div class="rubric-rule">
                 <p><strong>Number of Lives Impacted (1.9 & 2)</strong></p>
-                <p><span class="score-badge s5">5 - Highly Agree</span> Candidate provides a specific, well-reasoned number based on concrete project plans and target groups. They demonstrate understanding of potential impact limitations and provide justification for their estimate.</p>
-                <p><span class="score-badge s4">4 - Agree</span> Candidate provides a reasonable number with some explanation of how they arrived at it. However, they may lack details about target groups or project reach.</p>
-                <p><span class="score-badge s3">3 - Unsure</span> Candidate expresses uncertainity about number of lives impacted or avoids giving speific estimate. They may need furhter guidance or clarification on how to quantify impact.</p>
-                <p><span class="score-badge s2">2 - Disagree</span> Candidate provides an unrealistic number without justification or contradicts other information in their application. They may need to refine their project goals or impact measurement strategy.</p>
-                <p><span class="score-badge s1">1 - Highly Disagree</span> Candidate claims their project will have no positive impact or even suggests potential negative consequences. This raises concerns about project feasibility and alignment with program goals.</p>
+                [cite_start]<p><span class="score-badge s5">5 - Highly Agree</span> Candidate provides a specific, ell-reasoned number based on concrete project plans and target groups[cite: 2]. [cite_start]They demonstrate understanding of potental impact limitations and provide justification for their estimate[cite: 2].</p>
+                [cite_start]<p><span class="score-badge s4">4 - Agree</span> Candidate provides a reasonable number with some explanation of how they arrived at it[cite: 2]. [cite_start]However, they may lack details about target groups or project reach[cite: 2].</p>
+                [cite_start]<p><span class="score-badge s3">3 - Unsure</span> Candidate expresses uncertainity about number of lives impacted or avoids giving speific estimate[cite: 2]. [cite_start]They may need furhter guidance or clarification on how to quantify impact[cite: 2].</p>
+                [cite_start]<p><span class="score-badge s2">2 - Disagree</span> Candidate provides an unrealistic number without justification or contradicts other information in their application[cite: 2]. [cite_start]They may need to refine their project goals or impact measurement strategy[cite: 2].</p>
+                [cite_start]<p><span class="score-badge s1">1 - Highly Disagree</span> Candidate claims their project will have no positive impact or even suggests potential negative consequences[cite: 2]. [cite_start]This raises concerns about project feasibility and alignment with program goals[cite: 2].</p>
             </div>
             
             <div class="rubric-rule">
                 <p><strong>SDG & UNAI Principles (2.1 & 2.2)</strong></p>
-                <p><span class="score-badge s5">5 - Highly Agree</span> Candidate clearly identifies a specific SDG and provides a convincing explanation of how their work directly addresses its core objectives and targets. They demonstrate a deep understandng of the selected SDG and its relevance to their work. Candidate clearly and explicitly demonstrates a strong connection between their work and a specific UN Academic Impact Principle, citing relevant details and objectives. They show a deep understanding of the principle and how their work contributes to its goals.</p>
-                <p><span class="score-badge s4">4 - Agree</span> Candidate identifies a relevant SDG and makes a reasonable connection to their work, but the explanation lacks depth or specificity. They demonstrate some understanding of the chosen SDG but could elaborate on the specific targets their work addresses. Candidate acknowledges the UN Academic Impact Principles or is unable to clearly articulate a connection between their work and a UN Academic Impact Principle, but the explanation lacks specifics or depth. They could benefit from providing more concrete examples or elaborating on their understanding.</p>
-                <p><span class="score-badge s3">3 - Unsure</span> Candidate identifies a connection to the SDGs but is unsure which one best aligns with their work or provides a vague connection. They may need further guidance or information to identify the most relevant SDG. Candidate is unsure of the specific UN Academic Impact connection between their work and any principle. They may need further resources or guidance.</p>
-                <p><span class="score-badge s2">2 - Disagree</span> Candidate identifies an SDG that is not directly relevant to their work or fails to explain the connection convincingly. They demonstrate limited understanding of the SDGs or their relationship to their work. Candidate does not see a connection between their work and any UN Academic Impact Principles, potentially due to a misunderstanding of the principles or their own work's focus. Clarification and additional information may be needed.</p>
-                <p><span class="score-badge s1">1 - Highly Disagree</span> Candidate's work has no connection to any SDG or actively rejects the relelance of SDGs despite potential connections. They demonstrate a clear misunderstanding or disinterest in the SDGs. Candidate's work explicitly refutes any connection between their work and the UN Academic Impact Principles, potentially demonstrating a lack of awareness or alignment with the goals. Further exploration of their motivations and understanding is required.</p>
+                [cite_start]<p><span class="score-badge s5">5 - Highly Agree</span> Candidate clearly identifies a specific SDG and provides a convincing explanation of how their work directly addresses its core objectives and targets[cite: 2]. [cite_start]They demonstrate a deep understandng of the selected SDG and its relevance to their work[cite: 2]. [cite_start]Candidate clearly and explicitly demonstrates a strong connection between their work and a specific UN Academic Impact Principle, citing relevant details and objectives[cite: 2]. [cite_start]They show a deep understanding of the principle and how their work contributes to its goals[cite: 2].</p>
+                [cite_start]<p><span class="score-badge s4">4 - Agree</span> Candidate identifies a relevant SDG and makes a reasonable connection to their work, but the explanation lacks depth or specificity[cite: 2]. [cite_start]They demonstrate some understanding of the chosen SDG but could elaborate on the specific targets their work addresses[cite: 2]. [cite_start]Candidate acknowledges the UN Academic Impact Principles or is unable to clearly articulate a connection between their work and a UN Academic Impact Principle, but the explanation lacks specifics or depth[cite: 2]. [cite_start]They could benefit from providing more concrete examples or elaborating on their understanding[cite: 2].</p>
+                [cite_start]<p><span class="score-badge s3">3 - Unsure</span> Candidate identifies a connection to the SDGs but is unsure which one best aligns with their work or provides a vague connection[cite: 2]. [cite_start]They may need further guidance or information to identify the most relevant SDG[cite: 2]. [cite_start]Candidate is unsure of the specific UN Academic Impact connection between their work and any principle[cite: 2]. [cite_start]They may need further resources or guidance[cite: 2].</p>
+                [cite_start]<p><span class="score-badge s2">2 - Disagree</span> Candidate identifies an SDG that is not directly relevant to their work or fails to explain the connection. convincingly[cite: 2]. [cite_start]They demonstrate limited understanding of the SDGs or their relationship to their work[cite: 2]. [cite_start]Candidate does not see a connection between their work and any UN Academic Impact Principles, potentially due to a misunderstanding of the principles or their own work's focus[cite: 2]. [cite_start]Clarification and additional information may be needed[cite: 2].</p>
+                [cite_start]<p><span class="score-badge s1">1 - Highly Disagree</span> Candidate's work has no connection to any SDG or actively rejects the relelance of SDGs despite potential connections[cite: 2]. [cite_start]They demonstrate a clear misunderstanding or disinterest in the SDGs[cite: 2]. [cite_start]Candidate's work explicitly refutes any connection between their work and the UN Academic Impact Principles, potentially demonstrating a lack of awareness or alignment with the goals[cite: 2]. [cite_start]Further exploration of their motivations and understanding is required[cite: 2].</p>
             </div>
         </div>
 
@@ -463,11 +455,11 @@
             <h4>Part 1: Proximity to Issue</h4>
             <div class="rubric-rule">
                 <p><strong>Community Connection (2.2)</strong></p>
-                <p><span class="score-badge s5">5 - Highly Agree</span> Candidate Clearly demonstrates strong personal connection to the community, actively involved as a member or through deep, impactful relationships. (To note: Extensive personal stories, concrete examples of involvement, clear understanding of community dynamics).</p>
-                <p><span class="score-badge s4">4 - Agree</span> Candidate Shows some connection to the community, either through past experiences or ongoing interactions (Examples of involvement, understanding of community needs, but lacks depth or current engagement).</p>
-                <p><span class="score-badge s3">3 - Unsure</span> Unclear level of connection to the community, lacks specific details or offers conflicting information (Vague statements, limited understanding of community dynamics, no clear evidence of engagement).</p>
-                <p><span class="score-badge s2">2 - Disagree</span> Candidate does not demonstrate any clear connection to the community, suggests involvement was superficial or not impactful. (No examples, dismissive language about the community, prioritizes external perspectives).</p>
-                <p><span class="score-badge s1">1 - Highly Disagree</span> Candidate has no connection to the community, expresses biased vies and demonstrates lack of understanding and empathy. (Harmful stereotypes, insensitive language, clear disregard for community perspectives).</p>
+                [cite_start]<p><span class="score-badge s5">5 - Highly Agree</span> Candidate Clearly demonstrates strong personal connection to the community, actively involved as a member or through deep, impactful relationships[cite: 3]. (To note: Extensive personal stories, concrete examples of involvement, clear understanding of community dynamics) [cite_start][cite: 3].</p>
+                [cite_start]<p><span class="score-badge s4">4 - Agree</span> Candidate Shows some connection to the community, either through past experiences or ongoing interactions (Examples of involvement, understanding of community needs, but lacks depth or current engagement.)[cite: 3].</p>
+                [cite_start]<p><span class="score-badge s3">3 - Unsure</span> Unclear level of connection to the community, lacks specific details or offers conflicting information (Vague statements, limited understanding of community dynamics, no clear evidence of engagement)[cite: 3].</p>
+                [cite_start]<p><span class="score-badge s2">2 - Disagree</span> Candidate does not demonstrate any clear connection to the community, suggests involvement was superficial or not impactful[cite: 3]. (No examples, dismissive language about the community, prioritizes external perspectives.) [cite_start][cite: 3].</p>
+                [cite_start]<p><span class="score-badge s1">1 - Highly Disagree</span> Candidate has no connection to the community, expresses biased vies and demonstrates lack of understanding and empathy[cite: 3]. (Harmful stereotypes, insensitive language, clear disregard for community perspectives.) [cite_start][cite: 3].</p>
             </div>
         </div>
 
@@ -476,45 +468,45 @@
             
             <div class="rubric-rule">
                 <p><strong>Personal Motivation - Thoughtful/Emotional Investment (Q1)</strong></p>
-                <p><span class="score-badge s5">5 - Highly Agree</span> The candidate demonstrates a clear and compelling personal story that explains their interest in social impact.</p>
-                <p><span class="score-badge s4">4 - Agree</span> The candidate shares a personal experience that deeply connects to their chosen social issue.</p>
-                <p><span class="score-badge s3">3 - Unsure</span> The candidate mentions personal experiences, but the link to social impact motivation is not fully developed.</p>
-                <p><span class="score-badge s2">2 - Disagree</span> The candidate mentions personal experiences, but they are not relevant to their chosen social issue.</p>
-                <p><span class="score-badge s1">1 - Highly Disagree</span> The candidate does not mention any personal experiences or motivations for their interest in social impact.</p>
+                [cite_start]<p><span class="score-badge s5">5 - Highly Agree</span> The candidate demonstrates a clear and compelling personal story that explains their interest in social impact[cite: 3].</p>
+                [cite_start]<p><span class="score-badge s4">4 - Agree</span> The candidate shares a personal experience that deeply connects to their chosen social issue[cite: 3].</p>
+                [cite_start]<p><span class="score-badge s3">3 - Unsure</span> The candidate mentions personal experiences, but the link to social impact motivation is not fully developed[cite: 3].</p>
+                [cite_start]<p><span class="score-badge s2">2 - Disagree</span> The candidate mentions personal experiences, but they are not relevant to their chosen social issue[cite: 3].</p>
+                [cite_start]<p><span class="score-badge s1">1 - Highly Disagree</span> The candidate does not mention any personal experiences or motivations for their interest in social impact[cite: 3].</p>
             </div>
             
             <div class="rubric-rule">
                 <p><strong>Personal Motivation - Genuine Passion (Q1)</strong></p>
-                <p><span class="score-badge s5">5 - Highly Agree</span> Clearly articulates a deep, personal "why" behind their work. The passion feels lived-in and authentic.</p>
-                <p><span class="score-badge s4">4 - Agree</span> Explains interest in the fellowship and its social impact clearly and sincerely. Shows strong, genuine motivation, though the personal connection may not be deeply explored.</p>
-                <p><span class="score-badge s3">3 - Unsure</span> States reasons for applying that show some interest and alignment with the fellowship, but the personal "why" remains surface-level or underdeveloped.</p>
-                <p><span class="score-badge s2">2 - Disagree</span> Reasons for applying feel generic or vague. Motivation appears weak or unclear, with limited connection to social impact or personal values.</p>
-                <p><span class="score-badge s1">1 - Highly Disagree</span> Motivation is unclear or primarily focused on résumé-building, credentials, or external rewards, with little to no indication of personal or social commitment.</p>
+                [cite_start]<p><span class="score-badge s5">5 - Highly Agree</span> Clearly articulates a deep, personal "why" behind their work[cite: 4]. [cite_start]The passion feels lived-in and authentic[cite: 4].</p>
+                [cite_start]<p><span class="score-badge s4">4 - Agree</span> Explains interest in the fellowship and its social impact clearly and sincerely[cite: 4]. [cite_start]Shows strong, genuine motivation, though the personal connection may not be deeply explored[cite: 4].</p>
+                [cite_start]<p><span class="score-badge s3">3 - Unsure</span> States reasons for applying that show some interest and alignment with the fellowship, but the personal "why" remains surface-level or underdeveloped[cite: 4].</p>
+                [cite_start]<p><span class="score-badge s2">2 - Disagree</span> Reasons for applying feel generic or vague[cite: 4]. [cite_start]Motivation appears weak or unclear, with limited connection to social impact or personal values[cite: 4].</p>
+                [cite_start]<p><span class="score-badge s1">1 - Highly Disagree</span> Motivation is unclear or primarily focused on résumé-building. credentials, or external rewards, with little to no indication of personal or social commitment[cite: 4].</p>
             </div>
             
             <div class="rubric-rule">
                 <p><strong>MCN Values & Fellowship (Q2)</strong></p>
-                <p><span class="score-badge s5">5 - Highly Agree</span> The candidate articulates how their own values align with the program's values and aslo outlines specific ways they will engage with the program's resources and opportunities.</p>
-                <p><span class="score-badge s4">4 - Agree</span> The candidate mentions the program's values and also contributing to the program, but the connection to their own motivation is unclear and their plans are vague or unspecific.</p>
-                <p><span class="score-badge s3">3 - Unsure</span> The candidate mentions the program, but their focus is primarily on personal benefits or outcomes and focuses primarily on receiving benefits from the program with little mention of contribution.</p>
-                <p><span class="score-badge s1">1/2 - Disagree</span> The candidate demonstrates little to no knowledge of the program's values or mission AND does not demonstrate a connection between the fellowship and their social impact goals.</p>
+                [cite_start]<p><span class="score-badge s5">5 - Highly Agree</span> The candidate articulates how their own values align with the program's values and aslo outlines specific ways they will engage with the program's resources and opportunities[cite: 4].</p>
+                [cite_start]<p><span class="score-badge s4">4 - Agree</span> The candidate mentions the program's values and also contributing to the program, but the connection to their own motivation is unclear and their plans are vague or unspecific[cite: 4].</p>
+                [cite_start]<p><span class="score-badge s3">3 - Unsure</span> The candidate mentions the program, but their focus is primarily on personal benefits or outcomes and focuses primarily on receiving benefits from the program with little mention of contribution[cite: 4].</p>
+                [cite_start]<p><span class="score-badge s1">1/2 - Disagree</span> The candidate demonstrates little to no knowledge of the program's values or mission AND does not demonstrate a connection between the fellowship and their social impact goals[cite: 4].</p>
             </div>
             
             <div class="rubric-rule">
                 <p><strong>Leadership & Teamwork - Empathy & Humility (Q3)</strong></p>
-                <p><span class="score-badge s5">5 - Highly Agree</span> The candidate clearly describes their role and responsibilities as a leader and their actions show genuine consideration for others' feelings and perspectives.</p>
-                <p><span class="score-badge s4">4 - Agree</span> The candidate mentions a leadership experience and mentions relevant MCN value, but the details are vague or incomplete and their demonstration is unclear or underdeveloped.</p>
-                <p><span class="score-badge s3">3 - Unsure</span> The candidate mentions leadership, but it's unclear if they were in a true leadership position and the actions are primarily focused on achieving results or gaining recognition.</p>
-                <p><span class="score-badge s1">1/2 - Disagree</span> The candidate does not provide any examples of leadership experience and their actions contradict or undermine MCN Values.</p>
+                [cite_start]<p><span class="score-badge s5">5 - Highly Agree</span> The candidate clearly describes their role and responsibilities as a leader and their actions show genuine consideration for others' feelings and perspectives[cite: 4].</p>
+                [cite_start]<p><span class="score-badge s4">4 - Agree</span> The candidate mentions a leadership experience and mentions relevant MCN value, but the details are vague or incomplete and their demonstration is unclear or underdeveloped[cite: 4].</p>
+                [cite_start]<p><span class="score-badge s3">3 - Unsure</span> The candidate mentions leadership, but it's unclear if they were in a true leadership position and the actions are primarily focused on achieving results or gaining recognition[cite: 4].</p>
+                [cite_start]<p><span class="score-badge s1">1/2 - Disagree</span> The candidate does not provide any examples of leadership experience and their actions contradict or undermine MCN Values[cite: 4].</p>
             </div>
             
             <div class="rubric-rule">
                 <p><strong>Community Mindset (Q3)</strong></p>
-                <p><span class="score-badge s5">5 - Highly Agree</span> Expresses a strong desire to collaborate with and learn from other Fellows. Values the "we" over the "I".</p>
-                <p><span class="score-badge s4">4 - Agree</span> Recognizes the importance of the fellowship community and mentions specific ways they hope to engage.</p>
-                <p><span class="score-badge s3">3 - Unsure</span> The candidate's response does not reflect their ideas on teamwork and collaboration.</p>
-                <p><span class="score-badge s2">2 - Disagree</span> Focuses almost entirely on personal gain or individual project success.</p>
-                <p><span class="score-badge s1">1 - Highly Disagree</span> Candidate does not lean toward teamwork or community values.</p>
+                [cite_start]<p><span class="score-badge s5">5 - Highly Agree</span> Expresses a strong desire to collaborate with and learn from other Fellows[cite: 4]. [cite_start]Values the "we" over the "L"[cite: 4].</p>
+                [cite_start]<p><span class="score-badge s4">4 - Agree</span> Recognizes the importance of the fellowship community and mentions specific ways they hope to engage[cite: 4].</p>
+                [cite_start]<p><span class="score-badge s3">3 - Unsure</span> The candidate's response does not reflect their ideas on teamwork and collaboration[cite: 4].</p>
+                [cite_start]<p><span class="score-badge s2">2 - Disagree</span> Focuses almost entirely on personal gain or individual project success[cite: 4].</p>
+                [cite_start]<p><span class="score-badge s1">1 - Highly Disagree</span> Candidate does not lean toward teamwork or community values[cite: 4].</p>
             </div>
             
         </div>
@@ -523,15 +515,15 @@
             <h4>Part 3: Overview Checks</h4>
             <div class="rubric-rule">
                 <p><strong>Final Red Flags (Yes/Maybe/No)</strong></p>
-                <p><span class="score-badge s-yn">Ethics (Person)</span> Does something in this student's personal statements lead you to question their ethics? Do you feel you can't quite trust their instincts? If you have any question about this please first ask your fellow team members for insight, and if it still seems unclear ask team MCN.</p>
-                <p><span class="score-badge s-yn">Ethics (Project)</span> Does something about the project this student is working on seem unethical? Does it work with communities in a paternalistic way? If you have any question about this please first ask your fellow team members for insight, and if it still seems unclear ask team MCN or mark it as a maybe.</p>
-                <p><span class="score-badge s-yn">Political</span> Is the work this student is doing politically sensitive?</p>
-                <p><span class="score-badge s-yn">Unique Project</span> Is this applicant's project a very unique, extraordinary. and outstanding for MCN to take note of?</p>
-                <p><span class="score-badge s-yn">Unique Emotion</span> Is this applicant's emotional investment responses a very unique, extraordinary, and outstanding for MCN to take note of?</p>
-                <p><span class="score-badge s-yn">Tech for Impact</span> Is this candidate Using Tech for Impact? (e.g the use of Al, robotics, other emerging technologies, digital products like mobile apps, websites, software, hardware, devices, etc in advancing the SDGs or UNAI Principles)</p>
-                <p><span class="score-badge s-yn">Public Health</span> Is the candidate working on a public health project?</p>
-                <p><span class="score-badge s-yn">AI Gen</span> Overall, do the applicant's responses seem AI-generated?</p>
-                <p><span class="score-badge s-yn">Ethical Integrity</span> Overall, does the applicant show ethical integrity through their responses?</p>
+                <p><span class="score-badge s-yn">Ethics (Person)</span> Ethics of person: Does something in this student's personal statements lead you to question their ethics? Do you feel you can't quite trust their instincts? [cite_start]If you have any question about this please first ask your fellow team members for insight, and if it still seems unclear ask team MCN[cite: 5].</p>
+                <p><span class="score-badge s-yn">Ethics (Project)</span> Ethics of project: Does something about the project this student is working on seem unethical? Does it work with communities in a paternalistic way? [cite_start]If you have any question about this please first ask your fellow team members for insight. and if it still seems unclear ask team MCN or mark it as a maybe[cite: 3].</p>
+                [cite_start]<p><span class="score-badge s-yn">Political</span> Political nature of project: Is the work this student is doing politically sensitive? [cite: 3]</p>
+                [cite_start]<p><span class="score-badge s-yn">Unique Project</span> Is this applicant's project a very unique, extraordinary. and outstanding for MCN to take note of? [cite: 5]</p>
+                [cite_start]<p><span class="score-badge s-yn">Unique Emotion</span> Is this applicant's emotional investment responses a very unique, extraordinary, and outstanding for MCN to take note of? [cite: 5]</p>
+                <p><span class="score-badge s-yn">Tech for Impact</span> Is this candidate Using Tech for Impact? (e.g the use of Al, robotics, other emerging technologies, digital products like mobile apps, websites, software, hardware, devices, etc in advancing the SDGs or UNAI Principles) [cite_start][cite: 5]</p>
+                [cite_start]<p><span class="score-badge s-yn">Public Health</span> Is the candidate working on a public health project? [cite: 5]</p>
+                [cite_start]<p><span class="score-badge s-yn">AI Gen</span> Overall, do the applicant's responses seem Al- generated? [cite: 5]</p>
+                [cite_start]<p><span class="score-badge s-yn">Ethical Integrity</span> Overall, does the applicant show ethical integrity through their responses? [cite: 5]</p>
             </div>
         </div>
     </div>
@@ -544,7 +536,7 @@
             <img src="logo.png.jpg" alt="MCN Logo" class="logo-img" id="officialLogo">
         </div>
         <h1 style="margin:0; font-size: 38px; font-weight: 800; letter-spacing: -0.5px;">Admissions Reviewers Toolkit</h1>
-        <p style="margin:12px 0 0; opacity: 0.95; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; word-spacing: 2px; font-size: 14px; color: #bae6fd;">Developed By Akhyear Mushfiqur Rahman, Millennium Fellow'25 & GAC'26</p>
+        <p style="margin:12px 0 0; opacity: 0.95; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; font-size: 14px; color: #bae6fd;">Developed By Akhyear Mushfiqur Rahman, Millennium Fellow'25 & GAC'26</p>
     </div>
 
     <div class="setup-grid" id="setupGrid">
@@ -581,7 +573,7 @@
                         <li><strong>Paste & Fetch:</strong> Put your Master Sheet link in the top bar and select the row number you want to evaluate.</li>
                         <li><strong>Check the Rules:</strong> Use the side buttons to slide out the AI Policy and Official Rubric whenever you need them.</li>
                         <li><strong>Score the Applicant:</strong> Read the profile and fill out the 28-point assessment board at the bottom.</li>
-                        <li><strong>Save your Draft:</strong> Click <em>Copy Scores to Clipboard</em> to paste into a personal draft sheet, or use <em>Draft CSV Sheet</em> to download a backup before you manually select the options in the official form.</li>
+                        <li><strong>Save your Draft:</strong> Click <em>Copy Scores to Clipboard</em> or use <em>Draft CSV Sheet</em> before you manually select the options in the official form.</li>
                     </ol>
                 </div>
             </div>
@@ -757,6 +749,21 @@ for(let i=1; i<=28; i++) {
 function toggleRubric() { document.getElementById('rubricPanel').classList.toggle('open'); }
 function toggleAiPolicy() { document.getElementById('aiPanel').classList.toggle('open'); }
 
+// THIS IS THE NEW SENTENCE-CASE ENGINE THAT FIXES ALL-CAPS TEXT FROM THE SPREADSHEET
+function formatText(str) {
+    if (!str) return "";
+    // Checks if the text is typed entirely in uppercase letters
+    const alphaStr = str.replace(/[^A-Za-z]/g, '');
+    if (alphaStr.length > 0 && alphaStr === alphaStr.toUpperCase()) {
+        let lower = str.toLowerCase();
+        // Capitalizes the first letter of every sentence
+        return lower.replace(/(^\s*\w|[.!?]\s*\w)/g, function(c) {
+            return c.toUpperCase();
+        });
+    }
+    return str;
+}
+
 function loadData() {
     let link = document.getElementById('sheetLink').value.trim();
     const rowInput = document.getElementById('rowNum');
@@ -796,17 +803,24 @@ function loadData() {
             const lastName = student["Last Name"] || "Candidate";
             currentApplicantName = (firstName + "_" + lastName).trim();
 
-            let html = "<div class='animated-entry'><h2 style='color:var(--mcn-navy); margin-bottom: 30px; font-weight: 800; font-size: 28px; letter-spacing: -0.5px; word-spacing: 2px;'>Applicant Profile</h2>";
+            let html = "<div class='animated-entry'><h2 style='color:var(--mcn-navy); margin-bottom: 35px; font-weight: 800; font-size: 32px; letter-spacing: -0.5px;'>Applicant Profile</h2>";
 
             for (const key in student) {
                 if (student[key] && student[key].trim() !== "") {
                     let contentText = student[key];
                     const linkFinder = /(https?:\/\/[^\s]+)/g;
                     contentText = contentText.replace(linkFinder, '<a href="$1" target="_blank" title="Click to open link">$1</a>');
+                    
+                    // Runs the ALL-CAPS fixer on the questions
+                    let formattedQuestion = formatText(key);
 
                     html += `<div class="impact-card">
-                                <span class="card-label">${key}</span>
-                                <div class="card-value">${contentText}</div>
+                                <div class="card-header">
+                                    <h4 class="card-label">${formattedQuestion}</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="card-value">${contentText}</div>
+                                </div>
                              </div>`;
                     
                     currentFullText += key + ":\n" + student[key] + "\n\n";
